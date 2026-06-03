@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>文生图作品集</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: oklch(97.6% 0.009 76);
+      --paper-2: oklch(94.7% 0.014 72);
+      --ink: oklch(25% 0.032 64);
+      --muted: oklch(53% 0.036 67);
+      --line: oklch(84% 0.027 70);
+      --accent: oklch(55% 0.13 28);
+      --accent-2: oklch(65% 0.12 174);
+      --wash: oklch(91% 0.04 40);
+      --shadow: 0 20px 60px rgba(91, 67, 44, .14);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at 12% 4%, oklch(92% 0.055 42 / .7), transparent 24rem),
+        linear-gradient(180deg, var(--paper), oklch(96% 0.013 94));
+      color: var(--ink);
+    }
+
+    a { color: inherit; }
+
+    .site-head {
+      min-height: 84vh;
+      display: grid;
+      align-items: end;
+      padding: 32px clamp(18px, 4vw, 64px) 40px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .site-head::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, oklch(98% 0.012 75) 0 42%, transparent 42%),
+        url("东方幻想_场景/云端仙宫.png") right center / min(58vw, 980px) auto no-repeat;
+      opacity: .95;
+      z-index: -2;
+    }
+
+    .site-head::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--paper) 0 30%, oklch(96% 0.011 72 / .86) 48%, oklch(96% 0.011 72 / .16) 100%);
+      z-index: -1;
+    }
+
+    .topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px clamp(18px, 4vw, 64px);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--ink);
+      display: grid;
+      place-items: center;
+      transform: rotate(45deg);
+    }
+
+    .brand-mark span {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      display: block;
+    }
+
+    .hero {
+      width: min(820px, 100%);
+      padding-top: 96px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 8.2vw, 118px);
+      line-height: .92;
+      letter-spacing: 0;
+      max-width: 8.6em;
+      font-weight: 780;
+    }
+
+    .hero-copy {
+      margin: 24px 0 0;
+      max-width: 58ch;
+      color: var(--muted);
+      font-size: clamp(16px, 1.65vw, 19px);
+      line-height: 1.75;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .meta-pill {
+      border: 1px solid var(--line);
+      background: oklch(98% 0.009 76 / .72);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      backdrop-filter: blur(10px);
+    }
+
+    .section {
+      padding: 34px clamp(18px, 4vw, 64px) 70px;
+    }
+
+    .controls {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: start;
+      padding: 18px 0;
+      background: linear-gradient(180deg, var(--paper) 78%, transparent);
+      backdrop-filter: blur(12px);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .filter {
+      border: 1px solid var(--line);
+      background: oklch(98% 0.009 76);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 9px 13px;
+      cursor: pointer;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+      white-space: nowrap;
+    }
+
+    .filter:hover {
+      transform: translateY(-1px);
+      border-color: oklch(70% 0.06 52);
+    }
+
+    .filter[aria-pressed="true"] {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+
+    .filter small {
+      margin-left: 6px;
+      color: currentColor;
+      opacity: .66;
+    }
+
+    .search {
+      width: min(300px, 100%);
+      border: 1px solid var(--line);
+      background: oklch(98% 0.009 76);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 15px;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px oklch(70% 0.11 28 / .16);
+    }
+
+    .summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: end;
+      padding: 20px 0 28px;
+    }
+
+    .summary h2 {
+      margin: 0;
+      font-size: clamp(26px, 4vw, 52px);
+      line-height: 1;
+      font-weight: 740;
+    }
+
+    .summary p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 48ch;
+      line-height: 1.7;
+    }
+
+    .gallery {
+      columns: 4 260px;
+      column-gap: 16px;
+    }
+
+    .work {
+      width: 100%;
+      display: inline-block;
+      break-inside: avoid;
+      margin: 0 0 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: oklch(98% 0.008 80);
+      overflow: hidden;
+      box-shadow: 0 12px 34px rgba(91, 67, 44, .07);
+      cursor: zoom-in;
+      transform: translateZ(0);
+      transition: transform .26s cubic-bezier(.16, 1, .3, 1), box-shadow .26s ease;
+    }
+
+    .work:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .work img {
+      width: 100%;
+      display: block;
+      background: var(--paper-2);
+    }
+
+    .caption {
+      padding: 12px 13px 13px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .caption strong {
+      font-size: 15px;
+      line-height: 1.35;
+      font-weight: 680;
+    }
+
+    .caption span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .empty {
+      display: none;
+      padding: 60px 0 90px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 34px;
+      background: oklch(24% 0.025 65 / .72);
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox figure {
+      margin: 0;
+      max-width: min(1100px, 94vw);
+      max-height: 92vh;
+      display: grid;
+      gap: 12px;
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+      box-shadow: 0 30px 90px rgba(30, 22, 15, .38);
+      background: var(--paper);
+    }
+
+    .lightbox figcaption {
+      color: var(--paper);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .close {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid oklch(92% 0.01 80 / .45);
+      border-radius: 999px;
+      background: oklch(98% 0.009 76);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    footer {
+      padding: 36px clamp(18px, 4vw, 64px);
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 760px) {
+      .site-head {
+        min-height: 78vh;
+      }
+
+      .site-head::before {
+        background:
+          linear-gradient(180deg, oklch(98% 0.012 75) 0 50%, transparent),
+          url("东方幻想_场景/云端仙宫.png") center bottom / auto 45vh no-repeat;
+      }
+
+      .site-head::after {
+        background: linear-gradient(180deg, var(--paper) 0 54%, oklch(96% 0.011 72 / .38) 100%);
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .search {
+        width: 100%;
+      }
+
+      .summary {
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-head">
+    <div class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><span></span></span> Text to Image Portfolio</div>
+      <div id="top-count">118 works</div>
+    </div>
+    <section class="hero">
+      <p class="eyebrow">AI image curation, 2026</p>
+      <h1>文生图作品集</h1>
+      <p class="hero-copy">从文字抵达画面，在人物、场景与想象世界之间，收藏每一次提示词生成的视觉回声。</p>
+      <div class="hero-meta">
+        <span class="meta-pill">风格谱系</span>
+        <span class="meta-pill">生成影像档案</span>
+        <span class="meta-pill">轻盈画廊视图</span>
+      </div>
+    </section>
+  </header>
+
+  <main class="section">
+    <nav class="controls" aria-label="作品筛选">
+      <div class="filters" id="filters"></div>
+      <input class="search" id="search" type="search" placeholder="搜索作品或分类" aria-label="搜索作品或分类">
+    </nav>
+
+    <section class="summary">
+      <h2 id="view-title">全部作品</h2>
+      <p id="view-copy">不同题材按气质展开，竖幅肖像、横幅场景与系列图像在同一条视觉动线里相遇。</p>
+    </section>
+
+    <section class="gallery" id="gallery" aria-live="polite"></section>
+    <div class="empty" id="empty">没有匹配的图片，换一个分类或关键词试试。</div>
+  </main>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+    <button class="close" id="close" type="button" aria-label="关闭预览">×</button>
+    <figure>
+      <img id="lightbox-img" alt="">
+      <figcaption>
+        <span id="lightbox-title"></span>
+        <span id="lightbox-meta"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <footer>
+    <span>文生图作品集</span>
+    <span>本地 HTML 页面，可继续往各分类文件夹添加作品后更新清单。</span>
+  </footer>
+
+  <script>
+    const groups = [
+      ["东方幻想_人物", ["仙侠公子.png", "仙侠公子_2.png", "古战场将军_1.png", "古战场将军_2.png", "古战场将军_3.png", "古战场将军_4.png", "古战场将军_5.png", "古战场将军_6.png", "古战场将军_7.png", "古战场将军_8.png", "古风少女.png", "汉服少女.png", "汉服少女_2.png", "汉服少女_3.png", "竹林侠女.png", "竹林剑客_1.png", "竹林剑客_2.png", "竹林剑客_3.png", "雪景汉服.png"]],
+      ["东方幻想_场景", ["ChatGPT Image 2026年6月1日 11_22_10.png", "ChatGPT Image 2026年6月1日 11_26_51.png", "东方幻想闹市.png", "云端仙宫.png", "水墨仙境.png"]],
+      ["写实人像", ["帅哥1.png", "美女1.png", "美女2.png", "美女3.png"]],
+      ["写实风景", ["ChatGPT Image 2026年6月2日 10_31_33 (1).png", "ChatGPT Image 2026年6月2日 10_31_33 (2).png", "ChatGPT Image 2026年6月2日 10_31_33 (3).png", "ChatGPT Image 2026年6月2日 10_31_34 (4).png", "ChatGPT Image 2026年6月2日 10_35_40 (1).png", "ChatGPT Image 2026年6月2日 10_35_40 (2).png", "ChatGPT Image 2026年6月2日 10_35_41 (3).png", "ChatGPT Image 2026年6月2日 10_35_42 (4).png", "ChatGPT Image 2026年6月2日 10_41_19 (1).png", "ChatGPT Image 2026年6月2日 10_41_19 (2).png", "ChatGPT Image 2026年6月2日 10_41_20 (3).png", "ChatGPT Image 2026年6月2日 10_41_21 (4).png", "云端古寺.png", "仰望U9_上海.png", "山顶古寺_日落.png", "沙漠日落.png", "沙漠月夜.png", "沙漠绿洲.png", "沙漠驼队.png", "秋山古寺.png", "红色兰博基尼_海边.png", "超市货架.png", "银色超跑_山路.png", "雪山古寺.png", "黑色超跑.png"]],
+      ["国漫动画", ["冯宝宝_1.png", "冯宝宝_2.png", "夏禾.png", "张楚岚_雷法.png", "王也_太极.png", "王也_道长.png", "陈朵.png"]],
+      ["宠物写真", ["布偶猫.png", "柯基犬.png", "窗边橘猫.png", "金毛犬.png"]],
+      ["年代感写实照片", ["ChatGPT Image 2026年6月2日 10_18_33 (1).png", "ChatGPT Image 2026年6月2日 10_18_33 (2).png", "ChatGPT Image 2026年6月2日 10_20_53 (1).png", "ChatGPT Image 2026年6月2日 10_20_54 (2).png", "ChatGPT Image 2026年6月2日 10_20_56 (3).png", "ChatGPT Image 2026年6月2日 10_20_56 (4).png", "ChatGPT Image 2026年6月2日 10_25_35 (1).png", "ChatGPT Image 2026年6月2日 10_25_35 (2).png", "ChatGPT Image 2026年6月2日 10_25_37 (3).png", "ChatGPT Image 2026年6月2日 10_25_37 (4).png", "乡村全景.png", "乡村全景_2.png", "乡村小路_1.png", "乡村小路_2.png", "乡村街道_冬日.png", "乡村街道_冬日_2.png", "乡镇百货店.png", "乡镇街道.png", "乡镇集市_1.png", "乡镇集市_2.png", "乡镇集市_3.png", "农家围炉_1.png", "农家围炉_2.png", "农家围炉_夜晚.png", "农家烤火.png", "农家院_冬日.png", "农家院_玉米.png", "农家院落.png", "冬日乡村街道.png", "冬日乡村道路.png", "城市街道_1.png", "教学楼走廊.png", "晚自习教室.png", "校园操场.png", "现代都市.png", "老街巷子.png", "课堂记忆_1.png"]],
+      ["日系二次元", ["流浪少女.png", "海边少女.png", "电车少女.png"]],
+      ["科幻宇宙", ["土星_众卫星.png", "土星_土卫一.png", "土星_土卫六.png", "土星_正面.png", "土星_环特写.png", "土星_环细节.png", "土星与卫星.png", "土星全景.png", "土星环_月球.png", "小行星带.png", "星云_紫金色.png", "木星_大红斑.png", "木星_木卫二.png", "木星_极光.png", "木星与卫星.png", "银河系.png"]],
+      ["科幻机甲", ["机甲战斗.png", "机甲雨夜.png"]]
+    ];
+
+    const copy = {
+      "东方幻想_人物": "古风人物、侠客、将军和汉服角色，适合展示角色设定与东方气质。",
+      "东方幻想_场景": "仙宫、闹市和水墨场景，作为世界观与环境氛围的入口。",
+      "写实人像": "偏商业摄影与人像写真方向，强调面部、姿态和光线。",
+      "写实风景": "风景、车辆、寺庙、沙漠与日常场景，适合观察画面调度。",
+      "国漫动画": "国漫角色向作品，偏角色辨识度和戏剧动作。",
+      "宠物写真": "宠物肖像系列，强调毛发、眼神和摄影棚质感。",
+      "年代感写实照片": "乡村、校园、老街和生活记忆，整体更偏叙事影像。",
+      "日系二次元": "清爽日系角色图，适合单独看角色情绪和构图。",
+      "科幻宇宙": "星体、卫星、星云与行星细节，偏宏观科幻视觉。",
+      "科幻机甲": "机甲动作与雨夜气氛，数量少但视觉冲击强。"
+    };
+
+    const works = groups.flatMap(([category, files]) => files.map((file) => ({
+      category,
+      file,
+      src: `${category}/${file}`,
+      title: cleanTitle(file)
+    })));
+
+    const state = { category: "全部", query: "" };
+    const filters = document.querySelector("#filters");
+    const gallery = document.querySelector("#gallery");
+    const search = document.querySelector("#search");
+    const empty = document.querySelector("#empty");
+    const viewTitle = document.querySelector("#view-title");
+    const viewCopy = document.querySelector("#view-copy");
+    const topCount = document.querySelector("#top-count");
+    const lightbox = document.querySelector("#lightbox");
+    const lightboxImg = document.querySelector("#lightbox-img");
+    const lightboxTitle = document.querySelector("#lightbox-title");
+    const lightboxMeta = document.querySelector("#lightbox-meta");
+
+    topCount.textContent = `${works.length} works`;
+    buildFilters();
+    render();
+
+    search.addEventListener("input", (event) => {
+      state.query = event.target.value.trim().toLowerCase();
+      render();
+    });
+
+    document.querySelector("#close").addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeLightbox();
+    });
+
+    function buildFilters() {
+      const all = [["全部", works.length], ...groups.map(([category, files]) => [category, files.length])];
+      filters.innerHTML = all.map(([name, count]) => (
+        `<button class="filter" type="button" aria-pressed="${name === state.category}" data-category="${name}">${displayCategory(name)}<small>${count}</small></button>`
+      )).join("");
+
+      filters.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.category = button.dataset.category;
+          buildFilters();
+          render();
+        });
+      });
+    }
+
+    function render() {
+      const visible = works.filter((work) => {
+        const inCategory = state.category === "全部" || work.category === state.category;
+        const haystack = `${work.title} ${work.category} ${work.file}`.toLowerCase();
+        return inCategory && (!state.query || haystack.includes(state.query));
+      });
+
+      viewTitle.textContent = state.category === "全部" ? "全部作品" : displayCategory(state.category);
+      viewCopy.textContent = state.category === "全部"
+        ? "不同题材按气质展开，竖幅肖像、横幅场景与系列图像在同一条视觉动线里相遇。"
+        : copy[state.category];
+
+      gallery.innerHTML = visible.map((work, index) => `
+        <article class="work" tabindex="0" data-index="${works.indexOf(work)}">
+          <img src="${encodeURI(work.src)}" alt="${escapeHtml(work.title)}" loading="${index < 8 ? "eager" : "lazy"}">
+          <div class="caption">
+            <strong>${escapeHtml(work.title)}</strong>
+            <span>${escapeHtml(displayCategory(work.category))}</span>
+          </div>
+        </article>
+      `).join("");
+
+      empty.style.display = visible.length ? "none" : "block";
+
+      gallery.querySelectorAll(".work").forEach((card) => {
+        card.addEventListener("click", () => openLightbox(works[Number(card.dataset.index)]));
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openLightbox(works[Number(card.dataset.index)]);
+          }
+        });
+      });
+    }
+
+    function openLightbox(work) {
+      lightboxImg.src = encodeURI(work.src);
+      lightboxImg.alt = work.title;
+      lightboxTitle.textContent = work.title;
+      lightboxMeta.textContent = displayCategory(work.category);
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+      lightboxImg.removeAttribute("src");
+    }
+
+    function cleanTitle(file) {
+      return file
+        .replace(/\.[^.]+$/, "")
+        .replace(/^ChatGPT Image\s*/i, "影像实验 ")
+        .replace(/\d{4}年\d{1,2}月\d{1,2}日\s*/, "")
+        .replace(/_/g, " ")
+        .replace(/\s+\((\d+)\)/, " $1")
+        .trim();
+    }
+
+    function displayCategory(category) {
+      return category.replace(/_/g, " · ");
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+  </script>
+</body>
+</html>
