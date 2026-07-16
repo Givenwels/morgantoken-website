@@ -1,0 +1,19 @@
+# Morgan (丁梦轲)
+> AI 训练师 · AIGC 创作者 · 个人作品集 | AI Product Builder
+
+## 主要页面
+- [首页](https://morgantoken.fun) — 个人介绍、技能栈、作品集入口
+- [作品集](https://morgantoken.fun/portfolio/text-to-image/index.html) — AI 文生图 & 文生视频作品
+- [音乐](https://morgantoken.fun/music) — 个人音乐品味与创作
+- [开源](https://morgantoken.fun/opensource) — 开源项目与技术贡献
+
+## 关于我
+丁梦轲 (Morgan)，22岁，AI 训练师。专注多模态数据标注质检与模型评测。
+服务过 MiniMax 文生视频评测、点点 AI 小红书图文多模态等项目。
+擅长自动化提效（Python + Playwright + Coze/Dify + Chrome 插件），
+个人项目包括 B站视频下载助手、Boss直聘岗位采集、图片批量下载插件等。
+求职方向：AI 训练师 / 多模态标注质检 / 模型评测（北京/深圳）。
+
+## 技术栈
+AI训练、数据标注、质量质检、模型评测、Badcase归因、样例库沉淀、
+Python、Playwright、Coze、Dify、Chrome扩展、VibeCoding、Claude Code
