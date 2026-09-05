@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>anthropic的cowork类似的开源项目介绍 – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="思考：anthropic总是能想出新的东西，比之前openai出智能体商店啥的强多了。从mcp到claude code到skill，再到cowork。因为cowork是闭源的，然后现在AI开发很强了，开源开发者一下就跟进了开源的cowork项目，ai办公助手，像豆包电脑端，还是得上传文件，然后没有特别针对办公场景。现在的cowork实际上就是claude code UI化，然后加强办公方面的能力，产品上的区别我觉得就有点像vibe chat的vscode，但是用户完全不用关心代码，只需要指定目录，这在文件管理上是一种很大提升。豆包那种上传文件，然后生成产出文件就有点落后了。
+
+" />
+    <meta property="og:description" content="思考：anthropic总是能想出新的东西，比之前openai出智能体商店啥的强多了。从mcp到claude code到skill，再到cowork。因为cowork是闭源的，然后现在AI开发很强了，开源开发者一下就跟进了开源的cowork项目，ai办公助手，像豆包电脑端，还是得上传文件，然后没有特别针对办公场景。现在的cowork实际上就是claude code UI化，然后加强办公方面的能力，产品上的区别我觉得就有点像vibe chat的vscode，但是用户完全不用关心代码，只需要指定目录，这在文件管理上是一种很大提升。豆包那种上传文件，然后生成产出文件就有点落后了。
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="anthropic的cowork类似的开源项目介绍" />
+    <meta property="twitter:title" content="anthropic的cowork类似的开源项目介绍" />
+    
+
+
+    <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+    <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <link rel="alternate" type="application/rss+xml" title="AutoEval" href="/bench/feed.xml" />
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container-wide header-inner">
+        <h1 class="site-name"><a href="/bench/">AutoEval</a></h1>
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-toggle-checkbox" />
+        <label for="site-nav-toggle" class="site-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article class="post">
+  <div class="container">
+    <a href="/bench/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      返回主页
+    </a>
+
+    <div class="post-header">
+      <h1 class="post-title">anthropic的cowork类似的开源项目介绍</h1>
+      <div class="post-meta">
+        <span>2026年01月19日</span>
+        
+        <span class="post-card-category">技术</span>
+        
+        <span>阅读 <span id="busuanzi_value_page_pv"></span> 次</span>
+        <span>|</span>
+        <span><span id="unique_visitor_count"></span> 人读过</span>
+      </div>
+    </div>
+
+    <div class="post-content">
+      <p>思考：anthropic总是能想出新的东西，比之前openai出智能体商店啥的强多了。从mcp到claude code到skill，再到cowork。因为cowork是闭源的，然后现在AI开发很强了，开源开发者一下就跟进了开源的cowork项目，ai办公助手，像豆包电脑端，还是得上传文件，然后没有特别针对办公场景。现在的cowork实际上就是claude code UI化，然后加强办公方面的能力，产品上的区别我觉得就有点像vibe chat的vscode，但是用户完全不用关心代码，只需要指定目录，这在文件管理上是一种很大提升。豆包那种上传文件，然后生成产出文件就有点落后了。</p>
+
+<p>但是干这个事开源有很大的优势，因为现在sota模型还是国外的模型，claude code + 4.5opus，codex + gpt5.2 max，gemini cli + gemini3 pro。</p>
+
+<p>开源迅速迭代，用户只需要自己搞定sota模型的api key，加上现在疯狂卷的开源产品，很大概率能干出比国内互联网大厂更好的桌面端软件。因为国内大厂不能将这个产品to c然后内置claude4.5。这个时候国内大厂的优势就只剩更多的人力和强大的产品能力了。但是模型即产品，基于sota模型迭代的开源产品机会很大。</p>
+
+<p>看起来好像cowork只是manus，或者豆包或者扣子，弄了一个桌面客户端。实际上它应该是继续迈向未来的一个个人的，数据安全的ai助理的终极目标的前进的又一步。畅想一下，你的电脑上有一个本地的agent软件，它能记录你的信息和偏好（贾维斯低配版），你可以选择使用端侧模型，像48gb的mac安个32b的模型，也可以选择连接web api。如果你是一个办公室文员，可以要你的ai助手给你每天自动整理报告，自动进行处理。如果你是一个up主，可以要你的ai助手每天自动搜集最新信息，帮你自动发送小红书帖子，帮你自动剪辑b站视频。现在的自动化在不断的加快，是用户心智不断培养的一个过程，普通用户对ai的快速变更可能已经有所疲劳了，但是toc的产品应该还在等待下一个deepseek时刻。</p>
+
+<p>最后会不会造出新形式的manus呢？</p>
+
+<p><strong>国外的</strong></p>
+
+<p><strong>一 OpenWork</strong></p>
+
+<p>项目链接：https://github.com/accomplish-ai/openwork</p>
+
+<p>视频链接：https://www.youtube.com/watch?v=UJ0FIufMOlc</p>
+
+<p><img src="/assets/images/posts/post5/media/image1.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image2.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image3.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image4.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image5.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image6.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image7.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image8.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image9.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image10.png" alt="" /></p>
+
+<p><strong>二 OpenWork</strong></p>
+
+<p>项目链接：https://github.com/different-ai/openwork</p>
+
+<p><img src="/assets/images/posts/post5/media/image11.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image12.png" alt="" /></p>
+
+<p>架构文档：</p>
+
+<p><img src="/assets/images/posts/post5/media/image13.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image14.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image15.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image16.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image17.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image18.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image19.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image20.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image21.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image22.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image23.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image24.png" alt="" /></p>
+
+<p><strong>三 openwork by langchain</strong></p>
+
+<p>项目链接：https://github.com/langchain-ai/openwork</p>
+
+<p><img src="/assets/images/posts/post5/media/image25.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image26.png" alt="" /></p>
+
+<p>架构文档：</p>
+
+<p><img src="/assets/images/posts/post5/media/image27.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image28.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image29.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image30.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image31.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image32.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image33.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image34.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image35.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image36.png" alt="" /></p>
+
+<p><strong>国内的</strong></p>
+
+<p><strong>四 Eigent</strong></p>
+
+<p><img src="/assets/images/posts/post5/media/image37.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image38.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image39.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image40.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image41.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image42.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image43.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image44.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image45.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image46.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image47.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image48.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image49.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image50.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image51.png" alt="" /></p>
+
+<p><strong>五 Claude-Cowork</strong></p>
+
+<p>项目链接：https://github.com/DevAgentForge/Claude-Cowork/tree/main</p>
+
+<p><img src="/assets/images/posts/post5/media/image52.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image53.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image54.png" alt="" /></p>
+
+<p>架构文档：</p>
+
+<p><img src="/assets/images/posts/post5/media/image55.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image56.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image57.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image58.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image59.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image60.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image61.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image62.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image63.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image64.png" alt="" /></p>
+
+<p><strong>六 open-claude-cowork</strong></p>
+
+<p>项目链接：https://github.com/ComposioHQ/open-claude-cowork</p>
+
+<p><img src="/assets/images/posts/post5/media/image65.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image66.png" alt="" /></p>
+
+<p>架构文档：</p>
+
+<p><img src="/assets/images/posts/post5/media/image67.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image68.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image69.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image70.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image71.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image72.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image73.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image74.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image75.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image76.png" alt="" /></p>
+
+<p><strong>七 opencowork</strong></p>
+
+<p>项目链接：https://github.com/Safphere/opencowork</p>
+
+<p><img src="/assets/images/posts/post5/media/image77.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image78.png" alt="" /></p>
+
+<p>架构文档：</p>
+
+<p><img src="/assets/images/posts/post5/media/image79.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image80.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image81.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image82.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image83.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image84.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image85.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image86.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image87.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image88.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image89.png" alt="" /></p>
+
+<p><strong>八 open-cowork</strong></p>
+
+<p>项目链接：https://github.com/OpenCoworkAI/open-cowork?tab=readme-ov-file</p>
+
+<p><img src="/assets/images/posts/post5/media/image90.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image91.png" alt="" /></p>
+
+<p>架构文档：</p>
+
+<p><img src="/assets/images/posts/post5/media/image92.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image93.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image94.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image95.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image96.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image97.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image98.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image99.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image100.png" alt="" /></p>
+
+<p><img src="/assets/images/posts/post5/media/image101.png" alt="" /></p>
+
+    </div>
+
+    
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="suyoumo/suyoumo.github.io"
+    data-repo-id="R_kgDORQbMTg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORQbMTs4C2cNQ"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function() {
+  var SUPABASE_URL = 'https://iuganrktxtmvhzduioke.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1Z2Fucmt0eHRtdmh6ZHVpb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNTM3NDksImV4cCI6MjA4NjcyOTc0OX0._4_2bsX4vBiQKYYl0-4X9yG4NrOtYkMk4-Uc7f9GhTw';
+  if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var path = window.location.pathname;
+  var vid = localStorage.getItem('_vid');
+  if (!vid) {
+    vid = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('_vid', vid);
+  }
+
+  // Record visit (ignore duplicate)
+  sb.from('page_views').upsert({ page_path: path, visitor_id: vid }, { onConflict: 'page_path,visitor_id' }).then(function() {
+    // Count unique visitors for this page
+    sb.rpc('count_unique_visitors', { target_path: path }).then(function(res) {
+      var el = document.getElementById('unique_visitor_count');
+      if (el && res.data !== null) el.textContent = res.data;
+    });
+  });
+})();
+</script>
+
+  </div>
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="site-stats">
+          <span>本站总访问 <span id="busuanzi_value_site_pv"></span> 次</span>
+          <span>|</span>
+          <span>访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+        </p>
+        <p>&copy; 2026 AutoEval. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

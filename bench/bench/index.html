@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>AutoEval – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="AutoEval" />
+    <meta property="twitter:title" content="AutoEval" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="AutoEval logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="AutoEval hover logo" />
+          </span>
+          <span class="bench-brand-text">AutoEval</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      <style>
+  .bench-review-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 26px;
+    padding: 18px 22px;
+    border: 1px solid rgba(196, 90, 60, 0.28);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #fff 0%, #fbf3ee 100%);
+    box-shadow: 0 8px 24px rgba(25, 25, 24, 0.05);
+  }
+  .bench-review-entry-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+  }
+  .bench-review-entry-badge {
+    align-self: flex-start;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #c45a3c;
+    background: rgba(196, 90, 60, 0.1);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .bench-review-entry-copy strong {
+    font-size: 1.15rem;
+    color: #191918;
+  }
+  .bench-review-entry-desc {
+    color: #6b6b65;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .bench-review-entry-button {
+    flex: none;
+    padding: 11px 22px;
+    border-radius: 10px;
+    background: #c45a3c;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+  .bench-review-entry-button:hover {
+    background: #a9472e;
+  }
+  @media (max-width: 900px) {
+    .bench-review-entry { flex-direction: column; align-items: stretch; }
+    .bench-review-entry-button { text-align: center; }
+  }
+  .bench-verdict-conclusion {
+    margin: 0 0 6px;
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .bench-verdict-conclusion strong { color: #c45a3c; }
+  .bench-verdict-meta {
+    margin: 8px 0 0;
+    font-size: 0.78rem;
+    color: #9a9388;
+  }
+  .bench-verdict-meta a { color: #c45a3c; font-weight: 700; }
+  .bench-verdict-warn {
+    color: #9a6b1f;
+    font-weight: 700;
+    background: rgba(196, 90, 60, 0.06);
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+  }
+  .rv-mode-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0 12px;
+    flex-wrap: wrap;
+  }
+  .rv-mode-row > span {
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: #8a857c;
+  }
+  .rv-mode-option {
+    padding: 5px 14px;
+    border: 1px solid #e0d9cf;
+    border-radius: 999px;
+    background: #fff;
+    color: #5a5750;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .rv-mode-option:hover { border-color: #c45a3c; color: #c45a3c; }
+  .rv-mode-option.is-active { background: #c45a3c; border-color: #c45a3c; color: #fff; }
+  .rv-mode-option[data-mode="formal"].is-active { background: #3f6b45; border-color: #3f6b45; }
+</style>
+
+<section class="bench-hero">
+  <div class="container-wide bench-shell">
+    <p class="bench-kicker">MY AUTOMATED EVAL</p>
+    <h1>AutoEval</h1>
+    <p class="bench-intro">AutoEval 是我自己搭的一套自动化评测：模型跑的不是通用题库，是我日常真实要做的 agent 任务（真实工具调用、规划拆解、约束遵守、错误恢复与安全），跑完自动评分，只回答一个问题：在我自己的场景里，它到底能不能用。这里只放我自己的评测结论、人工复核结果与我的平台数据。</p>
+    <div class="leaderboard-family-switch bench-family-switch" aria-label="Leaderboard family">
+      <span>Leaderboard Family:</span>
+      <a class="is-active" href="/bench/bench/" aria-current="page">AutoEval <strong>当前</strong><span class="bench-family-badge">个人评测</span></a>
+      <a href="/bench/code-agent-bench/">Morgan AgentBench <span class="bench-family-badge">开源排名</span> ↗</a>
+      <a href="/bench/llm-leaderboard/">LLMLeadBoard <span class="bench-family-badge">开源排名</span> ↗</a>
+    </div>
+    <div class="bench-family-verdict" id="family-verdict">
+      <div class="bench-family-verdict-head">
+        <span class="bench-family-verdict-badge">MY VERDICT</span>
+        <span class="bench-family-verdict-tag">Morgan 的评测结论与使用感受</span>
+      </div>
+      <div class="rv-mode-row" id="rv-mode-row" role="group" aria-label="评测模式">
+        <span>评测模式：</span>
+        <button type="button" class="rv-mode-option" data-mode="test">测试模式</button>
+        <button type="button" class="rv-mode-option" data-mode="formal">正式模式</button>
+      </div>
+      <div class="bench-family-verdict-body" id="verdict-conclusion">
+        <p class="bench-family-verdict-placeholder">评测结论尚待生成。完成一次人工复核并提交后，这里会自动展示最新结论。</p>
+      </div>
+    </div>
+    <div class="bench-review-entry">
+      <div class="bench-review-entry-copy">
+        <span class="bench-review-entry-badge">人工复核 · GSB</span>
+        <strong>复核 QA 对，手动打 GSB</strong>
+        <span class="bench-review-entry-desc">左、右模型自选（如 DeepSeek vs GLM），同题回答并排对照；判分模型先给判定，你逐题打 GSB，胜率与人机一致率自动汇总。</span>
+      </div>
+      <a class="bench-review-entry-button" href="/bench/bench/review/">进入人工复核 GSB →</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var body = document.getElementById('verdict-conclusion');
+  if (!body) return;
+  // 评测模式：优先系统内切换（localStorage autoEvalMode），未设置时用数据文件默认值（test / formal）
+  var MODE = (function () {
+    try {
+      var m = window.localStorage.getItem('autoEvalMode');
+      if (m === 'formal' || m === 'test') return m;
+    } catch (e) { /* no storage */ }
+    return 'test';
+  })();
+  function esc(v) {
+    return String(v == null ? '' : v).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function fmtTime(s) { return String(s || '').replace('T', ' ').slice(0, 16); }
+  function compute(entry) {
+    var wins = {}, ties = {}, losses = {}, counts = {};
+    (entry.results || []).forEach(function (r) {
+      var a = r.left_model, b = r.right_model;
+      if (!a || !b) return;
+      wins[a] = wins[a] || 0; ties[a] = ties[a] || 0; losses[a] = losses[a] || 0; counts[a] = counts[a] || 0;
+      wins[b] = wins[b] || 0; ties[b] = ties[b] || 0; losses[b] = losses[b] || 0; counts[b] = counts[b] || 0;
+      var w = r.human_gsb === 'left' ? a : (r.human_gsb === 'right' ? b : null);
+      if (w) { wins[w] += 1; losses[w === a ? b : a] += 1; }
+      else if (r.human_gsb === 'tie') { ties[a] += 1; ties[b] += 1; }
+      counts[a] += 1; counts[b] += 1;
+    });
+    var rank = Object.keys(wins).map(function (m) {
+      var n = counts[m] || 0;
+      return { m: m, w: wins[m], t: ties[m], l: losses[m], rate: n ? (wins[m] + 0.5 * ties[m]) / n : 0 };
+    }).sort(function (x, y) { return y.rate - x.rate || y.w - x.w; });
+    var agree = 0, total = 0, dims = {};
+    (entry.results || []).forEach(function (r) {
+      if (!r.human_gsb || !r.left_model) return;
+      total += 1;
+      if (r.judge_verdict && r.human_gsb === r.judge_verdict) agree += 1;
+      var t = r.task_type || '综合';
+      dims[t] = dims[t] || { A: 0, B: 0 };
+      if (r.human_gsb === 'left') dims[t].A += 1;
+      else if (r.human_gsb === 'right') dims[t].B += 1;
+    });
+    return { rank: rank, agree: agree, total: total, dims: dims };
+  }
+  var latestData = null;
+  function refreshConclusion() {
+    window.fetch('http://127.0.0.1:8898/api/review/results')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { latestData = d; applyConclusion(d); })
+      .catch(function () { /* API 未启动时保留占位文案 */ });
+  }
+  function applyConclusion(d) {
+    if (!d.entries || !d.data.length) return;
+    var e = d.data[d.data.length - 1];
+    var c = compute(e);
+    if (!c.rank.length) return;
+    var best = c.rank[0], second = c.rank[1];
+    var decided = second && (best.rate - second.rate) > 0.01;
+    var dimwinA = null, dimwinB = null;
+    Object.keys(c.dims).forEach(function (t) {
+      var r = c.dims[t];
+      if (r.A - r.B > 0 && (!dimwinA || (r.A - r.B) > (c.dims[dimwinA].A - c.dims[dimwinA].B))) dimwinA = t;
+      if (r.B - r.A > 0 && (!dimwinB || (r.B - r.A) > (c.dims[dimwinB].B - c.dims[dimwinB].A))) dimwinB = t;
+    });
+    var html = '';
+    if (MODE === 'test') {
+      html += '<p class="bench-verdict-conclusion bench-verdict-warn">⚠️ 测试用结论：当前为测试数据，本结论仅供流程验证，正式结果请以真实题库重新提交。</p>';
+    }
+    // 针对场景说明
+    html += '<p class="bench-verdict-conclusion">针对本次场景：' +
+      (e.uploaded
+        ? '上传文档对照（左：' + esc(e.uploaded_left_name || '-') + ' · 右：' + esc(e.uploaded_right_name || '-') + '）'
+        : '平台演示数据同题对照') +
+      '；共 ' + ((e.results || []).length) + ' 题，已复核评分 ' + c.total + ' 题。</p>';
+    // 题型或题目清单（让结论落到具体内容上）
+    var typeCount = {};
+    (e.results || []).forEach(function (r) { if (r.task_type) { typeCount[r.task_type] = (typeCount[r.task_type] || 0) + 1; } });
+    var typeKeys = Object.keys(typeCount);
+    if (typeKeys.length) {
+      html += '<p class="bench-verdict-conclusion">涵盖题型：' + typeKeys.map(function (t) { return esc(t) + ' ' + typeCount[t] + ' 题'; }).join(' · ') + '。</p>';
+    } else {
+      var names = (e.results || []).slice(0, 4).map(function (r) { return esc(String(r.task_name || '').slice(0, 28)); }).filter(Boolean);
+      if (names.length) html += '<p class="bench-verdict-conclusion">测试题目：' + names.join('、') + ((e.results || []).length > 4 ? ' 等' : '') + '。</p>';
+    }
+    var main = '<p class="bench-verdict-conclusion"><strong>' + esc(best.m) + (decided ? ' 更优' : ' 与 ' + esc(second.m) + ' 势均力敌') + '</strong>：胜率 ' + (best.rate * 100).toFixed(1) + '%（胜 ' + best.w + ' · 平 ' + best.t + ' · 负 ' + best.l + '）' + (second ? '，' + esc(second.m) + ' ' + (second.rate * 100).toFixed(1) + '%' : '') + '</p>';
+    html += main;
+    if (c.total) html += '<p class="bench-verdict-conclusion">人机一致率 ' + (c.agree / c.total * 100).toFixed(1) + '%（' + c.agree + '/' + c.total + ' · 判分模型 ' + esc(e.judge_model || '') + '）</p>';
+    var keep = [];
+    if (typeKeys.length) {
+      if (decided && dimwinA) keep.push('最强项「' + esc(dimwinA) + '」');
+      if (dimwinB) keep.push(esc(second ? second.m : '对方') + ' 优势项「' + esc(dimwinB) + '」');
+    }
+    if (keep.length) html += '<p class="bench-verdict-conclusion">' + keep.join('；') + '</p>';
+    html += '<p class="bench-verdict-meta">第 ' + (e.round || '-') + ' 次提交 · ' + fmtTime(e.saved_at) + ' 自动生成 · <a href="/bench/bench/review/">继续人工复核 →</a></p>';
+    body.innerHTML = html;
+  }
+
+  // —— 评测模式即时切换（免刷新）：与人工复核页共用 localStorage 记忆 ——
+  var modeRow = document.getElementById('rv-mode-row');
+  function setModeUI() {
+    if (!modeRow) return;
+    Array.prototype.forEach.call(modeRow.querySelectorAll('.rv-mode-option'), function (btn) {
+      btn.classList.toggle('is-active', btn.dataset.mode === MODE);
+    });
+  }
+  function switchMode(m) {
+    if (m !== 'test' && m !== 'formal') return;
+    MODE = m;
+    try { window.localStorage.setItem('autoEvalMode', m); } catch (e) { /* no storage */ }
+    setModeUI();
+    if (latestData) applyConclusion(latestData);
+  }
+  if (modeRow) {
+    modeRow.addEventListener('click', function (event) {
+      var btn = event.target.closest && event.target.closest('.rv-mode-option');
+      if (btn) switchMode(btn.dataset.mode);
+    });
+  }
+  window.addEventListener('storage', function (event) {
+    if (event.key === 'autoEvalMode' && (event.newValue === 'test' || event.newValue === 'formal')) {
+      MODE = event.newValue;
+      setModeUI();
+      if (latestData) applyConclusion(latestData);
+    }
+  });
+  setModeUI();
+  refreshConclusion();
+})();
+</script>
+
+
+    </main>
+  </body>
+</html>

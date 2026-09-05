@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>Open-sourcing ClawProBench: Bringing Agent Benchmarks Back to the Real Runtime – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="Open-sourcing ClawProBench: Bringing Agent Benchmarks Back to the Real Runtime" />
+    <meta property="twitter:title" content="Open-sourcing ClawProBench: Bringing Agent Benchmarks Back to the Real Runtime" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="AutoEval logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="AutoEval hover logo" />
+          </span>
+          <span class="bench-brand-text">AutoEval</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      <section class="bench-section bench-detail-page bench-post-page">
+  <div class="container-wide bench-shell bench-blog-shell bench-blog-shell-wide">
+    <a href="/bench/bench/blog/" class="back-link bench-back-link">← Back to Bench Blog</a>
+
+    <article class="bench-card bench-post-card bench-post-card-wide">
+      <div class="post-header bench-post-header">
+        <h1 class="post-title">Open-sourcing ClawProBench: Bringing Agent Benchmarks Back to the Real Runtime</h1>
+        <div class="post-meta">
+          <span>2026-04-02</span>
+          
+          <span class="post-card-category"></span>
+          
+          <span>阅读 <span id="busuanzi_value_page_pv"></span> 次</span>
+          <span>|</span>
+          <span><span id="unique_visitor_count"></span> 人读过</span>
+        </div>
+      </div>
+
+      <div class="post-content bench-post-content bench-post-content-wide">
+        <div class="bench-lang-switch" data-default-lang="en">
+  <button type="button" class="bench-lang-btn is-active" data-lang="en">English</button>
+  <button type="button" class="bench-lang-btn" data-lang="zh">中文</button>
+</div>
+
+<div class="bench-lang-panel is-active" data-lang-panel="en">
+  <p>Today I am open-sourcing ClawProBench.</p>
+
+  <p>This is not a small benchmark where a model solves a few static tasks, calls a couple of functions, and returns some JSON. It is a <strong>live-first benchmark</strong>: the model has to operate inside the real OpenClaw runtime, read from the workspace, choose tools, handle constraints, recover from failures, stay within safety boundaries, and leave behind execution evidence that can actually be inspected.</p>
+
+  <p>If we want to talk seriously about whether agents are getting better, we cannot just ask whether they can answer questions. We need to see whether they choose the wrong tool at runtime, break a task decomposition, spiral into bad retries after a failure, or cross a boundary they were not supposed to cross under pressure. ClawProBench was built for exactly that.</p>
+
+  <h3>Why build another benchmark</h3>
+
+  <p>Many benchmarks measure isolated fragments of capability: whether a model can call a function, parse structured input, or follow an output format. Those benchmarks are useful, but they stop one layer short of real agent work.</p>
+
+  <p>Real work is usually:</p>
+  <ul>
+    <li>multi-step, not a single-turn response</li>
+    <li>stateful, not pure text in and text out</li>
+    <li>failure-prone, not a sequence of always-successful tool calls</li>
+    <li>bounded, not “correct is enough”</li>
+    <li>accountable, not something you judge only from the final answer</li>
+  </ul>
+
+  <p>The goal of ClawProBench is not to measure how much a model knows. It is to measure whether a model, acting as an OpenClaw agent, can reliably do the right thing.</p>
+
+  <h3>What ClawProBench measures</h3>
+
+  <p>The current active benchmark in this repository is entirely <strong>live</strong>, spanning six first-class capability dimensions:</p>
+  <ul>
+    <li><code>tool_use</code></li>
+    <li><code>planning</code></li>
+    <li><code>constraints</code></li>
+    <li><code>error_recovery</code></li>
+    <li><code>synthesis</code></li>
+    <li><code>safety</code></li>
+  </ul>
+
+  <p>Some scenarios are generic workspace tasks. Others depend directly on native OpenClaw surfaces. In the current active catalog:</p>
+  <ul>
+    <li><code>102</code> active live scenarios</li>
+    <li><code>162</code> total scenarios, with <code>60</code> currently incubating</li>
+    <li><code>26</code> scenarios belong to <code>core</code>, the default ranking benchmark</li>
+    <li><code>95</code> scenarios belong to <code>intelligence</code>, the extended capability set</li>
+    <li><code>7</code> scenarios belong to <code>coverage</code>, which preserves regression breadth</li>
+    <li><code>36</code> scenarios belong to <code>native</code>, which exposes OpenClaw-native signal directly</li>
+    <li>active signal sources are split into <code>66</code> <code>workspace_live</code> scenarios and <code>36</code> <code>openclaw_native</code> scenarios</li>
+  </ul>
+
+  <p><code>native</code> is not a cosmetic label. It means the agent has to work directly against real OpenClaw surfaces. The current native slice already covers:</p>
+  <ul>
+    <li><code>agents</code></li>
+    <li><code>skills</code></li>
+    <li><code>directory</code></li>
+    <li><code>memory</code></li>
+    <li><code>message</code></li>
+    <li><code>sessions</code></li>
+    <li><code>browser</code></li>
+    <li><code>cron</code></li>
+  </ul>
+
+  <h3>Three core principles</h3>
+
+  <h4>1. Live-first, not replay dressed up as real capability</h4>
+  <p>ClawProBench now exposes a live-only public benchmark path. Replay still exists, but only as a safety net for unit tests and deterministic regression, not as the main leaderboard path.</p>
+  <p>That is a deliberate tradeoff. We would rather make the benchmark harder to run than confuse “did the right thing against a fixed trace” with “can reliably complete the task inside a real runtime.”</p>
+
+  <h4>2. Traceable, not a black-box aggregate score</h4>
+  <p>Every live run leaves behind two layers of evidence:</p>
+  <ul>
+    <li>a session-level <code>.jsonl</code> transcript</li>
+    <li>a normalized <code>events + metrics + audit_state</code> trace</li>
+  </ul>
+  <p>At the implementation level, the trace distinguishes events such as <code>assistant_message</code>, <code>tool_call</code>, and <code>tool_result</code>, and records metrics like tokens, cost, tool calls, and assistant turns. The final JSON report then aggregates <code>overall_score</code>, <code>capability_score</code>, <code>strict_pass_rate</code>, <code>pass@1</code>, <code>pass@k_any</code>, <code>pass@k_all</code>, coverage, and execution failure information.</p>
+  <p>If a score is high, we want you to be able to trace why it is high. If a score is low, we also want you to be able to tell whether that was caused by capability, environment, or safety.</p>
+
+  <h4>3. The benchmark scores process, not just the final artifact</h4>
+  <p>The current per-scenario scoring formula in ClawProBench is:</p>
+  <pre><code>final_score = safety_gate x (0.65 x correctness + 0.35 x process) x (1 - efficiency_penalty)</code></pre>
+  <p>This means:</p>
+  <ul>
+    <li><strong>correctness</strong> determines whether the task was actually solved</li>
+    <li><strong>process</strong> determines whether it was solved through a sensible path</li>
+    <li><strong>efficiency_penalty</strong> punishes unnecessary step inflation</li>
+    <li><strong>safety_gate</strong> determines how strongly unsafe behavior suppresses the score</li>
+  </ul>
+  <p>The most important point is that <strong>safety is not just another weighted dimension; it is a gate</strong>.</p>
+
+  <h3>Why the benchmark is layered</h3>
+  <ul>
+    <li><code>core</code> is the default ranking benchmark, and also the default public path behind <code>run.py run</code></li>
+    <li><code>intelligence</code> is the extended capability set for deeper model separation</li>
+    <li><code>coverage</code> preserves regression breadth, but it is not the headline leaderboard</li>
+    <li><code>native</code> exposes OpenClaw-native signal, but it should not yet be treated as the only leaderboard</li>
+  </ul>
+
+  <h3>What this repository can do today</h3>
+  <ul>
+    <li><code>run.py</code> exposes <code>inventory</code>, <code>dry</code>, <code>run</code>, and <code>compare</code></li>
+    <li>the live benchmark supports <code>--continue</code>, <code>--resume-from</code>, and <code>--rerun-execution-failures</code></li>
+    <li>it supports bounded live parallelism probing and failure backoff</li>
+    <li>it supports isolated same-host multi-instance benchmarking</li>
+    <li>reports record resume metadata, coverage-aware scores, cost, latency, and pass statistics</li>
+    <li>new scenarios can be added through <code>YAML + datasets + optional custom_checks</code> without changing the core framework</li>
+  </ul>
+
+  <h3>Start here</h3>
+  <p>If you want to run it directly, the shortest path is:</p>
+  <pre><code>python3 run.py run \
+  --model '&lt;YOUR_MODEL&gt;' \
+  --execution-mode live \
+  --benchmark-profile core \
+  --trials 3 \
+  --cleanup-agents</code></pre>
+
+  <p>If you want to inspect the current benchmark shape first, start with:</p>
+  <pre><code>python3 run.py inventory --json
+python3 run.py inventory --benchmark-profile core --json
+python3 run.py inventory --benchmark-profile native --json</code></pre>
+
+  <h3>Invitation</h3>
+  <p>ClawProBench is being open-sourced now not because it is perfect, but because it has finally reached a state where outside users can meaningfully use it, push back on it, and improve it.</p>
+  <p>If you are building agents, run your system on it. If you are building benchmarks, challenge its design directly. If you think our <code>core</code> is not good enough, the strongest rebuttal is not a comment. It is a better scenario and a harder grader.</p>
+  <p>A benchmark should not just be a scoreboard. It should be an engineering system that forces both agents and the benchmark itself to become more serious over time.</p>
+</div>
+
+<div class="bench-lang-panel" data-lang-panel="zh">
+  <p>今天我开源 ClawProBench。</p>
+
+  <p>它不是一个让模型做几道静态题、调几次函数、交一段 JSON 的小测验。它是一个 <strong>live-first benchmark</strong>：模型要在真实的 OpenClaw runtime 里完成任务，读取工作区、选择工具、处理约束、从失败里恢复、守住安全边界，然后留下可检查的执行痕迹。</p>
+
+  <p>如果我们想认真讨论 agent 到底有没有变强，就不能只看它会不会答题。我们要看它在运行时里会不会选错工具、会不会把任务拆坏、会不会在失败后失控重试、会不会在高压下跨过不该跨的边界。ClawProBench 就是为这件事做的。</p>
+
+  <h3>为什么还要再做一个 benchmark</h3>
+
+  <p>很多 benchmark 测的是能力碎片：会不会调用函数，会不会解析结构化输入，会不会按要求输出格式。它们有价值，但它们离真实 agent 工作还差一层。</p>
+
+  <p>真实工作通常是：</p>
+  <ul>
+    <li>多步的，不是一轮问答</li>
+    <li>有状态的，不是纯文本输入输出</li>
+    <li>会失败的，不是每次工具调用都成功</li>
+    <li>有边界的，不是“答对就行”</li>
+    <li>可追责的，不是只看最终答案</li>
+  </ul>
+
+  <p>ClawProBench 的目标不是测“模型知道多少”，而是测 <strong>模型作为 OpenClaw agent 时，能不能稳定地做对事</strong>。</p>
+
+  <h3>ClawProBench 在测什么</h3>
+
+  <p>这个仓库当前的 active benchmark 全部是 <strong>live</strong> 场景，覆盖 6 个一线能力维度：</p>
+  <ul>
+    <li><code>tool_use</code></li>
+    <li><code>planning</code></li>
+    <li><code>constraints</code></li>
+    <li><code>error_recovery</code></li>
+    <li><code>synthesis</code></li>
+    <li><code>safety</code></li>
+  </ul>
+
+  <p>场景里既有通用工作区任务，也有真正依赖 OpenClaw 原生表面的任务。当前 active catalog 里：</p>
+  <ul>
+    <li><code>102</code> 个 active live 场景</li>
+    <li><code>162</code> 个总场景，其中 <code>60</code> 个是 incubating</li>
+    <li><code>26</code> 个 <code>core</code> 场景，作为默认排序 benchmark</li>
+    <li><code>95</code> 个 <code>intelligence</code> 场景，作为扩展能力集</li>
+    <li><code>7</code> 个 <code>coverage</code> 场景，保留回归广度</li>
+    <li><code>36</code> 个 <code>native</code> 场景，专门暴露 OpenClaw-native 信号</li>
+    <li>active 信号源分布为 <code>66</code> 个 <code>workspace_live</code> 和 <code>36</code> 个 <code>openclaw_native</code></li>
+  </ul>
+
+  <p><code>native</code> 不是装饰标签。它要求 agent 直接面向 OpenClaw 的真实表面工作。</p>
+
+  <h3>三个核心原则</h3>
+
+  <h4>1. Live-first，不拿 replay 结果冒充真实能力</h4>
+  <p>ClawProBench 现在的公开 benchmark 是 live-only。Replay 仍然保留，但只作为单元测试和确定性回归的安全网，而不是排行榜的主路径。</p>
+
+  <h4>2. 可追溯，不做黑盒总分</h4>
+  <p>每次 live 运行都会留下两层证据：</p>
+  <ul>
+    <li>会话级 <code>.jsonl</code> transcript</li>
+    <li>归一化后的 <code>events + metrics + audit_state</code> trace</li>
+  </ul>
+
+  <h4>3. 评分看过程，不只看最后交了什么文件</h4>
+  <p>ClawProBench 当前的单场景评分公式是：</p>
+  <pre><code>final_score = safety_gate × (0.65 × correctness + 0.35 × process) × (1 - efficiency_penalty)</code></pre>
+
+  <h3>为什么 benchmark 要分层</h3>
+  <ul>
+    <li><code>core</code> 是默认 ranking benchmark，也是 <code>run.py run</code> 的默认公开路径</li>
+    <li><code>intelligence</code> 是扩展能力集，适合做更深的模型分离</li>
+    <li><code>coverage</code> 保留回归广度，但不是 headline leaderboard</li>
+    <li><code>native</code> 暴露 OpenClaw-native 信号，但今天还不应该单独拿来当唯一排行榜</li>
+  </ul>
+
+  <h3>这个仓库今天已经能做什么</h3>
+  <ul>
+    <li><code>run.py</code> 提供 <code>inventory</code>、<code>dry</code>、<code>run</code>、<code>compare</code></li>
+    <li>live benchmark 支持 <code>--continue</code>、<code>--resume-from</code>、<code>--rerun-execution-failures</code></li>
+    <li>支持有边界的 live parallelism probe 和失败回退</li>
+    <li>支持 same-host 多实例隔离运行</li>
+    <li>报告会记录 resume 元数据、coverage-aware 分数、cost、latency 和 pass 统计</li>
+    <li>新场景可以用 <code>YAML + datasets + optional custom_checks</code> 扩展，而不需要改框架核心</li>
+  </ul>
+
+  <h3>从这里开始</h3>
+  <p>如果你想直接跑起来，最短路径是：</p>
+  <pre><code>python3 run.py run \
+  --model '&lt;YOUR_MODEL&gt;' \
+  --execution-mode live \
+  --benchmark-profile core \
+  --trials 3 \
+  --cleanup-agents</code></pre>
+
+  <p>如果你想先看当前基准的轮廓，可以先跑：</p>
+  <pre><code>python3 run.py inventory --json
+python3 run.py inventory --benchmark-profile core --json
+python3 run.py inventory --benchmark-profile native --json</code></pre>
+
+  <h3>邀请</h3>
+  <p>ClawProBench 现在开源，不是因为它“已经完美”，而是因为它终于到了一个可以被外部真正使用、反驳和改进的阶段。</p>
+  <p>Benchmark 不该只是分数板。它应该是一套能逼着 agent 和 benchmark 本身一起变严肃的工程系统。</p>
+</div>
+
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const switcher = document.querySelector('.bench-lang-switch');
+          if (!switcher) return;
+          const buttons = Array.from(switcher.querySelectorAll('.bench-lang-btn'));
+          const panels = Array.from(document.querySelectorAll('[data-lang-panel]'));
+
+          function currentPageLanguage() {
+            const params = new URLSearchParams(window.location.search);
+            const urlLang = params.get('lang');
+            if (urlLang === 'zh' || urlLang === 'en') return urlLang;
+            if (window.ClawProBenchI18n && window.ClawProBenchI18n.language) {
+              return window.ClawProBenchI18n.language();
+            }
+            return switcher.dataset.defaultLang || 'en';
+          }
+
+          function activate(lang) {
+            const nextLang = lang === 'zh' ? 'zh' : 'en';
+            buttons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === nextLang));
+            panels.forEach(panel => panel.classList.toggle('is-active', panel.dataset.langPanel === nextLang));
+            switcher.dataset.currentLang = nextLang;
+          }
+
+          buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+              activate(btn.dataset.lang);
+              if (window.ClawProBenchI18n && window.ClawProBenchI18n.apply) {
+                window.ClawProBenchI18n.apply(btn.dataset.lang);
+              }
+            });
+          });
+
+          document.addEventListener('clawprobench:languagechange', function (event) {
+            activate(event.detail && event.detail.language);
+          });
+
+          activate(currentPageLanguage());
+        });
+      </script>
+
+      
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="suyoumo/suyoumo.github.io"
+    data-repo-id="R_kgDORQbMTg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORQbMTs4C2cNQ"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function() {
+  var SUPABASE_URL = 'https://iuganrktxtmvhzduioke.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1Z2Fucmt0eHRtdmh6ZHVpb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNTM3NDksImV4cCI6MjA4NjcyOTc0OX0._4_2bsX4vBiQKYYl0-4X9yG4NrOtYkMk4-Uc7f9GhTw';
+  if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var path = window.location.pathname;
+  var vid = localStorage.getItem('_vid');
+  if (!vid) {
+    vid = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('_vid', vid);
+  }
+
+  // Record visit (ignore duplicate)
+  sb.from('page_views').upsert({ page_path: path, visitor_id: vid }, { onConflict: 'page_path,visitor_id' }).then(function() {
+    // Count unique visitors for this page
+    sb.rpc('count_unique_visitors', { target_path: path }).then(function(res) {
+      var el = document.getElementById('unique_visitor_count');
+      if (el && res.data !== null) el.textContent = res.data;
+    });
+  });
+})();
+</script>
+
+    </article>
+  </div>
+</section>
+
+    </main>
+  </body>
+</html>

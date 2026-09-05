@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>doubao seed 2.0 code on Morgan AgentBench – Morgan AgentBench</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="
+
+
+" />
+    <meta property="og:description" content="
+
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="doubao seed 2.0 code on Morgan AgentBench" />
+    <meta property="twitter:title" content="doubao seed 2.0 code on Morgan AgentBench" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/code-agent-bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="Morgan AgentBench logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="Morgan AgentBench hover logo" />
+          </span>
+          <span class="bench-brand-text">Morgan AgentBench</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="model-article-page" data-i18n-skip>
+  <div class="model-article-shell">
+    <nav class="model-breadcrumb" aria-label="Breadcrumb">
+      <a href="/bench/code-agent-bench/">CodeAgentBench</a>
+      <span>/</span>
+      <span><span class="bench-lang-en">Model notes</span><span class="bench-lang-zh">模型文章</span></span>
+      <span>/</span>
+      <span>doubao seed 2.0 code</span>
+    </nav>
+
+    <header class="model-hero">
+      <div class="model-hero-copy">
+        <div class="model-kicker-row">
+          
+          <span class="model-rank-badge"><span class="bench-lang-en">Rank</span><span class="bench-lang-zh">排名</span> 30</span>
+          
+          <span>OpenCode</span>
+          <span>Volcengine</span>
+        </div>
+        <h1>doubao seed 2.0 code</h1>
+        
+        <p class="model-subtitle">
+          <span class="bench-lang-en">A lower-table result with a few useful bright spots: 27/151 tasks solved at least once, 9/151 solved in all three attempts, with the clearest wins around large Python/Django application repairs plus automation and configuration-management work.</span>
+          <span class="bench-lang-zh">这是一个排名靠后但仍有局部亮点的结果：151 题中至少一次解出 27 题，三次都解出 9 题；强项主要落在大型 Python/Django 应用修复以及自动化和配置管理类改动。</span>
+        </p>
+        
+        <div class="model-hero-meta">
+          <span>opencode-cli 1.14.32</span>
+          <span>volcengine-plan/doubao-seed-2.0-code</span>
+          <span><span class="bench-lang-en">Updated</span><span class="bench-lang-zh">更新</span> 2026-06-18</span>
+        </div>
+      </div>
+
+      <aside class="model-score-panel" aria-label="doubao seed 2.0 code score summary">
+        <div class="model-score-primary">
+          <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+          <strong>19.42</strong>
+          
+          <div class="model-score-meter" aria-hidden="true">
+            <span style="width: 19.42%"></span>
+          </div>
+        </div>
+        <div class="model-score-grid">
+          <div>
+            <span>Pass@3</span>
+            <strong>17.9%</strong>
+          </div>
+          <div>
+            <span>Pass^3</span>
+            <strong>6.0%</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Solved Tasks</span><span class="bench-lang-zh">解出任务</span></span>
+            <strong>27/151</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Attempts</span><span class="bench-lang-zh">尝试通过</span></span>
+            <strong>52/453</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    
+    <section class="model-tldr" aria-label="TL;DR">
+      <div>
+        <div class="model-section-label">TL;DR</div>
+        <h2><span class="bench-lang-en">How to read this result</span><span class="bench-lang-zh">可以这样读</span></h2>
+      </div>
+      <ul>
+        
+        
+        
+        <li><span class="bench-lang-en">doubao seed 2.0 code is best read as volatile explorer: rank #30, 27 reached tasks, 9 stable solves.</span><span class="bench-lang-zh">doubao seed 2.0 code 更适合读成探索型但波动较大：排名 #30，触达 27 题，稳定解出 9 题。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Best suite signal: Open Library · release 013 at 7/10 (70.0%).</span><span class="bench-lang-zh">最强 suite 信号：Open Library · release 013，7/10（70.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Weakest visible area: Flipt · release 005 at 0/10 (0.0%).</span><span class="bench-lang-zh">最弱可见区域：Flipt feature flag 服务 · release 005，0/10（0.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Because the agent shell is OpenCode, the result mostly exposes the underlying model's planning habits rather than a heavily opinionated workflow.</span><span class="bench-lang-zh">因为 agent shell 是 OpenCode，这个结果更直接暴露底层模型的规划习惯，而不是强工作流包装后的表现。</span></li>
+        
+      </ul>
+    </section>
+    
+
+    <div class="model-content-grid">
+      
+      <aside class="model-aside" aria-label="Key numbers">
+        <div class="model-aside-card">
+          <div class="model-section-label"><span class="bench-lang-en">Key Numbers</span><span class="bench-lang-zh">关键数字</span></div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+            <strong>19.42</strong>
+            <em><span class="bench-lang-en">rank #30 of 32</span><span class="bench-lang-zh">32 个模型中排名 #30</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Stable solves</span><span class="bench-lang-zh">稳定解题</span></span>
+            <strong>9</strong>
+            <em><span class="bench-lang-en">tasks solved in all 3 attempts</span><span class="bench-lang-zh">三次尝试都解出的任务</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Reach gap</span><span class="bench-lang-zh">覆盖-稳定差</span></span>
+            <strong>+18</strong>
+            <em><span class="bench-lang-en">Pass@3 tasks minus Pass^3 tasks</span><span class="bench-lang-zh">至少一次成功的题数减三次都成功的题数</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Attempt score</span><span class="bench-lang-zh">单次尝试</span></span>
+            <strong>11.5%</strong>
+            <em><span class="bench-lang-en">52/453 solved attempts</span><span class="bench-lang-zh">453 次尝试中成功 52 次</span></em>
+          </div>
+          
+        </div>
+      </aside>
+      
+
+      <div class="model-prose">
+        <div class="bench-lang-en">
+
+  <p>doubao seed 2.0 code is a volatile explorer row around the #30 slot. The useful reading is not just the 19.42 score, but the split between 27 reached tasks and 9 stable solves.</p>
+
+  <p>The closest family reference is SenseNova 6.7 flash lite at rank #29. Compared with that row, this one is 3.72 points behind, with 6 fewer reached tasks and 4 fewer stable solves.</p>
+
+  <p>Most of the positive signal concentrates in Open Library · release 013 at 7/10 (70.0%). The opposing read is Flipt · release 005 at 0/10 (0.0%), which keeps the row from looking like a generalist. Because the agent shell is OpenCode, the result mostly exposes the underlying model’s planning habits rather than a heavily opinionated workflow.</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>7/10 · 70.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 70.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 7/10 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：10 题中解出 7 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 003</span><span class="bench-lang-zh">Ansible 自动化 · release 003</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 004</span><span class="bench-lang-zh">Ansible 自动化 · release 004</span></span>
+        <strong>1/3 · 33.3%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 33.3%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 001</span><span class="bench-lang-zh">Ansible 自动化 · release 001</span></span>
+        <strong>3/10 · 30.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 30.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>3/10 · 30.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 30.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>1/4 · 25.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 25.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 005</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 005</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 007</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 007</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 008</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 008</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>Do not read the chart as a small version of the top rows. It is a map of early failure surfaces with a few recoverable pockets.</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Inconsistency in author identifier generation when comparing editions.</span><span class="bench-lang-zh">比较 editions 时 author identifier 生成不一致。</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 3/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Add Validation and Date Formatting Functions</span><span class="bench-lang-zh">添加验证和日期格式化函数</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 2/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Work search emits over-escaped edition_key filters and does not expose raw user queries as parameters.</span><span class="bench-lang-zh">Work search 发出过度转义的 edition_key 过滤器，且未将原始用户查询作为参数公开。</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 1/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">Function read_subjects() in get_subjects.py exceeds acceptable complexity thresholds and includes unused logic</span><span class="bench-lang-zh">get_subjects.py 中的函数 read_subjects() 超出可接受的复杂度阈值，并包含未使用逻辑</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 0/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: no-op-patch. Suite: release-zh-016-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：no-op-patch。Suite：release-zh-016-internetarchive-openlibrary。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>At this rank, <code class="language-plaintext highlighter-rouge">Function read_subjects() in get_subjects.py exceeds acceptable complexity thresholds and includes unused logic</code> matters as much as the wins. It shows the task shape where the model-agent loop fails before it can produce a meaningful verifier-backed patch.</p>
+
+  <p>The audit trims 1 solved attempt from doubao seed 2.0 code but still keeps 98% of the solved set, so the suite shape remains useful even where individual wins are debatable.</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 98%; --rejected-pct: 2%;" aria-hidden="true">
+      <span>98%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">51 of 52 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">52 次初始成功里，51 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 51 of 52 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 52 次初始成功中的 51 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>51 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>1 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>19.42</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>19.42</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>This row is more useful as a failure map than as a default choice. Look at Flipt · release 005 at 0/10 (0.0%) first: it shows the task shape where the loop loses traction. With 52/453 solved attempts, the page is most useful for seeing where the agent loop breaks before it becomes a dependable option.</p>
+
+  <details class="model-evidence">
+  <summary>Supporting suite table</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>Solved</th>
+          <th>Pass^3</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>7/10</td>
+          <td>3</td>
+          <td>70.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-003-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-004-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>1/3</td>
+          <td>0</td>
+          <td>33.3%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>3/10</td>
+          <td>1</td>
+          <td>30.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>3/10</td>
+          <td>0</td>
+          <td>30.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>1/4</td>
+          <td>0</td>
+          <td>25.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-005-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-007-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+<div class="bench-lang-zh">
+
+  <p>doubao seed 2.0 code 是一个排名 #30 附近的探索型但波动较大结果。它的重点不只是 19.42 分，而是 27 道触达题和 9 道稳定题之间的差距。</p>
+
+  <p>最接近的同系参照是排名 #29 的 SenseNova 6.7 flash lite。和它相比，这一行最终分低 3.72 分，触达题少 6 个，稳定题少 4 个。</p>
+
+  <p>正面信号大多集中在Open Library · release 013，7/10（70.0%）。反向读法是Flipt feature flag 服务 · release 005，0/10（0.0%），它让这一行看起来不像通用型。因为 agent shell 是 OpenCode，这个结果更直接暴露底层模型的规划习惯，而不是强工作流包装后的表现。</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>7/10 · 70.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 70.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 7/10 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：10 题中解出 7 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 003</span><span class="bench-lang-zh">Ansible 自动化 · release 003</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 004</span><span class="bench-lang-zh">Ansible 自动化 · release 004</span></span>
+        <strong>1/3 · 33.3%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 33.3%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 001</span><span class="bench-lang-zh">Ansible 自动化 · release 001</span></span>
+        <strong>3/10 · 30.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 30.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>3/10 · 30.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 30.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>1/4 · 25.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 25.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 005</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 005</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 007</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 007</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 008</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 008</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>不要把这张图读成头部模型的小号版本。它更像早期失败面的地图，中间夹着少数可恢复区域。</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Inconsistency in author identifier generation when comparing editions.</span><span class="bench-lang-zh">比较 editions 时 author identifier 生成不一致。</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 3/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Add Validation and Date Formatting Functions</span><span class="bench-lang-zh">添加验证和日期格式化函数</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 2/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Work search emits over-escaped edition_key filters and does not expose raw user queries as parameters.</span><span class="bench-lang-zh">Work search 发出过度转义的 edition_key 过滤器，且未将原始用户查询作为参数公开。</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 1/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">Function read_subjects() in get_subjects.py exceeds acceptable complexity thresholds and includes unused logic</span><span class="bench-lang-zh">get_subjects.py 中的函数 read_subjects() 超出可接受的复杂度阈值，并包含未使用逻辑</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 0/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: no-op-patch. Suite: release-zh-016-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：no-op-patch。Suite：release-zh-016-internetarchive-openlibrary。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>在这个排名段，<code class="language-plaintext highlighter-rouge">get_subjects.py 中的函数 read_subjects() 超出可接受的复杂度阈值，并包含未使用逻辑</code> 和成功案例一样重要。它说明模型-agent 循环在哪种任务形态上还没形成有效 verifier-backed patch。</p>
+
+  <p>复核从 doubao seed 2.0 code 中剔除了 1 次成功，但仍保留 98% 的成功集合，因此即便个别胜利有争议，suite 形状仍然有参考价值。</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 98%; --rejected-pct: 2%;" aria-hidden="true">
+      <span>98%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">51 of 52 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">52 次初始成功里，51 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 51 of 52 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 52 次初始成功中的 51 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>51 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>1 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>19.42</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>19.42</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>这一行更适合作为失败地图，而不是默认选择。先看Flipt feature flag 服务 · release 005，0/10（0.0%）：它展示了模型-agent 循环最容易失去抓手的任务形态。在 453 次尝试中只成功 52 次时，这页最有价值的是看 agent loop 在哪里先断掉。</p>
+
+  <details class="model-evidence">
+  <summary>支撑这个判断的 suite 表</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>解出</th>
+          <th>Pass^3</th>
+          <th>通过率</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>7/10</td>
+          <td>3</td>
+          <td>70.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-003-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-004-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>1/3</td>
+          <td>0</td>
+          <td>33.3%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>3/10</td>
+          <td>1</td>
+          <td>30.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>3/10</td>
+          <td>0</td>
+          <td>30.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>1/4</td>
+          <td>0</td>
+          <td>25.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-005-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-007-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+      </div>
+    </div>
+
+    
+    <section class="model-related">
+      <div>
+        <div class="model-section-label"><span class="bench-lang-en">Related Models</span><span class="bench-lang-zh">相关模型</span></div>
+        <h2><span class="bench-lang-en">Same neighborhood on the leaderboard</span><span class="bench-lang-zh">榜单附近的参照物</span></h2>
+      </div>
+      <div class="model-related-grid">
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/opencode-sensenova67-flash-lite/">
+          <span><span class="bench-lang-en">One rank above</span><span class="bench-lang-zh">上一名</span></span>
+          <strong>SenseNova 6.7 flash lite</strong>
+          <em><span class="bench-lang-en">Rank #29 · 23.14 Final Score</span><span class="bench-lang-zh">排名 #29 · Final Score 23.14</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/opencode-stepfun35/">
+          <span><span class="bench-lang-en">One rank below</span><span class="bench-lang-zh">下一名</span></span>
+          <strong>Step 3.5 flash</strong>
+          <em><span class="bench-lang-en">Rank #31 · 17.04 Final Score</span><span class="bench-lang-zh">排名 #31 · Final Score 17.04</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/opencode-glm52/">
+          <span><span class="bench-lang-en">Same agent</span><span class="bench-lang-zh">同 agent</span></span>
+          <strong>GLM 5.2</strong>
+          <em><span class="bench-lang-en">Rank #1 · 37.59 Final Score</span><span class="bench-lang-zh">排名 #1 · Final Score 37.59</span></em>
+        </a>
+        
+      </div>
+    </section>
+    
+  </div>
+</article>
+
+    </main>
+  </body>
+</html>

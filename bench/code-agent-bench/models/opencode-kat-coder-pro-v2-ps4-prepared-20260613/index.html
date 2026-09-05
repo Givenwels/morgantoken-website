@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>KAT Coder Pro v2 on Morgan AgentBench – Morgan AgentBench</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="
+
+
+" />
+    <meta property="og:description" content="
+
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="KAT Coder Pro v2 on Morgan AgentBench" />
+    <meta property="twitter:title" content="KAT Coder Pro v2 on Morgan AgentBench" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/code-agent-bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="Morgan AgentBench logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="Morgan AgentBench hover logo" />
+          </span>
+          <span class="bench-brand-text">Morgan AgentBench</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="model-article-page" data-i18n-skip>
+  <div class="model-article-shell">
+    <nav class="model-breadcrumb" aria-label="Breadcrumb">
+      <a href="/bench/code-agent-bench/">CodeAgentBench</a>
+      <span>/</span>
+      <span><span class="bench-lang-en">Model notes</span><span class="bench-lang-zh">模型文章</span></span>
+      <span>/</span>
+      <span>KAT Coder Pro v2</span>
+    </nav>
+
+    <header class="model-hero">
+      <div class="model-hero-copy">
+        <div class="model-kicker-row">
+          
+          <span class="model-rank-badge"><span class="bench-lang-en">Rank</span><span class="bench-lang-zh">排名</span> 19</span>
+          
+          <span>OpenCode</span>
+          <span>StreamLake</span>
+        </div>
+        <h1>KAT Coder Pro v2</h1>
+        
+        <p class="model-subtitle">
+          <span class="bench-lang-en">A lower-table result with a few useful bright spots: 39/151 tasks solved at least once, 21/151 solved in all three attempts, with the clearest wins around large Python/Django application repairs plus localized Go security-scanner changes.</span>
+          <span class="bench-lang-zh">这是一个排名靠后但仍有局部亮点的结果：151 题中至少一次解出 39 题，三次都解出 21 题；强项主要落在大型 Python/Django 应用修复以及边界相对清楚的 Go 漏洞扫描器改动。</span>
+        </p>
+        
+        <div class="model-hero-meta">
+          <span>opencode-cli 1.17.6</span>
+          <span>streamlake/kat-coder-pro-v2</span>
+          <span><span class="bench-lang-en">Updated</span><span class="bench-lang-zh">更新</span> 2026-06-18</span>
+        </div>
+      </div>
+
+      <aside class="model-score-panel" aria-label="KAT Coder Pro v2 score summary">
+        <div class="model-score-primary">
+          <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+          <strong>27.97</strong>
+          
+          <div class="model-score-meter" aria-hidden="true">
+            <span style="width: 27.97%"></span>
+          </div>
+        </div>
+        <div class="model-score-grid">
+          <div>
+            <span>Pass@3</span>
+            <strong>25.8%</strong>
+          </div>
+          <div>
+            <span>Pass^3</span>
+            <strong>13.9%</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Solved Tasks</span><span class="bench-lang-zh">解出任务</span></span>
+            <strong>39/151</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Attempts</span><span class="bench-lang-zh">尝试通过</span></span>
+            <strong>90/453</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    
+    <section class="model-tldr" aria-label="TL;DR">
+      <div>
+        <div class="model-section-label">TL;DR</div>
+        <h2><span class="bench-lang-en">How to read this result</span><span class="bench-lang-zh">可以这样读</span></h2>
+      </div>
+      <ul>
+        
+        
+        
+        <li><span class="bench-lang-en">KAT Coder Pro v2 is best read as moderately stable: rank #19, 39 reached tasks, 21 stable solves.</span><span class="bench-lang-zh">KAT Coder Pro v2 更适合读成中等稳定型：排名 #19，触达 39 题，稳定解出 21 题。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Best suite signal: Open Library · release 013 at 5/10 (50.0%).</span><span class="bench-lang-zh">最强 suite 信号：Open Library · release 013，5/10（50.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Weakest visible area: Flipt · release 005 at 0/10 (0.0%).</span><span class="bench-lang-zh">最弱可见区域：Flipt feature flag 服务 · release 005，0/10（0.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Because the agent shell is OpenCode, the result mostly exposes the underlying model's planning habits rather than a heavily opinionated workflow.</span><span class="bench-lang-zh">因为 agent shell 是 OpenCode，这个结果更直接暴露底层模型的规划习惯，而不是强工作流包装后的表现。</span></li>
+        
+      </ul>
+    </section>
+    
+
+    <div class="model-content-grid">
+      
+      <aside class="model-aside" aria-label="Key numbers">
+        <div class="model-aside-card">
+          <div class="model-section-label"><span class="bench-lang-en">Key Numbers</span><span class="bench-lang-zh">关键数字</span></div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+            <strong>27.97</strong>
+            <em><span class="bench-lang-en">rank #19 of 32</span><span class="bench-lang-zh">32 个模型中排名 #19</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Stable solves</span><span class="bench-lang-zh">稳定解题</span></span>
+            <strong>21</strong>
+            <em><span class="bench-lang-en">tasks solved in all 3 attempts</span><span class="bench-lang-zh">三次尝试都解出的任务</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Reach gap</span><span class="bench-lang-zh">覆盖-稳定差</span></span>
+            <strong>+18</strong>
+            <em><span class="bench-lang-en">Pass@3 tasks minus Pass^3 tasks</span><span class="bench-lang-zh">至少一次成功的题数减三次都成功的题数</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Attempt score</span><span class="bench-lang-zh">单次尝试</span></span>
+            <strong>19.9%</strong>
+            <em><span class="bench-lang-en">90/453 solved attempts</span><span class="bench-lang-zh">453 次尝试中成功 90 次</span></em>
+          </div>
+          
+        </div>
+      </aside>
+      
+
+      <div class="model-prose">
+        <div class="bench-lang-en">
+
+  <p>KAT Coder Pro v2 is a moderately stable row around the #19 slot. The useful reading is not just the 27.97 score, but the split between 39 reached tasks and 21 stable solves.</p>
+
+  <p>The closest family reference is KAT Coder Pro v2 at rank #28. Compared with that row, this one is 4.50 points ahead, with 10 more reached tasks and 4 more stable solves.</p>
+
+  <p>The volume win is Open Library · release 013 at 5/10 (50.0%), while the cleanest pass-rate spike is vuls · release 012 at 3/4 (75.0%). The warning label is Flipt · release 005 at 0/10 (0.0%), so the contrast is not generic strength versus weakness; it is large Python/Django application repairs holding together better than Go product plumbing across configuration, storage, and service APIs on this run. Because the agent shell is OpenCode, the result mostly exposes the underlying model’s planning habits rather than a heavily opinionated workflow.</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>3/4 · 75.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 75.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 3/4 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：4 题中解出 3 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 010</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 010</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 011</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 011</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 016</span><span class="bench-lang-zh">Open Library · release 016</span></span>
+        <strong>2/5 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 005</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 005</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Navidrome · release 017</span><span class="bench-lang-zh">Navidrome 音乐服务 · release 017</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go service work with persistence and API behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：涉及持久化和 API 行为的 Go 服务改动对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 002</span><span class="bench-lang-zh">Ansible 自动化 · release 002</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>This is a middle-band profile: the useful signal is the slope between Open Library · release 013 at 5/10 (50.0%) and Flipt · release 005 at 0/10 (0.0%).</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Scan results miss Package URL (PURL) information in library output</span><span class="bench-lang-zh">Library 输出中的扫描结果缺少 Package URL (PURL) 信息</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 3/3</span><span class="bench-lang-zh">future-architect/vuls · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-010-future-architect-vuls.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-010-future-architect-vuls。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Avoid double calculation of loops and delegate_to in TaskExecutor</span><span class="bench-lang-zh">避免在 TaskExecutor 中重复计算 loops 和 delegate_to</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 2/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-001-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-001-ansible-ansible。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Add Validation and Date Formatting Functions</span><span class="bench-lang-zh">添加验证和日期格式化函数</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 1/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">Alpine Linux vulnerability detection incorrectly handles source vs binary packages</span><span class="bench-lang-zh">Alpine Linux vulnerability detection 错误处理 source packages 与 binary packages</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 0/3</span><span class="bench-lang-zh">future-architect/vuls · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: apply-failed. Suite: release-zh-010-future-architect-vuls.</span><span class="bench-lang-zh">Verifier 信号：apply-failed。Suite：release-zh-010-future-architect-vuls。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>The examples keep the middle-band story honest: <code class="language-plaintext highlighter-rouge">Scan results miss Package URL (PURL) information in library output</code> is the upside, <code class="language-plaintext highlighter-rouge">Alpine Linux vulnerability detection incorrectly handles source vs binary packages</code> is the failure surface, and the page should be read between those two poles.</p>
+
+  <p>The audit changes how to read KAT Coder Pro v2: only 60% of initial solved attempts survive, with 36 rejected attempts, while the exported score field stays flat. Treat the wins as leads that need stricter confirmation.</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 60%; --rejected-pct: 40%;" aria-hidden="true">
+      <span>60%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">54 of 90 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">90 次初始成功里，54 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 54 of 90 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 90 次初始成功中的 54 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>54 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>36 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>27.97</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>27.97</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>In practice, read it through the gap between Open Library · release 013 at 5/10 (50.0%) and Flipt · release 005 at 0/10 (0.0%). That gap is more actionable than the rank because it says which repo shape gets coherent patches. The 90/453 attempt score is the backdrop; the article above is about which parts of that score are repeatable enough to matter.</p>
+
+  <details class="model-evidence">
+  <summary>Supporting suite table</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>Solved</th>
+          <th>Pass^3</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>3/4</td>
+          <td>3</td>
+          <td>75.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>5/10</td>
+          <td>2</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>5/10</td>
+          <td>2</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-010-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-011-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/10</td>
+          <td>0</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-016-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>2/5</td>
+          <td>1</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-005-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-017-navidrome-navidrome</code></td>
+          <td>navidrome/navidrome</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-002-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>1/10</td>
+          <td>0</td>
+          <td>10.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+<div class="bench-lang-zh">
+
+  <p>KAT Coder Pro v2 是一个排名 #19 附近的中等稳定型结果。它的重点不只是 27.97 分，而是 39 道触达题和 21 道稳定题之间的差距。</p>
+
+  <p>最接近的同系参照是排名 #28 的 KAT Coder Pro v2。和它相比，这一行最终分高 4.50 分，触达题多 10 个，稳定题多 4 个。</p>
+
+  <p>从数量看，主要胜利来自Open Library · release 013，5/10（50.0%）；从通过率看，最干净的高点是vuls 漏洞扫描器 · release 012，3/4（75.0%）。需要警惕的是Flipt feature flag 服务 · release 005，0/10（0.0%），所以这里不是泛泛地说强弱项，而是大型 Python/Django 应用修复在这次运行中比横跨配置、存储和服务 API 的 Go 产品工程更能闭环。因为 agent shell 是 OpenCode，这个结果更直接暴露底层模型的规划习惯，而不是强工作流包装后的表现。</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>3/4 · 75.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 75.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 3/4 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：4 题中解出 3 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 010</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 010</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 011</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 011</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 016</span><span class="bench-lang-zh">Open Library · release 016</span></span>
+        <strong>2/5 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 005</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 005</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Navidrome · release 017</span><span class="bench-lang-zh">Navidrome 音乐服务 · release 017</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go service work with persistence and API behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：涉及持久化和 API 行为的 Go 服务改动对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 002</span><span class="bench-lang-zh">Ansible 自动化 · release 002</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>这是一个中段模型画像：真正有用的信号，是Open Library · release 013，5/10（50.0%）到Flipt feature flag 服务 · release 005，0/10（0.0%）之间的落差。</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Scan results miss Package URL (PURL) information in library output</span><span class="bench-lang-zh">Library 输出中的扫描结果缺少 Package URL (PURL) 信息</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 3/3</span><span class="bench-lang-zh">future-architect/vuls · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-010-future-architect-vuls.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-010-future-architect-vuls。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Avoid double calculation of loops and delegate_to in TaskExecutor</span><span class="bench-lang-zh">避免在 TaskExecutor 中重复计算 loops 和 delegate_to</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 2/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-001-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-001-ansible-ansible。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Add Validation and Date Formatting Functions</span><span class="bench-lang-zh">添加验证和日期格式化函数</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 1/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">Alpine Linux vulnerability detection incorrectly handles source vs binary packages</span><span class="bench-lang-zh">Alpine Linux vulnerability detection 错误处理 source packages 与 binary packages</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 0/3</span><span class="bench-lang-zh">future-architect/vuls · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: apply-failed. Suite: release-zh-010-future-architect-vuls.</span><span class="bench-lang-zh">Verifier 信号：apply-failed。Suite：release-zh-010-future-architect-vuls。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>这些案例让中段模型画像更具体：<code class="language-plaintext highlighter-rouge">Library 输出中的扫描结果缺少 Package URL (PURL) 信息</code> 是上限，<code class="language-plaintext highlighter-rouge">Alpine Linux vulnerability detection 错误处理 source packages 与 binary packages</code> 是失败面，这页应该在两者之间读。</p>
+
+  <p>复核改变了 KAT Coder Pro v2 的读法：初始成功只有 60% 保留下来，36 次被剔除，但当前导出的分数字段没有变化。原始胜利更适合作为线索，需要更严格确认。</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 60%; --rejected-pct: 40%;" aria-hidden="true">
+      <span>60%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">54 of 90 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">90 次初始成功里，54 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 54 of 90 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 90 次初始成功中的 54 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>54 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>36 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>27.97</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>27.97</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>实际选择时，更应该通过Open Library · release 013，5/10（50.0%）和Flipt feature flag 服务 · release 005，0/10（0.0%）之间的落差来读它。这个落差比分数排名更可操作，因为它说明哪类代码库更容易得到连贯补丁。90/453 的单次尝试成功数只是背景；上面的文章重点是哪些部分足够可重复、值得当成能力看。</p>
+
+  <details class="model-evidence">
+  <summary>支撑这个判断的 suite 表</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>解出</th>
+          <th>Pass^3</th>
+          <th>通过率</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>3/4</td>
+          <td>3</td>
+          <td>75.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>5/10</td>
+          <td>2</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>5/10</td>
+          <td>2</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-010-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-011-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/10</td>
+          <td>0</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-016-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>2/5</td>
+          <td>1</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-005-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-017-navidrome-navidrome</code></td>
+          <td>navidrome/navidrome</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-002-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>1/10</td>
+          <td>0</td>
+          <td>10.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+      </div>
+    </div>
+
+    
+    <section class="model-related">
+      <div>
+        <div class="model-section-label"><span class="bench-lang-en">Related Models</span><span class="bench-lang-zh">相关模型</span></div>
+        <h2><span class="bench-lang-en">Same neighborhood on the leaderboard</span><span class="bench-lang-zh">榜单附近的参照物</span></h2>
+      </div>
+      <div class="model-related-grid">
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/opencode-stepfun37-flash/">
+          <span><span class="bench-lang-en">One rank above</span><span class="bench-lang-zh">上一名</span></span>
+          <strong>Step 3.7 flash</strong>
+          <em><span class="bench-lang-en">Rank #18 · 28.01 Final Score</span><span class="bench-lang-zh">排名 #18 · Final Score 28.01</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/claude-mimo25/">
+          <span><span class="bench-lang-en">One rank below</span><span class="bench-lang-zh">下一名</span></span>
+          <strong>MiMo v2.5</strong>
+          <em><span class="bench-lang-en">Rank #20 · 27.04 Final Score</span><span class="bench-lang-zh">排名 #20 · Final Score 27.04</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/opencode-kat-coder-pro-v2-kat2/">
+          <span><span class="bench-lang-en">Same provider</span><span class="bench-lang-zh">同 provider</span></span>
+          <strong>KAT Coder Pro v2</strong>
+          <em><span class="bench-lang-en">Rank #28 · 23.47 Final Score</span><span class="bench-lang-zh">排名 #28 · Final Score 23.47</span></em>
+        </a>
+        
+      </div>
+    </section>
+    
+  </div>
+</article>
+
+    </main>
+  </body>
+</html>

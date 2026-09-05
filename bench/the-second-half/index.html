@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>姚顺雨，进入大模型下半场 – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="读了姚顺雨大神的新博客：The Second Half，insights非常深刻，堪称AGI时代的the bitter lesson，推荐大家去他的博客上阅读原文。以下是摘录： 几十年来，AI的研究者都在重复着提出榜单(benchmark)-提出算法刷榜-提出更难的榜单的游戏。但今天，事情不一样了。我们讨论的是通用人工智能：OpenAI o3, Deepseek-R1。 这象征着AI这场游戏，已经进入下半场。
+
+" />
+    <meta property="og:description" content="读了姚顺雨大神的新博客：The Second Half，insights非常深刻，堪称AGI时代的the bitter lesson，推荐大家去他的博客上阅读原文。以下是摘录： 几十年来，AI的研究者都在重复着提出榜单(benchmark)-提出算法刷榜-提出更难的榜单的游戏。但今天，事情不一样了。我们讨论的是通用人工智能：OpenAI o3, Deepseek-R1。 这象征着AI这场游戏，已经进入下半场。
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="姚顺雨，进入大模型下半场" />
+    <meta property="twitter:title" content="姚顺雨，进入大模型下半场" />
+    
+
+
+    <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+    <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <link rel="alternate" type="application/rss+xml" title="AutoEval" href="/bench/feed.xml" />
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container-wide header-inner">
+        <h1 class="site-name"><a href="/bench/">AutoEval</a></h1>
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-toggle-checkbox" />
+        <label for="site-nav-toggle" class="site-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <article class="post">
+  <div class="container">
+    <a href="/bench/" class="back-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      返回主页
+    </a>
+
+    <div class="post-header">
+      <h1 class="post-title">姚顺雨，进入大模型下半场</h1>
+      <div class="post-meta">
+        <span>2025年04月25日</span>
+        
+        <span class="post-card-category">随笔</span>
+        
+        <span>阅读 <span id="busuanzi_value_page_pv"></span> 次</span>
+        <span>|</span>
+        <span><span id="unique_visitor_count"></span> 人读过</span>
+      </div>
+    </div>
+
+    <div class="post-content">
+      <p>读了<a href="https://zhida.zhihu.com/search?content_id=256439340&amp;content_type=Article&amp;match_order=1&amp;q=姚顺雨&amp;zhida_source=entity">姚顺雨</a>大神的新博客：The Second Half，insights非常深刻，堪称AGI时代的the bitter lesson，推荐大家去他的博客上阅读原文。以下是摘录： 几十年来，AI的研究者都在重复着提出榜单(benchmark)-提出算法刷榜-提出更难的榜单的游戏。但今天，事情不一样了。我们讨论的是通用人工智能：<a href="https://zhida.zhihu.com/search?content_id=256439340&amp;content_type=Article&amp;match_order=1&amp;q=OpenAI&amp;zhida_source=entity">OpenAI</a> o3, Deepseek-R1。 这象征着AI这场游戏，已经进入下半场。</p>
+
+<p>姚顺雨用三个词总结了AI的上半场：RL finally generalizes，强化学习终于泛化出了通用智能。尽管RL（强化学习）一直被视作AI的圣杯，但直到今天，我们才真正认识RL。 RL有三个关键：1)算法，2)环境，3)先验。过去，绝大多数的研究都关注1-算法。时至今日，<a href="https://zhida.zhihu.com/search?content_id=256439340&amp;content_type=Article&amp;match_order=1&amp;q=ICML&amp;zhida_source=entity">ICML</a>的投稿还会因为没有算法创新而被攻击。然而，今天回头看，RL中最重要的原来不是算法或环境，而是3-先验。而获得先验的方式 - <a href="https://zhida.zhihu.com/search?content_id=256439340&amp;content_type=Article&amp;match_order=1&amp;q=LLM&amp;zhida_source=entity">LLM</a>的语言预训练 - 又和RL本身完全无关。 语言先验进而改变了2-环境。通过将语言推理加入到任意RL环境的动作空间中，我们得以利用LLM在预训练中积攒的先验知识实现泛化。</p>
+
+<p>一旦我们拥有了正确的RL先验（语言预训练）和RL环境（将语言推理作为动作），人们发现RL算法就没那么重要了。我们有了Openai o1，deepseek-r1，deep research。这是多么讽刺的事实 - 长久以来，RL研究者都将注意力倾注于算法而不是环境，而先验更是无人在意。</p>
+
+<p>总结上半场，我们总是在1)开发新的训练算法和模型来刷榜，2)创造更难的榜单并重复这个循环。这样的游戏结束了，因为1)通用模型的一次迭代就会轻松超过在特定任务上刷榜的努力，2)即使我们创造了更难的榜单，他们也会像MMLU一样迅速饱和。</p>
+
+<h1 id="下半场">下半场</h1>
+
+<p>总结：人工智能时代已经进入中场休息。</p>
+
+<p>几十年来，人工智能的发展主要集中在开发新的训练方法和模型上。而且这些努力都取得了成功：从击败国际象棋和围棋世界冠军，到在SAT和律师资格考试中超越大多数人类，再到赢得国际数学奥林匹克竞赛（IMO）和国际信息学奥林匹克竞赛（IOI）金牌。这些载入史册的里程碑——深蓝、AlphaGo、GPT-4和O系列——背后，是人工智能方法论的根本性创新：搜索、深度强化学习、扩展和推理。随着时间的推移，人工智能只会变得越来越好。</p>
+
+<p>那么现在突然有什么不同了呢？</p>
+
+<p>简而言之：强化学习终于成功了。更准确地说：强化学习终于实现了泛化。经过数次重大尝试和一系列里程碑式的成果，我们最终找到了一个可行的方案，利用语言和推理来解决各种各样的强化学习任务。即使在一年前，如果你告诉大多数人工智能研究人员，一个方案就能解决软件工程、创意写作、国际数学奥林匹克竞赛级别的数学、鼠标键盘操作以及长篇问答等问题——他们肯定会嘲笑你的异想天开。这些任务个个都极其困难，许多研究人员甚至花费整个博士阶段的时间都只专注于其中一个狭窄的领域。</p>
+
+<p>然而，它还是发生了。</p>
+
+<p>那么接下来会发生什么？人工智能的后半程——从现在开始——将把重点从解决问题转移到定义问题。在这个新时代，评估比训练更重要。我们不再仅仅问“我们能否训练一个模型来解决X问题？”，而是问“我们应该训练人工智能做什么，以及如何衡量真正的进展？”为了在后半程取得成功，我们需要及时转变思维方式和技能，或许需要更接近产品经理的思维模式。</p>
+
+<h2 id="上半部分">上半部分</h2>
+
+<p>要理解上半部分的内容，不妨看看获奖论文。你认为迄今为止最具影响力的AI论文有哪些？</p>
+
+<p>我尝试了斯坦福 224N 的测试，答案不出所料：Transformer、AlexNet、GPT-3 等等。这些论文的共同点是什么？它们都提出了一些训练更好模型的根本性突破。此外，它们也都通过在某些基准测试中展示（显著的）改进而成功发表了论文。</p>
+
+<p>然而，其中存在一个潜在的共同点：这些“赢家”都是训练方法或模型，而非基准测试或任务。即使是最具影响力的基准测试 ImageNet，其引用量也只有 AlexNet 的三分之一不到。方法与基准测试之间的差异在其他领域更为显著——例如，Transformer 的主要基准测试是 WMT’14，其研讨会报告的引用量约为 1300 次，而 Transformer 的引用量则超过 16 万次。</p>
+
+<p><img src="/images/second_half/first_half.png" alt="上半场" /></p>
+
+<p>这说明了上半场的比赛：重点是构建新的模型和方法，评估和基准测试是次要的（尽管对于纸质系统来说是必不可少的）。</p>
+
+<p>为什么？一个重要原因是，在人工智能发展的初期，方法比任务本身更难也更令人兴奋。从零开始创建新的算法或模型架构——想想反向传播算法、卷积神经网络（AlexNet）或GPT-3中使用的Transformer等突破性成果——需要非凡的洞察力和工程技术。相比之下，定义人工智能的任务往往显得更加直接：我们只需将人类已经完成的任务（例如翻译、图像识别或国际象棋）转化为基准即可。这几乎不需要什么洞察力，甚至不需要什么工程技术。</p>
+
+<p>方法往往比单个任务更具通用性和广泛适用性，因此也更具价值。例如，Transformer 架构最终推动了计算机视觉、自然语言处理、强化学习以及许多其他领域的进步——远远超出了它最初证明自身价值的单一数据集（WMT’14 翻译任务）。一个优秀的新方法能够在许多不同的基准测试中脱颖而出，因为它简单且通用，因此其影响往往超越了单个任务。</p>
+
+<p>这款游戏已经运行了几十年，激发了许多改变世界的理念和突破，并在各个领域不断提升的基准性能中得以体现。那么，这款游戏为何还要改变呢？因为这些理念和突破的积累，已经从根本上改变了解决问题的方法。</p>
+
+<h2 id="食谱">食谱</h2>
+
+<p>秘诀是什么？不出所料，它的组成部分包括大规模语言预训练、规模化（数据和计算规模），以及推理和行动的理念。这些听起来像是你在旧金山每天都能听到的流行语，但为什么要称它们为秘诀呢？</p>
+
+<p>我们可以通过强化学习（RL）的视角来理解这一点，强化学习通常被认为是人工智能的“最终目标”——毕竟，从理论上讲，强化学习保证赢得比赛，而且从经验上讲，很难想象没有强化学习的任何超人系统（例如 AlphaGo）。</p>
+
+<p>在强化学习（RL）中，有三个关键组成部分：<strong>算法、环境和先验信息</strong>。长期以来，强化学习研究者主要关注算法（例如 REINFORCE、DQN、TD-learning、Actor-Critic、PPO、TRPO 等）——智能体学习的核心机制——而将环境和先验信息视为固定不变或最小化的。例如，Sutton 和 Barto 的经典教科书通篇都在讨论算法，几乎没有涉及环境或先验信息。</p>
+
+<p><img src="/images/second_half/rl_book.png" alt="上半场" /></p>
+
+<p>然而，在深度强化学习时代，环境的重要性已通过经验证实：算法的性能往往高度依赖于其开发和测试的环境。如果忽略环境，就可能构建出一个“最优”算法，而该算法仅在玩具般的场景下表现优异。那么，为什么我们不先确定我们真正想要解决的环境，然后再找到最适合它的算法呢？</p>
+
+<p>这正是OpenAI最初的计划。他们开发了<a href="https://openai.com/index/openai-gym-beta/">gym</a>，一个用于各种游戏的标准强化学习环境，随后又推出了<a href="https://openai.com/index/universe/">World of Bits和Universe项目</a>，试图将互联网或计算机变成游戏。这计划不错，不是吗？一旦我们将所有数字世界都变成一个环境，并用智能强化学习算法来解决它，我们就拥有了数字通用人工智能（AGI）。</p>
+
+<p>计划不错，但并不完全奏效。OpenAI 在这条路上取得了巨大的进步，利用强化学习解决了<a href="https://openai.com/index/openai-five-defeats-dota-2-world-champions/">Dota 游戏</a>、<a href="https://openai.com/index/solving-rubiks-cube/">机器人手</a>等问题。但它始终未能解决计算机使用或网页导航等难题，而且在一个领域中运行的强化学习智能体也无法迁移到另一个领域。其中必有遗漏。</p>
+
+<p>直到 GPT-2 或 GPT-3 出现之后，人们才发现缺失的关键在于先验知识。我们需要强大的语言预训练能力，才能将通用常识和语言知识提炼到模型中，然后对这些模型进行微调，使其成为网页（WebGPT）或聊天（ChatGPT）智能体（并改变世界）。<strong>事实证明，强化学习最重要的部分甚至可能不是强化学习算法或环境，而是先验知识，而先验知识的获取方式与强化学习本身完全无关。</strong></p>
+
+<p>语言预训练为聊天提供了良好的先验知识，但对于控制计算机或玩电子游戏却效果不佳。为什么呢？因为这些领域与互联网文本的分布相差甚远，简单地在这些领域进行系统框架训练/强化学习（SFT/RL）泛化能力很差。我在2019年注意到了这个问题，当时GPT-2刚刚发布，我基于它进行了SFT/RL训练来解决基于文本的游戏——CALM<a href="https://arxiv.org/abs/2010.02903">是</a>世界上第一个通过预训练语言模型构建的智能体。但是，CALM需要数百万步的强化学习才能攻克一个游戏，而且它无法迁移到其他游戏中。虽然这正是强化学习的特性，对强化学习研究人员来说并不奇怪，但我却觉得很奇怪，因为我们人类可以轻松地玩一个新游戏，并且在零样本学习的基础上显著提高。然后我突然灵光一闪——我们之所以会进行概括，是因为我们不仅可以选择“去2号柜子”或“用1号钥匙打开3号箱子”或“用剑杀掉地牢里的敌人”，还可以选择思考诸如“地牢很危险，我需要武器来战斗。这里没有现成的武器，所以我可能需要在锁着的箱子或盒子里找到它。3号箱子就在2号柜子里，让我先去那里把它打开吧”之类的问题。</p>
+
+<p><img src="/images/second_half/reasoning.png" alt="推理" /></p>
+
+<p>思考或推理是一种<strong>奇特的</strong>行为——它并不直接影响外部世界，但推理的空间却是开放的、组合无限的——你可以思考一个词、一个句子、一段文字，或者一万个随机的英语单词，但你周围的世界并不会立即改变。在经典的强化学习理论中，这简直糟糕透了，决策根本无法进行。想象一下，你需要从两个盒子中选择一个，其中一个盒子里装着一百万美元，另一个是空的。你预期能赚到五十万美元。现在想象一下，我添加了无数个空盒子。你预期一分钱也赚不到。但是，通过将推理加入到任何强化学习环境的动作空间中，我们可以利用语言预训练的先验信息进行泛化，并且能够灵活地进行测试时计算，以应对不同的决策。这真是<strong>太神奇</strong>了，很抱歉我在这里没能完全解释清楚，我可能需要专门写一篇博文来详细阐述。欢迎阅读<a href="https://arxiv.org/abs/2210.03629">《ReAct》</a>，了解智能体推理的原始故事，并感受我当时的想法。目前，我的直觉解释是：即使你添加了无限多个空盒子，你也已经在各种游戏中见过它们，选择这些盒子能让你在任何游戏中更好地选择装有钱的盒子。我的抽象解释是：<strong>智能体通过推理实现语言泛化</strong>。</p>
+
+<p>一旦我们拥有了合适的强化学习先验知识（语言预训练）和强化学习环境（将语言推理作为动作），强化学习算法本身可能反而是最微不足道的部分。于是，我们才有了O系列、R1、深度学习、计算机智能体，以及更多即将到来的东西。真是讽刺！长期以来，强化学习研究者们过于关注算法而忽视了环境，先验知识更是无人问津——所有强化学习实验本质上都是从零开始。然而，我们却花了数十年曲折才意识到，或许我们之前的优先级应该完全颠倒过来。</p>
+
+<p>但正如史蒂夫·乔布斯所说：你无法预见未来，只能回顾过去才能将点点滴滴串联起来。</p>
+
+<h2 id="下半部分">下半部分</h2>
+
+<p>这个食谱彻底改变了比赛格局。回顾上半场比赛：</p>
+
+<ul>
+  <li>我们开发出能够爬山基准测试的新型训练方法或模型。</li>
+  <li>我们设定更严格的标准，然后继续循环。</li>
+</ul>
+
+<p>这款游戏正在被毁掉，因为：</p>
+
+<ul>
+  <li>该方案本质上已经标准化并行业化了基准爬山算法，而无需引入太多新的思路。由于该方案具有良好的可扩展性和通用性，你针对特定任务提出的新方法可能将其性能提升 5%，而下一个 o 系列模型在不专门针对该任务的情况下，却能将其性能提升 30%。</li>
+  <li>即使我们制定更严格的基准，很快（而且速度越来越快）这些基准也会被现有的方法所解决。我的同事 Jason Wei 制作了一张精美的图表，很好地展现了这一趋势：</li>
+</ul>
+
+<p><img src="/images/second_half/progress.jpeg" alt="进步" /></p>
+
+<p>那么下半场我们还有什么可做的呢？如果不再需要新的方法，而且越来越难的基准测试很快就会被解决，我们应该做什么？</p>
+
+<p>我认为<strong>我们应该从根本上重新思考评估方式</strong>。这不仅意味着要制定新的、更严格的基准，还要从根本上质疑现有的评估<strong>体系</strong>，并创建新的体系，从而迫使我们突破既有模式，探索新的方法。这很难，因为人类有惯性，很少质疑基本假设——人们往往想当然地认为它们是理所当然的，却意识不到它们是假设，而非定律。</p>
+
+<p>为了解释惯性，假设你发明了<a href="https://arxiv.org/abs/2009.03300">一种基于人工考试的、历史上最成功的评估方法之一</a>。这在 2021 年是一个非常大胆的想法，但三年后它就饱和了。你会怎么做？很可能是设计<a href="https://agi.safe.ai/">一个难度更高的考试</a>。或者假设你只解决<a href="https://arxiv.org/pdf/2107.03374">简单的编程任务</a>。你会怎么做？很可能是寻找<a href="https://arxiv.org/pdf/2502.06807v1">更难的编程任务</a>来解决，直到达到 IOI 金牌水平。</p>
+
+<p>惯性是自然现象，但问题在于：人工智能已经击败了国际象棋和围棋的世界冠军，在SAT和律师资格考试中超越了大多数人类，并在国际智力竞赛和国际数学奥林匹克竞赛中取得了金牌。但至少从经济和GDP来看，世界并没有发生太大变化。</p>
+
+<p>我称之为<strong>效用问题</strong>，并认为这是人工智能面临的最重要的问题。</p>
+
+<p>或许我们很快就能解决效用问题，或许不能。无论如何，这个问题的根本原因可能出乎意料地简单：<strong>我们的评估设置与现实世界的设置在许多基本方面都存在差异</strong>。举两个例子：</p>
+
+<ul>
+  <li><strong>评估“应该”自动进行</strong>，通常情况下，智能体接收任务输入，自主完成任务，然后获得任务奖励。但实际上，智能体在整个任务过程中都需要与人类互动——你不可能只是给客服发一条超长的信息，等上十分钟，然后就指望得到详细的回复来解决所有问题。正是由于对这种模式的质疑，人们才发明了新的基准测试，旨在让真人（例如<a href="https://lmarena.ai/">Chatbot Arena</a>）或用户模拟（例如<a href="https://arxiv.org/abs/2406.12045">tau-bench</a>）参与到评估循环中。 <img src="/images/second_half/tau.png" alt="τ" /></li>
+  <li><strong>评估“应该”以独立同分布 (iid) 的方式运行。</strong>如果你有一个包含 500 个任务的测试集，你会独立运行每个任务，对任务指标取平均值，从而得到一个总体指标。但实际上，你是按顺序而不是并行地解决任务的。一位 Google 软件工程师 (SWE) 随着对代码库的熟悉程度加深，解决 google3 问题的能力也会越来越强，但一个软件工程师代理 (SWE agent) 却能在同一个代码库中解决许多问题，而无需积累足够的熟悉程度。我们显然需要长期记忆方法（而且<a href="https://yitaoliu17.com/assets/pdf/ICLR_2025_CER.pdf">确实存在</a><a href="https://arxiv.org/pdf/2409.07429">）</a> ，但学术界缺乏合适的基准来证明其必要性，甚至缺乏质疑独立同分布假设（iid 假设一直是机器学习的基础）的勇气。</li>
+</ul>
+
+<p>这些假设“一直”都是如此，在人工智能发展的早期阶段，基于这些假设制定基准是没问题的，因为<strong>当智能水平较低时，提升智能通常会提高效用</strong>。但现在，通用方法在这些假设下必然有效。因此，进入人工智能发展的后期阶段，正确的做法是……</p>
+
+<ul>
+  <li>我们开发了适用于实际应用的新型评估设置或任务。</li>
+  <li>我们用原有配方解决这些问题，或者在配方中添加新的成分。如此循环往复。</li>
+</ul>
+
+<p>这款游戏难就难在它不熟悉。但它也令人兴奋。前半段玩家忙于解决电子游戏和考试，后半段玩家则能运用智慧打造实用产品，从而建立价值数十亿甚至数万亿美元的公司。前半段充斥着渐进式的方法和模型，而后半段则会对其进行一定程度的筛选。除非你提出新的假设打破常规，否则通用的方法会直接扼杀你的渐进式策略。而一旦打破常规，你就能进行真正具有颠覆性意义的研究。</p>
+
+<p>欢迎来到下半场！</p>
+
+    </div>
+
+    
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="suyoumo/suyoumo.github.io"
+    data-repo-id="R_kgDORQbMTg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORQbMTs4C2cNQ"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function() {
+  var SUPABASE_URL = 'https://iuganrktxtmvhzduioke.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1Z2Fucmt0eHRtdmh6ZHVpb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNTM3NDksImV4cCI6MjA4NjcyOTc0OX0._4_2bsX4vBiQKYYl0-4X9yG4NrOtYkMk4-Uc7f9GhTw';
+  if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var path = window.location.pathname;
+  var vid = localStorage.getItem('_vid');
+  if (!vid) {
+    vid = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('_vid', vid);
+  }
+
+  // Record visit (ignore duplicate)
+  sb.from('page_views').upsert({ page_path: path, visitor_id: vid }, { onConflict: 'page_path,visitor_id' }).then(function() {
+    // Count unique visitors for this page
+    sb.rpc('count_unique_visitors', { target_path: path }).then(function(res) {
+      var el = document.getElementById('unique_visitor_count');
+      if (el && res.data !== null) el.textContent = res.data;
+    });
+  });
+})();
+</script>
+
+  </div>
+</article>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="site-stats">
+          <span>本站总访问 <span id="busuanzi_value_site_pv"></span> 次</span>
+          <span>|</span>
+          <span>访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+        </p>
+        <p>&copy; 2026 AutoEval. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

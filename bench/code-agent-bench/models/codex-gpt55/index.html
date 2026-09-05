@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>GPT 5.5 (xhigh) on Morgan AgentBench – Morgan AgentBench</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="
+
+
+" />
+    <meta property="og:description" content="
+
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="GPT 5.5 (xhigh) on Morgan AgentBench" />
+    <meta property="twitter:title" content="GPT 5.5 (xhigh) on Morgan AgentBench" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/code-agent-bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="Morgan AgentBench logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="Morgan AgentBench hover logo" />
+          </span>
+          <span class="bench-brand-text">Morgan AgentBench</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="model-article-page" data-i18n-skip>
+  <div class="model-article-shell">
+    <nav class="model-breadcrumb" aria-label="Breadcrumb">
+      <a href="/bench/code-agent-bench/">CodeAgentBench</a>
+      <span>/</span>
+      <span><span class="bench-lang-en">Model notes</span><span class="bench-lang-zh">模型文章</span></span>
+      <span>/</span>
+      <span>GPT 5.5 (xhigh)</span>
+    </nav>
+
+    <header class="model-hero">
+      <div class="model-hero-copy">
+        <div class="model-kicker-row">
+          
+          <span class="model-rank-badge"><span class="bench-lang-en">Rank</span><span class="bench-lang-zh">排名</span> 2</span>
+          
+          <span>Codex</span>
+          <span>OpenAI</span>
+        </div>
+        <h1>GPT 5.5 (xhigh)</h1>
+        
+        <p class="model-subtitle">
+          <span class="bench-lang-en">A top-tier result with 51/151 tasks solved at least once and 40/151 solved in all three attempts; strongest around large Python/Django application repairs plus localized Go security-scanner changes.</span>
+          <span class="bench-lang-zh">这是一个第一梯队结果：151 题中至少一次解出 51 题，三次都解出 40 题；强项主要落在大型 Python/Django 应用修复以及边界相对清楚的 Go 漏洞扫描器改动。</span>
+        </p>
+        
+        <div class="model-hero-meta">
+          <span>codex-cli 0.135.0</span>
+          <span>gpt-5.5#effort=xhigh</span>
+          <span><span class="bench-lang-en">Updated</span><span class="bench-lang-zh">更新</span> 2026-06-18</span>
+        </div>
+      </div>
+
+      <aside class="model-score-panel" aria-label="GPT 5.5 (xhigh) score summary">
+        <div class="model-score-primary">
+          <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+          <strong>36.88</strong>
+          
+          <div class="model-score-meter" aria-hidden="true">
+            <span style="width: 36.88%"></span>
+          </div>
+        </div>
+        <div class="model-score-grid">
+          <div>
+            <span>Pass@3</span>
+            <strong>33.8%</strong>
+          </div>
+          <div>
+            <span>Pass^3</span>
+            <strong>26.5%</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Solved Tasks</span><span class="bench-lang-zh">解出任务</span></span>
+            <strong>51/151</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Attempts</span><span class="bench-lang-zh">尝试通过</span></span>
+            <strong>136/453</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    
+    <section class="model-tldr" aria-label="TL;DR">
+      <div>
+        <div class="model-section-label">TL;DR</div>
+        <h2><span class="bench-lang-en">How to read this result</span><span class="bench-lang-zh">可以这样读</span></h2>
+      </div>
+      <ul>
+        
+        
+        
+        <li><span class="bench-lang-en">GPT 5.5 (xhigh) is best read as repeatability-first: rank #2, 51 reached tasks, 40 stable solves.</span><span class="bench-lang-zh">GPT 5.5 (xhigh) 更适合读成稳定性优先：排名 #2，触达 51 题，稳定解出 40 题。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Best suite signal: Open Library · release 013 at 9/10 (90.0%).</span><span class="bench-lang-zh">最强 suite 信号：Open Library · release 013，9/10（90.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Weakest visible area: Flipt · release 008 at 0/10 (0.0%).</span><span class="bench-lang-zh">最弱可见区域：Flipt feature flag 服务 · release 008，0/10（0.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">The Codex shell is doing what it should here: fewer lucky one-offs, more repeated verifier-backed patches.</span><span class="bench-lang-zh">Codex shell 在这里体现出的不是偶然命中，而是更多可重复的 verifier-backed patch。</span></li>
+        
+      </ul>
+    </section>
+    
+
+    <div class="model-content-grid">
+      
+      <aside class="model-aside" aria-label="Key numbers">
+        <div class="model-aside-card">
+          <div class="model-section-label"><span class="bench-lang-en">Key Numbers</span><span class="bench-lang-zh">关键数字</span></div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+            <strong>36.88</strong>
+            <em><span class="bench-lang-en">rank #2 of 32</span><span class="bench-lang-zh">32 个模型中排名 #2</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Stable solves</span><span class="bench-lang-zh">稳定解题</span></span>
+            <strong>40</strong>
+            <em><span class="bench-lang-en">tasks solved in all 3 attempts</span><span class="bench-lang-zh">三次尝试都解出的任务</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Reach gap</span><span class="bench-lang-zh">覆盖-稳定差</span></span>
+            <strong>+11</strong>
+            <em><span class="bench-lang-en">Pass@3 tasks minus Pass^3 tasks</span><span class="bench-lang-zh">至少一次成功的题数减三次都成功的题数</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Attempt score</span><span class="bench-lang-zh">单次尝试</span></span>
+            <strong>30.0%</strong>
+            <em><span class="bench-lang-en">136/453 solved attempts</span><span class="bench-lang-zh">453 次尝试中成功 136 次</span></em>
+          </div>
+          
+        </div>
+      </aside>
+      
+
+      <div class="model-prose">
+        <div class="bench-lang-en">
+
+  <p>GPT 5.5 (xhigh) stands out for repeatability. The reach number is 51/151, and 40 tasks survive all three attempts, giving it a 78% repeatability ratio among reached tasks.</p>
+
+  <p>The closest family reference is GPT 5.4 (xhigh) at rank #3. Compared with that row, this one is 0.09 points ahead, with 4 fewer reached tasks and 5 more stable solves.</p>
+
+  <p>Most of the positive signal concentrates in Open Library · release 013 at 9/10 (90.0%). The opposing read is Flipt · release 008 at 0/10 (0.0%), which keeps the row from looking like a generalist. The Codex shell is doing what it should here: fewer lucky one-offs, more repeated verifier-backed patches.</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>9/10 · 90.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 90.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 9/10 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：10 题中解出 9 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>3/4 · 75.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 75.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 014</span><span class="bench-lang-zh">Open Library · release 014</span></span>
+        <strong>7/10 · 70.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 70.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>6/10 · 60.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 60.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 001</span><span class="bench-lang-zh">Ansible 自动化 · release 001</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 003</span><span class="bench-lang-zh">Ansible 自动化 · release 003</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 008</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 008</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 009</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 009</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Navidrome · release 017</span><span class="bench-lang-zh">Navidrome 音乐服务 · release 017</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go service work with persistence and API behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：涉及持久化和 API 行为的 Go 服务改动对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>The chart matters here because it separates repeatable skill from accidental reach. Open Library · release 013 at 9/10 (90.0%) is not just a high bar; it is the area where this row most often turns a found fix into a repeatable one.</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Inconsistent Edition Matching and Record Expansion</span><span class="bench-lang-zh">版本匹配不一致与记录扩展</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 3/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Forked output from ‘Display.display’ is unreliable and exposes shutdown deadlock risk</span><span class="bench-lang-zh">"# 从 fork 进程调用 Display.display 的输出不可靠，并暴露 shutdown 死锁风险</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 2/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-003-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-003-ansible-ansible。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Issue: Display an error for missing arch in OVAL DB for Oracle and Amazon Linux</span><span class="bench-lang-zh">问题：为 Oracle 与 Amazon Linux 的 OVAL DB 中缺失的 arch 显示错误</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 1/3</span><span class="bench-lang-zh">future-architect/vuls · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: apply-failed. Suite: release-zh-010-future-architect-vuls.</span><span class="bench-lang-zh">Verifier 信号：apply-failed。Suite：release-zh-010-future-architect-vuls。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">PowerShell CLIXML output displays escaped sequences instead of actual characters</span><span class="bench-lang-zh">PowerShell CLIXML output 显示 escaped sequences，而不是实际字符</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 0/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-003-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-003-ansible-ansible。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>The examples reinforce the repeatability story: <code class="language-plaintext highlighter-rouge">Inconsistent Edition Matching and Record Expansion</code> is internetarchive/openlibrary · solved 3/3, while <code class="language-plaintext highlighter-rouge">Forked output from ‘Display.display’ is unreliable and exposes shutdown deadlock risk</code> shows the kind of task that still needs retry luck.</p>
+
+  <p>The verifier audit keeps 136/136 solved attempts for GPT 5.5 (xhigh), so the interesting question is not score inflation; it is where the model repeatedly finds the same kind of patch.</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 100%; --rejected-pct: 0%;" aria-hidden="true">
+      <span>100%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">136 of 136 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">136 次初始成功里，136 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 136 of 136 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 136 次初始成功中的 136 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>136 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>0 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>36.88</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>36.88</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>If you are choosing it for production-style agent work, the argument is consistency: start with tasks that resemble Open Library · release 013 at 9/10 (90.0%) and expect fewer lucky-only wins. The caution is Flipt · release 008 at 0/10 (0.0%), where even this stable profile does not transfer cleanly. Across 453 attempts, the important number is not only 136 successes; it is that 40 tasks repeat cleanly.</p>
+
+  <details class="model-evidence">
+  <summary>Supporting suite table</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>Solved</th>
+          <th>Pass^3</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>9/10</td>
+          <td>8</td>
+          <td>90.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>3/4</td>
+          <td>3</td>
+          <td>75.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-014-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>7/10</td>
+          <td>4</td>
+          <td>70.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>6/10</td>
+          <td>6</td>
+          <td>60.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>5/10</td>
+          <td>3</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-003-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>3</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-009-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-017-navidrome-navidrome</code></td>
+          <td>navidrome/navidrome</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+<div class="bench-lang-zh">
+
+  <p>GPT 5.5 (xhigh) 最突出的地方是重复稳定性。它至少一次解出 51/151 题，其中 40 题三次都过，在已触达题目里的稳定比例约为 78%。</p>
+
+  <p>最接近的同系参照是排名 #3 的 GPT 5.4 (xhigh)。和它相比，这一行最终分高 0.09 分，触达题少 4 个，稳定题多 5 个。</p>
+
+  <p>正面信号大多集中在Open Library · release 013，9/10（90.0%）。反向读法是Flipt feature flag 服务 · release 008，0/10（0.0%），它让这一行看起来不像通用型。Codex shell 在这里体现出的不是偶然命中，而是更多可重复的 verifier-backed patch。</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>9/10 · 90.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 90.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 9/10 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：10 题中解出 9 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>3/4 · 75.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 75.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 014</span><span class="bench-lang-zh">Open Library · release 014</span></span>
+        <strong>7/10 · 70.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 70.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>6/10 · 60.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 60.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 001</span><span class="bench-lang-zh">Ansible 自动化 · release 001</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 003</span><span class="bench-lang-zh">Ansible 自动化 · release 003</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 008</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 008</span></span>
+        <strong>0/10 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 009</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 009</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go product plumbing across configuration, storage, and service APIs resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：横跨配置、存储和服务 API 的 Go 产品工程对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Navidrome · release 017</span><span class="bench-lang-zh">Navidrome 音乐服务 · release 017</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: Go service work with persistence and API behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：涉及持久化和 API 行为的 Go 服务改动对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>这里看图的重点不是谁最高，而是区分“稳定能力”和“偶然触达”。Open Library · release 013，9/10（90.0%） 不只是高柱子，它也是这一行最容易把解法变成稳定补丁的区域。</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Inconsistent Edition Matching and Record Expansion</span><span class="bench-lang-zh">版本匹配不一致与记录扩展</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 3/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-013-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-013-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Forked output from ‘Display.display’ is unreliable and exposes shutdown deadlock risk</span><span class="bench-lang-zh">"# 从 fork 进程调用 Display.display 的输出不可靠，并暴露 shutdown 死锁风险</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 2/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-003-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-003-ansible-ansible。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Issue: Display an error for missing arch in OVAL DB for Oracle and Amazon Linux</span><span class="bench-lang-zh">问题：为 Oracle 与 Amazon Linux 的 OVAL DB 中缺失的 arch 显示错误</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 1/3</span><span class="bench-lang-zh">future-architect/vuls · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: apply-failed. Suite: release-zh-010-future-architect-vuls.</span><span class="bench-lang-zh">Verifier 信号：apply-failed。Suite：release-zh-010-future-architect-vuls。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">PowerShell CLIXML output displays escaped sequences instead of actual characters</span><span class="bench-lang-zh">PowerShell CLIXML output 显示 escaped sequences，而不是实际字符</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 0/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-003-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-003-ansible-ansible。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>案例进一步说明了稳定性：<code class="language-plaintext highlighter-rouge">版本匹配不一致与记录扩展</code> 是internetarchive/openlibrary · 3 次中成功 3 次，而 <code class="language-plaintext highlighter-rouge">"# 从 fork 进程调用 Display.display 的输出不可靠，并暴露 shutdown 死锁风险</code> 则代表仍然需要重试运气的任务。</p>
+
+  <p>GPT 5.5 (xhigh) 的复核保留了 136 次成功中的 136 次，所以重点不是分数膨胀，而是模型在哪些地方能反复找到同类补丁。</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 100%; --rejected-pct: 0%;" aria-hidden="true">
+      <span>100%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">136 of 136 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">136 次初始成功里，136 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 136 of 136 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 136 次初始成功中的 136 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>136 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>0 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>36.88</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>36.88</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>如果把它用于偏生产的 agent 工作，核心理由是稳定性：优先放在接近Open Library · release 013，9/10（90.0%）的任务上，不要只期待偶然命中。需要避开的参照是Flipt feature flag 服务 · release 008，0/10（0.0%），这里即使稳定型画像也不能顺利迁移。在 453 次尝试里，重要的不只是 136 次成功，而是有 40 道题可以稳定复现。</p>
+
+  <details class="model-evidence">
+  <summary>支撑这个判断的 suite 表</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>解出</th>
+          <th>Pass^3</th>
+          <th>通过率</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>9/10</td>
+          <td>8</td>
+          <td>90.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>3/4</td>
+          <td>3</td>
+          <td>75.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-014-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>7/10</td>
+          <td>4</td>
+          <td>70.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>6/10</td>
+          <td>6</td>
+          <td>60.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>5/10</td>
+          <td>3</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-003-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>3</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/10</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-009-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-017-navidrome-navidrome</code></td>
+          <td>navidrome/navidrome</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+      </div>
+    </div>
+
+    
+    <section class="model-related">
+      <div>
+        <div class="model-section-label"><span class="bench-lang-en">Related Models</span><span class="bench-lang-zh">相关模型</span></div>
+        <h2><span class="bench-lang-en">Same neighborhood on the leaderboard</span><span class="bench-lang-zh">榜单附近的参照物</span></h2>
+      </div>
+      <div class="model-related-grid">
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/opencode-glm52/">
+          <span><span class="bench-lang-en">One rank above</span><span class="bench-lang-zh">上一名</span></span>
+          <strong>GLM 5.2</strong>
+          <em><span class="bench-lang-en">Rank #1 · 37.59 Final Score</span><span class="bench-lang-zh">排名 #1 · Final Score 37.59</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/codex-gpt54/">
+          <span><span class="bench-lang-en">One rank below</span><span class="bench-lang-zh">下一名</span></span>
+          <strong>GPT 5.4 (xhigh)</strong>
+          <em><span class="bench-lang-en">Rank #3 · 36.79 Final Score</span><span class="bench-lang-zh">排名 #3 · Final Score 36.79</span></em>
+        </a>
+        
+      </div>
+    </section>
+    
+  </div>
+</article>
+
+    </main>
+  </body>
+</html>

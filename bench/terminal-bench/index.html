@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>TerminalBench 2.1 – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="TerminalBench 2.1" />
+    <meta property="twitter:title" content="TerminalBench 2.1" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="AutoEval logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="AutoEval hover logo" />
+          </span>
+          <span class="bench-brand-text">AutoEval</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      
+
+
+
+<section class="code-agent-page">
+  <div class="code-agent-shell">
+    <section class="code-agent-hero">
+      <div class="code-agent-hero-copy">
+        <p class="bench-kicker">Terminal-Bench 2.1 agent results</p>
+        <h1>TerminalBench 2.1</h1>
+        <p class="bench-intro">A leaderboard for coding agents on TerminalBench-2.1: 89 tasks. All models run via OpenCode agent. Rankings sort by Final Score (pass@1 × 100). Multi-attempt metrics are shown as secondary diagnostics when available.</p>
+        <div class="leaderboard-family-switch code-agent-family-switch" aria-label="Leaderboard family">
+          <span>Leaderboard Family:</span>
+          <a href="/bench/bench/">AutoEval</a>
+          <a class="is-active" href="/bench/code-agent-bench/" aria-current="page">Morgan AgentBench <strong>CURRENT</strong></a>
+          <a href="/bench/llm-leaderboard/">LLMLeadBoard</a>
+        </div>
+        <div class="leaderboard-family-switch code-agent-family-switch code-agent-sub-switch" aria-label="Morgan AgentBench sub-leaderboard" style="margin-top:0.5rem">
+          <span>Morgan AgentBench:</span>
+          <a href="/bench/code-agent-bench/">SWE-Bench-Pro</a>
+          <a class="is-active" href="/bench/terminal-bench/" aria-current="page">TerminalBench 2.1 <strong>CURRENT</strong></a>
+        </div>
+      </div>
+      <div class="code-agent-summary-grid" aria-label="TerminalBench 2.1 summary">
+        <div>
+          <span>Best Final Score</span>
+          <strong>31.46</strong>
+          <em>OpenCode - MiniMax-M3</em>
+        </div>
+        <div>
+          <span>Completed Models</span>
+          <strong>5</strong>
+          <em>All via OpenCode agent</em>
+        </div>
+        <div>
+          <span>Tasks</span>
+          <strong>89</strong>
+          <em>TerminalBench-2.1</em>
+        </div>
+        <div>
+          <span>Exported</span>
+          <strong>2026-07-08</strong>
+          <em>TerminalBench 2.1 zh89</em>
+        </div>
+      </div>
+    </section>
+
+    <section class="bench-section code-agent-board-section">
+      <div class="bench-section-head">
+        <div class="bench-head-copy">
+          <h2>Benchmark <span>Leaderboard</span></h2>
+          <p>Final Score = pass@1 × 100. TerminalBench rows can be single-try or multi-try; Pass@3 and Pass^3 are secondary diagnostics and are not part of Final Score.</p>
+        </div>
+      </div>
+
+      <div class="bench-filter-strip code-agent-filter-strip" aria-label="TerminalBench agent filter">
+        <span>Agent</span>
+        <div class="bench-dataset-tabs" id="code-agent-filter">
+          <button class="is-active" type="button" data-code-agent-filter="all">All Agents</button>
+          
+          <button type="button" data-code-agent-filter="opencode">OpenCode (5)</button>
+          
+        </div>
+      </div>
+
+      <div class="bench-card code-agent-leaderboard-card" id="code-agent-card">
+        <div class="bench-table-wrap code-agent-table-wrap">
+          <table class="bench-table bench-table-rich code-agent-table" id="code-agent-table">
+            <thead>
+              <tr>
+                <th data-sort-key="rank" data-sort-type="number"># <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="model-name" data-sort-type="text">Agent / Model <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="agent-version" data-sort-type="text">Agent Version <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="final-score" data-sort-type="number">Final Score <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="attempt-score" data-sort-type="number">Pass@1 <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="solved-unique-tasks" data-sort-type="number">Solved Tasks <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="attempts-per-task" data-sort-type="number">Attempts <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="total-tokens" data-sort-type="number">Tokens (In / Out / Total) <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="pass-3-rate" data-sort-type="number">Pass^3 <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="pass-at-3-rate" data-sort-type="number">Pass@3 <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="exported-at" data-sort-type="text">Exported <span class="bench-sort-indicator"></span></th>
+                <th data-sort-key="model-dir" data-sort-type="text">Model Dir <span class="bench-sort-indicator"></span></th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              
+              
+              
+              
+              <tr
+                data-agent="opencode"
+                data-agent-label="OpenCode"
+                data-agent-version="opencode-cli 1.17.8"
+                data-rank="1"
+                data-model-name="MiniMax-M3"
+                data-model-dir="opencode-minimax-m3"
+                data-final-score="31.46"
+                data-pass-at-3-rate="0"
+                data-pass-3-rate="0"
+                data-attempt-score="0.3146"
+                data-solved-unique-tasks="28"
+                data-solved-attempts="28"
+                data-scoreable-attempt-coverage="1.0"
+                data-total-tokens="305086"
+                data-input-tokens="302041"
+                data-output-tokens="3045"
+                data-archive-size-mb="0"
+                data-full-run-tree-size-mb="0"
+                data-exported-at="2026-07-06"
+                data-attempts-per-task="1"
+              >
+                <td data-value="1">1</td>
+                <td class="bench-model-column">
+                  
+                  <a href="/bench/code-agent-bench/models/opencode-minimax-m3/" class="bench-model-cell bench-model-cell-rich code-agent-model-cell bench-model-link bench-model-cell-link">
+                  
+                    
+                    <img class="bench-model-logo" src="/bench/assets/images/bench/logo-minimax.jpeg" alt="MiniMax logo" />
+                    
+                    <div class="bench-model-meta">
+                      <strong>MiniMax-M3</strong>
+                      <span><span class="code-agent-pill code-agent-pill-opencode">OpenCode</span>MiniMax - minimax-cn-coding-plan/MiniMax-M3</span>
+                    </div>
+                  
+                  </a>
+                  
+                </td>
+                <td data-value="opencode-cli 1.17.8">
+                  <span class="code-agent-version-pill" title="opencode-cli: opencode --version in current local environment for the TerminalBench 2.1 export">opencode-cli 1.17.8</span>
+                </td>
+                <td data-value="31.46">
+                  <span class="bench-score">31.46</span>
+                </td>
+                <td data-value="0.3146">
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 31.46%"></span></div>
+                    <strong>28/89 - 31.5%</strong>
+                  </div>
+                </td>
+                <td data-value="28">28/89</td>
+                <td data-value="1">1x</td>
+                <td data-value="305086">
+                  
+                  <span class="code-agent-token-cell">
+                    <span><em>In</em> 302.0M</span>
+                    <span><em>Out</em> 3.0M</span>
+                    <span><em>Total</em> 305.1M</span>
+                  </span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass^3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass@3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="2026-07-06">2026-07-06</td>
+                <td data-value="opencode-minimax-m3">
+                  <code class="code-agent-model-dir">opencode-minimax-m3</code>
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+              <tr
+                data-agent="opencode"
+                data-agent-label="OpenCode"
+                data-agent-version="opencode-cli 1.17.8"
+                data-rank="2"
+                data-model-name="MiMo v2.5"
+                data-model-dir="opencode-mimo-v2.5"
+                data-final-score="23.6"
+                data-pass-at-3-rate="0"
+                data-pass-3-rate="0"
+                data-attempt-score="0.236"
+                data-solved-unique-tasks="21"
+                data-solved-attempts="21"
+                data-scoreable-attempt-coverage="1.0"
+                data-total-tokens="179516"
+                data-input-tokens="178941"
+                data-output-tokens="574"
+                data-archive-size-mb="0"
+                data-full-run-tree-size-mb="0"
+                data-exported-at="2026-07-08"
+                data-attempts-per-task="1"
+              >
+                <td data-value="2">2</td>
+                <td class="bench-model-column">
+                  
+                  <div class="bench-model-cell bench-model-cell-rich code-agent-model-cell">
+                  
+                    
+                    <img class="bench-model-logo" src="/bench/assets/images/bench/logo-xiaomi.png" alt="MiMo logo" />
+                    
+                    <div class="bench-model-meta">
+                      <strong>MiMo v2.5</strong>
+                      <span><span class="code-agent-pill code-agent-pill-opencode">OpenCode</span>MiMo - xiaomi-token-plan-cn/mimo-v2.5</span>
+                    </div>
+                  
+                  </div>
+                  
+                </td>
+                <td data-value="opencode-cli 1.17.8">
+                  <span class="code-agent-version-pill" title="opencode-cli: opencode --version in current local environment for the TerminalBench 2.1 export">opencode-cli 1.17.8</span>
+                </td>
+                <td data-value="23.6">
+                  <span class="bench-score">23.6</span>
+                </td>
+                <td data-value="0.236">
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 23.6%"></span></div>
+                    <strong>21/89 - 23.6%</strong>
+                  </div>
+                </td>
+                <td data-value="21">21/89</td>
+                <td data-value="1">1x</td>
+                <td data-value="179516">
+                  
+                  <span class="code-agent-token-cell">
+                    <span><em>In</em> 178.9M</span>
+                    <span><em>Out</em> 0.6M</span>
+                    <span><em>Total</em> 179.5M</span>
+                  </span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass^3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass@3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="2026-07-08">2026-07-08</td>
+                <td data-value="opencode-mimo-v2.5">
+                  <code class="code-agent-model-dir">opencode-mimo-v2.5</code>
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+              <tr
+                data-agent="opencode"
+                data-agent-label="OpenCode"
+                data-agent-version="opencode-cli 1.17.8"
+                data-rank="3"
+                data-model-name="MiMo v2.5 Pro"
+                data-model-dir="opencode-mimo-v2.5-pro"
+                data-final-score="15.73"
+                data-pass-at-3-rate="0"
+                data-pass-3-rate="0"
+                data-attempt-score="0.1573"
+                data-solved-unique-tasks="14"
+                data-solved-attempts="14"
+                data-scoreable-attempt-coverage="1.0"
+                data-total-tokens="107810"
+                data-input-tokens="107375"
+                data-output-tokens="435"
+                data-archive-size-mb="0"
+                data-full-run-tree-size-mb="0"
+                data-exported-at="2026-07-07"
+                data-attempts-per-task="1"
+              >
+                <td data-value="3">3</td>
+                <td class="bench-model-column">
+                  
+                  <div class="bench-model-cell bench-model-cell-rich code-agent-model-cell">
+                  
+                    
+                    <img class="bench-model-logo" src="/bench/assets/images/bench/logo-xiaomi.png" alt="MiMo logo" />
+                    
+                    <div class="bench-model-meta">
+                      <strong>MiMo v2.5 Pro</strong>
+                      <span><span class="code-agent-pill code-agent-pill-opencode">OpenCode</span>MiMo - xiaomi-token-plan-cn/mimo-v2.5-pro</span>
+                    </div>
+                  
+                  </div>
+                  
+                </td>
+                <td data-value="opencode-cli 1.17.8">
+                  <span class="code-agent-version-pill" title="opencode-cli: opencode --version in current local environment for the TerminalBench 2.1 export">opencode-cli 1.17.8</span>
+                </td>
+                <td data-value="15.73">
+                  <span class="bench-score">15.73</span>
+                </td>
+                <td data-value="0.1573">
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 15.73%"></span></div>
+                    <strong>14/89 - 15.7%</strong>
+                  </div>
+                </td>
+                <td data-value="14">14/89</td>
+                <td data-value="1">1x</td>
+                <td data-value="107810">
+                  
+                  <span class="code-agent-token-cell">
+                    <span><em>In</em> 107.4M</span>
+                    <span><em>Out</em> 0.4M</span>
+                    <span><em>Total</em> 107.8M</span>
+                  </span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass^3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass@3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="2026-07-07">2026-07-07</td>
+                <td data-value="opencode-mimo-v2.5-pro">
+                  <code class="code-agent-model-dir">opencode-mimo-v2.5-pro</code>
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+              <tr
+                data-agent="opencode"
+                data-agent-label="OpenCode"
+                data-agent-version="opencode-cli 1.17.8"
+                data-rank="4"
+                data-model-name="Step 3.7 Flash"
+                data-model-dir="opencode-stepfun-3.7-flash"
+                data-final-score="13.48"
+                data-pass-at-3-rate="0.191"
+                data-pass-3-rate="0"
+                data-attempt-score="0.1348"
+                data-solved-unique-tasks="12"
+                data-solved-attempts="12"
+                data-scoreable-attempt-coverage="1.0"
+                data-total-tokens="1737170"
+                data-input-tokens="1707660"
+                data-output-tokens="29510"
+                data-archive-size-mb="0"
+                data-full-run-tree-size-mb="0"
+                data-exported-at="2026-07-06"
+                data-attempts-per-task="3"
+              >
+                <td data-value="4">4</td>
+                <td class="bench-model-column">
+                  
+                  <div class="bench-model-cell bench-model-cell-rich code-agent-model-cell">
+                  
+                    
+                    <img class="bench-model-logo" src="/bench/assets/images/bench/logo-stepfun.png" alt="StepFun logo" />
+                    
+                    <div class="bench-model-meta">
+                      <strong>Step 3.7 Flash</strong>
+                      <span><span class="code-agent-pill code-agent-pill-opencode">OpenCode</span>StepFun - stepfun/step-3.7-flash</span>
+                    </div>
+                  
+                  </div>
+                  
+                </td>
+                <td data-value="opencode-cli 1.17.8">
+                  <span class="code-agent-version-pill" title="opencode-cli: opencode --version in current local environment for the TerminalBench 2.1 export">opencode-cli 1.17.8</span>
+                </td>
+                <td data-value="13.48">
+                  <span class="bench-score">13.48</span>
+                </td>
+                <td data-value="0.1348">
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 13.48%"></span></div>
+                    <strong>12/89 - 13.5%</strong>
+                  </div>
+                </td>
+                <td data-value="12">12/89</td>
+                <td data-value="3">3x</td>
+                <td data-value="1737170">
+                  
+                  <span class="code-agent-token-cell">
+                    <span><em>In</em> 1.71B</span>
+                    <span><em>Out</em> 29.5M</span>
+                    <span><em>Total</em> 1.74B</span>
+                  </span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 0%"></span></div>
+                    <strong>0/89 - 0%</strong>
+                  </div>
+                  
+                </td>
+                <td data-value="0.191">
+                  
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 19.1%"></span></div>
+                    <strong>17/89 - 19.1%</strong>
+                  </div>
+                  
+                </td>
+                <td data-value="2026-07-06">2026-07-06</td>
+                <td data-value="opencode-stepfun-3.7-flash">
+                  <code class="code-agent-model-dir">opencode-stepfun-3.7-flash</code>
+                </td>
+              </tr>
+              
+              
+              
+              
+              
+              <tr
+                data-agent="opencode"
+                data-agent-label="OpenCode"
+                data-agent-version="opencode-cli 1.17.8"
+                data-rank="5"
+                data-model-name="GPT-5.4 Mini"
+                data-model-dir="opencode-gpt-5.4-mini"
+                data-final-score="13.48"
+                data-pass-at-3-rate="0"
+                data-pass-3-rate="0"
+                data-attempt-score="0.1348"
+                data-solved-unique-tasks="12"
+                data-solved-attempts="12"
+                data-scoreable-attempt-coverage="1.0"
+                data-total-tokens="23412"
+                data-input-tokens="22645"
+                data-output-tokens="767"
+                data-archive-size-mb="0"
+                data-full-run-tree-size-mb="0"
+                data-exported-at="2026-07-07"
+                data-attempts-per-task="1"
+              >
+                <td data-value="5">5</td>
+                <td class="bench-model-column">
+                  
+                  <div class="bench-model-cell bench-model-cell-rich code-agent-model-cell">
+                  
+                    
+                    <img class="bench-model-logo" src="/bench/assets/images/bench/logo-openai.png" alt="OpenAI logo" />
+                    
+                    <div class="bench-model-meta">
+                      <strong>GPT-5.4 Mini</strong>
+                      <span><span class="code-agent-pill code-agent-pill-opencode">OpenCode</span>OpenAI - openai/gpt-5.4-mini</span>
+                    </div>
+                  
+                  </div>
+                  
+                </td>
+                <td data-value="opencode-cli 1.17.8">
+                  <span class="code-agent-version-pill" title="opencode-cli: opencode --version in current local environment for the TerminalBench 2.1 export">opencode-cli 1.17.8</span>
+                </td>
+                <td data-value="13.48">
+                  <span class="bench-score">13.48</span>
+                </td>
+                <td data-value="0.1348">
+                  <div class="bench-pass-cell">
+                    <div class="bench-pass-bar"><span style="width: 13.48%"></span></div>
+                    <strong>12/89 - 13.5%</strong>
+                  </div>
+                </td>
+                <td data-value="12">12/89</td>
+                <td data-value="1">1x</td>
+                <td data-value="23412">
+                  
+                  <span class="code-agent-token-cell">
+                    <span><em>In</em> 22.6M</span>
+                    <span><em>Out</em> 0.8M</span>
+                    <span><em>Total</em> 23.4M</span>
+                  </span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass^3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="0">
+                  
+                  <span class="code-agent-empty-metric" title="Only 1 attempt per task — pass@3 not applicable">N/A</span>
+                  
+                </td>
+                <td data-value="2026-07-07">2026-07-07</td>
+                <td data-value="opencode-gpt-5.4-mini">
+                  <code class="code-agent-model-dir">opencode-gpt-5.4-mini</code>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="bench-leaderboard-note code-agent-note">
+        <span>Notes:</span>
+        <span>All models run via <strong>OpenCode</strong> agent on TerminalBench 2.1 (zh89 variant, 89 tasks).</span>
+        <span><code>Final Score</code> = pass@1 × 100 only; it does not use <code>Pass@3</code> or <code>Pass^3</code>.</span>
+        <span><code>Pass@3</code> counts tasks solved at least once across 3 attempts. Only applicable for models with multiple attempts per task.</span>
+        <span><code>Pass^3</code> counts tasks solved in all 3 attempts. Only applicable for models with multiple attempts per task.</span>
+        <span><code>Pass@1</code> shows the primary solve rate (first attempt or best single attempt).</span>
+        <span><strong>Step 3.7 Flash</strong>: 3 attempts per task, pass@3 = 17/89 (19.1%), pass@3 estimate = 21.6%.</span>
+        <span><strong>MiniMax-M3</strong>, <strong>MiMo v2.5</strong>, <strong>MiMo v2.5 Pro</strong>, and <strong>GPT-5.4 Mini</strong>: selected pass@1 only — pass@3 and pass^3 are not applicable.</span>
+        <span><code>Tokens</code> are summed across all attempts. Input includes cache tokens when available.</span>
+      </div>
+    </section>
+
+    <section class="bench-card bench-chart-card code-agent-chart-card" id="code-agent-chart-section">
+      <div class="bench-chart-head">
+        <div class="bench-head-copy">
+          <h2>Visual <span>Leaderboard</span></h2>
+          <p>Switch metrics to compare models by different performance dimensions.</p>
+        </div>
+        <div class="bench-chart-toolbar">
+          <label class="bench-chart-filter" for="code-agent-chart-metric">
+            <span>Metric</span>
+            <select id="code-agent-chart-metric">
+              <option value="final-score" data-format="decimal2" selected>Final Score</option>
+              <option value="pass-3-rate" data-format="percent">Pass^3</option>
+              <option value="pass-at-3-rate" data-format="percent">Pass@3</option>
+              <option value="attempt-score" data-format="percent">Pass@1</option>
+              <option value="solved-unique-tasks" data-format="integer">Solved Tasks</option>
+              <option value="total-tokens" data-format="compact">Total Tokens</option>
+              <option value="input-tokens" data-format="compact">Input Tokens</option>
+              <option value="output-tokens" data-format="compact">Output Tokens</option>
+            </select>
+          </label>
+          <label class="bench-chart-filter bench-chart-filter-compact" for="code-agent-chart-limit">
+            <span>View</span>
+            <select id="code-agent-chart-limit">
+              <option value="8">Top 8</option>
+              <option value="12">Top 12</option>
+              <option value="all" selected>All</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="bench-chart-scroll">
+        <div class="bench-chart-grid code-agent-chart-grid" id="code-agent-chart-bars">
+          
+          <div
+            class="bench-chart-item code-agent-chart-item"
+            data-agent="opencode"
+            data-agent-label="OpenCode"
+            data-model-name="MiniMax-M3"
+            data-provider="MiniMax"
+            data-logo="/bench/assets/images/bench/logo-minimax.jpeg"
+            data-final-score="31.46"
+            data-pass-at-3-rate="0"
+            data-pass-3-rate="0"
+            data-attempt-score="0.3146"
+            data-solved-unique-tasks="28"
+            data-solved-attempts="28"
+            data-total-tokens="305086"
+            data-input-tokens="302041"
+            data-output-tokens="3045"
+            data-archive-size-mb="0"
+            data-full-run-tree-size-mb="0"
+          >
+            <span class="bench-chart-rank"></span>
+            <span class="bench-chart-column">
+              <span class="bench-chart-value"></span>
+              <span class="bench-chart-fill"></span>
+            </span>
+            <span class="bench-chart-label-track">
+              
+              <img class="bench-chart-logo" src="/bench/assets/images/bench/logo-minimax.jpeg" alt="MiniMax logo" />
+              
+              <span class="bench-chart-label">
+                <strong>MiniMax-M3</strong>
+                <span>OpenCode - MiniMax</span>
+              </span>
+            </span>
+          </div>
+          
+          <div
+            class="bench-chart-item code-agent-chart-item"
+            data-agent="opencode"
+            data-agent-label="OpenCode"
+            data-model-name="MiMo v2.5"
+            data-provider="MiMo"
+            data-logo="/bench/assets/images/bench/logo-xiaomi.png"
+            data-final-score="23.6"
+            data-pass-at-3-rate="0"
+            data-pass-3-rate="0"
+            data-attempt-score="0.236"
+            data-solved-unique-tasks="21"
+            data-solved-attempts="21"
+            data-total-tokens="179516"
+            data-input-tokens="178941"
+            data-output-tokens="574"
+            data-archive-size-mb="0"
+            data-full-run-tree-size-mb="0"
+          >
+            <span class="bench-chart-rank"></span>
+            <span class="bench-chart-column">
+              <span class="bench-chart-value"></span>
+              <span class="bench-chart-fill"></span>
+            </span>
+            <span class="bench-chart-label-track">
+              
+              <img class="bench-chart-logo" src="/bench/assets/images/bench/logo-xiaomi.png" alt="MiMo logo" />
+              
+              <span class="bench-chart-label">
+                <strong>MiMo v2.5</strong>
+                <span>OpenCode - MiMo</span>
+              </span>
+            </span>
+          </div>
+          
+          <div
+            class="bench-chart-item code-agent-chart-item"
+            data-agent="opencode"
+            data-agent-label="OpenCode"
+            data-model-name="MiMo v2.5 Pro"
+            data-provider="MiMo"
+            data-logo="/bench/assets/images/bench/logo-xiaomi.png"
+            data-final-score="15.73"
+            data-pass-at-3-rate="0"
+            data-pass-3-rate="0"
+            data-attempt-score="0.1573"
+            data-solved-unique-tasks="14"
+            data-solved-attempts="14"
+            data-total-tokens="107810"
+            data-input-tokens="107375"
+            data-output-tokens="435"
+            data-archive-size-mb="0"
+            data-full-run-tree-size-mb="0"
+          >
+            <span class="bench-chart-rank"></span>
+            <span class="bench-chart-column">
+              <span class="bench-chart-value"></span>
+              <span class="bench-chart-fill"></span>
+            </span>
+            <span class="bench-chart-label-track">
+              
+              <img class="bench-chart-logo" src="/bench/assets/images/bench/logo-xiaomi.png" alt="MiMo logo" />
+              
+              <span class="bench-chart-label">
+                <strong>MiMo v2.5 Pro</strong>
+                <span>OpenCode - MiMo</span>
+              </span>
+            </span>
+          </div>
+          
+          <div
+            class="bench-chart-item code-agent-chart-item"
+            data-agent="opencode"
+            data-agent-label="OpenCode"
+            data-model-name="Step 3.7 Flash"
+            data-provider="StepFun"
+            data-logo="/bench/assets/images/bench/logo-stepfun.png"
+            data-final-score="13.48"
+            data-pass-at-3-rate="0.191"
+            data-pass-3-rate="0"
+            data-attempt-score="0.1348"
+            data-solved-unique-tasks="12"
+            data-solved-attempts="12"
+            data-total-tokens="1737170"
+            data-input-tokens="1707660"
+            data-output-tokens="29510"
+            data-archive-size-mb="0"
+            data-full-run-tree-size-mb="0"
+          >
+            <span class="bench-chart-rank"></span>
+            <span class="bench-chart-column">
+              <span class="bench-chart-value"></span>
+              <span class="bench-chart-fill"></span>
+            </span>
+            <span class="bench-chart-label-track">
+              
+              <img class="bench-chart-logo" src="/bench/assets/images/bench/logo-stepfun.png" alt="StepFun logo" />
+              
+              <span class="bench-chart-label">
+                <strong>Step 3.7 Flash</strong>
+                <span>OpenCode - StepFun</span>
+              </span>
+            </span>
+          </div>
+          
+          <div
+            class="bench-chart-item code-agent-chart-item"
+            data-agent="opencode"
+            data-agent-label="OpenCode"
+            data-model-name="GPT-5.4 Mini"
+            data-provider="OpenAI"
+            data-logo="/bench/assets/images/bench/logo-openai.png"
+            data-final-score="13.48"
+            data-pass-at-3-rate="0"
+            data-pass-3-rate="0"
+            data-attempt-score="0.1348"
+            data-solved-unique-tasks="12"
+            data-solved-attempts="12"
+            data-total-tokens="23412"
+            data-input-tokens="22645"
+            data-output-tokens="767"
+            data-archive-size-mb="0"
+            data-full-run-tree-size-mb="0"
+          >
+            <span class="bench-chart-rank"></span>
+            <span class="bench-chart-column">
+              <span class="bench-chart-value"></span>
+              <span class="bench-chart-fill"></span>
+            </span>
+            <span class="bench-chart-label-track">
+              
+              <img class="bench-chart-logo" src="/bench/assets/images/bench/logo-openai.png" alt="OpenAI logo" />
+              
+              <span class="bench-chart-label">
+                <strong>GPT-5.4 Mini</strong>
+                <span>OpenCode - OpenAI</span>
+              </span>
+            </span>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section class="bench-card bench-chart-card bench-scatter-card code-agent-scatter-card" id="code-agent-scatter-section">
+      <div class="bench-chart-head">
+        <div class="bench-head-copy">
+          <h2>Reach <span>vs Consistency</span></h2>
+          <p>Pass@3 shows whether an agent can solve a task at least once; Pass^3 shows whether it solves the same task all three times. Only models with multiple attempts are plotted.</p>
+        </div>
+      </div>
+
+      <div class="bench-scatter-frame code-agent-scatter-frame">
+        <div class="bench-scatter-y-title">Pass@3</div>
+        <div class="bench-scatter-plot-wrap">
+          <div class="bench-scatter-plot" id="code-agent-scatter-plot">
+            <div class="bench-scatter-grid"></div>
+            
+            
+            
+            
+            
+            
+            
+            
+            <div
+              class="bench-scatter-point code-agent-scatter-point"
+              data-agent="opencode"
+              data-agent-label="OpenCode"
+              data-model-name="Step 3.7 Flash"
+              data-pass-at-3-rate="0.191"
+              data-pass-3-rate="0"
+              data-attempt-score="0.1348"
+            >
+              <span class="bench-scatter-dot"></span>
+              <span class="bench-scatter-line"></span>
+              <span class="bench-scatter-name">OpenCode - Step 3.7 Flash</span>
+            </div>
+            
+            
+            
+            
+          </div>
+          <div class="bench-scatter-x-axis" id="code-agent-scatter-x-axis"></div>
+        </div>
+        <div class="bench-scatter-x-title">Pass^3</div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script src="/bench/assets/js/code-agent-bench.js?v=1788618301"></script>
+
+    </main>
+  </body>
+</html>

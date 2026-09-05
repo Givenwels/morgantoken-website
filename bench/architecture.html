@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <title>Architecture – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="Architecture" />
+    <meta property="twitter:title" content="Architecture" />
+    
+
+
+    <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+    <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <link rel="alternate" type="application/rss+xml" title="AutoEval" href="/bench/feed.xml" />
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container-wide header-inner">
+        <h1 class="site-name"><a href="/bench/">AutoEval</a></h1>
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-toggle-checkbox" />
+        <label for="site-nav-toggle" class="site-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="openclaw-arch-page">
+  <section class="ocb-hero">
+    <div class="ocb-shell">
+      <div class="ocb-eyebrow">Benchmarking OpenClaw-native intelligence</div>
+      <h1>
+        A benchmark for <span class="soft">how agents actually behave</span><br />
+        inside the OpenClaw runtime.
+      </h1>
+      <p class="lead">
+        AutoEval is designed to measure more than final answers. It evaluates whether a model can choose tools well, plan multi-step work, recover from failure, respect constraints, stay safe, and do all of this with visible efficiency, reliability, and coverage-aware reporting.
+      </p>
+      <div class="ocb-hero-actions">
+        <a class="ocb-button primary" href="#architecture-main">Explore the benchmark</a>
+        <a class="ocb-button" href="#scoring-main">See the scoring logic</a>
+      </div>
+
+      <div class="ocb-hero-grid">
+        <article class="ocb-card ocb-hero-summary">
+          <h2>Why this benchmark exists</h2>
+          <p>
+            The goal is not to reward models for sounding plausible. The goal is to evaluate operational intelligence in an agent system: can the model act coherently, make progress under tool-mediated execution, and stay robust when the task becomes multi-step, stateful, or failure-prone?
+          </p>
+          <div class="ocb-hero-metrics">
+            <div class="ocb-metric-box">
+              <strong>6</strong>
+              <span>core dimensions: tool use, planning, constraints, recovery, synthesis, safety</span>
+            </div>
+            <div class="ocb-metric-box">
+              <strong>102</strong>
+              <span>active scenarios in the current benchmark dataset</span>
+            </div>
+            <div class="ocb-metric-box">
+              <strong>core</strong>
+              <span>default ranking profile, keeping the main leaderboard tied to high-signal tasks</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="ocb-card ocb-hero-visual">
+          <div>
+            <div class="ocb-mini-label">What makes it feel rigorous</div>
+            <div class="ocb-flow">
+              <div class="ocb-flow-row">
+                <code>live execution</code>
+                <p>The benchmark runs through the OpenClaw runtime rather than grading disconnected text responses.</p>
+              </div>
+              <div class="ocb-flow-row">
+                <code>deterministic checks</code>
+                <p>Scoring is grounded in explicit rules for tools, outputs, files, recovery behavior, clarification, and audit state.</p>
+              </div>
+              <div class="ocb-flow-row">
+                <code>process-aware scoring</code>
+                <p>Correctness matters, but so do tool appropriateness, sequence quality, and unnecessary redundancy.</p>
+              </div>
+              <div class="ocb-flow-row">
+                <code>coverage-aware reports</code>
+                <p>Results expose what portion of the benchmark was actually covered, so partial runs are not mistaken for full evidence.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="ocb-section" id="architecture-main">
+    <div class="ocb-shell">
+      <div class="ocb-section-head">
+        <h2>Architecture that behaves like a benchmark system, not a static score sheet</h2>
+        <p>
+          AutoEval is structured as a full evaluation pipeline: benchmark profiles define what belongs in ranking, scenario metadata defines what each task demands, the runner controls trial execution and workspace setup, and the reporter turns every run into a reusable evidence artifact.
+        </p>
+      </div>
+
+      <div class="ocb-image-frame">
+        <img src="/bench/assets/images/bench/architecture-pipeline.png" alt="AutoEval evaluation pipeline from scenario selection to validated report" />
+      </div>
+
+      <div class="ocb-panel">
+        <div class="ocb-kicker">End-to-end evaluation flow</div>
+        <div class="ocb-card-grid four">
+          <article class="ocb-info-card">
+            <h3>Select a benchmark slice</h3>
+            <p>Profiles such as core, intelligence, coverage, full, and native make benchmark scope explicit.</p>
+          </article>
+          <article class="ocb-info-card">
+            <h3>Load scenario definitions</h3>
+            <p>Scenario YAMLs carry prompts, tools, checks, difficulty, execution metadata, workspace seeds, and optional custom grading hooks.</p>
+          </article>
+          <article class="ocb-info-card">
+            <h3>Execute controlled trials</h3>
+            <p>The runner creates per-trial workspaces, supports resume flows, and records live execution behavior through the OpenClaw bridge.</p>
+          </article>
+          <article class="ocb-info-card">
+            <h3>Score and report the run</h3>
+            <p>Reports surface capability, overall score, strict pass, latency, cost, tokens, coverage, reliability, and integrity signals.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="ocb-card-grid four metrics-row">
+        <article class="ocb-info-card">
+          <div class="ocb-kicker">102</div>
+          <h3>Active scenarios</h3>
+          <p>The public website reflects the active benchmark dataset rather than every experimental task in the repository.</p>
+        </article>
+        <article class="ocb-info-card">
+          <div class="ocb-kicker">6</div>
+          <h3>Core dimensions</h3>
+          <p>Tool use, planning, constraints, recovery, synthesis, and safety remain visible as first-class benchmark axes.</p>
+        </article>
+        <article class="ocb-info-card">
+          <div class="ocb-kicker">Profiles</div>
+          <h3>Curated slices</h3>
+          <p><code>core</code>, <code>intelligence</code>, <code>coverage</code>, and <code>native</code> expose different benchmark views without collapsing them into one opaque total.</p>
+        </article>
+        <article class="ocb-info-card">
+          <div class="ocb-kicker">Filters</div>
+          <h3>Explicit scope control</h3>
+          <p>Group, status, signal source, difficulty, execution mode, and other filters make the benchmark slice reproducible and legible.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ocb-section" id="scoring-main">
+    <div class="ocb-shell">
+      <div class="ocb-section-head">
+        <h2>Scoring that rewards correctness, process quality, and robustness together</h2>
+        <p>
+          The benchmark is designed so that a strong model must do more than arrive at a plausible final answer. It must also behave sensibly during execution, avoid unnecessary actions, and preserve safety under realistic task pressure.
+        </p>
+      </div>
+
+      <div class="ocb-panel">
+        <div class="ocb-kicker">Scoring stack</div>
+        <div class="ocb-section-head compact">
+          <h2>Correctness, process quality, efficiency drag, and safety gating</h2>
+          <p>
+            AutoEval scores more than the final answer. Deterministic checks, process scoring, efficiency pressure, and safety gating are composed into the task score, and then aggregated into benchmark-level views.
+          </p>
+        </div>
+        <div class="ocb-score-stack-grid">
+          <article class="ocb-stack-block blue">
+            <div>
+              <small>Deterministic checks</small>
+              <strong>Correctness</strong>
+            </div>
+            <p>Tool calls, outputs, files, recovery signals, clarification behavior, and audit-backed evidence determine whether the task was truly solved.</p>
+          </article>
+          <article class="ocb-stack-block violet">
+            <div>
+              <small>Process scoring</small>
+              <strong>Process quality</strong>
+            </div>
+            <p>The benchmark looks at tool appropriateness, step ordering, and redundancy, so it can distinguish clean execution from brute-force progress.</p>
+          </article>
+          <article class="ocb-stack-block amber">
+            <div>
+              <small>Efficiency drag</small>
+              <strong>Efficiency</strong>
+            </div>
+            <p>Extra steps are penalized. Efficiency is benchmark pressure, not a decorative side metric that can be ignored once the answer is right.</p>
+          </article>
+          <article class="ocb-stack-block terracotta">
+            <div>
+              <small>Safety gate</small>
+              <strong>Safety</strong>
+            </div>
+            <p>Unsafe behavior can sharply suppress or zero out a result, which prevents apparently capable but unsafe behavior from looking stronger than it is.</p>
+          </article>
+        </div>
+        <div class="ocb-formula">
+          <code>final_score = safety_gate × (0.65 × correctness + 0.35 × process) × (1 - efficiency_penalty)</code>
+        </div>
+      </div>
+
+      <div class="ocb-card-grid three">
+        <article class="ocb-rationale-card">
+          <div class="ocb-kicker">Determinism</div>
+          <h3>18 supported check types</h3>
+          <p>The scoring engine has a broad rule-based vocabulary for agent behavior, covering tool usage, output validation, file-state checks, recovery signals, clarification behavior, and audit-backed evidence rather than relying on a vague impressionistic grade.</p>
+        </article>
+        <article class="ocb-rationale-card">
+          <div class="ocb-kicker">Reliability</div>
+          <h3>Repeated trials matter</h3>
+          <p>Reporting includes strict pass, reliability views, and coverage-aware summary metrics. This helps distinguish genuine capability from one-off success and makes the benchmark less sensitive to lucky runs.</p>
+        </article>
+        <article class="ocb-rationale-card">
+          <div class="ocb-kicker">Interpretability</div>
+          <h3>The report explains failure modes</h3>
+          <p>Instead of collapsing everything into one failure bucket, the reporter separates outcomes, execution failures, and integrity review signals. That makes low scores easier to interpret and benchmark maintenance easier to trust.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ocb-section" id="dataset-main">
+    <div class="ocb-shell">
+      <div class="ocb-section-head">
+        <h2>Dataset design that reflects benchmark intent, not just task accumulation</h2>
+        <p>
+          A benchmark becomes more useful when its task set is legible. AutoEval treats benchmark membership as first-class metadata, keeps difficulty explicit, and exposes multiple official slices so users can inspect both count and influence instead of staring at one opaque total.
+        </p>
+      </div>
+
+      <div class="ocb-image-frame">
+        <img src="/bench/assets/images/bench/dataset-structure.png" alt="AutoEval dataset dimensions, difficulty weights, and benchmark slices" />
+      </div>
+
+      <div class="ocb-card-grid three">
+        <article class="ocb-dataset-card">
+          <div class="ocb-kicker">Difficulty weighting</div>
+          <h3>Harder tasks matter more</h3>
+          <p>Difficulty weights are explicit: easy, medium, hard, and expert scale as <code>1 / 2 / 4 / 8</code>. This prevents the benchmark from being dominated by easy wins and lets more demanding scenarios carry proportionally more influence.</p>
+        </article>
+        <article class="ocb-dataset-card">
+          <div class="ocb-kicker">Benchmark slices</div>
+          <h3>Different questions deserve different views</h3>
+          <p><code>core</code> asks who is strongest on the main ranking path. <code>intelligence</code> asks about broader capability. <code>coverage</code> tracks regression breadth. <code>native</code> makes OpenClaw-native surfaces visible without forcing them to dominate the main leaderboard prematurely.</p>
+        </article>
+        <article class="ocb-dataset-card">
+          <div class="ocb-kicker">Scenario metadata</div>
+          <h3>Tasks are benchmark objects, not loose prompts</h3>
+          <p>Each scenario can declare tools, checks, tags, execution mode, difficulty, pass threshold, workspace material, and custom grading logic. That makes the dataset easier to extend without weakening benchmark semantics.</p>
+        </article>
+        <article class="ocb-dataset-card">
+          <div class="ocb-kicker">Live evidence</div>
+          <h3>Per-trial workspaces keep runs observable</h3>
+          <p>The runner creates controlled workspaces and the reporting layer records cost, latency, token usage, and execution metadata. This keeps the dataset tied to observable agent behavior rather than to abstract answer-only evaluation.</p>
+        </article>
+        <article class="ocb-dataset-card">
+          <div class="ocb-kicker">Coverage transparency</div>
+          <h3>Partial runs remain interpretable</h3>
+          <p>Reports expose coverage, covered weight, normalized capability, and normalized score on covered slices. That matters because serious benchmarking should show how much evidence exists, not just a headline number.</p>
+        </article>
+        <article class="ocb-dataset-card">
+          <div class="ocb-kicker">Extensibility</div>
+          <h3>New tasks can grow without rewriting the harness</h3>
+          <p>Most benchmark growth happens declaratively through scenario YAML and optional custom checks. This keeps the benchmark flexible while preserving a clear boundary between content, execution, scoring, and reporting.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="ocb-section" id="trust-main">
+    <div class="ocb-shell">
+      <div class="ocb-section-head">
+        <h2>Why AutoEval is a credible way to measure agent intelligence</h2>
+        <p>
+          The benchmark does not try to measure every form of intelligence. What it does is operationalize the forms of intelligence that matter in an agent runtime: acting through tools, preserving coherence across steps, adapting under failure, respecting boundaries, and producing inspectable evidence under controlled execution.
+        </p>
+      </div>
+
+      <div class="ocb-image-frame">
+        <img src="/bench/assets/images/bench/trustworthy-evidence.png" alt="AutoEval evidence chain for trustworthy agent evaluation" />
+      </div>
+
+      <div class="ocb-card-grid three">
+        <article class="ocb-trust-card">
+          <h3>It measures behavior, not just outputs</h3>
+          <p>Tool choices, step order, recovery behavior, and safety outcomes are all part of the observable signal.</p>
+        </article>
+        <article class="ocb-trust-card">
+          <h3>It separates ranking from coverage</h3>
+          <p>The main leaderboard can stay high-signal while broader slices remain available for analysis and regression tracking.</p>
+        </article>
+        <article class="ocb-trust-card">
+          <h3>It makes reliability visible</h3>
+          <p>Repeated-trial views help distinguish stable capability from one-off success or environment luck.</p>
+        </article>
+        <article class="ocb-trust-card">
+          <h3>It keeps partial evidence honest</h3>
+          <p>Coverage-aware reporting prevents subset runs from being mistaken for complete benchmark judgments.</p>
+        </article>
+        <article class="ocb-trust-card">
+          <h3>It keeps benchmark maintenance legible</h3>
+          <p>Scenario metadata, custom checks, and structured reporting make the system easier to extend without hiding changes inside vague evaluation logic.</p>
+        </article>
+        <article class="ocb-trust-card">
+          <h3>It fits the OpenClaw system itself</h3>
+          <p>The benchmark is built around the actual OpenClaw runtime and its native surfaces, so the evaluation target is the system that users care about.</p>
+        </article>
+      </div>
+
+      <div class="ocb-pill-row">
+        <span class="ocb-pill">deterministic scoring</span>
+        <span class="ocb-pill">process-aware evaluation</span>
+        <span class="ocb-pill">safety gating</span>
+        <span class="ocb-pill">difficulty weighting</span>
+        <span class="ocb-pill">coverage-aware reporting</span>
+        <span class="ocb-pill">live OpenClaw execution</span>
+        <span class="ocb-pill">tokens · cost · latency · strict pass</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p class="site-stats">
+          <span>本站总访问 <span id="busuanzi_value_site_pv"></span> 次</span>
+          <span>|</span>
+          <span>访客 <span id="busuanzi_value_site_uv"></span> 人</span>
+        </p>
+        <p>&copy; 2026 AutoEval. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

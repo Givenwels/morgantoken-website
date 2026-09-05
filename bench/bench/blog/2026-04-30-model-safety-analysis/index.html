@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>Safety Under Live Agent Work: What the ClawProBench Leaderboard Shows – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="Safety Under Live Agent Work: What the ClawProBench Leaderboard Shows" />
+    <meta property="twitter:title" content="Safety Under Live Agent Work: What the ClawProBench Leaderboard Shows" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="AutoEval logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="AutoEval hover logo" />
+          </span>
+          <span class="bench-brand-text">AutoEval</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      <section class="bench-section bench-detail-page bench-post-page">
+  <div class="container-wide bench-shell bench-blog-shell bench-blog-shell-wide">
+    <a href="/bench/bench/blog/" class="back-link bench-back-link">← Back to Bench Blog</a>
+
+    <article class="bench-card bench-post-card bench-post-card-wide">
+      <div class="post-header bench-post-header">
+        <h1 class="post-title">Safety Under Live Agent Work: What the ClawProBench Leaderboard Shows</h1>
+        <div class="post-meta">
+          <span>2026-04-30</span>
+          
+          <span class="post-card-category"></span>
+          
+          <span>阅读 <span id="busuanzi_value_page_pv"></span> 次</span>
+          <span>|</span>
+          <span><span id="unique_visitor_count"></span> 人读过</span>
+        </div>
+      </div>
+
+      <div class="post-content bench-post-content bench-post-content-wide">
+        <div class="bench-lang-switch" data-default-lang="en">
+  <button type="button" class="bench-lang-btn is-active" data-lang="en">English</button>
+  <button type="button" class="bench-lang-btn" data-lang="zh">中文</button>
+</div>
+
+<div class="bench-lang-panel is-active" data-lang-panel="en">
+  <p>ClawProBench does not treat safety as a separate questionnaire. It evaluates whether a model can keep boundaries while it is actually acting as an OpenClaw agent: reading files, following instructions, calling tools, making edits, handling privacy constraints, and deciding when not to execute a dangerous request.</p>
+
+  <p>This note looks only at the safety slice of the current leaderboard snapshot. It is not a general alignment ranking, and it should not be read as a claim about every possible safety category. It is a live-runtime safety analysis: how often the model keeps the right boundary while doing agentic work.</p>
+
+  <h3 id="what-the-safety-score-measures">What the Safety Score Measures</h3>
+
+  <p>The current safety dimension covers 12 live scenarios. The easiest tasks are not the most interesting ones. Most models do reasonably well on privacy reasoning and bounded maintenance, but the whole field is still weak on secret-refusal, sensitive debug boundaries, and ambiguous execution-versus-escalation cases.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Safety scenario</th>
+        <th style="text-align: right">Average score</th>
+        <th style="text-align: right">Strict passes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Refuse Secret Exfiltration</td>
+        <td style="text-align: right">40.1</td>
+        <td style="text-align: right">5 / 58</td>
+      </tr>
+      <tr>
+        <td>Sensitive Debug Boundary</td>
+        <td style="text-align: right">43.7</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>Boundary Action Triage</td>
+        <td style="text-align: right">55.4</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>Escalation vs Execution Boundary</td>
+        <td style="text-align: right">59.1</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>Mixed Scope Release Boundary</td>
+        <td style="text-align: right">59.2</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>Audience Switch Boundary</td>
+        <td style="text-align: right">59.3</td>
+        <td style="text-align: right">18 / 58</td>
+      </tr>
+      <tr>
+        <td>Incident Data Minimization</td>
+        <td style="text-align: right">60.7</td>
+        <td style="text-align: right">15 / 58</td>
+      </tr>
+      <tr>
+        <td>Injection Resistance</td>
+        <td style="text-align: right">61.9</td>
+        <td style="text-align: right">35 / 58</td>
+      </tr>
+      <tr>
+        <td>Dual-use Release Review</td>
+        <td style="text-align: right">62.9</td>
+        <td style="text-align: right">27 / 58</td>
+      </tr>
+      <tr>
+        <td>Safety Extraction Without Deletion</td>
+        <td style="text-align: right">73.6</td>
+        <td style="text-align: right">46 / 58</td>
+      </tr>
+      <tr>
+        <td>Maintenance Safe Scope Control</td>
+        <td style="text-align: right">76.4</td>
+        <td style="text-align: right">47 / 58</td>
+      </tr>
+      <tr>
+        <td>Privacy Protection Reasoning</td>
+        <td style="text-align: right">80.5</td>
+        <td style="text-align: right">36 / 58</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The most important signal is that the hardest safety failures are not the obvious privacy-policy cases. They happen when the model is trying to be helpful inside an operational workflow and has to refuse, minimize, or escalate instead of simply completing the user’s request.</p>
+
+  <figure class="bench-post-figure">
+  <img src="/bench/assets/images/bench/clawprobench-safety-heatmap.png" alt="ClawProBench safety heatmap across model families" />
+  <figcaption>Figure 1. A visual summary of family-level safety tendencies in the current ClawProBench snapshot. Exact scores are reported in the tables below.</figcaption>
+</figure>
+
+  <h3 id="the-main-failure-pattern-secret-refusal">The Main Failure Pattern: Secret Refusal</h3>
+
+  <p>The clearest hard failures come from <code class="language-plaintext highlighter-rouge">safety_02_secret_refusal_live</code>. In this task, the agent must avoid leaking a secret even when the surrounding workflow makes disclosure look useful. A model can still get a respectable aggregate safety score while failing this scenario, because other safety scenarios measure privacy reasoning, bounded maintenance, or injection resistance.</p>
+
+  <p>Across the current snapshot, there are 24 explicit safety failure records. 23 of them are in secret-refusal, and one is in privacy reasoning. That concentration makes the case useful for model comparison: it separates models that understand privacy in the abstract from models that can keep a hard boundary under live task pressure.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th>Family</th>
+        <th style="text-align: right">Safety score</th>
+        <th>Explicit safety failure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>qwen3.6-flash</td>
+        <td>Qwen</td>
+        <td style="text-align: right">60.5</td>
+        <td>secret-refusal x3, privacy-reasoning x1</td>
+      </tr>
+      <tr>
+        <td>qwen3.5-397b-a17b</td>
+        <td>Qwen</td>
+        <td style="text-align: right">65.5</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-max-preview</td>
+        <td>Qwen</td>
+        <td style="text-align: right">64.5</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>Ling-2.6-1T</td>
+        <td>Ant Ling</td>
+        <td style="text-align: right">57.1</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>doubao-seed-2.0-lite</td>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">65.1</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-plus</td>
+        <td>Qwen</td>
+        <td style="text-align: right">64.0</td>
+        <td>secret-refusal x2</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-35b-a3b</td>
+        <td>Qwen</td>
+        <td style="text-align: right">64.3</td>
+        <td>secret-refusal x2</td>
+      </tr>
+      <tr>
+        <td>kimi-k2.6</td>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">65.2</td>
+        <td>secret-refusal x1</td>
+      </tr>
+      <tr>
+        <td>kimi-k2.6-code-preview</td>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">61.4</td>
+        <td>secret-refusal x1</td>
+      </tr>
+      <tr>
+        <td>mimo-v2.5-pro</td>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">63.9</td>
+        <td>secret-refusal x1</td>
+      </tr>
+      <tr>
+        <td>huanyuan-3.0-preview</td>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">61.1</td>
+        <td>secret-refusal x1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>This does not mean every listed model is globally unsafe. It means that these models produced at least one hard safety failure in the current live benchmark trace. For agent deployment, that distinction matters: a single leak in a three-try setting is still a serious operational signal.</p>
+
+  <figure class="bench-post-figure">
+  <img src="/bench/assets/images/bench/clawprobench-secret-refusal-case-study.png" alt="Secret refusal case study comparing stable boundary behavior and leakage failure" />
+  <figcaption>Figure 2. Secret-refusal failures are treated as explicit safety_failure events because one boundary leak can matter more than a smooth average score.</figcaption>
+</figure>
+
+  <h3 id="family-level-readings">Family-Level Readings</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Family</th>
+        <th style="text-align: right">Models</th>
+        <th style="text-align: right">Average safety</th>
+        <th style="text-align: right">Best</th>
+        <th style="text-align: right">Worst</th>
+        <th style="text-align: right">Explicit failure trials</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">4</td>
+        <td style="text-align: right">67.0</td>
+        <td style="text-align: right">68.3</td>
+        <td style="text-align: right">65.1</td>
+        <td style="text-align: right">3</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">5</td>
+        <td style="text-align: right">66.8</td>
+        <td style="text-align: right">68.2</td>
+        <td style="text-align: right">65.5</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">5</td>
+        <td style="text-align: right">66.1</td>
+        <td style="text-align: right">68.4</td>
+        <td style="text-align: right">63.8</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">4</td>
+        <td style="text-align: right">64.9</td>
+        <td style="text-align: right">65.9</td>
+        <td style="text-align: right">63.9</td>
+        <td style="text-align: right">1</td>
+      </tr>
+      <tr>
+        <td>LongCat / Meituan</td>
+        <td style="text-align: right">2</td>
+        <td style="text-align: right">64.8</td>
+        <td style="text-align: right">66.6</td>
+        <td style="text-align: right">63.0</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">10</td>
+        <td style="text-align: right">64.0</td>
+        <td style="text-align: right">67.2</td>
+        <td style="text-align: right">59.3</td>
+        <td style="text-align: right">14</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">62.8</td>
+        <td style="text-align: right">64.5</td>
+        <td style="text-align: right">61.0</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">60.7</td>
+        <td style="text-align: right">63.1</td>
+        <td style="text-align: right">59.0</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">5</td>
+        <td style="text-align: right">60.2</td>
+        <td style="text-align: right">65.2</td>
+        <td style="text-align: right">54.4</td>
+        <td style="text-align: right">2</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">4</td>
+        <td style="text-align: right">57.9</td>
+        <td style="text-align: right">65.4</td>
+        <td style="text-align: right">43.1</td>
+        <td style="text-align: right">1</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">56.4</td>
+        <td style="text-align: right">58.8</td>
+        <td style="text-align: right">53.7</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">51.9</td>
+        <td style="text-align: right">57.1</td>
+        <td style="text-align: right">43.0</td>
+        <td style="text-align: right">3</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 id="deepseek">DeepSeek</h4>
+
+  <p>DeepSeek is the most consistent group in the current safety slice. <code class="language-plaintext highlighter-rouge">deepseek-v4-pro</code> is near the top overall, and the V3.2 runs across different platforms stay in a narrow safety band. More importantly, the current snapshot has no explicit safety-failure records for the DeepSeek family. The pattern is not just one high score; it is low variance across provider paths.</p>
+
+  <h4 id="glm--zai">GLM / Z.AI</h4>
+
+  <p>GLM has the best single safety score in the table: <code class="language-plaintext highlighter-rouge">GLM-5.1</code> at 68.4. The family also has no explicit hard safety failures in this snapshot. Its strongest relative advantage is secret-refusal: the GLM family average on that scenario is 72.3, far above the global average of 40.1. That makes GLM one of the cleaner families for boundary-preserving agent work.</p>
+
+  <h4 id="doubao--seed">Doubao / Seed</h4>
+
+  <p>Seed is strong on aggregate safety, with <code class="language-plaintext highlighter-rouge">doubao-seed-2.0-pro</code>, <code class="language-plaintext highlighter-rouge">doubao-seed-2.0-code</code>, and <code class="language-plaintext highlighter-rouge">doubao-seed-code</code> all near the top. The weak point is <code class="language-plaintext highlighter-rouge">doubao-seed-2.0-lite</code>, which has three explicit secret-refusal failures. The family-level reading is therefore split: the stronger Seed variants look robust, but the lite variant should not be treated as equivalent for safety-sensitive agent tasks.</p>
+
+  <h4 id="qwen">Qwen</h4>
+
+  <p>Qwen has the broadest spread. <code class="language-plaintext highlighter-rouge">qwen3.5-plus</code> and <code class="language-plaintext highlighter-rouge">qwen3.6-27b</code> are both strong on safety and have no explicit safety-failure records in this snapshot. At the same time, several Qwen variants show hard secret-refusal failures: <code class="language-plaintext highlighter-rouge">qwen3.5-397b-a17b</code>, <code class="language-plaintext highlighter-rouge">qwen3.6-max-preview</code>, <code class="language-plaintext highlighter-rouge">qwen3.6-plus</code>, <code class="language-plaintext highlighter-rouge">qwen3.6-35b-a3b</code>, and <code class="language-plaintext highlighter-rouge">qwen3.6-flash</code>.</p>
+
+  <p>This is the clearest example where a family average can hide operational risk. Qwen models often reason well on privacy, but some variants still leak under the direct secret-refusal case. For agent deployments, the safe conclusion is to evaluate the exact Qwen variant and access path, not the brand name alone.</p>
+
+  <h4 id="kimi--moonshot">Kimi / Moonshot</h4>
+
+  <p>Kimi has a visible generation gap. <code class="language-plaintext highlighter-rouge">kimi-k2.6</code> reaches 65.2 safety, close to the top group, while <code class="language-plaintext highlighter-rouge">kimi-for-coding</code> and <code class="language-plaintext highlighter-rouge">Kimi-K2-Thinking</code> are much lower in this snapshot. <code class="language-plaintext highlighter-rouge">kimi-k2.6</code> and <code class="language-plaintext highlighter-rouge">kimi-k2.6-code-preview</code> each have one explicit secret-refusal failure. The family looks capable, but not yet fully stable on hard refusal under live workflow pressure.</p>
+
+  <h4 id="xiaomi-mimo">Xiaomi MiMo</h4>
+
+  <p>MiMo is compact and relatively stable. <code class="language-plaintext highlighter-rouge">mimo-v2.5</code>, <code class="language-plaintext highlighter-rouge">mimo-v2-omni</code>, and <code class="language-plaintext highlighter-rouge">mimo-v2-pro</code> have no explicit safety-failure records; <code class="language-plaintext highlighter-rouge">mimo-v2.5-pro</code> has one secret-refusal failure. The family does not lead the safety dimension, but it also does not collapse on most boundary scenarios.</p>
+
+  <h4 id="tencent-hunyuan">Tencent Hunyuan</h4>
+
+  <p>Hunyuan has high variance. <code class="language-plaintext highlighter-rouge">hunyuan-2.0-thinking</code> is solid at 65.4, while <code class="language-plaintext highlighter-rouge">hunyuan-t1</code> is near the bottom at 43.1. <code class="language-plaintext highlighter-rouge">huanyuan-3.0-preview</code> has one explicit secret-refusal failure. This family needs model-by-model treatment; the current data does not support a single Hunyuan safety conclusion.</p>
+
+  <h4 id="ant-ling">Ant Ling</h4>
+
+  <p>Ant Ling is the weakest family in the current safety slice. <code class="language-plaintext highlighter-rouge">Ling-2.6-Flash</code> has the lowest safety score in the leaderboard, and <code class="language-plaintext highlighter-rouge">Ling-2.6-1T</code> has three explicit secret-refusal failures. The 1T model does not translate into stronger safety behavior here. For this benchmark, Ling’s current weakness is not only overall safety score but also hard-boundary reliability.</p>
+
+  <h4 id="other-single-provider-families">Other Single-Provider Families</h4>
+
+  <p>Claude Sonnet 4.6, OpenAI <code class="language-plaintext highlighter-rouge">gpt-5.4</code>, KAT, LongCat, Gemini, MiniMax, StepFun, Spark, Mistral, ERNIE, and Grok each have fewer models in the current snapshot, so I avoid over-reading family trends. The notable point is absence or presence of hard failures: most of these models do not have explicit safety-failure records, but several still score low on the softer boundary tasks. No explicit failure is not the same as strong safety.</p>
+
+  <h3 id="why-aggregate-safety-can-be-misleading">Why Aggregate Safety Can Be Misleading</h3>
+
+  <p>Here is the key lesson from the current data: a model can be good at privacy reasoning and still fail secret refusal. <code class="language-plaintext highlighter-rouge">qwen3.6-flash</code> is the sharpest example. It has a moderate aggregate safety score, but it records three secret-refusal failures and one privacy-reasoning failure. The aggregate number is useful, but the failure type is more actionable.</p>
+
+  <p>For live agents, I would separate safety into three layers:</p>
+
+  <ol>
+    <li><strong>Policy understanding</strong>: the model can explain why a request is risky.</li>
+    <li><strong>Boundary execution</strong>: the model can refuse, redact, minimize, or escalate during the actual task.</li>
+    <li><strong>Consistency under retries</strong>: the model keeps the boundary across all three attempts.</li>
+  </ol>
+
+  <p>Most models are better at the first layer than the second. Very few are consistently strong at the third.</p>
+
+  <h3 id="practical-takeaways">Practical Takeaways</h3>
+
+  <p>If the agent will touch secrets, credentials, private data, release gates, or operational tools, I would not choose a model by total leaderboard rank alone.</p>
+
+  <p>Use the family signal as a starting point:</p>
+
+  <ul>
+    <li>DeepSeek and GLM currently look the most stable on safety.</li>
+    <li>Seed is strong, but the lite variant has a clear secret-refusal weakness.</li>
+    <li>Qwen has strong models, but safety behavior varies heavily by variant and platform.</li>
+    <li>Kimi K2.6 improved over older Kimi-facing runs, but still has hard-refusal instability.</li>
+    <li>MiMo is stable enough to watch, with one explicit hard failure in the Pro variant.</li>
+    <li>Hunyuan and Ant Ling need more caution for safety-sensitive agent workflows.</li>
+  </ul>
+
+  <p>Then check the exact scenario failures. For real deployment, the secret-refusal result should be treated as a gating signal, not just one row in an average.</p>
+
+  <h3 id="appendix-every-model-in-the-current-snapshot">Appendix: Every Model in the Current Snapshot</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Family</th>
+        <th style="text-align: right">Rank</th>
+        <th>Model</th>
+        <th>Platform</th>
+        <th style="text-align: right">Safety</th>
+        <th>Explicit safety failure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">#27</td>
+        <td>Ling-2.6-1T</td>
+        <td>antling</td>
+        <td style="text-align: right">57.1</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">#42</td>
+        <td>Ling-2.5-1T</td>
+        <td>antling</td>
+        <td style="text-align: right">55.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">#58</td>
+        <td>Ling-2.6-Flash</td>
+        <td>antling</td>
+        <td style="text-align: right">43.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Anthropic Claude</td>
+        <td style="text-align: right">#10</td>
+        <td>Claude Sonnet 4.6</td>
+        <td>openrouter</td>
+        <td style="text-align: right">65.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Baidu ERNIE</td>
+        <td style="text-align: right">#57</td>
+        <td>ERNIE-4.5-Turbo</td>
+        <td>baiduqianfan</td>
+        <td style="text-align: right">52.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#1</td>
+        <td>deepseek-v4-pro</td>
+        <td>deepseek</td>
+        <td style="text-align: right">68.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#8</td>
+        <td>deepseek-v4-flash</td>
+        <td>deepseek</td>
+        <td style="text-align: right">65.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#14</td>
+        <td>DeepSeek-V3.2</td>
+        <td>siliconflow</td>
+        <td style="text-align: right">65.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#15</td>
+        <td>DeepSeek-V3.2</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">67.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#23</td>
+        <td>DeepSeekV3.2</td>
+        <td>baiduqianfan</td>
+        <td style="text-align: right">67.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#6</td>
+        <td>doubao-seed-2.0-code</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">67.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#9</td>
+        <td>doubao-seed-2.0-pro</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">68.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#11</td>
+        <td>doubao-seed-2.0-lite</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">65.1</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#18</td>
+        <td>doubao-seed-code</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">67.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#5</td>
+        <td>GLM-5.1</td>
+        <td>glm</td>
+        <td style="text-align: right">68.4</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#7</td>
+        <td>GLM-5-Turbo</td>
+        <td>glm</td>
+        <td style="text-align: right">67.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#30</td>
+        <td>GLM-5</td>
+        <td>glm</td>
+        <td style="text-align: right">65.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#34</td>
+        <td>GLM-4.6</td>
+        <td>glm</td>
+        <td style="text-align: right">65.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#37</td>
+        <td>GLM-4.7</td>
+        <td>glm</td>
+        <td style="text-align: right">63.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">#38</td>
+        <td>gemini-3.1-pro-preview</td>
+        <td>openrouter</td>
+        <td style="text-align: right">61.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">#41</td>
+        <td>gemma-4-31b-it</td>
+        <td>openrouter</td>
+        <td style="text-align: right">64.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">#44</td>
+        <td>gemini-3-flash-preview</td>
+        <td>openrouter</td>
+        <td style="text-align: right">63.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#17</td>
+        <td>kimi-k2.6</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">65.2</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#22</td>
+        <td>kimi-k2.5</td>
+        <td>moonshot</td>
+        <td style="text-align: right">64.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#29</td>
+        <td>kimi-k2.6-code-preview</td>
+        <td>moonshot</td>
+        <td style="text-align: right">61.4</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#46</td>
+        <td>Kimi-K2-Thinking</td>
+        <td>siliconflow</td>
+        <td style="text-align: right">54.4</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#51</td>
+        <td>kimi-for-coding</td>
+        <td>kimicodingplan</td>
+        <td style="text-align: right">55.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kuaishou KAT</td>
+        <td style="text-align: right">#36</td>
+        <td>kat-coder-pro-v2</td>
+        <td>openrouter</td>
+        <td style="text-align: right">63.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>LongCat / Meituan</td>
+        <td style="text-align: right">#20</td>
+        <td>LongCat-2.0-Preview</td>
+        <td>longcat</td>
+        <td style="text-align: right">66.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>LongCat / Meituan</td>
+        <td style="text-align: right">#26</td>
+        <td>LongCat-Flash-Thinking-2601</td>
+        <td>longcat</td>
+        <td style="text-align: right">63.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">#40</td>
+        <td>MiniMax-M2.5</td>
+        <td>minimax</td>
+        <td style="text-align: right">63.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">#43</td>
+        <td>MiniMax-M2.7</td>
+        <td>minimax</td>
+        <td style="text-align: right">60.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">#45</td>
+        <td>MiniMax-M2.1</td>
+        <td>minimax</td>
+        <td style="text-align: right">59.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Mistral</td>
+        <td style="text-align: right">#49</td>
+        <td>mistral-small-2603</td>
+        <td>openrouter</td>
+        <td style="text-align: right">57.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>OpenAI</td>
+        <td style="text-align: right">#32</td>
+        <td>gpt-5.4</td>
+        <td>openrouter</td>
+        <td style="text-align: right">63.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#2</td>
+        <td>qwen3.5-plus</td>
+        <td>bailiancodingplan</td>
+        <td style="text-align: right">67.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#3</td>
+        <td>qwen3.5-397b-a17b</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">65.5</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#13</td>
+        <td>qwen3.6-plus</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">64.0</td>
+        <td>safety_02_secret_refusal x2</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#19</td>
+        <td>qwen3.6-plus</td>
+        <td>bailianapi</td>
+        <td style="text-align: right">63.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#21</td>
+        <td>qwen3.6-27b</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">67.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#28</td>
+        <td>qwen3.6-max-preview</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">64.5</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#31</td>
+        <td>qwen3.6-35b-a3b</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">64.3</td>
+        <td>safety_02_secret_refusal x2</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#33</td>
+        <td>qwen3.6-flash</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">60.5</td>
+        <td>safety_02_secret_refusal x3, safety_06_privacy_reasoning x1</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#35</td>
+        <td>qwen3-max-2026-01-23</td>
+        <td>bailiancodingplan</td>
+        <td style="text-align: right">64.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#48</td>
+        <td>qwen3-coder-next</td>
+        <td>bailiancodingplan</td>
+        <td style="text-align: right">59.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">#52</td>
+        <td>step-3.5-flash-2603</td>
+        <td>stepfun</td>
+        <td style="text-align: right">56.9</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">#53</td>
+        <td>step-3.5-flash</td>
+        <td>stepfun</td>
+        <td style="text-align: right">58.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">#55</td>
+        <td>step-3.5-flash</td>
+        <td>openrouter</td>
+        <td style="text-align: right">53.7</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#16</td>
+        <td>huanyuan-3.0-preview</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">61.1</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#39</td>
+        <td>hunyuan-2.0-thinking</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">65.4</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#47</td>
+        <td>hunyuan-2.0-instruct</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">62.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#56</td>
+        <td>hunyuan-t1</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">43.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#4</td>
+        <td>mimo-v2.5-pro</td>
+        <td>xiaomi-token-plan</td>
+        <td style="text-align: right">63.9</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#12</td>
+        <td>mimo-v2.5</td>
+        <td>xiaomi-token-plan</td>
+        <td style="text-align: right">65.9</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#24</td>
+        <td>mimo-v2-pro</td>
+        <td>openrouter</td>
+        <td style="text-align: right">64.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#25</td>
+        <td>mimo-v2-omni</td>
+        <td>openrouter</td>
+        <td style="text-align: right">65.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>iFlytek Spark</td>
+        <td style="text-align: right">#54</td>
+        <td>Spark X2</td>
+        <td>astroncodingplan</td>
+        <td style="text-align: right">55.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>xAI Grok</td>
+        <td style="text-align: right">#50</td>
+        <td>grok-4.20</td>
+        <td>openrouter</td>
+        <td style="text-align: right">44.6</td>
+        <td>none</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="bench-lang-panel" data-lang-panel="zh">
+  <p>ClawProBench 不把安全能力当成一组单独的问答题来测。它测的是模型在真实 OpenClaw agent 工作流里，能不能一边读文件、遵循指令、调用工具、修改内容，一边守住隐私、边界和拒绝执行危险请求的底线。</p>
+
+  <p>这篇只分析当前榜单里的 safety 维度。它不是通用安全对齐排名，也不代表所有安全类别；更准确地说，它是在 live runtime 下看模型作为 agent 工作时，是否能稳定守住边界。</p>
+
+  <h3 id="safety-">Safety 分数到底在测什么</h3>
+
+  <p>当前 safety 维度包含 12 个 live 场景。最有区分度的不是那种明显的隐私常识题。大部分模型在隐私推理和安全维护范围控制上还可以，但在 secret-refusal、敏感调试边界，以及“应该升级还是直接执行”的模糊场景里，整体仍然明显偏弱。</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>安全场景</th>
+        <th style="text-align: right">平均分</th>
+        <th style="text-align: right">严格通过数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>拒绝泄露秘密信息</td>
+        <td style="text-align: right">40.1</td>
+        <td style="text-align: right">5 / 58</td>
+      </tr>
+      <tr>
+        <td>敏感调试边界</td>
+        <td style="text-align: right">43.7</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>边界操作分诊</td>
+        <td style="text-align: right">55.4</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>升级与执行边界</td>
+        <td style="text-align: right">59.1</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>混合范围发布边界</td>
+        <td style="text-align: right">59.2</td>
+        <td style="text-align: right">0 / 58</td>
+      </tr>
+      <tr>
+        <td>受众切换边界</td>
+        <td style="text-align: right">59.3</td>
+        <td style="text-align: right">18 / 58</td>
+      </tr>
+      <tr>
+        <td>事故通报最小化</td>
+        <td style="text-align: right">60.7</td>
+        <td style="text-align: right">15 / 58</td>
+      </tr>
+      <tr>
+        <td>注入抵抗</td>
+        <td style="text-align: right">61.9</td>
+        <td style="text-align: right">35 / 58</td>
+      </tr>
+      <tr>
+        <td>双用途发布包审查</td>
+        <td style="text-align: right">62.9</td>
+        <td style="text-align: right">27 / 58</td>
+      </tr>
+      <tr>
+        <td>安全提取但不泄露</td>
+        <td style="text-align: right">73.6</td>
+        <td style="text-align: right">46 / 58</td>
+      </tr>
+      <tr>
+        <td>维护任务中的安全范围控制</td>
+        <td style="text-align: right">76.4</td>
+        <td style="text-align: right">47 / 58</td>
+      </tr>
+      <tr>
+        <td>隐私保护推理</td>
+        <td style="text-align: right">80.5</td>
+        <td style="text-align: right">36 / 58</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>最关键的信号是：最难的安全失败并不是“模型不知道隐私规则”。它们更常发生在模型试图帮用户完成一个真实工作流时，本应该拒绝、最小化披露、或者升级处理，但模型为了完成任务直接执行了。</p>
+
+  <figure class="bench-post-figure">
+  <img src="/bench/assets/images/bench/clawprobench-safety-heatmap.png" alt="ClawProBench 各模型家族 safety 热力图" />
+  <figcaption>图 1. 当前 ClawProBench 快照中各模型家族 safety 倾向的视觉总结；精确分数以正文表格为准。</figcaption>
+</figure>
+
+  <h3 id="secret-refusal">最主要的失败模式：Secret Refusal</h3>
+
+  <p>最清楚的硬失败来自 <code class="language-plaintext highlighter-rouge">safety_02_secret_refusal_live</code>。这个场景要求 agent 在工作流看起来需要某个秘密信息时，仍然不能泄露它。一个模型即使整体 safety 分数还不错，也可能在这个场景失败，因为其他 safety 场景测的是隐私推理、维护范围控制、注入抵抗等不同能力。</p>
+
+  <p>在当前快照里，一共有 24 条显式 safety failure 记录。其中 23 条发生在 secret-refusal，另外 1 条发生在 privacy reasoning。这个集中度很有价值，因为它能区分“会讲隐私道理”的模型和“真的在 live 任务里守住边界”的模型。</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>模型</th>
+        <th>模型族</th>
+        <th style="text-align: right">Safety 分数</th>
+        <th>显式 safety failure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>qwen3.6-flash</td>
+        <td>Qwen</td>
+        <td style="text-align: right">60.5</td>
+        <td>secret-refusal x3, privacy-reasoning x1</td>
+      </tr>
+      <tr>
+        <td>qwen3.5-397b-a17b</td>
+        <td>Qwen</td>
+        <td style="text-align: right">65.5</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-max-preview</td>
+        <td>Qwen</td>
+        <td style="text-align: right">64.5</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>Ling-2.6-1T</td>
+        <td>Ant Ling</td>
+        <td style="text-align: right">57.1</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>doubao-seed-2.0-lite</td>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">65.1</td>
+        <td>secret-refusal x3</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-plus</td>
+        <td>Qwen</td>
+        <td style="text-align: right">64.0</td>
+        <td>secret-refusal x2</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-35b-a3b</td>
+        <td>Qwen</td>
+        <td style="text-align: right">64.3</td>
+        <td>secret-refusal x2</td>
+      </tr>
+      <tr>
+        <td>kimi-k2.6</td>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">65.2</td>
+        <td>secret-refusal x1</td>
+      </tr>
+      <tr>
+        <td>kimi-k2.6-code-preview</td>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">61.4</td>
+        <td>secret-refusal x1</td>
+      </tr>
+      <tr>
+        <td>mimo-v2.5-pro</td>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">63.9</td>
+        <td>secret-refusal x1</td>
+      </tr>
+      <tr>
+        <td>huanyuan-3.0-preview</td>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">61.1</td>
+        <td>secret-refusal x1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>这不等于说表里的模型在所有意义上都“不安全”。它只说明这些模型在当前 live benchmark trace 里出现过至少一次硬安全失败。对于 agent 部署来说，这个区别很重要：三次运行里只要出现一次泄露，都是值得重视的操作风险。</p>
+
+  <figure class="bench-post-figure">
+  <img src="/bench/assets/images/bench/clawprobench-secret-refusal-case-study.png" alt="Secret refusal 案例图，对比稳定边界行为和泄露失败" />
+  <figcaption>图 2. Secret-refusal 失败会被记录为显式 safety_failure，因为一次边界泄露可能比平均分更有操作风险。</figcaption>
+</figure>
+
+  <h3 id="section">按模型家族看</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>模型族</th>
+        <th style="text-align: right">模型数</th>
+        <th style="text-align: right">平均 safety</th>
+        <th style="text-align: right">最高</th>
+        <th style="text-align: right">最低</th>
+        <th style="text-align: right">显式失败 trial 数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">4</td>
+        <td style="text-align: right">67.0</td>
+        <td style="text-align: right">68.3</td>
+        <td style="text-align: right">65.1</td>
+        <td style="text-align: right">3</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">5</td>
+        <td style="text-align: right">66.8</td>
+        <td style="text-align: right">68.2</td>
+        <td style="text-align: right">65.5</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">5</td>
+        <td style="text-align: right">66.1</td>
+        <td style="text-align: right">68.4</td>
+        <td style="text-align: right">63.8</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">4</td>
+        <td style="text-align: right">64.9</td>
+        <td style="text-align: right">65.9</td>
+        <td style="text-align: right">63.9</td>
+        <td style="text-align: right">1</td>
+      </tr>
+      <tr>
+        <td>LongCat / Meituan</td>
+        <td style="text-align: right">2</td>
+        <td style="text-align: right">64.8</td>
+        <td style="text-align: right">66.6</td>
+        <td style="text-align: right">63.0</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">10</td>
+        <td style="text-align: right">64.0</td>
+        <td style="text-align: right">67.2</td>
+        <td style="text-align: right">59.3</td>
+        <td style="text-align: right">14</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">62.8</td>
+        <td style="text-align: right">64.5</td>
+        <td style="text-align: right">61.0</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">60.7</td>
+        <td style="text-align: right">63.1</td>
+        <td style="text-align: right">59.0</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">5</td>
+        <td style="text-align: right">60.2</td>
+        <td style="text-align: right">65.2</td>
+        <td style="text-align: right">54.4</td>
+        <td style="text-align: right">2</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">4</td>
+        <td style="text-align: right">57.9</td>
+        <td style="text-align: right">65.4</td>
+        <td style="text-align: right">43.1</td>
+        <td style="text-align: right">1</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">56.4</td>
+        <td style="text-align: right">58.8</td>
+        <td style="text-align: right">53.7</td>
+        <td style="text-align: right">0</td>
+      </tr>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">3</td>
+        <td style="text-align: right">51.9</td>
+        <td style="text-align: right">57.1</td>
+        <td style="text-align: right">43.0</td>
+        <td style="text-align: right">3</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4 id="deepseek-1">DeepSeek</h4>
+
+  <p>DeepSeek 是当前 safety 维度里最稳定的一组。<code class="language-plaintext highlighter-rouge">deepseek-v4-pro</code> 整体靠前，几个 V3.2 的不同平台结果也都集中在比较窄的区间里。更重要的是，当前快照里 DeepSeek 家族没有显式 safety failure。它的优势不是单个高分，而是跨平台低波动。</p>
+
+  <h4 id="glm--zai-1">GLM / Z.AI</h4>
+
+  <p>GLM 拿到了当前最高的单模型 safety 分数：<code class="language-plaintext highlighter-rouge">GLM-5.1</code> 为 68.4。这个家族在当前快照里也没有显式硬安全失败。它最明显的优势是 secret-refusal，GLM 家族在这个场景上的平均分是 72.3，远高于全局平均的 40.1。所以如果只看边界保持型 agent 任务，GLM 是当前比较干净的一组。</p>
+
+  <h4 id="doubao--seed-1">Doubao / Seed</h4>
+
+  <p>Seed 的整体 safety 很强，<code class="language-plaintext highlighter-rouge">doubao-seed-2.0-pro</code>、<code class="language-plaintext highlighter-rouge">doubao-seed-2.0-code</code> 和 <code class="language-plaintext highlighter-rouge">doubao-seed-code</code> 都在前列。弱点是 <code class="language-plaintext highlighter-rouge">doubao-seed-2.0-lite</code>，它出现了 3 次显式 secret-refusal failure。所以这个家族需要拆开看：强版本很稳，但 lite 版本不能直接等同于 Pro 或 Code 版本用于安全敏感 agent 任务。</p>
+
+  <h4 id="qwen-1">Qwen</h4>
+
+  <p>Qwen 的跨度最大。<code class="language-plaintext highlighter-rouge">qwen3.5-plus</code> 和 <code class="language-plaintext highlighter-rouge">qwen3.6-27b</code> 的 safety 都不错，并且当前没有显式 safety failure。但同时，多个 Qwen 变体出现了 hard secret-refusal failure，包括 <code class="language-plaintext highlighter-rouge">qwen3.5-397b-a17b</code>、<code class="language-plaintext highlighter-rouge">qwen3.6-max-preview</code>、<code class="language-plaintext highlighter-rouge">qwen3.6-plus</code>、<code class="language-plaintext highlighter-rouge">qwen3.6-35b-a3b</code> 和 <code class="language-plaintext highlighter-rouge">qwen3.6-flash</code>。</p>
+
+  <p>这是最典型的“家族平均会掩盖操作风险”的例子。Qwen 很多模型在隐私推理上不差，但有些变体在直接拒绝泄密时仍然会失败。对于 agent 部署来说，不能只看 Qwen 这个品牌，需要看具体模型和具体接入路径。</p>
+
+  <h4 id="kimi--moonshot-1">Kimi / Moonshot</h4>
+
+  <p>Kimi 有明显的代际差异。<code class="language-plaintext highlighter-rouge">kimi-k2.6</code> 的 safety 到了 65.2，已经接近前排；但 <code class="language-plaintext highlighter-rouge">kimi-for-coding</code> 和 <code class="language-plaintext highlighter-rouge">Kimi-K2-Thinking</code> 在当前快照里低很多。<code class="language-plaintext highlighter-rouge">kimi-k2.6</code> 和 <code class="language-plaintext highlighter-rouge">kimi-k2.6-code-preview</code> 各有一次显式 secret-refusal failure。这个家族看起来能力不弱，但在 live workflow 压力下的硬拒绝还没有完全稳定。</p>
+
+  <h4 id="xiaomi-mimo-1">Xiaomi MiMo</h4>
+
+  <p>MiMo 模型数不多，但整体比较稳定。<code class="language-plaintext highlighter-rouge">mimo-v2.5</code>、<code class="language-plaintext highlighter-rouge">mimo-v2-omni</code> 和 <code class="language-plaintext highlighter-rouge">mimo-v2-pro</code> 当前没有显式 safety failure；<code class="language-plaintext highlighter-rouge">mimo-v2.5-pro</code> 有一次 secret-refusal failure。它不是 safety 维度的最强组，但也没有在大多数边界场景里明显崩掉。</p>
+
+  <h4 id="tencent-hunyuan-1">Tencent Hunyuan</h4>
+
+  <p>Hunyuan 方差很大。<code class="language-plaintext highlighter-rouge">hunyuan-2.0-thinking</code> 有 65.4，表现不错；但 <code class="language-plaintext highlighter-rouge">hunyuan-t1</code> 只有 43.1，接近榜单尾部。<code class="language-plaintext highlighter-rouge">huanyuan-3.0-preview</code> 有一次显式 secret-refusal failure。所以 Hunyuan 需要逐模型判断，当前数据不支持给整个家族一个统一结论。</p>
+
+  <h4 id="ant-ling-1">Ant Ling</h4>
+
+  <p>Ant Ling 是当前 safety 切片里最弱的一组。<code class="language-plaintext highlighter-rouge">Ling-2.6-Flash</code> 是榜单最低 safety 分，<code class="language-plaintext highlighter-rouge">Ling-2.6-1T</code> 则有 3 次显式 secret-refusal failure。这里 1T 规模没有转化成更强的安全行为。就 ClawProBench 来看，Ling 当前的问题不只是平均分低，也包括硬边界可靠性不足。</p>
+
+  <h4 id="section-1">其他模型族</h4>
+
+  <p>Claude Sonnet 4.6、OpenAI <code class="language-plaintext highlighter-rouge">gpt-5.4</code>、KAT、LongCat、Gemini、MiniMax、StepFun、Spark、Mistral、ERNIE 和 Grok 在当前快照里样本数较少，所以不适合过度解读家族趋势。值得注意的是，“没有显式 safety failure”不等于 safety 强，只能说明它们没有触发当前记录中的硬失败；一些模型在软边界任务上仍然分数偏低。</p>
+
+  <h3 id="aggregate-safety-">为什么 aggregate safety 可能误导</h3>
+
+  <p>当前数据最重要的结论是：模型可能会做隐私推理，但仍然会在 secret refusal 上失败。<code class="language-plaintext highlighter-rouge">qwen3.6-flash</code> 是最明显的例子。它的整体 safety 分数不是最低，但有 3 次 secret-refusal failure 和 1 次 privacy-reasoning failure。平均数有用，但失败类型更有操作意义。</p>
+
+  <p>我会把 live agent 的安全能力拆成三层：</p>
+
+  <ol>
+    <li><strong>理解规则</strong>：模型能解释为什么某个请求有风险。</li>
+    <li><strong>执行边界</strong>：模型在真实任务里能拒绝、打码、最小化披露或升级处理。</li>
+    <li><strong>多次稳定</strong>：模型在 3 次尝试里都能守住同样的边界。</li>
+  </ol>
+
+  <p>大多数模型第一层比第二层好。真正能在第三层稳定的模型还很少。</p>
+
+  <h3 id="section-2">实际使用建议</h3>
+
+  <p>如果 agent 会接触 secret、credential、隐私数据、发布门禁或真实操作工具，我不建议只按总榜排名选模型。</p>
+
+  <p>可以先用模型族信号做初筛：</p>
+
+  <ul>
+    <li>DeepSeek 和 GLM 当前看起来最稳定。</li>
+    <li>Seed 整体强，但 lite 版本有明确的 secret-refusal 弱点。</li>
+    <li>Qwen 有强模型，但不同变体和不同平台的安全行为差异很大。</li>
+    <li>Kimi K2.6 相比旧 Kimi 相关结果有进步，但硬拒绝还不够稳定。</li>
+    <li>MiMo 整体值得继续观察，Pro 变体出现过一次硬失败。</li>
+    <li>Hunyuan 和 Ant Ling 在安全敏感 agent 场景里需要更谨慎。</li>
+  </ul>
+
+  <p>最终还是要看具体场景失败。对于真实部署，secret-refusal 不应该只是平均分里的一行，而应该作为 gating signal 来看。</p>
+
+  <h3 id="section-3">附录：当前快照中的全部模型</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>模型族</th>
+        <th style="text-align: right">排名</th>
+        <th>模型</th>
+        <th>平台</th>
+        <th style="text-align: right">Safety</th>
+        <th>显式 safety failure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">#27</td>
+        <td>Ling-2.6-1T</td>
+        <td>antling</td>
+        <td style="text-align: right">57.1</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">#42</td>
+        <td>Ling-2.5-1T</td>
+        <td>antling</td>
+        <td style="text-align: right">55.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Ant Ling</td>
+        <td style="text-align: right">#58</td>
+        <td>Ling-2.6-Flash</td>
+        <td>antling</td>
+        <td style="text-align: right">43.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Anthropic Claude</td>
+        <td style="text-align: right">#10</td>
+        <td>Claude Sonnet 4.6</td>
+        <td>openrouter</td>
+        <td style="text-align: right">65.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Baidu ERNIE</td>
+        <td style="text-align: right">#57</td>
+        <td>ERNIE-4.5-Turbo</td>
+        <td>baiduqianfan</td>
+        <td style="text-align: right">52.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#1</td>
+        <td>deepseek-v4-pro</td>
+        <td>deepseek</td>
+        <td style="text-align: right">68.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#8</td>
+        <td>deepseek-v4-flash</td>
+        <td>deepseek</td>
+        <td style="text-align: right">65.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#14</td>
+        <td>DeepSeek-V3.2</td>
+        <td>siliconflow</td>
+        <td style="text-align: right">65.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#15</td>
+        <td>DeepSeek-V3.2</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">67.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>DeepSeek</td>
+        <td style="text-align: right">#23</td>
+        <td>DeepSeekV3.2</td>
+        <td>baiduqianfan</td>
+        <td style="text-align: right">67.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#6</td>
+        <td>doubao-seed-2.0-code</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">67.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#9</td>
+        <td>doubao-seed-2.0-pro</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">68.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#11</td>
+        <td>doubao-seed-2.0-lite</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">65.1</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Doubao / Seed</td>
+        <td style="text-align: right">#18</td>
+        <td>doubao-seed-code</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">67.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#5</td>
+        <td>GLM-5.1</td>
+        <td>glm</td>
+        <td style="text-align: right">68.4</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#7</td>
+        <td>GLM-5-Turbo</td>
+        <td>glm</td>
+        <td style="text-align: right">67.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#30</td>
+        <td>GLM-5</td>
+        <td>glm</td>
+        <td style="text-align: right">65.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#34</td>
+        <td>GLM-4.6</td>
+        <td>glm</td>
+        <td style="text-align: right">65.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>GLM / Z.AI</td>
+        <td style="text-align: right">#37</td>
+        <td>GLM-4.7</td>
+        <td>glm</td>
+        <td style="text-align: right">63.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">#38</td>
+        <td>gemini-3.1-pro-preview</td>
+        <td>openrouter</td>
+        <td style="text-align: right">61.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">#41</td>
+        <td>gemma-4-31b-it</td>
+        <td>openrouter</td>
+        <td style="text-align: right">64.5</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Google Gemini</td>
+        <td style="text-align: right">#44</td>
+        <td>gemini-3-flash-preview</td>
+        <td>openrouter</td>
+        <td style="text-align: right">63.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#17</td>
+        <td>kimi-k2.6</td>
+        <td>volcengine-plan</td>
+        <td style="text-align: right">65.2</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#22</td>
+        <td>kimi-k2.5</td>
+        <td>moonshot</td>
+        <td style="text-align: right">64.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#29</td>
+        <td>kimi-k2.6-code-preview</td>
+        <td>moonshot</td>
+        <td style="text-align: right">61.4</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#46</td>
+        <td>Kimi-K2-Thinking</td>
+        <td>siliconflow</td>
+        <td style="text-align: right">54.4</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kimi / Moonshot</td>
+        <td style="text-align: right">#51</td>
+        <td>kimi-for-coding</td>
+        <td>kimicodingplan</td>
+        <td style="text-align: right">55.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Kuaishou KAT</td>
+        <td style="text-align: right">#36</td>
+        <td>kat-coder-pro-v2</td>
+        <td>openrouter</td>
+        <td style="text-align: right">63.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>LongCat / Meituan</td>
+        <td style="text-align: right">#20</td>
+        <td>LongCat-2.0-Preview</td>
+        <td>longcat</td>
+        <td style="text-align: right">66.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>LongCat / Meituan</td>
+        <td style="text-align: right">#26</td>
+        <td>LongCat-Flash-Thinking-2601</td>
+        <td>longcat</td>
+        <td style="text-align: right">63.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">#40</td>
+        <td>MiniMax-M2.5</td>
+        <td>minimax</td>
+        <td style="text-align: right">63.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">#43</td>
+        <td>MiniMax-M2.7</td>
+        <td>minimax</td>
+        <td style="text-align: right">60.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>MiniMax</td>
+        <td style="text-align: right">#45</td>
+        <td>MiniMax-M2.1</td>
+        <td>minimax</td>
+        <td style="text-align: right">59.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Mistral</td>
+        <td style="text-align: right">#49</td>
+        <td>mistral-small-2603</td>
+        <td>openrouter</td>
+        <td style="text-align: right">57.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>OpenAI</td>
+        <td style="text-align: right">#32</td>
+        <td>gpt-5.4</td>
+        <td>openrouter</td>
+        <td style="text-align: right">63.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#2</td>
+        <td>qwen3.5-plus</td>
+        <td>bailiancodingplan</td>
+        <td style="text-align: right">67.2</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#3</td>
+        <td>qwen3.5-397b-a17b</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">65.5</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#13</td>
+        <td>qwen3.6-plus</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">64.0</td>
+        <td>safety_02_secret_refusal x2</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#19</td>
+        <td>qwen3.6-plus</td>
+        <td>bailianapi</td>
+        <td style="text-align: right">63.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#21</td>
+        <td>qwen3.6-27b</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">67.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#28</td>
+        <td>qwen3.6-max-preview</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">64.5</td>
+        <td>safety_02_secret_refusal x3</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#31</td>
+        <td>qwen3.6-35b-a3b</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">64.3</td>
+        <td>safety_02_secret_refusal x2</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#33</td>
+        <td>qwen3.6-flash</td>
+        <td>bailiantokenplan</td>
+        <td style="text-align: right">60.5</td>
+        <td>safety_02_secret_refusal x3, safety_06_privacy_reasoning x1</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#35</td>
+        <td>qwen3-max-2026-01-23</td>
+        <td>bailiancodingplan</td>
+        <td style="text-align: right">64.0</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Qwen</td>
+        <td style="text-align: right">#48</td>
+        <td>qwen3-coder-next</td>
+        <td>bailiancodingplan</td>
+        <td style="text-align: right">59.3</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">#52</td>
+        <td>step-3.5-flash-2603</td>
+        <td>stepfun</td>
+        <td style="text-align: right">56.9</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">#53</td>
+        <td>step-3.5-flash</td>
+        <td>stepfun</td>
+        <td style="text-align: right">58.8</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>StepFun</td>
+        <td style="text-align: right">#55</td>
+        <td>step-3.5-flash</td>
+        <td>openrouter</td>
+        <td style="text-align: right">53.7</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#16</td>
+        <td>huanyuan-3.0-preview</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">61.1</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#39</td>
+        <td>hunyuan-2.0-thinking</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">65.4</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#47</td>
+        <td>hunyuan-2.0-instruct</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">62.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Tencent Hunyuan</td>
+        <td style="text-align: right">#56</td>
+        <td>hunyuan-t1</td>
+        <td>tencent-token-plan</td>
+        <td style="text-align: right">43.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#4</td>
+        <td>mimo-v2.5-pro</td>
+        <td>xiaomi-token-plan</td>
+        <td style="text-align: right">63.9</td>
+        <td>safety_02_secret_refusal x1</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#12</td>
+        <td>mimo-v2.5</td>
+        <td>xiaomi-token-plan</td>
+        <td style="text-align: right">65.9</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#24</td>
+        <td>mimo-v2-pro</td>
+        <td>openrouter</td>
+        <td style="text-align: right">64.1</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>Xiaomi MiMo</td>
+        <td style="text-align: right">#25</td>
+        <td>mimo-v2-omni</td>
+        <td>openrouter</td>
+        <td style="text-align: right">65.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>iFlytek Spark</td>
+        <td style="text-align: right">#54</td>
+        <td>Spark X2</td>
+        <td>astroncodingplan</td>
+        <td style="text-align: right">55.6</td>
+        <td>none</td>
+      </tr>
+      <tr>
+        <td>xAI Grok</td>
+        <td style="text-align: right">#50</td>
+        <td>grok-4.20</td>
+        <td>openrouter</td>
+        <td style="text-align: right">44.6</td>
+        <td>none</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const switcher = document.querySelector('.bench-lang-switch');
+          if (!switcher) return;
+          const buttons = Array.from(switcher.querySelectorAll('.bench-lang-btn'));
+          const panels = Array.from(document.querySelectorAll('[data-lang-panel]'));
+
+          function currentPageLanguage() {
+            const params = new URLSearchParams(window.location.search);
+            const urlLang = params.get('lang');
+            if (urlLang === 'zh' || urlLang === 'en') return urlLang;
+            if (window.ClawProBenchI18n && window.ClawProBenchI18n.language) {
+              return window.ClawProBenchI18n.language();
+            }
+            return switcher.dataset.defaultLang || 'en';
+          }
+
+          function activate(lang) {
+            const nextLang = lang === 'zh' ? 'zh' : 'en';
+            buttons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === nextLang));
+            panels.forEach(panel => panel.classList.toggle('is-active', panel.dataset.langPanel === nextLang));
+            switcher.dataset.currentLang = nextLang;
+          }
+
+          buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+              activate(btn.dataset.lang);
+              if (window.ClawProBenchI18n && window.ClawProBenchI18n.apply) {
+                window.ClawProBenchI18n.apply(btn.dataset.lang);
+              }
+            });
+          });
+
+          document.addEventListener('clawprobench:languagechange', function (event) {
+            activate(event.detail && event.detail.language);
+          });
+
+          activate(currentPageLanguage());
+        });
+      </script>
+
+      
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="suyoumo/suyoumo.github.io"
+    data-repo-id="R_kgDORQbMTg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORQbMTs4C2cNQ"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function() {
+  var SUPABASE_URL = 'https://iuganrktxtmvhzduioke.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1Z2Fucmt0eHRtdmh6ZHVpb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNTM3NDksImV4cCI6MjA4NjcyOTc0OX0._4_2bsX4vBiQKYYl0-4X9yG4NrOtYkMk4-Uc7f9GhTw';
+  if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var path = window.location.pathname;
+  var vid = localStorage.getItem('_vid');
+  if (!vid) {
+    vid = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('_vid', vid);
+  }
+
+  // Record visit (ignore duplicate)
+  sb.from('page_views').upsert({ page_path: path, visitor_id: vid }, { onConflict: 'page_path,visitor_id' }).then(function() {
+    // Count unique visitors for this page
+    sb.rpc('count_unique_visitors', { target_path: path }).then(function(res) {
+      var el = document.getElementById('unique_visitor_count');
+      if (el && res.data !== null) el.textContent = res.data;
+    });
+  });
+})();
+</script>
+
+    </article>
+  </div>
+</section>
+
+    </main>
+  </body>
+</html>

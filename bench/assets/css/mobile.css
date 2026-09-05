@@ -1,0 +1,313 @@
+/* ==========================================================================
+   AutoEval - Mobile Responsive Refinements
+   仅在 max-width: 768px 时生效。
+   设计原则：保留品牌（米色背景 + 衬线标题 + 红色 kicker），只调整布局。
+   ========================================================================== */
+
+/* 全局：始终隐藏汉堡菜单 checkbox（无论桌面/移动），避免浏览器默认样式显示方块 */
+.bench-nav-toggle-checkbox,
+.site-nav-toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+}
+
+@media (max-width: 768px) {
+
+  /* ---------- 1. 全局微调 ---------- */
+  html { font-size: 15px; }
+  body { line-height: 1.65; }
+
+  .container,
+  .container-wide {
+    padding-left: 14px;
+    padding-right: 14px;
+    max-width: 100%;
+  }
+
+  img { max-width: 100%; height: auto; }
+  pre, code { overflow-x: auto; word-break: break-word; }
+
+  h1 { font-size: 2rem !important; line-height: 1.2; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.2rem !important; }
+
+  /* ---------- 2. 顶部导航汉堡化 ---------- */
+  .bench-nav-burger,
+  .site-nav-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #d8d2c8;
+    border-radius: 6px;
+    background: #fff;
+    cursor: pointer;
+    margin-left: auto;
+    position: relative;
+    z-index: 30;
+  }
+
+  .bench-nav-burger span,
+  .site-nav-burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #3d3d3a;
+    border-radius: 2px;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .bench-nav-toggle-checkbox,
+  .site-nav-toggle-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .header-inner,
+  .bench-header-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+  }
+
+  /* 隐藏桌面端横排 nav，让汉堡接管 */
+  .bench-nav,
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 14px;
+    right: 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #fff;
+    border: 1px solid #e8e4de;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    z-index: 25;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease, padding 0.25s ease;
+    padding: 0 0;
+    margin-top: 0;
+  }
+
+  .bench-nav a,
+  .bench-language-toggle,
+  .site-nav a {
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid #ece6dc;
+    border-radius: 0;
+    margin: 0;
+  }
+  .bench-nav a:last-child,
+  .site-nav a:last-child { border-bottom: 0; }
+  .bench-nav .bench-language-toggle { border-bottom: 1px solid #ece6dc; }
+
+  /* 展开状态：checkbox 勾选 → nav 显示 */
+  .bench-nav-toggle-checkbox:checked ~ .bench-nav,
+  .site-nav-toggle-checkbox:checked ~ .site-nav {
+    max-height: 600px;
+    padding: 8px 0;
+  }
+
+  /* 让头部品牌与汉堡在同一行（top 行） */
+  .bench-brand,
+  .site-name {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .bench-nav-burger,
+  .site-nav-burger {
+    flex: 0 0 auto;
+  }
+
+  .bench-nav-toggle-checkbox:checked ~ .bench-nav-burger span:nth-child(1),
+  .site-nav-toggle-checkbox:checked ~ .site-nav-burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .bench-nav-toggle-checkbox:checked ~ .bench-nav-burger span:nth-child(2),
+  .site-nav-toggle-checkbox:checked ~ .site-nav-burger span:nth-child(2) {
+    opacity: 0;
+  }
+  .bench-nav-toggle-checkbox:checked ~ .bench-nav-burger span:nth-child(3),
+  .site-nav-toggle-checkbox:checked ~ .site-nav-burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* ---------- 3. bench 表格移动端卡片化 ---------- */
+  .bench-table-rich thead { display: none; }
+
+  .bench-table-wrap-leaderboard,
+  .bench-table-wrap {
+    overflow-x: visible !important;
+    border: 0 !important;
+  }
+
+  .bench-table-rich,
+  .bench-table-sticky-head .bench-table-rich {
+    min-width: 0 !important;
+    width: 100%;
+    display: block;
+  }
+
+  .bench-table-rich tbody { display: block; }
+
+  .bench-table-rich tbody tr {
+    display: block;
+    background: #fff;
+    border: 1px solid #e8e4de;
+    border-radius: 10px;
+    padding: 14px 14px 6px;
+    margin-bottom: 14px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    position: relative;
+  }
+
+  .bench-table-rich tbody td {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 0 !important;
+    border-bottom: 1px dashed #f0ebe3;
+    min-width: 0 !important;
+    width: auto !important;
+    background: transparent !important;
+    text-align: right;
+    position: static !important;
+  }
+  .bench-table-rich tbody td:last-child { border-bottom: 0; }
+
+  .bench-table-rich tbody td::before {
+    content: attr(data-mobile-label);
+    flex: 0 0 auto;
+    font-size: 0.78rem;
+    color: #8a8478;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  .bench-table-rich tbody td:nth-child(1)::before { content: "Rank"; }
+  .bench-table-rich tbody td:nth-child(2)::before { content: "Model"; }
+  .bench-table-rich tbody td:nth-child(3)::before { content: "Final Score"; }
+  .bench-table-rich tbody td:nth-child(4)::before { content: "Pass^3"; }
+  .bench-table-rich tbody td:nth-child(5)::before { content: "Pass@3"; }
+  .bench-table-rich tbody td:nth-child(6)::before { content: "Avg Score"; }
+  .bench-table-rich tbody td:nth-child(7)::before { content: "Capability"; }
+  .bench-table-rich tbody td:nth-child(8)::before { content: "Efficiency"; }
+  .bench-table-rich tbody td:nth-child(9)::before { content: "Planning"; }
+  .bench-table-rich tbody td:nth-child(10)::before { content: "Safety"; }
+  .bench-table-rich tbody td:nth-child(11)::before { content: "Tool Use"; }
+  .bench-table-rich tbody td:nth-child(12)::before { content: "Constraints"; }
+  .bench-table-rich tbody td:nth-child(13)::before { content: "Error Recovery"; }
+  .bench-table-rich tbody td:nth-child(14)::before { content: "Synthesis"; }
+  .bench-table-rich tbody td:nth-child(15)::before { content: "Avg Runtime"; }
+  .bench-table-rich tbody td:nth-child(16)::before { content: "Total Token"; }
+  .bench-table-rich tbody td:nth-child(17)::before { content: "Token Split"; }
+  .bench-table-rich tbody td:nth-child(18)::before { content: "Cost"; }
+  .bench-table-rich tbody td:nth-child(19)::before { content: "Price"; }
+  .bench-table-rich tbody td:nth-child(20)::before { content: "OpenClaw"; }
+  .bench-table-rich tbody td:nth-child(21)::before { content: "Released"; }
+  .bench-table-rich tbody td:nth-child(22)::before { content: "Updated"; }
+
+  /* Rank 行做成横幅：让原 .bench-closed-rank 徽章变通栏 */
+  .bench-table-rich tbody td:nth-child(1) {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: -14px -14px 12px !important;
+    padding: 12px 16px !important;
+    background: linear-gradient(135deg, #c45a3c 0%, #d97852 100%) !important;
+    color: #fff !important;
+    border-radius: 10px 10px 0 0 !important;
+    border-bottom: 0 !important;
+    text-align: center !important;
+    line-height: 1.2;
+    min-height: 44px;
+  }
+  /* 把内部 rank 徽章缩小居中 */
+  .bench-table-rich tbody td:nth-child(1) .bench-closed-rank,
+  .bench-table-rich tbody td:nth-child(1) > * {
+    background: rgba(255, 255, 255, 0.18) !important;
+    color: #fff !important;
+    border: 0 !important;
+    font-size: 1rem !important;
+    font-weight: 800 !important;
+    padding: 4px 14px !important;
+    min-width: 56px !important;
+    border-radius: 999px !important;
+    display: inline-flex !important;
+  }
+
+  .bench-table-rich tbody td:nth-child(2) {
+    display: block !important;
+    padding: 0 0 10px 0 !important;
+    border-bottom: 1px solid #e8e4de !important;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  .bench-table-rich tbody td:nth-child(2)::before {
+    content: "" !important;
+    display: none;
+  }
+
+  /* 隐藏次要列：Avg Score / Error Recovery / Synthesis / Cost / Price
+     保留：Rank, Model, Final, Pass^3, Pass@3, Capability, Efficiency, Planning,
+           Safety, Tool Use, Constraints, Avg Runtime, Total Token, Token Split,
+           OpenClaw, Released, Updated */
+  .bench-table-rich tbody td:nth-child(6),
+  .bench-table-rich tbody td:nth-child(13),
+  .bench-table-rich tbody td:nth-child(14),
+  .bench-table-rich tbody td:nth-child(18),
+  .bench-table-rich tbody td:nth-child(19) {
+    display: none !important;
+  }
+
+  /* 头部操作按钮 */
+  .bench-section-actions,
+  .bench-filter-strip,
+  .bench-dataset-tabs {
+    flex-wrap: wrap;
+  }
+  .bench-section-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .bench-section-actions > * { flex: 1 1 auto; }
+
+  .bench-ghost-button,
+  .bench-ghost-link,
+  .bench-export-text-button,
+  .bench-export-primary,
+  .bench-export-secondary {
+    padding: 8px 12px !important;
+    font-size: 0.85rem;
+  }
+
+  .bench-hero h1 { font-size: 1.8rem !important; }
+  .bench-intro { font-size: 0.95rem !important; }
+
+  .post-card { padding: 16px !important; }
+  .post-card-title { font-size: 1.15rem !important; }
+}
+
+/* ---------- 4. 平板折中 ---------- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bench-table-rich { font-size: 0.85rem; }
+  .bench-model-column { min-width: 220px !important; width: 220px; }
+}

@@ -1,0 +1,175 @@
+:root {
+  --method-ink: #171715;
+  --method-muted: #65645f;
+  --method-line: #dad8d1;
+  --method-paper: #f7f4ed;
+  --method-accent: #c84322;
+  --method-dark: #20201d;
+}
+
+.methodology-page { overflow-x: hidden; }
+.methodology-page .container-wide { box-sizing: border-box; }
+.methodology-shell { max-width: 1320px; }
+.methodology-hero { padding: 66px 0 38px; background: radial-gradient(circle at 82% 18%, rgba(200,67,34,.12), transparent 25rem), #fbfaf7; border-bottom: 1px solid var(--method-line); }
+.methodology-hero-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .55fr); gap: clamp(36px, 7vw, 100px); align-items: end; }
+.methodology-hero-grid > * { min-width: 0; }
+.methodology-hero h1 { max-width: 900px; margin: 12px 0 22px; font-size: clamp(3rem, 7vw, 5.8rem); line-height: .96; letter-spacing: -.065em; overflow-wrap: anywhere; text-wrap: balance; }
+.methodology-lead { max-width: 720px; margin: 0; color: var(--method-muted); font-size: 1.08rem; line-height: 1.8; text-wrap: pretty; }
+.methodology-principle { display: grid; gap: 18px; padding: 26px 0 6px 26px; border-left: 1px solid var(--method-line); }
+.methodology-principle span, .methodology-label { color: var(--method-accent); font-size: .72rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.methodology-principle strong { color: var(--method-ink); font-size: 1.12rem; line-height: 1.55; }
+.methodology-principle a { color: var(--method-accent); font-weight: 750; text-decoration: none; }
+.methodology-metrics { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 52px; border-top: 1px solid var(--method-line); border-bottom: 1px solid var(--method-line); }
+.methodology-metric { display: grid; gap: 3px; padding: 20px; border-right: 1px solid var(--method-line); }
+.methodology-metric:last-child { border-right: 0; }
+.methodology-metric strong { color: var(--method-ink); font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1; font-variant-numeric: tabular-nums; }
+.methodology-metric span { color: var(--method-muted); font-size: .82rem; }
+
+.methodology-section { padding: 70px 0 84px; background: #fbfaf7; scroll-margin-top: 84px; }
+.methodology-section-tinted { background: var(--method-paper); }
+.methodology-section-head { display: grid; grid-template-columns: minmax(130px, .3fr) minmax(0, 1fr); gap: 32px; margin-bottom: 40px; }
+.methodology-section-head > p { margin: 8px 0 0; color: var(--method-accent); font: 800 .72rem/1.4 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .12em; }
+.methodology-section-head h2 { max-width: 850px; margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3.75rem); line-height: 1.03; letter-spacing: -.045em; }
+.methodology-section-head div > p { max-width: 760px; margin: 0; color: var(--method-muted); text-wrap: pretty; }
+
+.methodology-capability-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--method-line); border-left: 1px solid var(--method-line); }
+.methodology-capability-grid article { position: relative; min-width: 0; min-height: 230px; padding: 25px; border-right: 1px solid var(--method-line); border-bottom: 1px solid var(--method-line); background: rgba(255,255,255,.46); }
+.methodology-capability-grid article > span { display: block; margin-bottom: 34px; color: #9b9890; font: .72rem ui-monospace, SFMono-Regular, Consolas, monospace; }
+.methodology-capability-grid strong { display: block; color: var(--method-ink); font-size: 1.28rem; }
+.methodology-capability-grid b { position: absolute; top: 20px; right: 22px; color: var(--method-accent); font: 700 2.5rem/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.methodology-capability-grid p { margin: 13px 0 0; color: var(--method-muted); line-height: 1.65; overflow-wrap: anywhere; }
+.methodology-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
+.methodology-panel { padding: 28px; border: 1px solid var(--method-line); background: #fff; }
+.methodology-panel h3, .methodology-formula-card h3 { margin: 4px 0 22px; font-size: 1.45rem; letter-spacing: -.025em; }
+.methodology-panel-dark { color: #e9e6de; background: var(--method-dark); border-color: var(--method-dark); }
+.methodology-panel-dark h3 { color: #fff; }
+.methodology-panel-dark .methodology-rows div { border-color: rgba(255,255,255,.13); }
+.methodology-panel-dark .methodology-rows dt { color: #c9c6bd; }
+.methodology-panel-dark .methodology-rows dd { color: #fff; }
+.methodology-rows { margin: 0; }
+.methodology-rows div { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--method-line); }
+.methodology-rows div:last-child { border-bottom: 0; }
+.methodology-rows dt { color: var(--method-muted); }
+.methodology-rows dd { margin: 0; color: var(--method-ink); font-weight: 750; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+.methodology-flow { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); margin: 0; padding: 0; border-top: 1px solid var(--method-line); border-left: 1px solid var(--method-line); counter-reset: none; }
+.methodology-flow li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; min-height: 190px; padding: 24px; border-right: 1px solid var(--method-line); border-bottom: 1px solid var(--method-line); }
+.methodology-flow li > span { color: var(--method-accent); font: 700 .8rem ui-monospace, SFMono-Regular, Consolas, monospace; }
+.methodology-flow strong { color: var(--method-ink); font-size: 1.08rem; }
+.methodology-flow p { margin: 10px 0 0; color: var(--method-muted); line-height: 1.65; }
+
+.methodology-score-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 22px; }
+.methodology-formula-card { min-width: 0; padding: 30px; border: 1px solid var(--method-line); background: #fff; }
+.methodology-final-card { background: #fff9f5; border-color: #e4b5a7; }
+.methodology-formula { width: 100%; margin: 20px 0 24px; padding: 18px; overflow-x: auto; overflow-wrap: anywhere; border-left: 4px solid var(--method-accent); background: var(--method-dark); color: #f3eee5; }
+.methodology-formula code { white-space: nowrap; font-size: .83rem; }
+.methodology-formula-card ul { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: var(--method-muted); }
+.methodology-formula-card li b { color: var(--method-ink); }
+.methodology-weight-line { display: flex; margin-top: 22px; overflow: hidden; border: 1px solid var(--method-line); }
+.methodology-weight-line span { flex: var(--share); padding: 13px 8px; border-right: 1px solid var(--method-line); color: var(--method-muted); text-align: center; font-size: .76rem; white-space: nowrap; }
+.methodology-weight-line span:last-child { border-right: 0; }
+
+.methodology-notes { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--method-line); border: 1px solid var(--method-line); }
+.methodology-notes article { padding: 26px; background: var(--method-paper); }
+.methodology-notes strong { color: var(--method-ink); }
+.methodology-notes p { margin: 8px 0 0; color: var(--method-muted); line-height: 1.7; }
+.methodology-attribution { padding: 54px 0 68px; color: #d7d4cb; background: var(--method-dark); }
+.methodology-attribution h2 { margin: 8px 0 16px; color: #fff; font-size: clamp(1.8rem, 4vw, 3rem); }
+.methodology-attribution p:last-child { max-width: 880px; margin: 0; line-height: 1.8; }
+.methodology-attribution a { color: #ff9d7f; }
+.methodology-page a:focus-visible, .methodology-formula:focus-visible { outline: 3px solid rgba(200,67,34,.35); outline-offset: 3px; }
+
+/* ===== 大模型裁判 3 步流程 ===== */
+.methodology-judge-flow { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--method-line); border-radius: 14px; overflow: hidden; background: var(--method-paper); }
+.methodology-judge-step { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: start; padding: 26px 22px; background: var(--method-paper); }
+.methodology-judge-step + .methodology-judge-step { border-left: 1px solid var(--method-line); }
+.methodology-judge-index { color: var(--method-accent); font-size: .8rem; font-weight: 800; letter-spacing: .1em; }
+.methodology-judge-body { min-width: 0; }
+.methodology-judge-tag { margin: 0 0 6px; color: var(--method-accent); font-size: .66rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+.methodology-judge-body h3 { margin: 0 0 8px; color: var(--method-ink); font-size: 1.12rem; letter-spacing: -.02em; }
+.methodology-judge-body p { margin: 0; color: var(--method-muted); font-size: .9rem; line-height: 1.65; }
+.methodology-judge-arrow { color: var(--method-accent); font-size: 1.3rem; font-weight: 700; align-self: center; }
+.methodology-judge-note { margin: 18px 0 0; max-width: 1000px; color: var(--method-muted); font-size: .92rem; line-height: 1.7; border-left: 3px solid var(--method-accent); padding-left: 14px; }
+.methodology-subhead { margin: 34px 0 16px; color: var(--method-ink); font-size: .95rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+
+/* ===== 评测工具 eval-tool ===== */
+.eval-tool { display: grid; gap: 18px; }
+.eval-tool-card { border: 1px solid var(--method-line); border-radius: 14px; padding: 22px; background: #fff; }
+.eval-tool-card-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; }
+.eval-tool-card-head span { color: var(--method-accent); font-weight: 800; font-size: .9rem; }
+.eval-tool-card-head h3 { margin: 0; color: var(--method-ink); font-size: 1.05rem; }
+.eval-tool-required { margin-left: auto; color: var(--method-accent); font-size: .68rem; font-weight: 700; letter-spacing: .08em; }
+.eval-tool-upload { border: 1.5px dashed var(--method-line); border-radius: 10px; padding: 22px; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; }
+.eval-tool-upload:hover, .eval-tool-upload.is-dragover { border-color: var(--method-accent); background: rgba(200,67,34,.04); }
+.eval-tool-upload-icon { display: block; font-size: 1.4rem; color: var(--method-accent); margin-bottom: 6px; }
+.eval-tool-upload p { margin: 4px 0; color: var(--method-ink); font-size: .92rem; }
+.eval-tool-upload-hint { color: var(--method-muted) !important; font-size: .78rem !important; }
+.eval-tool-upload-hint code { background: var(--method-paper); padding: 1px 5px; border-radius: 4px; font-size: .75rem; }
+.eval-tool-link-btn { background: none; border: 0; color: var(--method-accent); font-weight: 700; cursor: pointer; text-decoration: underline; padding: 0; font-size: .92rem; }
+.eval-tool-file-info { display: flex; align-items: center; gap: 12px; margin-top: 12px; padding: 10px 14px; background: var(--method-paper); border-radius: 8px; font-size: .85rem; color: var(--method-ink); }
+.eval-tool-file-info span:first-child { font-weight: 700; }
+.eval-tool-preview { margin-top: 12px; }
+.eval-tool-preview-title { font-size: .78rem; color: var(--method-muted); margin: 0 0 6px; }
+.eval-tool-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+.eval-tool-table th, .eval-tool-table td { border: 1px solid var(--method-line); padding: 6px 8px; text-align: left; vertical-align: top; }
+.eval-tool-table th { background: var(--method-paper); font-weight: 700; color: var(--method-ink); }
+.eval-tool-table td { color: var(--method-muted); max-width: 320px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.eval-tool-models { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.eval-tool-model { border: 1px solid var(--method-line); border-radius: 10px; padding: 14px; }
+.eval-tool-model-a { border-top: 3px solid var(--method-accent); }
+.eval-tool-model-b { border-top: 3px solid #2f6f8f; }
+.eval-tool-model-role { margin: 0 0 10px; font-size: .8rem; font-weight: 750; color: var(--method-ink); }
+.eval-tool-model-a .eval-tool-model-role { color: var(--method-accent); }
+.eval-tool-model-b .eval-tool-model-role { color: #2f6f8f; }
+.eval-tool-field { display: grid; gap: 4px; margin-bottom: 10px; }
+.eval-tool-field > span { font-size: .74rem; color: var(--method-muted); font-weight: 600; }
+.eval-tool-field input, .eval-tool-field select { border: 1px solid var(--method-line); border-radius: 7px; padding: 8px 10px; font-size: .86rem; background: #fff; color: var(--method-ink); width: 100%; box-sizing: border-box; }
+.eval-tool-field input:focus, .eval-tool-field select:focus { outline: 2px solid rgba(200,67,34,.3); border-color: var(--method-accent); }
+.eval-tool-model-note { margin: 10px 0 0; color: var(--method-muted); font-size: .8rem; line-height: 1.6; }
+.eval-tool-settings { display: flex; gap: 16px; flex-wrap: wrap; }
+.eval-tool-field-sm { width: 150px; }
+.eval-tool-card-cta { text-align: center; }
+.eval-tool-start { background: var(--method-accent); color: #fff; border: 0; border-radius: 9px; padding: 12px 32px; font-size: 1rem; font-weight: 750; cursor: pointer; transition: transform .12s, box-shadow .12s; }
+.eval-tool-start:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(200,67,34,.3); }
+.eval-tool-start:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+.eval-tool-start-hint { margin: 10px 0 0; color: var(--method-muted); font-size: .8rem; }
+.eval-tool-progress { margin-top: 16px; }
+.eval-tool-progress-bar { height: 8px; background: var(--method-paper); border-radius: 99px; overflow: hidden; }
+.eval-tool-progress-bar span { display: block; height: 100%; width: 0; background: var(--method-accent); transition: width .3s; }
+.eval-tool-progress p { margin: 8px 0 0; font-size: .8rem; color: var(--method-muted); }
+.eval-tool-result { margin-top: 16px; text-align: left; border: 1px solid var(--method-line); border-radius: 10px; padding: 16px; background: var(--method-paper); max-height: 320px; overflow: auto; }
+.eval-tool-result pre { white-space: pre-wrap; font-size: .8rem; color: var(--method-ink); margin: 0; }
+
+@media (max-width: 800px) {
+  .methodology-page .bench-header-inner { height: auto; min-width: 0; padding-top: 8px; padding-bottom: 8px; flex-wrap: wrap; }
+  .methodology-page .bench-nav { order: 2; width: 100%; min-width: 0; max-width: 100%; margin-left: 0; justify-content: flex-start; overflow-x: auto; }
+  .methodology-page .bench-nav a, .methodology-page .bench-language-toggle { flex: 0 0 auto; padding: 7px 10px; font-size: .8rem; }
+  .methodology-page .bench-shell { width: 100%; min-width: 0; max-width: 100vw; }
+  .methodology-page .methodology-shell { width: calc(100vw - 48px); max-width: none; margin-left: 24px; margin-right: 0; padding-left: 0; padding-right: 0; }
+  .methodology-hero { padding-top: 40px; }
+  .methodology-hero-grid, .methodology-section-head, .methodology-detail-grid, .methodology-score-layout { grid-template-columns: 1fr; }
+  .methodology-hero h1 { max-width: 100%; font-size: clamp(2.35rem, 11vw, 3.2rem); }
+  .methodology-principle { padding-left: 18px; }
+  .methodology-metrics { grid-template-columns: 1fr 1fr; }
+  .methodology-metric:nth-child(2) { border-right: 0; }
+  .methodology-metric:nth-child(-n+2) { border-bottom: 1px solid var(--method-line); }
+  .methodology-section { padding: 52px 0 62px; }
+  .methodology-section-head { gap: 14px; }
+  .methodology-capability-grid, .methodology-flow { grid-template-columns: 1fr; }
+  .methodology-capability-grid article, .methodology-flow li { min-height: 0; }
+  .methodology-notes { grid-template-columns: 1fr; }
+  .methodology-weight-line { overflow-x: auto; }
+  .methodology-weight-line span { flex: 0 0 112px; }
+  .methodology-formula-card { padding: 22px; }
+  .methodology-judge-flow { grid-template-columns: 1fr; }
+  .methodology-judge-step { grid-template-columns: auto 1fr; }
+  .methodology-judge-step + .methodology-judge-step { border-left: 0; border-top: 1px solid var(--method-line); }
+  .methodology-judge-arrow { display: none; }
+  .eval-tool-models { grid-template-columns: 1fr; }
+  .eval-tool-settings { flex-direction: column; }
+  .eval-tool-field-sm { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

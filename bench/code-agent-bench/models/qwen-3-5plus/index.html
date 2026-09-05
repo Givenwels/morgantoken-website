@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>Qwen 3.5 plus on Morgan AgentBench – Morgan AgentBench</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="
+
+
+" />
+    <meta property="og:description" content="
+
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="Qwen 3.5 plus on Morgan AgentBench" />
+    <meta property="twitter:title" content="Qwen 3.5 plus on Morgan AgentBench" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/code-agent-bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="Morgan AgentBench logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="Morgan AgentBench hover logo" />
+          </span>
+          <span class="bench-brand-text">Morgan AgentBench</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="model-article-page" data-i18n-skip>
+  <div class="model-article-shell">
+    <nav class="model-breadcrumb" aria-label="Breadcrumb">
+      <a href="/bench/code-agent-bench/">CodeAgentBench</a>
+      <span>/</span>
+      <span><span class="bench-lang-en">Model notes</span><span class="bench-lang-zh">模型文章</span></span>
+      <span>/</span>
+      <span>Qwen 3.5 plus</span>
+    </nav>
+
+    <header class="model-hero">
+      <div class="model-hero-copy">
+        <div class="model-kicker-row">
+          
+          <span class="model-rank-badge"><span class="bench-lang-en">Rank</span><span class="bench-lang-zh">排名</span> 10</span>
+          
+          <span>Qwen</span>
+          <span>Qwen</span>
+        </div>
+        <h1>Qwen 3.5 plus</h1>
+        
+        <p class="model-subtitle">
+          <span class="bench-lang-en">A competitive mid-table result with 51/151 tasks solved at least once and 22/151 solved in all three attempts; strongest around large Python/Django application repairs plus automation and configuration-management work.</span>
+          <span class="bench-lang-zh">这是一个有竞争力的中游结果：151 题中至少一次解出 51 题，三次都解出 22 题；强项主要落在大型 Python/Django 应用修复以及自动化和配置管理类改动。</span>
+        </p>
+        
+        <div class="model-hero-meta">
+          <span>qwen-cli 0.14.5</span>
+          <span>qwen3.5-plus</span>
+          <span><span class="bench-lang-en">Updated</span><span class="bench-lang-zh">更新</span> 2026-06-18</span>
+        </div>
+      </div>
+
+      <aside class="model-score-panel" aria-label="Qwen 3.5 plus score summary">
+        <div class="model-score-primary">
+          <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+          <strong>31.39</strong>
+          
+          <div class="model-score-meter" aria-hidden="true">
+            <span style="width: 31.39%"></span>
+          </div>
+        </div>
+        <div class="model-score-grid">
+          <div>
+            <span>Pass@3</span>
+            <strong>33.8%</strong>
+          </div>
+          <div>
+            <span>Pass^3</span>
+            <strong>14.6%</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Solved Tasks</span><span class="bench-lang-zh">解出任务</span></span>
+            <strong>51/151</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Attempts</span><span class="bench-lang-zh">尝试通过</span></span>
+            <strong>105/453</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    
+    <section class="model-tldr" aria-label="TL;DR">
+      <div>
+        <div class="model-section-label">TL;DR</div>
+        <h2><span class="bench-lang-en">How to read this result</span><span class="bench-lang-zh">可以这样读</span></h2>
+      </div>
+      <ul>
+        
+        
+        
+        <li><span class="bench-lang-en">Qwen 3.5 plus is best read as volatile explorer: rank #10, 51 reached tasks, 22 stable solves.</span><span class="bench-lang-zh">Qwen 3.5 plus 更适合读成探索型但波动较大：排名 #10，触达 51 题，稳定解出 22 题。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Best suite signal: Open Library · release 013 at 8/10 (80.0%).</span><span class="bench-lang-zh">最强 suite 信号：Open Library · release 013，8/10（80.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">Weakest visible area: qutebrowser · release 018 at 0/9 (0.0%).</span><span class="bench-lang-zh">最弱可见区域：qutebrowser 浏览器 · release 018，0/9（0.0%）。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">The Qwen CLI setup is closer to a direct model readout: when it misses, the miss is less hidden behind orchestration.</span><span class="bench-lang-zh">Qwen CLI 更接近直接读模型本身：它失败时，失败也较少被编排层遮住。</span></li>
+        
+      </ul>
+    </section>
+    
+
+    <div class="model-content-grid">
+      
+      <aside class="model-aside" aria-label="Key numbers">
+        <div class="model-aside-card">
+          <div class="model-section-label"><span class="bench-lang-en">Key Numbers</span><span class="bench-lang-zh">关键数字</span></div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+            <strong>31.39</strong>
+            <em><span class="bench-lang-en">rank #10 of 32</span><span class="bench-lang-zh">32 个模型中排名 #10</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Stable solves</span><span class="bench-lang-zh">稳定解题</span></span>
+            <strong>22</strong>
+            <em><span class="bench-lang-en">tasks solved in all 3 attempts</span><span class="bench-lang-zh">三次尝试都解出的任务</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Reach gap</span><span class="bench-lang-zh">覆盖-稳定差</span></span>
+            <strong>+29</strong>
+            <em><span class="bench-lang-en">Pass@3 tasks minus Pass^3 tasks</span><span class="bench-lang-zh">至少一次成功的题数减三次都成功的题数</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Attempt score</span><span class="bench-lang-zh">单次尝试</span></span>
+            <strong>23.2%</strong>
+            <em><span class="bench-lang-en">105/453 solved attempts</span><span class="bench-lang-zh">453 次尝试中成功 105 次</span></em>
+          </div>
+          
+        </div>
+      </aside>
+      
+
+      <div class="model-prose">
+        <div class="bench-lang-en">
+
+  <p>Qwen 3.5 plus is a volatile explorer row around the #10 slot. The useful reading is not just the 31.39 score, but the split between 51 reached tasks and 22 stable solves.</p>
+
+  <p>The closest family reference is Qwen 3.7 Max (1m) at rank #9. Compared with that row, this one is 0.23 points behind, with 4 more reached tasks and 3 fewer stable solves.</p>
+
+  <p>The volume win is Open Library · release 013 at 8/10 (80.0%), while the cleanest pass-rate spike is vuls · release 012 at 4/4 (100.0%). The warning label is qutebrowser · release 018 at 0/9 (0.0%), so the contrast is not generic strength versus weakness; it is large Python/Django application repairs holding together better than browser/runtime integration around QtWebEngine behavior on this run. The Qwen CLI setup is closer to a direct model readout: when it misses, the miss is less hidden behind orchestration.</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>4/4 · 100.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 100.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 4/4 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：4 题中解出 4 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>8/10 · 80.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 80.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 001</span><span class="bench-lang-zh">Ansible 自动化 · release 001</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 002</span><span class="bench-lang-zh">Ansible 自动化 · release 002</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 003</span><span class="bench-lang-zh">Ansible 自动化 · release 003</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 005</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 005</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 008</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 008</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 006</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 006</span></span>
+        <strong>2/10 · 20.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 20.0%"></span>
+      </div>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>Because this is the Qwen CLI row, the suite shape is unusually direct: strong and weak bars are closer to model behavior than to shell behavior.</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Avoid double calculation of loops and delegate_to in TaskExecutor</span><span class="bench-lang-zh">避免在 TaskExecutor 中重复计算 loops 和 delegate_to</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 3/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-001-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-001-ansible-ansible。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Consolidate ListMixin into List to Simplify List Model Structure and Maintenance</span><span class="bench-lang-zh">将 ListMixin 合并到 List 以简化 List 模型结构维护</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 2/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-016-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-016-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Unify validation in add_book by removing override, with the sole exception of 'promise items'</span><span class="bench-lang-zh">在 add_book 中通过移除 override 来统一验证，唯一例外是 promise items</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 1/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-016-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-016-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">Configuration Logic for Qt Arguments and Environment Setup Is Overloaded and Hard to Maintain</span><span class="bench-lang-zh">Qt 参数和环境初始化配置逻辑过载且难以维护</span></strong>
+      <em><span class="bench-lang-en">qutebrowser/qutebrowser · solved 0/3</span><span class="bench-lang-zh">qutebrowser/qutebrowser · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-018-qutebrowser-qutebrowser.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-018-qutebrowser-qutebrowser。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p><code class="language-plaintext highlighter-rouge">Avoid double calculation of loops and delegate_to in TaskExecutor</code> is the clean read of what the model can do directly; <code class="language-plaintext highlighter-rouge">Configuration Logic for Qt Arguments and Environment Setup Is Overloaded and Hard to Maintain</code> is the corresponding negative read, with less agent machinery to hide the miss.</p>
+
+  <p>The audit changes how to read Qwen 3.5 plus: only 57% of initial solved attempts survive, with 45 rejected attempts, while the exported score field stays flat. Treat the wins as leads that need stricter confirmation.</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 57%; --rejected-pct: 43%;" aria-hidden="true">
+      <span>57%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">60 of 105 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">105 次初始成功里，60 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 60 of 105 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 105 次初始成功中的 60 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>60 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>45 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>31.39</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>31.39</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>As a direct CLI row, it is most valuable for reading the model itself: Open Library · release 013 at 8/10 (80.0%) is the positive sample, and qutebrowser · release 018 at 0/9 (0.0%) is the boundary. The 105/453 attempt score is useful because there is less shell behavior between the model and the verifier result.</p>
+
+  <details class="model-evidence">
+  <summary>Supporting suite table</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>Solved</th>
+          <th>Pass^3</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/4</td>
+          <td>2</td>
+          <td>100.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>8/10</td>
+          <td>3</td>
+          <td>80.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>5/10</td>
+          <td>2</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-002-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-003-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-005-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>1/10</td>
+          <td>0</td>
+          <td>10.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>1/10</td>
+          <td>1</td>
+          <td>10.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-006-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>2/10</td>
+          <td>1</td>
+          <td>20.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+<div class="bench-lang-zh">
+
+  <p>Qwen 3.5 plus 是一个排名 #10 附近的探索型但波动较大结果。它的重点不只是 31.39 分，而是 51 道触达题和 22 道稳定题之间的差距。</p>
+
+  <p>最接近的同系参照是排名 #9 的 Qwen 3.7 Max (1m)。和它相比，这一行最终分低 0.23 分，触达题多 4 个，稳定题少 3 个。</p>
+
+  <p>从数量看，主要胜利来自Open Library · release 013，8/10（80.0%）；从通过率看，最干净的高点是vuls 漏洞扫描器 · release 012，4/4（100.0%）。需要警惕的是qutebrowser 浏览器 · release 018，0/9（0.0%），所以这里不是泛泛地说强弱项，而是大型 Python/Django 应用修复在这次运行中比围绕 QtWebEngine 行为的浏览器/runtime 集成更能闭环。Qwen CLI 更接近直接读模型本身：它失败时，失败也较少被编排层遮住。</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls 漏洞扫描器 · release 012</span></span>
+        <strong>4/4 · 100.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 100.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Best visible cluster for this row: 4/4 tasks reached.</span><span class="bench-lang-zh">这一行最明显的强项簇：4 题中解出 4 题。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 013</span><span class="bench-lang-zh">Open Library · release 013</span></span>
+        <strong>8/10 · 80.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 80.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Open Library · release 015</span><span class="bench-lang-zh">Open Library · release 015</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 001</span><span class="bench-lang-zh">Ansible 自动化 · release 001</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 002</span><span class="bench-lang-zh">Ansible 自动化 · release 002</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Ansible · release 003</span><span class="bench-lang-zh">Ansible 自动化 · release 003</span></span>
+        <strong>4/10 · 40.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 40.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser 浏览器 · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Weak cluster: browser/runtime integration around QtWebEngine behavior resisted this model-agent pairing.</span><span class="bench-lang-zh">弱项簇：围绕 QtWebEngine 行为的浏览器/runtime 集成对这个模型-agent 组合不友好。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 005</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 005</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 008</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 008</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">Flipt · release 006</span><span class="bench-lang-zh">Flipt feature flag 服务 · release 006</span></span>
+        <strong>2/10 · 20.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 20.0%"></span>
+      </div>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>因为这是 Qwen CLI 行，suite 形状相对直接：高低柱更接近模型本身，而不是 shell 工作流的效果。</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Stable win</span><span class="bench-lang-zh">稳定胜利</span></span>
+      <strong><span class="bench-lang-en">Avoid double calculation of loops and delegate_to in TaskExecutor</span><span class="bench-lang-zh">避免在 TaskExecutor 中重复计算 loops 和 delegate_to</span></strong>
+      <em><span class="bench-lang-en">ansible/ansible · solved 3/3</span><span class="bench-lang-zh">ansible/ansible · 3 次中成功 3 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-001-ansible-ansible.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-001-ansible-ansible。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">Retry-sensitive</span><span class="bench-lang-zh">依赖重试</span></span>
+      <strong><span class="bench-lang-en">Consolidate ListMixin into List to Simplify List Model Structure and Maintenance</span><span class="bench-lang-zh">将 ListMixin 合并到 List 以简化 List 模型结构维护</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 2/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 2 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-ok. Suite: release-zh-016-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-ok。Suite：release-zh-016-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-neutral">
+      <span><span class="bench-lang-en">One-shot reach</span><span class="bench-lang-zh">一次命中</span></span>
+      <strong><span class="bench-lang-en">Unify validation in add_book by removing override, with the sole exception of 'promise items'</span><span class="bench-lang-zh">在 add_book 中通过移除 override 来统一验证，唯一例外是 promise items</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 1/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3 次中成功 1 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-016-internetarchive-openlibrary.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-016-internetarchive-openlibrary。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">Configuration Logic for Qt Arguments and Environment Setup Is Overloaded and Hard to Maintain</span><span class="bench-lang-zh">Qt 参数和环境初始化配置逻辑过载且难以维护</span></strong>
+      <em><span class="bench-lang-en">qutebrowser/qutebrowser · solved 0/3</span><span class="bench-lang-zh">qutebrowser/qutebrowser · 3 次中成功 0 次</span></em>
+      <p><span class="bench-lang-en">Verifier pattern: harness-failed. Suite: release-zh-018-qutebrowser-qutebrowser.</span><span class="bench-lang-zh">Verifier 信号：harness-failed。Suite：release-zh-018-qutebrowser-qutebrowser。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p><code class="language-plaintext highlighter-rouge">避免在 TaskExecutor 中重复计算 loops 和 delegate_to</code> 是模型直接能力的正面样本；<code class="language-plaintext highlighter-rouge">Qt 参数和环境初始化配置逻辑过载且难以维护</code> 是相应的反面样本，中间没有太多 agent 编排可以掩盖失败。</p>
+
+  <p>复核改变了 Qwen 3.5 plus 的读法：初始成功只有 57% 保留下来，45 次被剔除，但当前导出的分数字段没有变化。原始胜利更适合作为线索，需要更严格确认。</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Original harness result vs verifier-backed audit sample</span><span class="bench-lang-zh">原始 harness 结果 vs verifier-backed 复核样本</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 57%; --rejected-pct: 43%;" aria-hidden="true">
+      <span>57%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">60 of 105 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">105 次初始成功里，60 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The available audit keeps 60 of 105 initial solved attempts. Read this as a robustness check, especially when the audit sample is smaller than 453 attempts.</span><span class="bench-lang-zh">当前可用复核保留了 105 次初始成功中的 60 次。这更适合作为稳健性检查，特别是在复核样本小于 453 次尝试时。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>60 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>45 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>31.39</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>31.39</span>
+    <em><span class="bench-lang-en">+0.00 points</span><span class="bench-lang-zh">+0.00 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>作为直接 CLI 行，它最有价值的是读模型本身：Open Library · release 013，8/10（80.0%）是正面样本，qutebrowser 浏览器 · release 018，0/9（0.0%）是边界。105/453 的单次尝试成功数有价值，是因为模型和 verifier 结果之间隔着的 shell 行为更少。</p>
+
+  <details class="model-evidence">
+  <summary>支撑这个判断的 suite 表</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>解出</th>
+          <th>Pass^3</th>
+          <th>通过率</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/4</td>
+          <td>2</td>
+          <td>100.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>8/10</td>
+          <td>3</td>
+          <td>80.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>5/10</td>
+          <td>2</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-002-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-003-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>4/10</td>
+          <td>2</td>
+          <td>40.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-005-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>1/10</td>
+          <td>0</td>
+          <td>10.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>1/10</td>
+          <td>1</td>
+          <td>10.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-006-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>2/10</td>
+          <td>1</td>
+          <td>20.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+      </div>
+    </div>
+
+    
+    <section class="model-related">
+      <div>
+        <div class="model-section-label"><span class="bench-lang-en">Related Models</span><span class="bench-lang-zh">相关模型</span></div>
+        <h2><span class="bench-lang-en">Same neighborhood on the leaderboard</span><span class="bench-lang-zh">榜单附近的参照物</span></h2>
+      </div>
+      <div class="model-related-grid">
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/qodercli-qwen37max-direct-full453-10c-r1-20260613/">
+          <span><span class="bench-lang-en">One rank above</span><span class="bench-lang-zh">上一名</span></span>
+          <strong>Qwen 3.7 Max (1m)</strong>
+          <em><span class="bench-lang-en">Rank #9 · 31.62 Final Score</span><span class="bench-lang-zh">排名 #9 · Final Score 31.62</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/qodercli-qwen37plus-direct-full453-10c-r1-20260615/">
+          <span><span class="bench-lang-en">One rank below</span><span class="bench-lang-zh">下一名</span></span>
+          <strong>Qwen 3.7 Plus (1m)</strong>
+          <em><span class="bench-lang-en">Rank #11 · 31.21 Final Score</span><span class="bench-lang-zh">排名 #11 · Final Score 31.21</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/models/qwen-3-6plus/">
+          <span><span class="bench-lang-en">Same agent</span><span class="bench-lang-zh">同 agent</span></span>
+          <strong>Qwen 3.6 plus</strong>
+          <em><span class="bench-lang-en">Rank #17 · 28.43 Final Score</span><span class="bench-lang-zh">排名 #17 · Final Score 28.43</span></em>
+        </a>
+        
+      </div>
+    </section>
+    
+  </div>
+</article>
+
+    </main>
+  </body>
+</html>

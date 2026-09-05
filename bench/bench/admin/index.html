@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>AutoEval 本地评测控制台 – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="AutoEval 本地评测控制台" />
+    <meta property="twitter:title" content="AutoEval 本地评测控制台" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body admin-page">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="AutoEval logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="AutoEval hover logo" />
+          </span>
+          <span class="bench-brand-text">AutoEval</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      <link rel="stylesheet" href="/assets/css/bench-admin.css" />
+
+<section class="admin-hero">
+  <div class="container-wide bench-shell admin-shell">
+    <div>
+      <p class="bench-kicker">LOCAL EVALUATION CONTROL</p>
+      <h1>AutoEval<br />本地评测控制台</h1>
+      <p>调用本机 OpenClaw 已配置的模型，运行 AutoEval 并把正式结果发布到本地榜单。</p>
+    </div>
+    <div id="admin-live-status" class="admin-live-status is-loading" aria-live="polite" aria-atomic="true">
+      <span class="admin-status-dot" aria-hidden="true"></span>
+      <span>正在连接本地服务…</span>
+    </div>
+  </div>
+</section>
+
+<section class="admin-section">
+  <div class="container-wide bench-shell admin-layout">
+    <div class="admin-main-column">
+      <section class="admin-card" aria-labelledby="admin-new-run-title">
+        <div class="admin-card-head">
+          <div>
+            <p class="admin-eyebrow">NEW RUN</p>
+            <h2 id="admin-new-run-title">开始一次评测</h2>
+          </div>
+          <span class="admin-local-pill">仅限本机</span>
+        </div>
+
+        <form id="admin-new-run" class="admin-run-form">
+          <label class="admin-field admin-field-wide">
+            <span>模型</span>
+            <select id="admin-model" name="model" required disabled>
+              <option value="">正在读取 OpenClaw 配置…</option>
+            </select>
+            <small>模型来自本机 OpenClaw，不会在页面中显示密钥或工作目录。</small>
+          </label>
+
+          <label class="admin-field">
+            <span>评测规模</span>
+            <select id="admin-profile" name="profile">
+              <option value="smoke">冒烟测试 · 1 场景</option>
+              <option value="core">核心评测 · 26 场景</option>
+              <option value="full">完整评测 · 102 场景</option>
+            </select>
+          </label>
+
+          <label class="admin-field">
+            <span>并行任务</span>
+            <select id="admin-workers" name="workers">
+              <option value="1">1（最稳妥）</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4（最快）</option>
+            </select>
+          </label>
+
+          <div class="admin-run-summary admin-field-wide" id="admin-run-summary">
+            <span>1 次试跑</span>
+            <span>冒烟结果不进入榜单</span>
+          </div>
+
+          <a class="admin-method-link admin-field-wide" href="/bench/methodology/">不了解分数？查看数据集和评分方法 →</a>
+
+          <button id="admin-start-run" class="admin-primary-button admin-field-wide" type="submit" disabled>
+            开始评测
+          </button>
+        </form>
+      </section>
+
+      <section class="admin-card" aria-labelledby="admin-jobs-title">
+        <div class="admin-card-head">
+          <div>
+            <p class="admin-eyebrow">RUN HISTORY</p>
+            <h2 id="admin-jobs-title">评测任务</h2>
+          </div>
+          <button id="admin-refresh" class="admin-text-button" type="button">立即刷新</button>
+        </div>
+        <div id="admin-job-list" class="admin-job-list" aria-live="polite">
+          <p class="admin-empty">正在读取任务…</p>
+        </div>
+      </section>
+    </div>
+
+    <aside class="admin-side-column">
+      <section id="admin-runtime" class="admin-card admin-runtime" aria-labelledby="admin-runtime-title">
+        <div class="admin-card-head">
+          <div>
+            <p class="admin-eyebrow">RUNTIME</p>
+            <h2 id="admin-runtime-title">本机环境</h2>
+          </div>
+        </div>
+        <dl class="admin-definition-list">
+          <div><dt>服务</dt><dd>检测中</dd></div>
+          <div><dt>OpenClaw</dt><dd>检测中</dd></div>
+          <div><dt>可用模型</dt><dd>检测中</dd></div>
+        </dl>
+      </section>
+
+      <section id="admin-job-detail" class="admin-card admin-detail" aria-labelledby="admin-detail-title">
+        <div class="admin-card-head">
+          <div>
+            <p class="admin-eyebrow">RUN DETAIL</p>
+            <h2 id="admin-detail-title">任务详情</h2>
+          </div>
+        </div>
+        <p class="admin-empty">选择一个任务查看进度和操作。</p>
+      </section>
+
+      <section class="admin-card admin-log-card" aria-labelledby="admin-log-title">
+        <div class="admin-card-head">
+          <div>
+            <p class="admin-eyebrow">LIVE OUTPUT</p>
+            <h2 id="admin-log-title">实时日志</h2>
+          </div>
+        </div>
+        <pre id="admin-log" class="admin-log" tabindex="0">尚未选择任务。</pre>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<script defer src="/assets/js/bench-admin.js"></script>
+
+    </main>
+  </body>
+</html>

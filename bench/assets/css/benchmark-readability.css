@@ -1,0 +1,116 @@
+/* Local readability refinement layered over the upstream ClawProBench theme. */
+.bench-table-wrap-leaderboard {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+
+.bench-table-wrap-leaderboard .bench-table-rich,
+.bench-table-sticky-head .bench-table-rich {
+  min-width: 1180px;
+}
+
+.bench-table-wrap-leaderboard .bench-model-column,
+.bench-table-sticky-head .bench-model-column {
+  min-width: 280px;
+  width: 280px;
+}
+
+.bench-table-wrap-leaderboard .bench-model-meta strong {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.bench-table-wrap-leaderboard .bench-model-meta > span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bench-export-surface .bench-model-meta strong {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .bench-table-wrap-leaderboard .bench-model-column,
+  .bench-table-sticky-head .bench-model-column {
+    min-width: 270px;
+    width: 270px;
+  }
+}
+
+/* Morgan 的评测结论与使用感受（AutoEval 自评区块） */
+.bench-family-verdict {
+  margin-top: 30px;
+  padding: 22px 24px;
+  border: 1px solid #e8e4de;
+  border-left: 4px solid #c45a3c;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #fff 0%, #fbf7f1 100%);
+  box-shadow: 0 8px 24px rgba(25, 25, 24, 0.05);
+}
+.bench-family-verdict-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.bench-family-verdict-badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #c45a3c;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+.bench-family-verdict-tag {
+  font-weight: 750;
+  color: #3d3d3a;
+  font-size: 0.95rem;
+}
+.bench-family-verdict-body {
+  color: #6b6b65;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.bench-family-verdict-body p { margin: 0; }
+.bench-family-verdict-placeholder { color: #9a9388; font-style: italic; }
+
+/* 排行榜家族按钮的性质标签 */
+.bench-family-switch .bench-family-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #eee9e1;
+  color: #8a6d3b;
+  font-size: 0.66rem;
+  font-weight: 750;
+  letter-spacing: 0.03em;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+.bench-family-switch a.is-active .bench-family-badge {
+  background: rgba(196, 90, 60, 0.12);
+  color: #c45a3c;
+}
+
+/* Keyboard access for clickable leaderboard rows */
+.bench-table tbody tr.bench-row[role="link"] {
+  cursor: pointer;
+}
+.bench-table tbody tr.bench-row[role="link"]:focus-visible,
+.bench-table tbody tr.bench-row[role="link"]:focus {
+  outline: 2px solid #c45a3c;
+  outline-offset: -2px;
+  background-color: rgba(196, 90, 60, 0.06);
+}

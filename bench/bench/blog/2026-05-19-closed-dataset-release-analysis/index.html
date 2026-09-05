@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>ClawProBench Closed Dataset Release and Analysis – AutoEval</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性">
+    <meta property="og:description" content="在真实 OpenClaw 环境中测量模型的执行能力、稳定性与安全性" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="ClawProBench Closed Dataset Release and Analysis" />
+    <meta property="twitter:title" content="ClawProBench Closed Dataset Release and Analysis" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="AutoEval logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="AutoEval hover logo" />
+          </span>
+          <span class="bench-brand-text">AutoEval</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" class="active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      <section class="bench-section bench-detail-page bench-post-page">
+  <div class="container-wide bench-shell bench-blog-shell bench-blog-shell-wide">
+    <a href="/bench/bench/blog/" class="back-link bench-back-link">← Back to Bench Blog</a>
+
+    <article class="bench-card bench-post-card bench-post-card-wide">
+      <div class="post-header bench-post-header">
+        <h1 class="post-title">ClawProBench Closed Dataset Release and Analysis</h1>
+        <div class="post-meta">
+          <span>2026-05-19</span>
+          
+          <span class="post-card-category"></span>
+          
+          <span>阅读 <span id="busuanzi_value_page_pv"></span> 次</span>
+          <span>|</span>
+          <span><span id="unique_visitor_count"></span> 人读过</span>
+        </div>
+      </div>
+
+      <div class="post-content bench-post-content bench-post-content-wide">
+        <div class="bench-lang-switch" data-default-lang="en">
+  <button type="button" class="bench-lang-btn is-active" data-lang="en">English</button>
+  <button type="button" class="bench-lang-btn" data-lang="zh">中文</button>
+</div>
+
+<div class="bench-lang-panel is-active" data-lang-panel="en">
+
+  <p>ClawProBench now includes a closed dataset leaderboard. It is not a replacement for the open leaderboard. It adds a more production-oriented view of model capability: when a model works through customer support, vendor security questionnaires, log redaction, approval boundaries, incident recovery, billing disputes, CRM updates, privacy exports, and other enterprise workflows, can it make stable, compliant, executable decisions under limited information and high-risk constraints?</p>
+
+  <p>In short, the open dataset asks whether a model is a strong general OpenClaw agent. The closed dataset asks whether it is ready for production workflows.</p>
+
+  <h3 id="what-was-released">What Was Released</h3>
+
+  <p>This closed release contains 68 tasks and 33 model results. The open leaderboard currently contains 102 tasks and 66 model results.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th style="text-align: right">Closed tasks</th>
+        <th>Main signal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Safety</td>
+        <td style="text-align: right">17</td>
+        <td>Privacy, secrets, logs, injection, minimal disclosure, customer and vendor boundaries</td>
+      </tr>
+      <tr>
+        <td>Synthesis</td>
+        <td style="text-align: right">13</td>
+        <td>Multi-source evidence merging, conflict resolution, external-facing summaries</td>
+      </tr>
+      <tr>
+        <td>Planning</td>
+        <td style="text-align: right">12</td>
+        <td>On-call tradeoffs, scheduling, resources, priorities, approval windows</td>
+      </tr>
+      <tr>
+        <td>Constraints</td>
+        <td style="text-align: right">10</td>
+        <td>Policy exceptions, permission boundaries, regional data, contracts and commitments</td>
+      </tr>
+      <tr>
+        <td>Tool Use</td>
+        <td style="text-align: right">10</td>
+        <td>Read-only preflights, minimal evidence access, action budgets, attachment trust</td>
+      </tr>
+      <tr>
+        <td>Error Recovery</td>
+        <td style="text-align: right">6</td>
+        <td>Double-write recovery, partial commits, privacy export aborts, idempotent replay</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Compared with the open dataset, the closed dataset changes the evaluation pressure in two important ways.</p>
+
+  <p>First, Safety becomes much more central. The open dataset has 12 safety tasks, while the closed dataset has 17. More importantly, these tasks are not just about refusing obviously dangerous requests. They test whether a model can still be useful while keeping secrets, logs, customer data, vendor material, and internal sources inside the right boundary.</p>
+
+  <p>Second, the closed dataset is almost entirely hard tasks. The open dataset has 52 expert tasks, 39 hard tasks, 8 medium tasks, and 3 easy tasks. The closed dataset has 64 hard tasks and 4 expert tasks. In this context, hard does not simply mean longer prompts. It means the model must choose between competing real-world constraints: answer without leaking, make progress without overstepping authority, synthesize evidence without pretending conflicts are resolved, and use tools without expanding data access.</p>
+
+  <h3 id="what-the-closed-dataset-measures-differently">What the Closed Dataset Measures Differently</h3>
+
+  <p>The open dataset evaluates broad OpenClaw agent ability: planning, tool use, error recovery, constraint following, synthesis, and safety. It is best for answering one question: is this model strong as a general work agent?</p>
+
+  <p>The closed dataset goes further. It focuses on whether the model is reliable under enterprise risk. It answers a different question: can this model handle real customers, real permissions, real data boundaries, and real incidents?</p>
+
+  <p>Those two questions often have different answers.</p>
+
+  <p>Many closed tasks are not difficult because the model lacks knowledge. They are difficult because the model needs to know what not to do:</p>
+
+  <ul>
+    <li>When a customer asks for a debug bundle, provide enough reproduction context without exposing secrets, internal logs, or customer data.</li>
+    <li>When answering a vendor security questionnaire, separate disclosable facts from internal-only details and approval-required items.</li>
+    <li>When a ticket or attachment contains prompt injection, treat that content as untrusted and do not execute it as an instruction.</li>
+    <li>When billing, refund, SLA, contract, and support records conflict, identify confirmed facts and unresolved conflicts instead of inventing one clean conclusion.</li>
+    <li>In CRM, account merge, and privacy request workflows, use the smallest necessary read or write scope instead of acting broadly just because a tool exists.</li>
+  </ul>
+
+  <p>The closed dataset penalizes two common model behaviors. One is excessive compliance: the user asks for something, and the model gives too much. The other is excessive action: the model sees tools and immediately updates, merges, exports, or writes. The closed dataset rewards models that are restrained but still useful.</p>
+
+  <h3 id="closed-final-score">Closed Final Score</h3>
+
+  <p>The closed leaderboard keeps three core signals:</p>
+
+  <ul>
+    <li>AvgScore: average task quality across rubric items.</li>
+    <li>Pass^3: stable three-run success, which reflects consistency.</li>
+    <li>Pass@3: at least one successful path across three runs, which reflects upside and sampling potential.</li>
+  </ul>
+
+  <p>The open leaderboard puts more weight on stable three-run success. The closed leaderboard increases the weight of Pass@3 while still retaining Pass^3. The reason is practical: the closed set is smaller, more concentrated, and more realistic. If a model can find a compliant path in at least one of three attempts, that is useful signal. But if Pass^3 is low, the model is still not stable enough for unsupervised production use.</p>
+
+  <p>The current page formulas are:</p>
+
+  <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Open Final Score = 100 x AvgScore^0.40 x ((Pass^3)^(1/3))^0.45 x (1 - (1 - Pass@3)^(1/3))^0.15
+Closed Final Score = 100 x AvgScore^0.40 x ((Pass^3)^(1/3))^0.25 x (1 - (1 - Pass@3)^(1/3))^0.35
+</code></pre></div>  </div>
+
+  <p>So the closed ranking is not just a single-run score, and it is not only a stability ranking. It balances average quality, consistency, and three-try recoverability.</p>
+
+  <h3 id="closed-leaderboard-results">Closed Leaderboard Results</h3>
+
+  <p>The current closed Top 12 are:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: right">Closed rank</th>
+        <th>Model</th>
+        <th style="text-align: right">Final Score</th>
+        <th style="text-align: right">Pass^3</th>
+        <th style="text-align: right">Pass@3</th>
+        <th style="text-align: right">AvgScore</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: right">1</td>
+        <td>doubao-seed-2.0-code</td>
+        <td style="text-align: right">62.44</td>
+        <td style="text-align: right">52.8%</td>
+        <td style="text-align: right">81.8%</td>
+        <td style="text-align: right">73.2</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">2</td>
+        <td>kat-coder-pro-v2</td>
+        <td style="text-align: right">59.68</td>
+        <td style="text-align: right">50.3%</td>
+        <td style="text-align: right">78.4%</td>
+        <td style="text-align: right">70.7</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">3</td>
+        <td>gpt-5.3-codex-xhigh</td>
+        <td style="text-align: right">58.45</td>
+        <td style="text-align: right">41.9%</td>
+        <td style="text-align: right">77.2%</td>
+        <td style="text-align: right">71.6</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">4</td>
+        <td>qwen3.6-plus</td>
+        <td style="text-align: right">57.08</td>
+        <td style="text-align: right">39.7%</td>
+        <td style="text-align: right">77.1%</td>
+        <td style="text-align: right">68.3</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">5</td>
+        <td>deepseek-v4-pro</td>
+        <td style="text-align: right">56.35</td>
+        <td style="text-align: right">34.1%</td>
+        <td style="text-align: right">79.0%</td>
+        <td style="text-align: right">65.7</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">6</td>
+        <td>gpt-5.5-xhigh</td>
+        <td style="text-align: right">55.77</td>
+        <td style="text-align: right">50.2%</td>
+        <td style="text-align: right">71.8%</td>
+        <td style="text-align: right">68.2</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">7</td>
+        <td>kimi-k2.6</td>
+        <td style="text-align: right">54.14</td>
+        <td style="text-align: right">38.2%</td>
+        <td style="text-align: right">71.7%</td>
+        <td style="text-align: right">67.2</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">8</td>
+        <td>DeepSeek-V3.2</td>
+        <td style="text-align: right">54.00</td>
+        <td style="text-align: right">33.3%</td>
+        <td style="text-align: right">73.5%</td>
+        <td style="text-align: right">66.3</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">9</td>
+        <td>gpt-5.4-xhigh</td>
+        <td style="text-align: right">53.04</td>
+        <td style="text-align: right">37.3%</td>
+        <td style="text-align: right">69.5%</td>
+        <td style="text-align: right">67.0</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">10</td>
+        <td>GLM-5.1</td>
+        <td style="text-align: right">52.89</td>
+        <td style="text-align: right">39.0%</td>
+        <td style="text-align: right">69.3%</td>
+        <td style="text-align: right">66.1</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">11</td>
+        <td>MiniMax-M2.1</td>
+        <td style="text-align: right">52.61</td>
+        <td style="text-align: right">31.1%</td>
+        <td style="text-align: right">70.6%</td>
+        <td style="text-align: right">66.7</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">12</td>
+        <td>qwen3.5-plus</td>
+        <td style="text-align: right">52.39</td>
+        <td style="text-align: right">31.2%</td>
+        <td style="text-align: right">71.7%</td>
+        <td style="text-align: right">64.6</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The first-place model, doubao-seed-2.0-code, has a clear shape. It is not carried by one isolated metric. It is especially strong where the closed dataset matters most: Safety is 79.3, Synthesis is 74.9, and Pass@3 is 81.8%. That means it is better at keeping customer data, vendor boundaries, conflicting evidence, and external-facing language under control while still making progress.</p>
+
+  <p>kat-coder-pro-v2 is one of the most interesting results. It is not a top open-leaderboard model, but it rises to second in the closed leaderboard. The reason is not Safety, where it scores 52.7. The lift comes from Planning at 76.4, Tool Use at 76.8, Constraints at 73.5, and Synthesis at 70.4. Its ability shape matches closed enterprise tasks very well, although safety remains its main weakness.</p>
+
+  <p>gpt-5.3-codex-xhigh is the more balanced profile. It does not dominate one single metric, but Safety is 68.1, Tool Use is 75.0, Constraints is 68.8, Error Recovery is 75.1, and Synthesis is 70.5. It looks more like a stable enterprise agent. Its Pass^3 is not the highest, but AvgScore and Pass@3 are both strong.</p>
+
+  <p>deepseek-v4-pro reaches 79.0 Pass@3, so its ceiling is high. But its Pass^3 is 34.1, Safety is 48.6, and Constraints is 55.2. It often finds a good path, but not reliably enough, and it is more likely to slip on safety and policy boundaries.</p>
+
+  <p>gpt-5.5-xhigh is strong in Tool Use, Error Recovery, and Synthesis, at 77.7, 75.0, and 74.1. Its overall rank is pulled down by Safety and Constraints. This kind of model can be useful for execution-heavy and recovery-heavy workflows, but workflows involving privacy, logs, secrets, and disclosure need stronger outer controls.</p>
+
+  <h3 id="why-open-scores-do-not-fully-transfer">Why Open Scores Do Not Fully Transfer</h3>
+
+  <p>The most important finding is that open ranking strength does not automatically transfer to the closed ranking.</p>
+
+  <p>Across the 33 paired models that have both open and closed results, the average closed-minus-open dimension movement is:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Dimension</th>
+        <th style="text-align: right">Average change</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Planning</td>
+        <td style="text-align: right">+3.3</td>
+      </tr>
+      <tr>
+        <td>Safety</td>
+        <td style="text-align: right">-9.8</td>
+      </tr>
+      <tr>
+        <td>Tool Use</td>
+        <td style="text-align: right">+3.4</td>
+      </tr>
+      <tr>
+        <td>Constraints</td>
+        <td style="text-align: right">-2.0</td>
+      </tr>
+      <tr>
+        <td>Error Recovery</td>
+        <td style="text-align: right">-1.4</td>
+      </tr>
+      <tr>
+        <td>Synthesis</td>
+        <td style="text-align: right">+8.8</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>This is the key result. The closed dataset is not simply lower across the board. Planning, Tool Use, and Synthesis are actually higher on average. Many models can adapt to realistic task decomposition, tool choice, and evidence consolidation. The main break is Safety, with an average drop of 9.8 points. That is the largest gap by far.</p>
+
+  <p>This explains why some models that rank very high on the open leaderboard fall much lower on the closed leaderboard.</p>
+
+  <p>To avoid turning the open leaderboard front-runners into the focus of this release note, the table below uses non-front-runner examples and the aggregate pattern:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th style="text-align: right">Open rank</th>
+        <th style="text-align: right">Closed rank</th>
+        <th style="text-align: right">Open Final</th>
+        <th style="text-align: right">Closed Final</th>
+        <th>Main movement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>deepseek-v4-flash</td>
+        <td style="text-align: right">#15</td>
+        <td style="text-align: right">#30</td>
+        <td style="text-align: right">61.47</td>
+        <td style="text-align: right">46.68</td>
+        <td>Safety -18.1, Planning -15.0, Constraints -14.4</td>
+      </tr>
+      <tr>
+        <td>Ring 2.6 1T</td>
+        <td style="text-align: right">#13</td>
+        <td style="text-align: right">#19</td>
+        <td style="text-align: right">62.05</td>
+        <td style="text-align: right">49.34</td>
+        <td>Safety -13.5, Constraints -7.9, Tool Use -4.4</td>
+      </tr>
+      <tr>
+        <td>mimo-v2.5</td>
+        <td style="text-align: right">#19</td>
+        <td style="text-align: right">#23</td>
+        <td style="text-align: right">60.39</td>
+        <td style="text-align: right">48.02</td>
+        <td>Safety -11.5, Error Recovery -12.2, Constraints -9.2</td>
+      </tr>
+      <tr>
+        <td>mimo-v2.5-pro</td>
+        <td style="text-align: right">#10</td>
+        <td style="text-align: right">#15</td>
+        <td style="text-align: right">63.30</td>
+        <td style="text-align: right">51.60</td>
+        <td>Safety -17.8, Constraints -7.0, Synthesis -1.4</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>These models are capable general agents. The issue is that closed tasks often require the model to do less, but do it correctly. Do not reveal internal logs. Do not turn a customer request into a broad privacy export. Do not promise an exception without approval. Do not execute instructions embedded in an untrusted attachment. Models that are too eager to complete the task can lose points on safety and constraints.</p>
+
+  <p>Pass^3 shows the same issue. For several high open-ranking models, closed Pass^3 falls sharply. That means the problem is not just one bad answer. It is stability under enterprise boundaries. A model can occasionally answer correctly, but three stable boundary-preserving runs are much harder.</p>
+
+  <h3 id="why-some-models-improve-on-the-closed-dataset">Why Some Models Improve on the Closed Dataset</h3>
+
+  <p>Some models move up sharply on the closed leaderboard.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th style="text-align: right">Open rank</th>
+        <th style="text-align: right">Closed rank</th>
+        <th style="text-align: right">Open Final</th>
+        <th style="text-align: right">Closed Final</th>
+        <th>Main movement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>kat-coder-pro-v2</td>
+        <td style="text-align: right">#42</td>
+        <td style="text-align: right">#2</td>
+        <td style="text-align: right">54.74</td>
+        <td style="text-align: right">59.68</td>
+        <td>Planning +12.9, Tool Use +14.6, Constraints +12.9, Synthesis +22.7</td>
+      </tr>
+      <tr>
+        <td>MiniMax-M2.1</td>
+        <td style="text-align: right">#53</td>
+        <td style="text-align: right">#11</td>
+        <td style="text-align: right">48.08</td>
+        <td style="text-align: right">52.61</td>
+        <td>Planning +11.9, Tool Use +13.8, Synthesis +18.9</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-plus</td>
+        <td style="text-align: right">#20</td>
+        <td style="text-align: right">#4</td>
+        <td style="text-align: right">60.20</td>
+        <td style="text-align: right">57.08</td>
+        <td>Pass@3 54.5% to 77.1%, Synthesis +15.0</td>
+      </tr>
+      <tr>
+        <td>kimi-k2.6</td>
+        <td style="text-align: right">#24</td>
+        <td style="text-align: right">#7</td>
+        <td style="text-align: right">59.31</td>
+        <td style="text-align: right">54.14</td>
+        <td>Planning +5.8, Error Recovery +7.4, Synthesis +9.9</td>
+      </tr>
+      <tr>
+        <td>MiniMax-M2.5</td>
+        <td style="text-align: right">#46</td>
+        <td style="text-align: right">#14</td>
+        <td style="text-align: right">51.79</td>
+        <td style="text-align: right">51.76</td>
+        <td>Planning +9.7, Tool Use +7.8, Synthesis +19.6</td>
+      </tr>
+      <tr>
+        <td>doubao-seed-2.0-code</td>
+        <td style="text-align: right">#12</td>
+        <td style="text-align: right">#1</td>
+        <td style="text-align: right">62.36</td>
+        <td style="text-align: right">62.44</td>
+        <td>Safety +11.8, Synthesis +14.2, Pass@3 62.8% to 81.8%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>The common factor is not simply higher intelligence. It is a capability shape that fits the closed dataset.</p>
+
+  <p>kat-coder-pro-v2 gains mainly from tool action, constraint following, and evidence synthesis. Closed tasks often ask whether the model should read minimal evidence, whether it has authority to continue, or whether conflicting facts can be stated as resolved. A model that handles those decisions well can rise even if it is not near the top of the broader open leaderboard.</p>
+
+  <p>doubao-seed-2.0-code improves in a more direct way: Safety and Synthesis both rise. It can complete the task while staying inside enterprise boundaries. That is exactly what the closed dataset rewards.</p>
+
+  <p>MiniMax-M2.1 and MiniMax-M2.5 show another useful pattern. A model can be less dominant on broad public tasks but still be competitive in structured enterprise workflows, tool choice, and evidence merging. For real deployment, that can matter more than a single general ranking.</p>
+
+  <h3 id="a-production-readiness-benchmark">A Production-Readiness Benchmark</h3>
+
+  <p>If we only look at the open leaderboard, model ability can look like planning, tool use, and task completion. In production, the model must also:</p>
+
+  <ol>
+    <li>avoid leaking content that should not be exposed;</li>
+    <li>avoid executing actions it has no authority to perform;</li>
+    <li>treat untrusted input as untrusted input;</li>
+    <li>avoid making company commitments without approval;</li>
+    <li>avoid turning conflicting evidence into a fake clean conclusion;</li>
+    <li>avoid expanding data access just to look helpful.</li>
+  </ol>
+
+  <p>The closed dataset is built around these pressure points. It is especially useful for selecting models that can enter enterprise workflows, not just models that score well on public tasks.</p>
+
+  <p>The current results suggest three requirements for closed-set performance.</p>
+
+  <p>First, the model needs safety restraint. Safety is the biggest differentiator. Many models do not fail because they cannot solve the task. They fail because they choose the wrong boundary between helping and leaking.</p>
+
+  <p>Second, the model needs evidence discipline. A high Synthesis score is not just fluent writing. It means the model can separate source of truth, conflicting records, approval state, and uncertainty.</p>
+
+  <p>Third, the model needs tool minimalism. A high Tool Use score is not about using more tools. It is about knowing when to read only, when to preflight, when to escalate, and when not to write.</p>
+
+  <h3 id="how-to-read-the-two-leaderboards">How to Read the Two Leaderboards</h3>
+
+  <p>If you are choosing a general OpenClaw agent, the open leaderboard remains important. It covers 102 tasks and more models, so it reflects broader capability.</p>
+
+  <p>If you are choosing a model for internal enterprise workflows, customer support, safety and compliance, operations support, vendor questionnaires, incident reviews, or CRM and ticket processing, the closed leaderboard should be read first.</p>
+
+  <p>A practical reading:</p>
+
+  <ul>
+    <li>Customer data, logs, secrets, and vendor material: prioritize Safety and Constraints.</li>
+    <li>Tickets, CRM, account merges, and evidence packets: prioritize Tool Use and Constraints.</li>
+    <li>Incident reviews, billing disputes, and contract conflicts: prioritize Synthesis and Error Recovery.</li>
+    <li>On-call, scheduling, resource allocation, and approval windows: prioritize Planning.</li>
+    <li>Unsupervised deployment: look closely at Pass^3.</li>
+    <li>Reviewed or multi-sample workflows: Pass@3 is also important.</li>
+  </ul>
+
+  <p>Final Score is useful for quick sorting, but deployment decisions should look at the model shape. A high closed score does not mean a model is strong in every enterprise scenario. A high open score does not mean it can naturally handle privacy, authority, and compliance boundaries.</p>
+
+  <h3 id="conclusion">Conclusion</h3>
+
+  <p>With the closed dataset, ClawProBench no longer only asks which model is strongest overall. It also asks which model is more ready for real enterprise agent work.</p>
+
+  <p>In this release, doubao-seed-2.0-code ranks first because Safety, Synthesis, and Pass@3 are all strong. kat-coder-pro-v2 rises sharply because its Planning, Tool Use, Constraints, and Synthesis match the closed enterprise workload. gpt-5.3-codex-xhigh shows a more balanced enterprise-agent profile. At the same time, some models that are very strong on the open leaderboard drop on the closed dataset, mainly because safety boundaries, constraint following, and stable behavior do not fully transfer.</p>
+
+  <p>That is the point of the closed dataset. It does not let a model only show strength on public tasks. It puts the model closer to production pressure and checks whether it can both act and keep boundaries.</p>
+
+  <p>For real deployment, the open and closed leaderboards should be read together. The open leaderboard shows broad capability. The closed leaderboard shows production readiness. The bigger the gap between the two, the less we should trust any single aggregate score as a complete description of a model.</p>
+
+</div>
+
+<div class="bench-lang-panel" data-lang-panel="zh">
+
+  <p>ClawProBench 现在新增了闭源数据集榜单。它不是为了替代原来的开源榜单，而是补上一个更接近真实企业 Agent 工作流的评测视角：当模型面对客户支持、供应商安全问卷、日志脱敏、审批边界、事故恢复、账单争议、CRM 更新、隐私导出等场景时，它能不能在有限信息、强约束和高风险上下文里做出稳定、合规、可执行的判断。</p>
+
+  <p>简单说，开源数据集更像是在看模型的通用 OpenClaw Agent 能力，闭源数据集更像是在看模型能不能真正进入企业生产环境。</p>
+
+  <h3 id="section">这次发布了什么</h3>
+
+  <p>本次闭源数据集包含 68 道任务和 33 个模型结果。当前开源榜单包含 102 道任务和 66 个模型结果。</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th style="text-align: right">闭源题目数</th>
+        <th>主要考察</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Safety</td>
+        <td style="text-align: right">17</td>
+        <td>隐私、密钥、日志、注入、最小披露、客户与供应商边界</td>
+      </tr>
+      <tr>
+        <td>Synthesis</td>
+        <td style="text-align: right">13</td>
+        <td>多来源证据合并、冲突事实归并、对外口径生成</td>
+      </tr>
+      <tr>
+        <td>Planning</td>
+        <td style="text-align: right">12</td>
+        <td>值班、排期、资源、优先级、审批窗口下的取舍</td>
+      </tr>
+      <tr>
+        <td>Constraints</td>
+        <td style="text-align: right">10</td>
+        <td>政策例外、权限边界、区域数据、合同和承诺限制</td>
+      </tr>
+      <tr>
+        <td>Tool Use</td>
+        <td style="text-align: right">10</td>
+        <td>只读预检、最小证据读取、动作预算、附件信任边界</td>
+      </tr>
+      <tr>
+        <td>Error Recovery</td>
+        <td style="text-align: right">6</td>
+        <td>双写恢复、部分提交、隐私导出中止、幂等回放</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>和开源数据集相比，闭源数据集的任务分布有两个明显变化。</p>
+
+  <p>第一，Safety 的比例大幅提高。开源数据集中 Safety 是 12 题，闭源数据集中是 17 题，并且很多题不是“拒绝危险请求”这么简单，而是要求模型在仍然帮助用户的同时，守住密钥、日志、客户数据、供应商资料和内部事实源的边界。</p>
+
+  <p>第二，闭源数据集几乎全部是 hard 级别任务。开源数据集包含 52 道 expert、39 道 hard、8 道 medium、3 道 easy；闭源数据集则是 64 道 hard、4 道 expert。这里的 hard 不是指题面更长，而是指模型要在多个现实约束之间做取舍：既要回答、又不能泄露；既要推进流程、又不能越权；既要合并证据、又不能把冲突事实当成确定结论。</p>
+
+  <h3 id="section-1">闭源集到底更关注什么能力</h3>
+
+  <p>开源数据集的核心目标是评估模型在 OpenClaw 中完成任务的通用 Agent 能力，包括规划、工具使用、失败恢复、约束遵循、信息综合和安全性。它更适合回答一个问题：这个模型作为通用工作代理，整体能力强不强？</p>
+
+  <p>闭源数据集更进一步，重点看模型在高风险企业场景下是否可靠。它更适合回答另一个问题：这个模型能不能在生产环境里处理真实客户、真实权限、真实数据边界和真实事故？</p>
+
+  <p>这两个问题的答案经常不一样。</p>
+
+  <p>闭源任务里，很多题的难点不是“知道正确答案”，而是“知道什么不能做”。例如：</p>
+
+  <ul>
+    <li>客户要求调试包时，模型要提供足够复现信息，但不能把密钥、内部日志、客户数据一并交出去。</li>
+    <li>供应商安全问卷要求回答时，模型要区分可披露事实、不可披露内部细节和需要审批的信息。</li>
+    <li>工单或附件中出现提示注入时，模型要识别不可信内容，不能把附件里的指令当成系统指令执行。</li>
+    <li>账单、退款、SLA、合同和支持记录互相冲突时，模型要合并证据，指出确定事实和不确定事实，而不是编一个听起来完整的结论。</li>
+    <li>CRM、账号合并、隐私请求等任务中，模型要做最小必要动作，不能因为“能调用工具”就直接写入或扩大读取范围。</li>
+  </ul>
+
+  <p>这类任务会惩罚两种常见模型行为：一种是过度顺从，用户让它给什么就给什么；另一种是过度行动，看到工具就想写入、更新、合并、导出。闭源集更偏向奖励“克制但有效”的模型。</p>
+
+  <h3 id="final-score-">闭源 Final Score 的计算口径</h3>
+
+  <p>闭源榜单仍然保留三类核心信号：</p>
+
+  <ul>
+    <li>AvgScore：模型在任务评分项上的平均质量；</li>
+    <li>Pass^3：三次运行都稳定通过的能力，反映一致性；</li>
+    <li>Pass@3：三次运行里至少有一次找到正确路径的能力，反映上限和可采样潜力。</li>
+  </ul>
+
+  <p>开源榜单更强调稳定三次通过，闭源榜单在 Final Score 中提高了 Pass@3 的权重，同时保留 Pass^3。原因是闭源集题目更少、更集中、更偏现实复杂场景，如果模型至少能在三次运行中找到合规路径，这个信号本身有价值；但如果 Pass^3 太低，说明它还不够稳定，生产使用仍然需要谨慎。</p>
+
+  <p>当前页面公式是：</p>
+
+  <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Open Final Score = 100 x AvgScore^0.40 x ((Pass^3)^(1/3))^0.45 x (1 - (1 - Pass@3)^(1/3))^0.15
+Closed Final Score = 100 x AvgScore^0.40 x ((Pass^3)^(1/3))^0.25 x (1 - (1 - Pass@3)^(1/3))^0.35
+</code></pre></div>  </div>
+
+  <p>所以闭源榜单不是单纯看一次得分，也不是只看最稳定模型，而是在“平均质量、稳定性、三次采样上限”之间做平衡。</p>
+
+  <h3 id="section-2">闭源榜单结果</h3>
+
+  <p>闭源榜单 Top 12 如下：</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="text-align: right">闭源排名</th>
+        <th>模型</th>
+        <th style="text-align: right">Final Score</th>
+        <th style="text-align: right">Pass^3</th>
+        <th style="text-align: right">Pass@3</th>
+        <th style="text-align: right">AvgScore</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: right">1</td>
+        <td>doubao-seed-2.0-code</td>
+        <td style="text-align: right">62.44</td>
+        <td style="text-align: right">52.8%</td>
+        <td style="text-align: right">81.8%</td>
+        <td style="text-align: right">73.2</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">2</td>
+        <td>kat-coder-pro-v2</td>
+        <td style="text-align: right">59.68</td>
+        <td style="text-align: right">50.3%</td>
+        <td style="text-align: right">78.4%</td>
+        <td style="text-align: right">70.7</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">3</td>
+        <td>gpt-5.3-codex-xhigh</td>
+        <td style="text-align: right">58.45</td>
+        <td style="text-align: right">41.9%</td>
+        <td style="text-align: right">77.2%</td>
+        <td style="text-align: right">71.6</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">4</td>
+        <td>qwen3.6-plus</td>
+        <td style="text-align: right">57.08</td>
+        <td style="text-align: right">39.7%</td>
+        <td style="text-align: right">77.1%</td>
+        <td style="text-align: right">68.3</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">5</td>
+        <td>deepseek-v4-pro</td>
+        <td style="text-align: right">56.35</td>
+        <td style="text-align: right">34.1%</td>
+        <td style="text-align: right">79.0%</td>
+        <td style="text-align: right">65.7</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">6</td>
+        <td>gpt-5.5-xhigh</td>
+        <td style="text-align: right">55.77</td>
+        <td style="text-align: right">50.2%</td>
+        <td style="text-align: right">71.8%</td>
+        <td style="text-align: right">68.2</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">7</td>
+        <td>kimi-k2.6</td>
+        <td style="text-align: right">54.14</td>
+        <td style="text-align: right">38.2%</td>
+        <td style="text-align: right">71.7%</td>
+        <td style="text-align: right">67.2</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">8</td>
+        <td>DeepSeek-V3.2</td>
+        <td style="text-align: right">54.00</td>
+        <td style="text-align: right">33.3%</td>
+        <td style="text-align: right">73.5%</td>
+        <td style="text-align: right">66.3</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">9</td>
+        <td>gpt-5.4-xhigh</td>
+        <td style="text-align: right">53.04</td>
+        <td style="text-align: right">37.3%</td>
+        <td style="text-align: right">69.5%</td>
+        <td style="text-align: right">67.0</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">10</td>
+        <td>GLM-5.1</td>
+        <td style="text-align: right">52.89</td>
+        <td style="text-align: right">39.0%</td>
+        <td style="text-align: right">69.3%</td>
+        <td style="text-align: right">66.1</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">11</td>
+        <td>MiniMax-M2.1</td>
+        <td style="text-align: right">52.61</td>
+        <td style="text-align: right">31.1%</td>
+        <td style="text-align: right">70.6%</td>
+        <td style="text-align: right">66.7</td>
+      </tr>
+      <tr>
+        <td style="text-align: right">12</td>
+        <td>qwen3.5-plus</td>
+        <td style="text-align: right">52.39</td>
+        <td style="text-align: right">31.2%</td>
+        <td style="text-align: right">71.7%</td>
+        <td style="text-align: right">64.6</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>第一名 doubao-seed-2.0-code 的特点非常清晰：它不是某一个维度特别偏科，而是在闭源集最关键的 Safety 和 Synthesis 上非常强。它的 Safety 达到 79.3，Synthesis 达到 74.9，Pass@3 达到 81.8%。这说明它在客户数据、供应商边界、冲突证据和对外口径生成上更稳，也更容易在多次尝试中找到合规答案。</p>
+
+  <p>第二名 kat-coder-pro-v2 是这次最有意思的模型之一。它在开源榜单里不是最靠前，但闭源榜单冲到第二。原因不是 Safety 极强，它的 Safety 只有 52.7；真正拉升它的是 Planning 76.4、Tool Use 76.8、Constraints 73.5、Synthesis 70.4。也就是说，它在资源取舍、工具动作、权限约束和证据合并上的形状非常适合闭源任务，但安全边界仍然是短板。</p>
+
+  <p>第三名 gpt-5.3-codex-xhigh 是更均衡的类型。它没有单项特别夸张，但 Safety 68.1、Tool Use 75.0、Constraints 68.8、Error Recovery 75.1、Synthesis 70.5，整体更像一个稳定企业 Agent。它的 Pass^3 不是最高，但 AvgScore 和 Pass@3 都很强。</p>
+
+  <p>deepseek-v4-pro 的 Pass@3 达到 79.0，说明上限很高，但 Pass^3 只有 34.1，Safety 48.6、Constraints 55.2，这意味着它经常能找到好答案，但不够稳定，也更容易在安全和约束边界上失手。</p>
+
+  <p>gpt-5.5-xhigh 在 Tool Use、Error Recovery、Synthesis 上都很强，分别是 77.7、75.0、74.1，但 Safety 和 Constraints 明显压低了总排名。这类模型适合需要强执行和强恢复的流程，但如果场景里涉及客户隐私、日志、密钥和对外披露，就需要更严格的外层策略约束。</p>
+
+  <h3 id="section-3">为什么有些模型开源分高，闭源分低</h3>
+
+  <p>这次最重要的发现是：开源高分不能自动迁移成闭源高分。</p>
+
+  <p>在 33 个同时拥有开源和闭源结果的模型里，闭源相对开源的平均维度变化是：</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>维度</th>
+        <th style="text-align: right">闭源相对开源平均变化</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Planning</td>
+        <td style="text-align: right">+3.3</td>
+      </tr>
+      <tr>
+        <td>Safety</td>
+        <td style="text-align: right">-9.8</td>
+      </tr>
+      <tr>
+        <td>Tool Use</td>
+        <td style="text-align: right">+3.4</td>
+      </tr>
+      <tr>
+        <td>Constraints</td>
+        <td style="text-align: right">-2.0</td>
+      </tr>
+      <tr>
+        <td>Error Recovery</td>
+        <td style="text-align: right">-1.4</td>
+      </tr>
+      <tr>
+        <td>Synthesis</td>
+        <td style="text-align: right">+8.8</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>这组数据很关键。闭源集并不是所有维度都更低。Planning、Tool Use、Synthesis 的平均分反而更高，说明不少模型在现实任务拆解、工具选择和材料整合上是能适应闭源任务的。真正拉开差距的是 Safety，平均下降 9.8 分，是所有维度里最明显的断层。</p>
+
+  <p>这解释了为什么有些模型在开源榜单排名极高，到了闭源榜单却掉得很厉害。</p>
+
+  <p>为了避免把开源榜单前列模型作为这篇发布报告的宣传重点，下面只展开非前三名案例和聚合现象：</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>模型</th>
+        <th style="text-align: right">开源总榜</th>
+        <th style="text-align: right">闭源总榜</th>
+        <th style="text-align: right">Open Final</th>
+        <th style="text-align: right">Closed Final</th>
+        <th>主要变化</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>deepseek-v4-flash</td>
+        <td style="text-align: right">#15</td>
+        <td style="text-align: right">#30</td>
+        <td style="text-align: right">61.47</td>
+        <td style="text-align: right">46.68</td>
+        <td>Safety -18.1，Planning -15.0，Constraints -14.4</td>
+      </tr>
+      <tr>
+        <td>Ring 2.6 1T</td>
+        <td style="text-align: right">#13</td>
+        <td style="text-align: right">#19</td>
+        <td style="text-align: right">62.05</td>
+        <td style="text-align: right">49.34</td>
+        <td>Safety -13.5，Constraints -7.9，Tool Use -4.4</td>
+      </tr>
+      <tr>
+        <td>mimo-v2.5</td>
+        <td style="text-align: right">#19</td>
+        <td style="text-align: right">#23</td>
+        <td style="text-align: right">60.39</td>
+        <td style="text-align: right">48.02</td>
+        <td>Safety -11.5，Error Recovery -12.2，Constraints -9.2</td>
+      </tr>
+      <tr>
+        <td>mimo-v2.5-pro</td>
+        <td style="text-align: right">#10</td>
+        <td style="text-align: right">#15</td>
+        <td style="text-align: right">63.30</td>
+        <td style="text-align: right">51.60</td>
+        <td>Safety -17.8，Constraints -7.0，Synthesis -1.4</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>这些模型在开源集上很强，说明它们具备不错的通用 Agent 能力。但闭源集里，很多题需要模型做出“少做一点但做对”的判断。比如不能直接给出内部日志，不能把客户请求扩大成隐私导出，不能在审批缺失时承诺例外，不能把不可信附件当成命令执行。模型如果更偏向积极完成任务，就会在闭源集里被安全和约束项扣分。</p>
+
+  <p>另一个信号是 Pass^3 的下降。开源前列模型在闭源集中的 Pass^3 普遍大幅下滑，说明问题不只是单次答案质量，而是稳定性迁移失败：模型偶尔能答对，但三次都稳定守住边界就困难很多。对于企业生产场景，这种稳定性比一次漂亮回答更重要。</p>
+
+  <h3 id="section-4">为什么有些模型闭源排名反而上升</h3>
+
+  <p>也有一批模型在闭源集里明显更吃香。</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>模型</th>
+        <th style="text-align: right">开源总榜</th>
+        <th style="text-align: right">闭源总榜</th>
+        <th style="text-align: right">Open Final</th>
+        <th style="text-align: right">Closed Final</th>
+        <th>主要变化</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>kat-coder-pro-v2</td>
+        <td style="text-align: right">#42</td>
+        <td style="text-align: right">#2</td>
+        <td style="text-align: right">54.74</td>
+        <td style="text-align: right">59.68</td>
+        <td>Planning +12.9，Tool Use +14.6，Constraints +12.9，Synthesis +22.7</td>
+      </tr>
+      <tr>
+        <td>MiniMax-M2.1</td>
+        <td style="text-align: right">#53</td>
+        <td style="text-align: right">#11</td>
+        <td style="text-align: right">48.08</td>
+        <td style="text-align: right">52.61</td>
+        <td>Planning +11.9，Tool Use +13.8，Synthesis +18.9</td>
+      </tr>
+      <tr>
+        <td>qwen3.6-plus</td>
+        <td style="text-align: right">#20</td>
+        <td style="text-align: right">#4</td>
+        <td style="text-align: right">60.20</td>
+        <td style="text-align: right">57.08</td>
+        <td>Pass@3 54.5% 到 77.1%，Synthesis +15.0</td>
+      </tr>
+      <tr>
+        <td>kimi-k2.6</td>
+        <td style="text-align: right">#24</td>
+        <td style="text-align: right">#7</td>
+        <td style="text-align: right">59.31</td>
+        <td style="text-align: right">54.14</td>
+        <td>Planning +5.8，Error Recovery +7.4，Synthesis +9.9</td>
+      </tr>
+      <tr>
+        <td>MiniMax-M2.5</td>
+        <td style="text-align: right">#46</td>
+        <td style="text-align: right">#14</td>
+        <td style="text-align: right">51.79</td>
+        <td style="text-align: right">51.76</td>
+        <td>Planning +9.7，Tool Use +7.8，Synthesis +19.6</td>
+      </tr>
+      <tr>
+        <td>doubao-seed-2.0-code</td>
+        <td style="text-align: right">#12</td>
+        <td style="text-align: right">#1</td>
+        <td style="text-align: right">62.36</td>
+        <td style="text-align: right">62.44</td>
+        <td>Safety +11.8，Synthesis +14.2，Pass@3 62.8% 到 81.8%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>这类模型的共同点不是“更聪明”，而是能力形状更贴合闭源集。</p>
+
+  <p>kat-coder-pro-v2 在闭源集中的大幅跃升，主要来自工具动作、约束遵循和证据合并。闭源任务经常要求模型判断“应该读哪个最小证据”“是否有权限继续”“该不该把冲突事实写成确定结论”。如果模型在这些环节足够稳，即便通用开源任务排名不算顶尖，也能在闭源榜单里上升。</p>
+
+  <p>doubao-seed-2.0-code 的上升更直接：Safety 和 Synthesis 同时拉高。这说明它不仅能完成任务，还能在企业边界内完成任务。闭源集奖励的正是这种能力。</p>
+
+  <p>MiniMax-M2.1、MiniMax-M2.5 的闭源表现也说明，部分模型在公开综合任务里不占优势，但在结构化企业流程、工具选择、证据合并任务上表现不错。对实际业务选型来说，这比单看通用榜单更有参考价值。</p>
+
+  <h3 id="section-5">闭源集更像是在测生产可用性</h3>
+
+  <p>如果只看开源榜单，我们很容易把模型能力理解成“会不会规划、会不会调用工具、会不会完成任务”。但真实生产环境里，模型还必须做到：</p>
+
+  <ol>
+    <li>不泄露不该泄露的内容；</li>
+    <li>不执行不该执行的动作；</li>
+    <li>不把不可信输入当成可信指令；</li>
+    <li>不在缺少审批时替公司做承诺；</li>
+    <li>不把冲突证据合成一个虚假的确定结论；</li>
+    <li>不为了显得有帮助而扩大数据读取范围。</li>
+  </ol>
+
+  <p>闭源数据集就是围绕这些问题设计的。它特别适合筛选“可以进入企业工作流”的模型，而不只是筛选“公开题目上分数高”的模型。</p>
+
+  <p>从这次结果看，闭源榜单对模型有三个核心要求。</p>
+
+  <p>第一，要有安全克制。Safety 是闭源集里最大的区分器。很多模型不是不会做任务，而是在“帮忙”和“泄露”之间选错了边界。</p>
+
+  <p>第二，要有证据纪律。Synthesis 高分不是把材料写得流畅，而是能区分事实源、冲突记录、审批状态和不确定结论。闭源任务里的账单、合同、SLA、事故复盘题都在考这个能力。</p>
+
+  <p>第三，要有工具最小化意识。Tool Use 高分不是调用更多工具，而是知道什么时候只读、什么时候预检、什么时候升级、什么时候不能写入。</p>
+
+  <h3 id="section-6">怎么读这个榜单</h3>
+
+  <p>如果你是在选通用 OpenClaw Agent，开源榜单仍然很重要。它覆盖 102 道任务，模型数量更多，能反映更广的通用能力。</p>
+
+  <p>如果你是在选企业内部流程、客户支持、安全合规、运营支持、供应商问卷、事故复盘、CRM/工单处理相关模型，闭源榜单更值得优先看。</p>
+
+  <p>具体可以按场景这样读：</p>
+
+  <ul>
+    <li>客户数据、日志、密钥、供应商材料：优先看 Safety 和 Constraints；</li>
+    <li>工单处理、CRM、账号合并、证据包：优先看 Tool Use 和 Constraints；</li>
+    <li>事故复盘、账单争议、合同冲突：优先看 Synthesis 和 Error Recovery；</li>
+    <li>值班、排期、资源分配、审批窗口：优先看 Planning；</li>
+    <li>需要稳定上线：同时看 Pass^3；</li>
+    <li>可以用多次采样或审阅机制：Pass@3 也很重要。</li>
+  </ul>
+
+  <p>单一 Final Score 适合快速排序，但真正落地时应该看维度形状。一个模型闭源总分高，不代表它所有企业场景都强；一个模型开源总分高，也不代表它能天然处理隐私、权限和合规边界。</p>
+
+  <h3 id="section-7">结论</h3>
+
+  <p>闭源数据集发布后，ClawProBench 的榜单不再只是回答“哪个模型综合能力最强”，也开始回答“哪个模型更适合真实企业 Agent 场景”。</p>
+
+  <p>这次结果里，doubao-seed-2.0-code 凭借 Safety、Synthesis 和 Pass@3 拿到闭源第一；kat-coder-pro-v2 依靠 Planning、Tool Use、Constraints 和 Synthesis 在闭源集大幅上升；gpt-5.3-codex-xhigh 展现出比较均衡的企业 Agent 形状。与此同时，一些开源榜单前列模型在闭源集出现明显掉队，核心原因不是通用能力不足，而是安全边界、约束遵循和稳定性没有迁移过来。</p>
+
+  <p>这也是闭源数据集存在的意义：它不让模型只在公开任务上展示能力，而是把模型放到更接近真实生产的压力环境里，观察它是否能在“做事”和“守边界”之间同时达标。</p>
+
+  <p>未来如果要把模型接入真实业务流程，闭源榜单应该和开源榜单一起看。开源榜单看通用能力，闭源榜单看生产可用性。两者差异越大，越说明我们不能只用一个总分来理解模型。</p>
+
+</div>
+
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const switcher = document.querySelector('.bench-lang-switch');
+          if (!switcher) return;
+          const buttons = Array.from(switcher.querySelectorAll('.bench-lang-btn'));
+          const panels = Array.from(document.querySelectorAll('[data-lang-panel]'));
+
+          function currentPageLanguage() {
+            const params = new URLSearchParams(window.location.search);
+            const urlLang = params.get('lang');
+            if (urlLang === 'zh' || urlLang === 'en') return urlLang;
+            if (window.ClawProBenchI18n && window.ClawProBenchI18n.language) {
+              return window.ClawProBenchI18n.language();
+            }
+            return switcher.dataset.defaultLang || 'en';
+          }
+
+          function activate(lang) {
+            const nextLang = lang === 'zh' ? 'zh' : 'en';
+            buttons.forEach(btn => btn.classList.toggle('is-active', btn.dataset.lang === nextLang));
+            panels.forEach(panel => panel.classList.toggle('is-active', panel.dataset.langPanel === nextLang));
+            switcher.dataset.currentLang = nextLang;
+          }
+
+          buttons.forEach(btn => {
+            btn.addEventListener('click', function () {
+              activate(btn.dataset.lang);
+              if (window.ClawProBenchI18n && window.ClawProBenchI18n.apply) {
+                window.ClawProBenchI18n.apply(btn.dataset.lang);
+              }
+            });
+          });
+
+          document.addEventListener('clawprobench:languagechange', function (event) {
+            activate(event.detail && event.detail.language);
+          });
+
+          activate(currentPageLanguage());
+        });
+      </script>
+
+      
+<div class="comments">
+  <script src="https://giscus.app/client.js"
+    data-repo="suyoumo/suyoumo.github.io"
+    data-repo-id="R_kgDORQbMTg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDORQbMTs4C2cNQ"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="preferred_color_scheme"
+    data-lang="zh-CN"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+
+      <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(function() {
+  var SUPABASE_URL = 'https://iuganrktxtmvhzduioke.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1Z2Fucmt0eHRtdmh6ZHVpb2tlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzExNTM3NDksImV4cCI6MjA4NjcyOTc0OX0._4_2bsX4vBiQKYYl0-4X9yG4NrOtYkMk4-Uc7f9GhTw';
+  if (!SUPABASE_URL || SUPABASE_URL === 'YOUR_SUPABASE_URL') return;
+
+  var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  var path = window.location.pathname;
+  var vid = localStorage.getItem('_vid');
+  if (!vid) {
+    vid = crypto.randomUUID ? crypto.randomUUID() : Math.random().toString(36).slice(2) + Date.now().toString(36);
+    localStorage.setItem('_vid', vid);
+  }
+
+  // Record visit (ignore duplicate)
+  sb.from('page_views').upsert({ page_path: path, visitor_id: vid }, { onConflict: 'page_path,visitor_id' }).then(function() {
+    // Count unique visitors for this page
+    sb.rpc('count_unique_visitors', { target_path: path }).then(function(res) {
+      var el = document.getElementById('unique_visitor_count');
+      if (el && res.data !== null) el.textContent = res.data;
+    });
+  });
+})();
+</script>
+
+    </article>
+  </div>
+</section>
+
+    </main>
+  </body>
+</html>

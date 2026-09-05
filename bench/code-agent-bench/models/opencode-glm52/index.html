@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+
+
+
+<html lang="zh-CN">
+  <head>
+    <title>GLM 5.2 on Morgan AgentBench – Morgan AgentBench</title>
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+    <link rel="icon" type="image/svg+xml" href="/bench/assets/images/bench/openclawprobench-logo.svg">
+    <link rel="icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="shortcut icon" type="image/png" href="/bench/assets/images/bench/logo-crab.png">
+    <link rel="apple-touch-icon" href="/bench/assets/images/bench/logo-crab.png">
+
+    
+    <meta name="description" content="
+
+
+" />
+    <meta property="og:description" content="
+
+
+" />
+    
+    <meta name="author" content="AutoEval" />
+
+    
+    <meta property="og:title" content="GLM 5.2 on Morgan AgentBench" />
+    <meta property="twitter:title" content="GLM 5.2 on Morgan AgentBench" />
+    
+
+
+  <link rel="stylesheet" type="text/css" href="/bench/style.css?v=1788618301" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/benchmark-readability.css" />
+  <link rel="stylesheet" type="text/css" href="/bench/assets/css/mobile.css?v=1788618301" />
+    <script defer src="/bench/assets/js/bench-i18n.js?v=1788618301"></script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  </head>
+
+  <body class="bench-body">
+    <header class="site-header bench-header">
+      <div class="container-wide header-inner bench-header-inner">
+        <a class="bench-brand" href="/bench/code-agent-bench/">
+          <span class="bench-brand-logo-wrap">
+            <img class="bench-brand-logo bench-brand-logo-default" src="/bench/assets/images/bench/logo-crab.png" alt="Morgan AgentBench logo" />
+            <img class="bench-brand-logo bench-brand-logo-hover" src="/bench/assets/images/bench/logo-longxia.png" alt="Morgan AgentBench hover logo" />
+          </span>
+          <span class="bench-brand-text">Morgan AgentBench</span>
+        </a>
+        <input type="checkbox" id="bench-nav-toggle" class="bench-nav-toggle-checkbox" />
+        <label for="bench-nav-toggle" class="bench-nav-burger" aria-label="菜单">
+          <span></span><span></span><span></span>
+        </label>
+        <nav class="site-nav bench-nav">
+          <a href="/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            主页
+          </a>
+          <a href="/bench/bench/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            AutoEval
+          </a>
+          <a href="/bench/llm-leaderboard/" >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-3 3 2 5-6"/></svg>
+            LLMLeadBoard
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="bench-main">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<article class="model-article-page" data-i18n-skip>
+  <div class="model-article-shell">
+    <nav class="model-breadcrumb" aria-label="Breadcrumb">
+      <a href="/bench/code-agent-bench/">CodeAgentBench</a>
+      <span>/</span>
+      <span><span class="bench-lang-en">Model notes</span><span class="bench-lang-zh">模型文章</span></span>
+      <span>/</span>
+      <span>GLM 5.2</span>
+    </nav>
+
+    <header class="model-hero">
+      <div class="model-hero-copy">
+        <div class="model-kicker-row">
+          
+          <span class="model-rank-badge"><span class="bench-lang-en">Rank</span><span class="bench-lang-zh">排名</span> 1</span>
+          
+          <span>OpenCode</span>
+          <span>Zhipu GLM</span>
+        </div>
+        <h1>GLM 5.2</h1>
+        
+        <p class="model-subtitle">
+          <span class="bench-lang-en">A fast-rising coding agent with a very clear personality: excellent on Python and ops-shaped repairs, fragile when the task turns into a cross-package product change.</span>
+          <span class="bench-lang-zh">一个性格很清楚的编程 agent：Python 和运维形态修复很强，但遇到跨包产品改动时容易变脆。</span>
+        </p>
+        
+        <div class="model-hero-meta">
+          <span>opencode-cli 1.17.8</span>
+          <span>zai-coding-plan/glm-5.2</span>
+          <span><span class="bench-lang-en">Updated</span><span class="bench-lang-zh">更新</span> 2026-06-18</span>
+        </div>
+      </div>
+
+      <aside class="model-score-panel" aria-label="GLM 5.2 score summary">
+        <div class="model-score-primary">
+          <span><span class="bench-lang-en">Final Score</span><span class="bench-lang-zh">最终分</span></span>
+          <strong>37.59</strong>
+          
+          <em><span class="bench-lang-en">Verifier audit</span><span class="bench-lang-zh">复核后</span> 32.87</em>
+          
+          <div class="model-score-meter" aria-hidden="true">
+            <span style="width: 37.59%"></span>
+          </div>
+        </div>
+        <div class="model-score-grid">
+          <div>
+            <span>Pass@3</span>
+            <strong>37.7%</strong>
+          </div>
+          <div>
+            <span>Pass^3</span>
+            <strong>23.8%</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Solved Tasks</span><span class="bench-lang-zh">解出任务</span></span>
+            <strong>57/151</strong>
+          </div>
+          <div>
+            <span><span class="bench-lang-en">Attempts</span><span class="bench-lang-zh">尝试通过</span></span>
+            <strong>140/453</strong>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    
+    <section class="model-tldr" aria-label="TL;DR">
+      <div>
+        <div class="model-section-label">TL;DR</div>
+        <h2><span class="bench-lang-en">How to read this result</span><span class="bench-lang-zh">可以这样读</span></h2>
+      </div>
+      <ul>
+        
+        
+        
+        <li><span class="bench-lang-en">GLM 5.2 is ranked #1 in this export, but not because it dominates every repo. It wins by being very reliable on several high-signal suites.</span><span class="bench-lang-zh">GLM 5.2 在这次导出里排第 1，但不是因为它每个仓库都碾压。它的优势来自几个高信号 suite 上非常稳定的表现。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">The strongest shape is Python or ops-heavy work with tight tests: Open Library, Ansible, and localized vulnerability-scanner patches.</span><span class="bench-lang-zh">它最强的是 Python 或偏运维的修复：Open Library、Ansible，以及边界清楚的漏洞扫描器改动。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">The weak shape is broad product plumbing: Flipt authentication/feature-flag changes, qutebrowser's Qt runtime behavior, and Navidrome persistence/API work.</span><span class="bench-lang-zh">它比较弱的是横跨多层的产品工程：Flipt 的认证和 feature flag、qutebrowser 的 Qt 运行时行为、Navidrome 的持久化和 API。</span></li>
+        
+        
+        
+        <li><span class="bench-lang-en">The stricter verifier keeps 101 of 140 headline successes, so the rank is real but the margin should be read with audit context.</span><span class="bench-lang-zh">更严格的复核保留了 140 次初始成功中的 101 次，所以排名有含金量，但领先幅度要结合审计来看。</span></li>
+        
+      </ul>
+    </section>
+    
+
+    <div class="model-content-grid">
+      
+      <aside class="model-aside" aria-label="Key numbers">
+        <div class="model-aside-card">
+          <div class="model-section-label"><span class="bench-lang-en">Key Numbers</span><span class="bench-lang-zh">关键数字</span></div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Lead over #2</span><span class="bench-lang-zh">领先第 2 名</span></span>
+            <strong>+0.71</strong>
+            <em><span class="bench-lang-en">vs GPT 5.5 (xhigh)</span><span class="bench-lang-zh">对比 GPT 5.5 (xhigh)</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Stable solves</span><span class="bench-lang-zh">稳定解题</span></span>
+            <strong>36</strong>
+            <em><span class="bench-lang-en">tasks solved in all 3 attempts</span><span class="bench-lang-zh">三次尝试都解出的任务</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Best suite</span><span class="bench-lang-zh">最佳 suite</span></span>
+            <strong>4/4</strong>
+            <em><span class="bench-lang-en">future-architect/vuls release 012</span><span class="bench-lang-zh">future-architect/vuls release 012</span></em>
+          </div>
+          
+          <div class="model-aside-stat">
+            <span><span class="bench-lang-en">Strict audit</span><span class="bench-lang-zh">严格复核</span></span>
+            <strong>-4.72</strong>
+            <em><span class="bench-lang-en">Final Score delta after reverify</span><span class="bench-lang-zh">复核后的 Final Score 变化</span></em>
+          </div>
+          
+        </div>
+      </aside>
+      
+
+      <div class="model-prose">
+        <div class="bench-lang-en">
+
+  <p>GLM 5.2’s result is interesting because it does <strong>not</strong> look like a model that is equally good everywhere. It looks like a model with a strong center of gravity. When the benchmark asks for a localized repair, a schema change with obvious tests, or a Python service fix where the failing test points at the right layer, it behaves like a first-place agent. When the task asks it to move a product feature through several packages and keep every consumer aligned, the same model can look surprisingly ordinary.</p>
+
+  <p>That is why the rank-1 number is useful, but the shape behind it matters more than the number itself.</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls · release 012</span></span>
+        <strong>4/4 · 100.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 100.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Localized Go vulnerability-scanner patches; the best clean-room signal in this run.</span><span class="bench-lang-zh">局部 Go 漏洞扫描器修复；这次运行里最干净的强项信号。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">openlibrary · release 013</span><span class="bench-lang-zh">openlibrary · release 013</span></span>
+        <strong>8/10 · 80.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 80.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Large Python/Django surface where failing tests usually point to the right subsystem.</span><span class="bench-lang-zh">大型 Python/Django 代码面，但失败测试通常能把方向指到正确子系统。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">openlibrary · release 015</span><span class="bench-lang-zh">openlibrary · release 015</span></span>
+        <strong>7/10 · 70.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 70.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Bibliographic metadata and import-path fixes: broad codebase, but concrete invariants.</span><span class="bench-lang-zh">书目元数据和导入路径修复：代码面很大，但不变量清楚。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">ansible · release 004</span><span class="bench-lang-zh">ansible · release 004</span></span>
+        <strong>2/3 · 66.7%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 66.7%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">ansible · release 001</span><span class="bench-lang-zh">ansible · release 001</span></span>
+        <strong>6/10 · 60.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 60.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 010</span><span class="bench-lang-zh">vuls · release 010</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">flipt · release 008</span><span class="bench-lang-zh">flipt · release 008</span></span>
+        <strong>2/10 · 20.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 20.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Feature-flag service work where the patch must land across API, storage, and UI-adjacent boundaries.</span><span class="bench-lang-zh">feature flag 服务里的跨层改动，补丁必须同时落到 API、存储和接近 UI 的边界。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">flipt · release 006</span><span class="bench-lang-zh">flipt · release 006</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">navidrome · release 017</span><span class="bench-lang-zh">navidrome · release 017</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">User-facing Go service tasks that combine migrations, repositories, and API behavior.</span><span class="bench-lang-zh">面向用户的 Go 服务任务，往往同时牵涉 migration、repository 和 API 行为。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">QtWebEngine runtime behavior and browser integration; zero successful tasks in this export.</span><span class="bench-lang-zh">QtWebEngine 运行时行为和浏览器集成；这次导出中没有成功任务。</span></p>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>The best version of GLM 5.2 shows up in two clusters. The first is <strong>Open Library</strong>, a large Django-era Python codebase with enough tests and naming convention to reward careful search. GLM 5.2 solved 8/10 tasks in <code class="language-plaintext highlighter-rouge">release-zh-013</code> and 7/10 in <code class="language-plaintext highlighter-rouge">release-zh-015</code>; more importantly, 12 of those Open Library tasks were stable enough to pass in all three attempts across the two suites.</p>
+
+  <p>The second cluster is <strong>ops-shaped code</strong>: Ansible modules, inventory behavior, and vuls scanner configuration. These are not trivial tasks, but they tend to expose a narrow invariant. In vuls release 012, the model went 4/4. In one representative task, it had to add Docker image digest support through config structs, validation, and scan-result output. That is exactly the kind of patch where GLM 5.2 can read the tests, find the right seam in the codebase, and finish without inventing a larger product design.</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Clean win</span><span class="bench-lang-zh">干净胜利</span></span>
+      <strong><span class="bench-lang-en">Docker image digest support in vuls</span><span class="bench-lang-zh">vuls 中的 Docker image digest 支持</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 3/3</span><span class="bench-lang-zh">future-architect/vuls · 3/3 解出</span></em>
+      <p><span class="bench-lang-en">A compact schema-and-validation change: add Digest, compute full image names, and keep scan output consistent.</span><span class="bench-lang-zh">一个紧凑的 schema 和 validation 改动：加入 Digest、计算完整镜像名，并保持扫描输出一致。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Repeatable win</span><span class="bench-lang-zh">可复现胜利</span></span>
+      <strong><span class="bench-lang-en">PrioritizedIdentifier in Open Library</span><span class="bench-lang-zh">Open Library 的 PrioritizedIdentifier</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 3/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3/3 解出</span></em>
+      <p><span class="bench-lang-en">A large Python codebase, but the task has crisp object semantics and serialization expectations.</span><span class="bench-lang-zh">虽然是大型 Python 代码库，但对象语义和序列化预期都很清楚。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Miss pattern</span><span class="bench-lang-zh">失误模式</span></span>
+      <strong><span class="bench-lang-en">Kubernetes authentication in Flipt</span><span class="bench-lang-zh">Flipt 里的 Kubernetes authentication</span></strong>
+      <em><span class="bench-lang-en">flipt-io/flipt · failed 0/3</span><span class="bench-lang-zh">flipt-io/flipt · 0/3 失败</span></em>
+      <p><span class="bench-lang-en">The change spans configuration, auth wiring, defaults, and tests; this is where GLM 5.2 starts dropping indirect consumers.</span><span class="bench-lang-zh">改动横跨配置、认证接线、默认值和测试；GLM 5.2 在这里开始漏掉间接消费者。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">QtWebEngine 6.7 dark-mode runtime support</span><span class="bench-lang-zh">QtWebEngine 6.7 dark-mode 运行时支持</span></strong>
+      <em><span class="bench-lang-en">qutebrowser/qutebrowser · failed 0/3</span><span class="bench-lang-zh">qutebrowser/qutebrowser · 0/3 失败</span></em>
+      <p><span class="bench-lang-en">The patch must respect browser runtime state, URL patterns, and Qt version behavior together.</span><span class="bench-lang-zh">补丁必须同时处理浏览器运行状态、URL pattern 和 Qt 版本行为。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>The weak side has a different texture. <strong>Flipt</strong> asks for product plumbing: authentication methods, feature-flag semantics, storage interfaces, API behavior, and UI-adjacent surfaces have to move together. GLM 5.2 often makes the obvious local edit, then misses a second-order consumer. That is why the Flipt releases sit at 10-40%, with several suites around 1-2 solved tasks out of 10.</p>
+
+  <p><strong>qutebrowser</strong> and <strong>Navidrome</strong> are even harsher. qutebrowser release 018 is 0/9, and Navidrome release 017 is 0/5. The qutebrowser failures are not about Python syntax; they are about runtime behavior across QtWebEngine versions, dark-mode settings, URL pattern support, and browser state. Navidrome’s misses are Go service changes that combine schema migration, repository interfaces, and HTTP/Subsonic behavior. In both cases, the patch has to remain coherent after it leaves the first file.</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Initial harness verdict vs stricter verifier-backed audit</span><span class="bench-lang-zh">初始 harness 判定 vs 更严格的 verifier-backed 复核</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 72%; --rejected-pct: 28%;" aria-hidden="true">
+      <span>72%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">101 of 140 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">140 次初始成功里，101 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The audit does not knock GLM 5.2 out of the top tier, but it changes the reading: the headline rank is powered by real wins, with a non-trivial band of brittle successes.</span><span class="bench-lang-zh">复核并没有把 GLM 5.2 打出第一梯队，但它改变了读法：榜首来自真实强项，同时也存在一段不可忽略的脆弱成功。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>101 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>39 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>37.59</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>32.87</span>
+    <em><span class="bench-lang-en">-4.72 points</span><span class="bench-lang-zh">-4.72 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>The verifier audit is the main caveat. The headline run reports 140 <code class="language-plaintext highlighter-rouge">harness-ok</code> attempts out of 453. Under the stricter re-verification pass, 101 remain verifier-backed, moving the score from 37.59 to 32.87. That does not make the result disposable; it means the right reading is “top-tier, but with a visible brittle band,” not “dominates the suite.”</p>
+
+  <p>So if you are choosing an agent, I would treat GLM 5.2 as a strong default for <strong>Python services, ops tooling, Ansible-style automation, and localized backend repairs</strong>. I would be more cautious when the task is a <strong>Go product feature</strong> that touches storage, API, auth, and frontend consumers at once, or a browser/runtime integration where the tests encode behavior that is not obvious from static code search.</p>
+
+  <details class="model-evidence">
+  <summary>Supporting suite table</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>Solved</th>
+          <th>Pass^3</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/4</td>
+          <td>3</td>
+          <td>100.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>8/10</td>
+          <td>6</td>
+          <td>80.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>7/10</td>
+          <td>6</td>
+          <td>70.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-004-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>2/3</td>
+          <td>2</td>
+          <td>66.7%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>6/10</td>
+          <td>3</td>
+          <td>60.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-010-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>5/10</td>
+          <td>3</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>2/10</td>
+          <td>1</td>
+          <td>20.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-006-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>1/10</td>
+          <td>1</td>
+          <td>10.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-017-navidrome-navidrome</code></td>
+          <td>navidrome/navidrome</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+<div class="bench-lang-zh">
+
+  <p>GLM 5.2 这次结果有意思的地方在于，它不像是一个「所有地方都同样强」的模型，而更像是一个重心很明确的模型。benchmark 如果要求的是局部修复、schema 调整、测试指向清楚的 Python 服务问题，它就很像第一名。可一旦任务变成跨多个 package 的产品功能，需要把配置、存储、API、消费者一起对齐，同一个模型就会显得普通很多。</p>
+
+  <p>所以 rank 1 这个数字有意义，但更值得看的其实是它背后的能力形状。</p>
+
+  <figure class="model-visual model-suite-bars">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Where the score comes from</span><span class="bench-lang-zh">分数从哪里来</span></span>
+    <em><span class="bench-lang-en">Selected high and low suites, grouped by pass-at-least-once rate.</span><span class="bench-lang-zh">选取高分和低分 suite，按三次尝试至少解出一次的比例展示。</span></em>
+  </figcaption>
+  <div class="model-suite-bar-list">
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 012</span><span class="bench-lang-zh">vuls · release 012</span></span>
+        <strong>4/4 · 100.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 100.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Localized Go vulnerability-scanner patches; the best clean-room signal in this run.</span><span class="bench-lang-zh">局部 Go 漏洞扫描器修复；这次运行里最干净的强项信号。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">openlibrary · release 013</span><span class="bench-lang-zh">openlibrary · release 013</span></span>
+        <strong>8/10 · 80.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 80.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Large Python/Django surface where failing tests usually point to the right subsystem.</span><span class="bench-lang-zh">大型 Python/Django 代码面，但失败测试通常能把方向指到正确子系统。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">openlibrary · release 015</span><span class="bench-lang-zh">openlibrary · release 015</span></span>
+        <strong>7/10 · 70.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 70.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Bibliographic metadata and import-path fixes: broad codebase, but concrete invariants.</span><span class="bench-lang-zh">书目元数据和导入路径修复：代码面很大，但不变量清楚。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">ansible · release 004</span><span class="bench-lang-zh">ansible · release 004</span></span>
+        <strong>2/3 · 66.7%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 66.7%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">ansible · release 001</span><span class="bench-lang-zh">ansible · release 001</span></span>
+        <strong>6/10 · 60.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 60.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">vuls · release 010</span><span class="bench-lang-zh">vuls · release 010</span></span>
+        <strong>5/10 · 50.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 50.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">flipt · release 008</span><span class="bench-lang-zh">flipt · release 008</span></span>
+        <strong>2/10 · 20.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 20.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">Feature-flag service work where the patch must land across API, storage, and UI-adjacent boundaries.</span><span class="bench-lang-zh">feature flag 服务里的跨层改动，补丁必须同时落到 API、存储和接近 UI 的边界。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">flipt · release 006</span><span class="bench-lang-zh">flipt · release 006</span></span>
+        <strong>1/10 · 10.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 10.0%"></span>
+      </div>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">navidrome · release 017</span><span class="bench-lang-zh">navidrome · release 017</span></span>
+        <strong>0/5 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">User-facing Go service tasks that combine migrations, repositories, and API behavior.</span><span class="bench-lang-zh">面向用户的 Go 服务任务，往往同时牵涉 migration、repository 和 API 行为。</span></p>
+      
+    </div>
+    
+    
+    <div class="model-suite-row">
+      <div class="model-suite-row-head">
+        <span><span class="bench-lang-en">qutebrowser · release 018</span><span class="bench-lang-zh">qutebrowser · release 018</span></span>
+        <strong>0/9 · 0.0%</strong>
+      </div>
+      <div class="model-suite-track" aria-hidden="true">
+        <span style="width: 0.0%"></span>
+      </div>
+      
+      <p><span class="bench-lang-en">QtWebEngine runtime behavior and browser integration; zero successful tasks in this export.</span><span class="bench-lang-zh">QtWebEngine 运行时行为和浏览器集成；这次导出中没有成功任务。</span></p>
+      
+    </div>
+    
+  </div>
+</figure>
+
+  <p>GLM 5.2 最好的表现集中在两类任务里。第一类是 <strong>Open Library</strong>。这是一个比较大的 Python/Django 代码库，但测试、命名和对象边界足够明确，能奖励认真搜索和小心改动。GLM 5.2 在 <code class="language-plaintext highlighter-rouge">release-zh-013</code> 解出 8/10，在 <code class="language-plaintext highlighter-rouge">release-zh-015</code> 解出 7/10；更重要的是，这两个 suite 里有 12 道 Open Library 题稳定到三次尝试都能通过。</p>
+
+  <p>第二类是 <strong>偏运维形态的代码</strong>：Ansible module、inventory 行为、vuls 扫描器配置。这些题并不简单，但往往会暴露一个相对窄的不变量。比如 vuls release 012 里它做到了 4/4。一个代表性题目是给 Docker image 增加 digest 支持，补丁要穿过 config struct、validation 和 scan result 输出。这种题正好落在 GLM 5.2 的舒适区：读测试，找到正确位置，完成改动，不需要发明一套更大的产品设计。</p>
+
+  <aside class="model-case-strip">
+  <div class="model-section-label"><span class="bench-lang-en">Concrete examples</span><span class="bench-lang-zh">具体题目例子</span></div>
+  <div class="model-case-grid">
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Clean win</span><span class="bench-lang-zh">干净胜利</span></span>
+      <strong><span class="bench-lang-en">Docker image digest support in vuls</span><span class="bench-lang-zh">vuls 中的 Docker image digest 支持</span></strong>
+      <em><span class="bench-lang-en">future-architect/vuls · solved 3/3</span><span class="bench-lang-zh">future-architect/vuls · 3/3 解出</span></em>
+      <p><span class="bench-lang-en">A compact schema-and-validation change: add Digest, compute full image names, and keep scan output consistent.</span><span class="bench-lang-zh">一个紧凑的 schema 和 validation 改动：加入 Digest、计算完整镜像名，并保持扫描输出一致。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-win">
+      <span><span class="bench-lang-en">Repeatable win</span><span class="bench-lang-zh">可复现胜利</span></span>
+      <strong><span class="bench-lang-en">PrioritizedIdentifier in Open Library</span><span class="bench-lang-zh">Open Library 的 PrioritizedIdentifier</span></strong>
+      <em><span class="bench-lang-en">internetarchive/openlibrary · solved 3/3</span><span class="bench-lang-zh">internetarchive/openlibrary · 3/3 解出</span></em>
+      <p><span class="bench-lang-en">A large Python codebase, but the task has crisp object semantics and serialization expectations.</span><span class="bench-lang-zh">虽然是大型 Python 代码库，但对象语义和序列化预期都很清楚。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Miss pattern</span><span class="bench-lang-zh">失误模式</span></span>
+      <strong><span class="bench-lang-en">Kubernetes authentication in Flipt</span><span class="bench-lang-zh">Flipt 里的 Kubernetes authentication</span></strong>
+      <em><span class="bench-lang-en">flipt-io/flipt · failed 0/3</span><span class="bench-lang-zh">flipt-io/flipt · 0/3 失败</span></em>
+      <p><span class="bench-lang-en">The change spans configuration, auth wiring, defaults, and tests; this is where GLM 5.2 starts dropping indirect consumers.</span><span class="bench-lang-zh">改动横跨配置、认证接线、默认值和测试；GLM 5.2 在这里开始漏掉间接消费者。</span></p>
+    </div>
+    
+    <div class="model-case-card model-case-risk">
+      <span><span class="bench-lang-en">Hard miss</span><span class="bench-lang-zh">硬失误</span></span>
+      <strong><span class="bench-lang-en">QtWebEngine 6.7 dark-mode runtime support</span><span class="bench-lang-zh">QtWebEngine 6.7 dark-mode 运行时支持</span></strong>
+      <em><span class="bench-lang-en">qutebrowser/qutebrowser · failed 0/3</span><span class="bench-lang-zh">qutebrowser/qutebrowser · 0/3 失败</span></em>
+      <p><span class="bench-lang-en">The patch must respect browser runtime state, URL patterns, and Qt version behavior together.</span><span class="bench-lang-zh">补丁必须同时处理浏览器运行状态、URL pattern 和 Qt 版本行为。</span></p>
+    </div>
+    
+  </div>
+</aside>
+
+  <p>弱点的质感不一样。<strong>Flipt</strong> 更像产品工程：认证方式、feature flag 语义、存储接口、API 行为，以及接近 UI 的表面要一起动。GLM 5.2 经常能做出最明显的局部编辑，但会漏掉第二层消费者。因此 Flipt 几个 release 大多在 10-40%，有些 suite 只有 10 道题里解出 1 到 2 道。</p>
+
+  <p><strong>qutebrowser</strong> 和 <strong>Navidrome</strong> 更苛刻。qutebrowser release 018 是 0/9，Navidrome release 017 是 0/5。qutebrowser 的失败不是 Python 语法问题，而是 QtWebEngine 版本、dark mode 设置、URL pattern、浏览器运行状态要同时成立。Navidrome 的失败则是 Go 服务里的 schema migration、repository interface、HTTP/Subsonic 行为一起变化。两者都要求补丁离开第一处文件后仍然保持一致。</p>
+
+  <figure class="model-visual model-audit-card">
+  <figcaption>
+    <span class="model-section-label"><span class="bench-lang-en">Verifier Audit</span><span class="bench-lang-zh">复核审计</span></span>
+    <em><span class="bench-lang-en">Initial harness verdict vs stricter verifier-backed audit</span><span class="bench-lang-zh">初始 harness 判定 vs 更严格的 verifier-backed 复核</span></em>
+  </figcaption>
+
+  <div class="model-audit-visual">
+    <div class="model-audit-ring" style="--accepted-pct: 72%; --rejected-pct: 28%;" aria-hidden="true">
+      <span>72%</span>
+    </div>
+    <div class="model-audit-copy">
+      <strong>
+        <span class="bench-lang-en">101 of 140 headline successes survived strict re-verification.</span>
+        <span class="bench-lang-zh">140 次初始成功里，101 次通过了更严格的复核。</span>
+      </strong>
+      <p><span class="bench-lang-en">The audit does not knock GLM 5.2 out of the top tier, but it changes the reading: the headline rank is powered by real wins, with a non-trivial band of brittle successes.</span><span class="bench-lang-zh">复核并没有把 GLM 5.2 打出第一梯队，但它改变了读法：榜首来自真实强项，同时也存在一段不可忽略的脆弱成功。</span></p>
+      <div class="model-audit-legend">
+        <span><i class="is-accepted"></i>101 <span class="bench-lang-en">verifier-backed</span><span class="bench-lang-zh">复核通过</span></span>
+        <span><i class="is-rejected"></i>39 <span class="bench-lang-en">strict rejected</span><span class="bench-lang-zh">严格拒绝</span></span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="model-audit-scoreline">
+    <span>37.59</span>
+    <b aria-hidden="true"><span class="bench-lang-en">to</span><span class="bench-lang-zh">到</span></b>
+    <span>32.87</span>
+    <em><span class="bench-lang-en">-4.72 points</span><span class="bench-lang-zh">-4.72 分</span></em>
+  </div>
+  
+</figure>
+
+  <p>审计是主要 caveat。初始运行里有 140 次 <code class="language-plaintext highlighter-rouge">harness-ok</code>，但在更严格的 verifier-backed 复核下，保留下来的有 101 次，Final Score 从 37.59 变成 32.87。这不代表结果不能用，而是读法要更精确：它确实是第一梯队，而且有真实强项，但不是「全场统治」，中间存在一段明显的脆弱成功。</p>
+
+  <p>如果你在选 agent，我会把 GLM 5.2 当成 <strong>Python 服务、运维工具、Ansible 风格自动化、局部后端修复</strong> 的强默认选择。但如果任务是 <strong>Go 产品功能</strong>，同时触碰 storage、API、auth 和前端消费者，或者是浏览器/runtime 集成，测试里编码了很多静态搜索看不出来的行为，我会更谨慎。</p>
+
+  <details class="model-evidence">
+  <summary>支撑这个判断的 suite 表</summary>
+  <div class="model-evidence-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Suite</th>
+          <th>Repo</th>
+          <th>解出</th>
+          <th>Pass^3</th>
+          <th>通过率</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><code>release-zh-012-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>4/4</td>
+          <td>3</td>
+          <td>100.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-013-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>8/10</td>
+          <td>6</td>
+          <td>80.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-015-internetarchive-openlibrary</code></td>
+          <td>internetarchive/openlibrary</td>
+          <td>7/10</td>
+          <td>6</td>
+          <td>70.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-004-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>2/3</td>
+          <td>2</td>
+          <td>66.7%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-001-ansible-ansible</code></td>
+          <td>ansible/ansible</td>
+          <td>6/10</td>
+          <td>3</td>
+          <td>60.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-010-future-architect-vuls</code></td>
+          <td>future-architect/vuls</td>
+          <td>5/10</td>
+          <td>3</td>
+          <td>50.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-008-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>2/10</td>
+          <td>1</td>
+          <td>20.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-006-flipt-io-flipt</code></td>
+          <td>flipt-io/flipt</td>
+          <td>1/10</td>
+          <td>1</td>
+          <td>10.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-017-navidrome-navidrome</code></td>
+          <td>navidrome/navidrome</td>
+          <td>0/5</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+        <tr>
+          <td><code>release-zh-018-qutebrowser-qutebrowser</code></td>
+          <td>qutebrowser/qutebrowser</td>
+          <td>0/9</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</details>
+
+</div>
+
+      </div>
+    </div>
+
+    
+    <section class="model-related">
+      <div>
+        <div class="model-section-label"><span class="bench-lang-en">Related Models</span><span class="bench-lang-zh">相关模型</span></div>
+        <h2><span class="bench-lang-en">Same neighborhood on the leaderboard</span><span class="bench-lang-zh">榜单附近的参照物</span></h2>
+      </div>
+      <div class="model-related-grid">
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/">
+          <span><span class="bench-lang-en">Nearest challenger</span><span class="bench-lang-zh">最近挑战者</span></span>
+          <strong>GPT 5.5 (xhigh)</strong>
+          <em><span class="bench-lang-en">Rank #2 · 36.88 Final Score</span><span class="bench-lang-zh">排名 #2 · 36.88 Final Score</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/">
+          <span><span class="bench-lang-en">Previous GLM</span><span class="bench-lang-zh">上一代 GLM</span></span>
+          <strong>GLM 5.1</strong>
+          <em><span class="bench-lang-en">Rank #8 · 31.74 Final Score</span><span class="bench-lang-zh">排名 #8 · 31.74 Final Score</span></em>
+        </a>
+        
+        <a class="model-related-card" href="/bench/code-agent-bench/">
+          <span><span class="bench-lang-en">Same agent family</span><span class="bench-lang-zh">同 agent 家族</span></span>
+          <strong>GLM 5 turbo</strong>
+          <em><span class="bench-lang-en">Rank #16 · 28.95 Final Score</span><span class="bench-lang-zh">排名 #16 · 28.95 Final Score</span></em>
+        </a>
+        
+      </div>
+    </section>
+    
+  </div>
+</article>
+
+    </main>
+  </body>
+</html>
