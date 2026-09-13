@@ -32,24 +32,19 @@
 }
 
 #header-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: .55em;
+  display: block;
   width: max-content;
-  justify-content: flex-start;
+  transition: opacity .25s ease, transform .25s ease, color .5s;
 }
 
 #header-logo svg {
   display: none !important;
 }
 
-.personal-logo-mark {
-  display: block;
-  width: 2.25rem;
-  height: 2.25rem;
-  flex: 0 0 auto;
-  border-radius: .42rem;
-  object-fit: cover;
+#header-logo.personal-brand-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, -.75rem, 0);
 }
 
 #footer-bottom-tagline[data-personal-hidden-section="true"],
@@ -278,11 +273,6 @@ button:focus-visible {
 }
 
 @media (max-width: 720px) {
-  .personal-logo-mark {
-    width: 1.6rem;
-    height: 1.6rem;
-  }
-
   .personal-wordmark {
     font-size: 1.1rem;
   }
