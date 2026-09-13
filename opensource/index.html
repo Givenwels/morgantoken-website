@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Morgan GitHub 开源项目本地快照">
+    <title>Morgan · GitHub 开源项目</title>
+    <link rel="stylesheet" href="/morgan-content.css">
+  </head>
+  <body data-collection="github" data-source="/migrated/github/repos.json">
+    <a class="skip-link" href="#main">跳到主要内容</a>
+    <header class="site-header">
+      <a class="wordmark" href="/">Morgan</a>
+      <nav aria-label="主导航">
+        <a href="/">首页</a>
+        <a href="/projects">项目</a>
+        <a href="/about">关于</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">Open-source archive</p>
+        <h1 id="page-title">GitHub 开源项目</h1>
+        <p class="intro">迁移快照包含 30 个仓库。搜索名称、描述或编程语言，浏览 Morgan 的公开项目。</p>
+      </section>
+
+      <p id="loading-status" class="status" role="status">正在加载仓库数据…</p>
+      <p id="error-status" class="status status-error" role="alert" hidden></p>
+
+      <section aria-labelledby="repository-title">
+        <div class="section-heading repository-heading">
+          <div>
+            <h2 id="repository-title">仓库目录</h2>
+            <p id="repository-count"></p>
+          </div>
+          <label class="search-field">
+            <span>搜索仓库</span>
+            <input id="repository-search" type="search" placeholder="名称、描述或语言" autocomplete="off">
+          </label>
+        </div>
+        <div id="repository-grid" class="repository-grid"></div>
+      </section>
+    </main>
+
+    <footer>Local snapshot · Morgan</footer>
+    <script type="module" src="/morgan-content.js"></script>
+  </body>
+</html>

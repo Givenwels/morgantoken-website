@@ -1,0 +1,314 @@
+/* Morgan's content layer: preserve the recovered Lusion system beneath it. */
+@font-face {
+  font-family: "Morgan Display";
+  src: url("/assets/fonts/Aeonik-Regular.woff2") format("woff2"),
+       url("/assets/fonts/Aeonik-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Morgan Display";
+  src: url("/assets/fonts/Aeonik-Medium.woff2") format("woff2"),
+       url("/assets/fonts/Aeonik-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --morgan-neutral-overlay: rgba(8, 10, 14, .78);
+  --morgan-neutral-detail-cover: #080a0e;
+  --morgan-focus-ring: #f2e9d8;
+}
+
+.personal-wordmark {
+  display: block;
+  font: 500 1.4rem/1 "Morgan Display", "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: .04em;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+#footer-bottom-tagline[data-personal-hidden-section="true"],
+#end-bottom[data-personal-hidden-section="true"],
+#scroll-nav-section[data-personal-hidden-section="true"] {
+  display: none !important;
+}
+
+/* The archived runtime cannot complete the original network-bound preloader. */
+#preloader {
+  display: none !important;
+}
+
+html[lang="zh-CN"] body,
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2,
+html[lang="zh-CN"] h3,
+html[lang="zh-CN"] h4,
+html[lang="zh-CN"] button,
+html[lang="zh-CN"] input {
+  font-family: "Morgan Display", "PingFang SC", "Microsoft YaHei",
+    "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+}
+
+#home-hero-title {
+  max-width: min(36rem, 100%);
+  font-size: clamp(1.15rem, 1.75vw, 2.25rem);
+  letter-spacing: -.025em;
+}
+
+html[lang="zh-CN"] #home-hero-title,
+html[lang="zh-CN"] #home-reel-title,
+html[lang="zh-CN"] #about-who-title-left,
+html[lang="zh-CN"] #about-who-title-right {
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+html[lang="zh-CN"] #home-reel-title {
+  width: min(84vw, 92rem) !important;
+  max-width: 84vw !important;
+  font-size: clamp(3rem, 5.25vw, 6.75rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -.035em;
+}
+
+html[lang="zh-CN"] #home-reel-title-inner > div {
+  overflow: visible !important;
+}
+
+html[lang="zh-CN"] #home-reel-title-line-1,
+html[lang="zh-CN"] #home-reel-title-line-2 {
+  padding-left: 0 !important;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
+html[lang="zh-CN"] #home-reel-desc,
+html[lang="zh-CN"] #about-capability-subheader-text,
+html[lang="zh-CN"] .about-capability-list-item {
+  font-family: "Morgan Display", "PingFang SC", "Microsoft YaHei",
+    "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+  line-height: 1.5;
+}
+
+#end-section-title {
+  --font-size: clamp(3.75rem, 6.2vw, 7.25rem);
+  max-width: 82vw;
+}
+
+html[lang="zh-CN"] #end-section-title .char-wrapper {
+  top: 0 !important;
+}
+
+#footer-section {
+  min-height: clamp(42rem, 78vh, 52rem);
+}
+
+#footer-top {
+  flex-grow: 0;
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+}
+
+#footer-middle {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(3rem, 7vw, 8rem);
+  row-gap: 0;
+  max-width: 70rem;
+  margin-inline: auto;
+  align-items: center;
+}
+
+#footer-middle-contact {
+  display: block;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: center;
+}
+
+#footer-contact-enquires {
+  margin-top: 0;
+}
+
+#footer-bottom {
+  margin-top: clamp(2.5rem, 5vh, 4rem);
+}
+
+#footer-wechat {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: center;
+  width: min(100%, 20rem);
+}
+
+.footer-wechat-title {
+  margin: 1rem 0 .45rem;
+  font-size: clamp(1.35rem, 2vw, 2.25rem);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.footer-wechat-caption {
+  margin: 0 0 1rem;
+  color: rgba(8, 10, 14, .62);
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.footer-wechat-image {
+  display: block;
+  width: min(100%, 17rem);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about-capability-card-header-text,
+.about-capability-list-item {
+  overflow-wrap: anywhere;
+}
+
+.project-item[data-personal-status="pending"] .project-item-main,
+.project-details-item[data-personal-status="pending"] {
+  filter: grayscale(1) brightness(.22);
+}
+
+.project-item[data-personal-status="pending"] .project-item-main {
+  position: relative;
+}
+
+.project-item[data-personal-status="pending"] .project-item-main::after {
+  content: "视觉素材待替换";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 3;
+  color: #fff;
+  font: 500 clamp(.8rem, 1.4vw, 1.1rem)/1.2 "Aeonik", "PingFang SC", sans-serif;
+  letter-spacing: .06em;
+  text-align: center;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, .65);
+  pointer-events: none;
+}
+
+.project-item[data-personal-hidden="true"],
+.project-item[hidden] {
+  display: none !important;
+}
+
+#project-details-launch-cta[aria-disabled="true"],
+#project-details-launch-cta-mobile[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: .55;
+  pointer-events: none;
+}
+
+#project-details[data-personal-empty="true"] #project-details-items-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+#project-details[data-personal-empty="true"] .project-details-item[data-personal-status="pending"] {
+  visibility: hidden !important;
+}
+
+#project-details[data-personal-empty="true"] #project-details-items-wrapper::after {
+  content: "视觉素材待替换";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 4;
+  min-height: 12rem;
+  color: var(--project-details-color-text, #fff);
+  background: var(--morgan-neutral-detail-cover);
+  font: 500 clamp(.8rem, 1.4vw, 1.1rem)/1.2 "Aeonik", "PingFang SC", sans-serif;
+  letter-spacing: .06em;
+  text-align: center;
+  pointer-events: none;
+}
+
+@media (min-width: 813px) {
+  #home-hero-title {
+    grid-column: 3 / span 5;
+  }
+
+  #project-details[data-personal-empty="true"] #project-details-items-wrapper {
+    overflow: visible;
+  }
+
+  #project-details[data-personal-empty="true"] #project-details-items-wrapper::after {
+    left: calc(-1 * var(--base-padding-x));
+    right: auto;
+    width: 100vw;
+  }
+}
+
+#header-logo:focus-visible,
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--morgan-focus-ring);
+  outline-offset: 4px;
+}
+
+@media (max-width: 720px) {
+  .personal-wordmark {
+    font-size: 1.1rem;
+  }
+
+  html[lang="zh-CN"] #home-reel-title {
+    width: 90vw !important;
+    max-width: 90vw !important;
+    font-size: clamp(2.25rem, 10vw, 4.25rem) !important;
+    line-height: 1.1 !important;
+  }
+
+  #home-hero-title {
+    max-width: 88vw;
+    font-size: clamp(1.25rem, 5.25vw, 2.4rem);
+  }
+
+  #end-section-title {
+    --font-size: clamp(2.1rem, 8.5vw, 3.75rem);
+    max-width: 92vw;
+  }
+
+  html[lang="zh-CN"] #home-reel-title-line-1,
+  html[lang="zh-CN"] #home-reel-title-line-2 {
+    white-space: normal;
+  }
+
+  #footer-middle {
+    grid-template-columns: 1fr;
+    row-gap: 3rem;
+  }
+
+  #footer-wechat {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    width: min(100%, 18rem);
+  }
+
+  html[lang="zh-CN"] #about-who-title-left,
+  html[lang="zh-CN"] #about-who-title-right {
+    max-width: 100%;
+  }
+
+  .project-item[data-personal-status="pending"] .project-item-main::after,
+  #project-details[data-personal-empty="true"] #project-details-items-wrapper::after {
+    padding-inline: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-item[data-personal-status="pending"] .project-item-main::after,
+  #project-details[data-personal-empty="true"] #project-details-items-wrapper::after {
+    transition: none;
+  }
+}

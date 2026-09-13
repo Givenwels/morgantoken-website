@@ -1,0 +1,1277 @@
+{
+  "generatedAt": "2026-09-05T06:12:13.991Z",
+  "source": {
+    "name": "Morgan ClawBench",
+    "basedOn": "ClawProBench",
+    "url": "https://github.com/suyoumo/ClawProBench",
+    "engineLicense": "Apache-2.0",
+    "siteLicense": "AGPL-3.0"
+  },
+  "meta": {
+    "taskCount": 102,
+    "modelCount": 70,
+    "localRuns": 0
+  },
+  "leaderboard": [
+    {
+      "rank": 1,
+      "name": "GLM-5.2",
+      "provider": "glm",
+      "final": 77.2,
+      "overall": 81.3,
+      "capabilities": {
+        "toolUse": 69.7,
+        "planning": 72,
+        "constraints": 62.5,
+        "recovery": 69.1,
+        "synthesis": 66,
+        "safety": 57
+      },
+      "efficiency": 98.3,
+      "priceOutCny": 14,
+      "updated": "2026-06-14"
+    },
+    {
+      "rank": 2,
+      "name": "agnes-2.0-flash",
+      "provider": "agnes",
+      "final": 74.6,
+      "overall": 77,
+      "capabilities": {
+        "toolUse": 85.4,
+        "planning": 72,
+        "constraints": 76.9,
+        "recovery": 77.5,
+        "synthesis": 79.3,
+        "safety": 69.9
+      },
+      "efficiency": 96.8,
+      "priceOutCny": 0,
+      "updated": "2026-06-23"
+    },
+    {
+      "rank": 3,
+      "name": "intern-s2-preview",
+      "provider": "ShangHai AILab",
+      "final": 73.7,
+      "overall": 76.7,
+      "capabilities": {
+        "toolUse": 82.2,
+        "planning": 79.2,
+        "constraints": 76.9,
+        "recovery": 73.7,
+        "synthesis": 75.2,
+        "safety": 70.5
+      },
+      "efficiency": 89.8,
+      "priceOutCny": 0,
+      "updated": "2026-05-16"
+    },
+    {
+      "rank": 4,
+      "name": "MiniMax-M3",
+      "provider": "minimax",
+      "final": 73.2,
+      "overall": 75.1,
+      "capabilities": {
+        "toolUse": 84.2,
+        "planning": 68.6,
+        "constraints": 78,
+        "recovery": 78.1,
+        "synthesis": 80.2,
+        "safety": 61
+      },
+      "efficiency": 88.5,
+      "priceOutCny": 0,
+      "updated": "2026-06-05"
+    },
+    {
+      "rank": 5,
+      "name": "Sensenova 6.7 Flash Lite",
+      "provider": "sensetime",
+      "final": 71.6,
+      "overall": 73.7,
+      "capabilities": {
+        "toolUse": 78.8,
+        "planning": 69.7,
+        "constraints": 70.1,
+        "recovery": 78.5,
+        "synthesis": 74.3,
+        "safety": 70.5
+      },
+      "efficiency": 93.8,
+      "priceOutCny": 0,
+      "updated": "2026-05-07"
+    },
+    {
+      "rank": 6,
+      "name": "ERNIE 5.1",
+      "provider": "baidu",
+      "final": 68.6,
+      "overall": 70.7,
+      "capabilities": {
+        "toolUse": 79.4,
+        "planning": 57.5,
+        "constraints": 77.9,
+        "recovery": 73.3,
+        "synthesis": 70.3,
+        "safety": 67.6
+      },
+      "efficiency": 92,
+      "priceOutCny": 22,
+      "updated": "2026-05-10"
+    },
+    {
+      "rank": 7,
+      "name": "step-3.7-flash",
+      "provider": "stepfun",
+      "final": 68.4,
+      "overall": 72,
+      "capabilities": {
+        "toolUse": 77.4,
+        "planning": 71,
+        "constraints": 68.8,
+        "recovery": 74.7,
+        "synthesis": 68.9,
+        "safety": 69.9
+      },
+      "efficiency": 96.3,
+      "priceOutCny": 0,
+      "updated": "2026-06-04"
+    },
+    {
+      "rank": 8,
+      "name": "gpt-5.5-xhigh",
+      "provider": "openai",
+      "final": 67.9,
+      "overall": 69.3,
+      "capabilities": {
+        "toolUse": 78,
+        "planning": 66.9,
+        "constraints": 70,
+        "recovery": 69.4,
+        "synthesis": 62.7,
+        "safety": 66.8
+      },
+      "efficiency": 100,
+      "priceOutCny": 206.5,
+      "updated": "2026-05-04"
+    },
+    {
+      "rank": 9,
+      "name": "gpt-5.4-xhigh",
+      "provider": "openai",
+      "final": 67.3,
+      "overall": 68,
+      "capabilities": {
+        "toolUse": 75.6,
+        "planning": 66.8,
+        "constraints": 66.8,
+        "recovery": 69.2,
+        "synthesis": 60.7,
+        "safety": 67.1
+      },
+      "efficiency": 100,
+      "priceOutCny": 103.2,
+      "updated": "2026-05-05"
+    },
+    {
+      "rank": 10,
+      "name": "gpt-5.3-codex-xhigh",
+      "provider": "openai",
+      "final": 65.4,
+      "overall": 66.8,
+      "capabilities": {
+        "toolUse": 72.9,
+        "planning": 65.5,
+        "constraints": 65.8,
+        "recovery": 68.7,
+        "synthesis": 59.5,
+        "safety": 66.8
+      },
+      "efficiency": 100,
+      "priceOutCny": 96.4,
+      "updated": "2026-05-06"
+    },
+    {
+      "rank": 11,
+      "name": "deepseek-v4-pro",
+      "provider": "deepseek",
+      "final": 64.4,
+      "overall": 69.6,
+      "capabilities": {
+        "toolUse": 70.1,
+        "planning": 74.9,
+        "constraints": 66.6,
+        "recovery": 72.4,
+        "synthesis": 63.5,
+        "safety": 68.2
+      },
+      "efficiency": 96.6,
+      "priceOutCny": 42,
+      "updated": "2026-04-25"
+    },
+    {
+      "rank": 12,
+      "name": "qwen3.5-plus",
+      "provider": "qwen",
+      "final": 64.2,
+      "overall": 70.1,
+      "capabilities": {
+        "toolUse": 70.7,
+        "planning": 76.5,
+        "constraints": 69.6,
+        "recovery": 75,
+        "synthesis": 59.4,
+        "safety": 67.2
+      },
+      "efficiency": 91.1,
+      "priceOutCny": null,
+      "updated": "2026-04-06"
+    },
+    {
+      "rank": 13,
+      "name": "qwen3.5-397b-a17b",
+      "provider": "qwen",
+      "final": 64.2,
+      "overall": 70.4,
+      "capabilities": {
+        "toolUse": 71.6,
+        "planning": 77.8,
+        "constraints": 72.4,
+        "recovery": 74.5,
+        "synthesis": 57.7,
+        "safety": 65.5
+      },
+      "efficiency": 93.9,
+      "priceOutCny": 18,
+      "updated": "2026-04-30"
+    },
+    {
+      "rank": 14,
+      "name": "mimo-v2.5-pro",
+      "provider": "xiaomi",
+      "final": 63.3,
+      "overall": 68.5,
+      "capabilities": {
+        "toolUse": 70.6,
+        "planning": 74.1,
+        "constraints": 67.4,
+        "recovery": 70.8,
+        "synthesis": 61.9,
+        "safety": 63.9
+      },
+      "efficiency": 97.4,
+      "priceOutCny": 42,
+      "updated": "2026-04-24"
+    },
+    {
+      "rank": 15,
+      "name": "GLM-5.1",
+      "provider": "glm",
+      "final": 62.9,
+      "overall": 69,
+      "capabilities": {
+        "toolUse": 71,
+        "planning": 75.1,
+        "constraints": 65.8,
+        "recovery": 74.1,
+        "synthesis": 56.7,
+        "safety": 68.4
+      },
+      "efficiency": 98.8,
+      "priceOutCny": 22,
+      "updated": "2026-03-30"
+    },
+    {
+      "rank": 16,
+      "name": "doubao-seed-2.0-code",
+      "provider": "seed",
+      "final": 62.4,
+      "overall": 67.7,
+      "capabilities": {
+        "toolUse": 69.1,
+        "planning": 70.3,
+        "constraints": 62.9,
+        "recovery": 74.6,
+        "synthesis": 60.7,
+        "safety": 67.5
+      },
+      "efficiency": 90.3,
+      "priceOutCny": 48,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 17,
+      "name": "Ring 2.6 1T",
+      "provider": "inclusionai",
+      "final": 62.1,
+      "overall": 65.2,
+      "capabilities": {
+        "toolUse": 77.2,
+        "planning": 59.1,
+        "constraints": 62,
+        "recovery": 65.3,
+        "synthesis": 57.6,
+        "safety": 67.9
+      },
+      "efficiency": 92.1,
+      "priceOutCny": 0,
+      "updated": "2026-05-12"
+    },
+    {
+      "rank": 18,
+      "name": "GLM-5-Turbo",
+      "provider": "glm",
+      "final": 61.9,
+      "overall": 67.4,
+      "capabilities": {
+        "toolUse": 69.9,
+        "planning": 72.3,
+        "constraints": 67.2,
+        "recovery": 66.6,
+        "synthesis": 58.4,
+        "safety": 67.6
+      },
+      "efficiency": 98.1,
+      "priceOutCny": null,
+      "updated": "2026-04-28"
+    },
+    {
+      "rank": 19,
+      "name": "deepseek-v4-flash",
+      "provider": "deepseek",
+      "final": 61.5,
+      "overall": 67.6,
+      "capabilities": {
+        "toolUse": 68.2,
+        "planning": 72.7,
+        "constraints": 66.3,
+        "recovery": 69.8,
+        "synthesis": 61,
+        "safety": 65.5
+      },
+      "efficiency": 95.4,
+      "priceOutCny": 2,
+      "updated": "2026-04-25"
+    },
+    {
+      "rank": 20,
+      "name": "doubao-seed-2.0-pro",
+      "provider": "seed",
+      "final": 61.1,
+      "overall": 68.3,
+      "capabilities": {
+        "toolUse": 73.1,
+        "planning": 70.1,
+        "constraints": 65.1,
+        "recovery": 73.8,
+        "synthesis": 57.4,
+        "safety": 68.3
+      },
+      "efficiency": 97.4,
+      "priceOutCny": 48,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 21,
+      "name": "Claude Sonnet 4.6",
+      "provider": "anthropic",
+      "final": 60.5,
+      "overall": 66.6,
+      "capabilities": {
+        "toolUse": 64,
+        "planning": 71.6,
+        "constraints": 66.8,
+        "recovery": 71.4,
+        "synthesis": 60.2,
+        "safety": 65
+      },
+      "efficiency": 90.9,
+      "priceOutCny": null,
+      "updated": "2026-04-06"
+    },
+    {
+      "rank": 22,
+      "name": "doubao-seed-2.0-lite",
+      "provider": "seed",
+      "final": 60.4,
+      "overall": 66.1,
+      "capabilities": {
+        "toolUse": 70.3,
+        "planning": 66.7,
+        "constraints": 64.8,
+        "recovery": 73.1,
+        "synthesis": 55.1,
+        "safety": 65.1
+      },
+      "efficiency": 93,
+      "priceOutCny": 10.8,
+      "updated": "2026-04-12"
+    },
+    {
+      "rank": 23,
+      "name": "mimo-v2.5",
+      "provider": "xiaomi",
+      "final": 60.4,
+      "overall": 66.6,
+      "capabilities": {
+        "toolUse": 64.8,
+        "planning": 70.9,
+        "constraints": 64.8,
+        "recovery": 72.3,
+        "synthesis": 59.7,
+        "safety": 65.9
+      },
+      "efficiency": 96.6,
+      "priceOutCny": 28,
+      "updated": "2026-04-23"
+    },
+    {
+      "rank": 24,
+      "name": "qwen3.6-plus",
+      "provider": "qwen",
+      "final": 60.2,
+      "overall": 66.9,
+      "capabilities": {
+        "toolUse": 67.2,
+        "planning": 70.9,
+        "constraints": 67.8,
+        "recovery": 71.5,
+        "synthesis": 58.4,
+        "safety": 64
+      },
+      "efficiency": 95.6,
+      "priceOutCny": 48,
+      "updated": "2026-04-22"
+    },
+    {
+      "rank": 25,
+      "name": "DeepSeek-V3.2",
+      "provider": "deepseek-ai",
+      "final": 60.1,
+      "overall": 67.6,
+      "capabilities": {
+        "toolUse": 68.9,
+        "planning": 68.7,
+        "constraints": 65.3,
+        "recovery": 73.3,
+        "synthesis": 62.7,
+        "safety": 65.8
+      },
+      "efficiency": 90.6,
+      "priceOutCny": null,
+      "updated": "2026-04-03"
+    },
+    {
+      "rank": 26,
+      "name": "DeepSeek-V3.2",
+      "provider": "deepseek-ai",
+      "final": 60.1,
+      "overall": 66.7,
+      "capabilities": {
+        "toolUse": 64.2,
+        "planning": 68.8,
+        "constraints": 65.4,
+        "recovery": 72.5,
+        "synthesis": 62.5,
+        "safety": 67.1
+      },
+      "efficiency": 86.9,
+      "priceOutCny": null,
+      "updated": "2026-04-06"
+    },
+    {
+      "rank": 27,
+      "name": "huanyuan-3.0-preview",
+      "provider": "tencent",
+      "final": 59.4,
+      "overall": 64.2,
+      "capabilities": {
+        "toolUse": 60.1,
+        "planning": 73.3,
+        "constraints": 63.3,
+        "recovery": 72.6,
+        "synthesis": 53.3,
+        "safety": 61.1
+      },
+      "efficiency": 96,
+      "priceOutCny": 8,
+      "updated": "2026-04-23"
+    },
+    {
+      "rank": 28,
+      "name": "kimi-k2.6",
+      "provider": "moonshot",
+      "final": 59.3,
+      "overall": 67,
+      "capabilities": {
+        "toolUse": 70.6,
+        "planning": 70.4,
+        "constraints": 66.1,
+        "recovery": 68.6,
+        "synthesis": 58.7,
+        "safety": 65.2
+      },
+      "efficiency": 96.7,
+      "priceOutCny": 27,
+      "updated": "2026-04-28"
+    },
+    {
+      "rank": 29,
+      "name": "doubao-seed-code",
+      "provider": "seed",
+      "final": 59.2,
+      "overall": 65,
+      "capabilities": {
+        "toolUse": 68.9,
+        "planning": 63.6,
+        "constraints": 59.8,
+        "recovery": 72.7,
+        "synthesis": 56.7,
+        "safety": 67.2
+      },
+      "efficiency": 93.4,
+      "priceOutCny": 16,
+      "updated": "2026-04-09"
+    },
+    {
+      "rank": 30,
+      "name": "qwen3.6-plus",
+      "provider": "qwen",
+      "final": 59.1,
+      "overall": 65.3,
+      "capabilities": {
+        "toolUse": 64.1,
+        "planning": 71.2,
+        "constraints": 66.7,
+        "recovery": 68.4,
+        "synthesis": 56.2,
+        "safety": 63.3
+      },
+      "efficiency": 91.2,
+      "priceOutCny": 48,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 31,
+      "name": "LongCat-2.0-Preview",
+      "provider": "meituan",
+      "final": 58.8,
+      "overall": 66.3,
+      "capabilities": {
+        "toolUse": 66.1,
+        "planning": 76.4,
+        "constraints": 54.9,
+        "recovery": 72.9,
+        "synthesis": 57.5,
+        "safety": 66.6
+      },
+      "efficiency": 97.1,
+      "priceOutCny": 0,
+      "updated": "2026-04-25"
+    },
+    {
+      "rank": 32,
+      "name": "qwen3.6-27b",
+      "provider": "qwen",
+      "final": 58.7,
+      "overall": 65.5,
+      "capabilities": {
+        "toolUse": 61.5,
+        "planning": 68.9,
+        "constraints": 67.3,
+        "recovery": 71.4,
+        "synthesis": 57.3,
+        "safety": 67.1
+      },
+      "efficiency": 96.7,
+      "priceOutCny": 18,
+      "updated": "2026-04-26"
+    },
+    {
+      "rank": 33,
+      "name": "kimi-k2.5",
+      "provider": "moonshot",
+      "final": 58.5,
+      "overall": 65.4,
+      "capabilities": {
+        "toolUse": 66.9,
+        "planning": 68.3,
+        "constraints": 61.2,
+        "recovery": 72.1,
+        "synthesis": 57.4,
+        "safety": 64.8
+      },
+      "efficiency": 93.8,
+      "priceOutCny": null,
+      "updated": "2026-04-02"
+    },
+    {
+      "rank": 34,
+      "name": "DeepSeekV3.2",
+      "provider": "deepseek-ai",
+      "final": 57.9,
+      "overall": 65.5,
+      "capabilities": {
+        "toolUse": 61.5,
+        "planning": 68,
+        "constraints": 62.6,
+        "recovery": 71.4,
+        "synthesis": 62.7,
+        "safety": 67.4
+      },
+      "efficiency": 87.4,
+      "priceOutCny": null,
+      "updated": "2026-04-06"
+    },
+    {
+      "rank": 35,
+      "name": "mimo-v2-pro",
+      "provider": "xiaomi",
+      "final": 57.9,
+      "overall": 64.7,
+      "capabilities": {
+        "toolUse": 60.1,
+        "planning": 70.3,
+        "constraints": 66.2,
+        "recovery": 66.5,
+        "synthesis": 60.3,
+        "safety": 64.1
+      },
+      "efficiency": 95.9,
+      "priceOutCny": null,
+      "updated": "2026-04-01"
+    },
+    {
+      "rank": 36,
+      "name": "mimo-v2-omni",
+      "provider": "xiaomi",
+      "final": 57.7,
+      "overall": 63.5,
+      "capabilities": {
+        "toolUse": 63.5,
+        "planning": 65.4,
+        "constraints": 59.8,
+        "recovery": 68.9,
+        "synthesis": 57.2,
+        "safety": 65.6
+      },
+      "efficiency": 93.1,
+      "priceOutCny": null,
+      "updated": "2026-04-01"
+    },
+    {
+      "rank": 37,
+      "name": "LongCat-Flash-Thinking-2601",
+      "provider": "meituan",
+      "final": 57.5,
+      "overall": 64.5,
+      "capabilities": {
+        "toolUse": 60.2,
+        "planning": 69.4,
+        "constraints": 65.4,
+        "recovery": 70.3,
+        "synthesis": 58.3,
+        "safety": 63
+      },
+      "efficiency": 94.9,
+      "priceOutCny": 0,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 38,
+      "name": "Ling-2.6-1T",
+      "provider": "tbox",
+      "final": 57.4,
+      "overall": 60.7,
+      "capabilities": {
+        "toolUse": 62.4,
+        "planning": 70.6,
+        "constraints": 57,
+        "recovery": 65.7,
+        "synthesis": 47.4,
+        "safety": 57.1
+      },
+      "efficiency": 91.4,
+      "priceOutCny": 17.2,
+      "updated": "2026-04-25"
+    },
+    {
+      "rank": 39,
+      "name": "qwen3.6-max-preview",
+      "provider": "qwen",
+      "final": 57.4,
+      "overall": 65.2,
+      "capabilities": {
+        "toolUse": 57.7,
+        "planning": 75.2,
+        "constraints": 61.8,
+        "recovery": 71.7,
+        "synthesis": 59.6,
+        "safety": 64.5
+      },
+      "efficiency": 94.9,
+      "priceOutCny": 90,
+      "updated": "2026-04-24"
+    },
+    {
+      "rank": 40,
+      "name": "kimi-k2.6-code-preview",
+      "provider": "moonshot",
+      "final": 57.1,
+      "overall": 62.5,
+      "capabilities": {
+        "toolUse": 62.2,
+        "planning": 67.1,
+        "constraints": 61.2,
+        "recovery": 68.1,
+        "synthesis": 53.2,
+        "safety": 61.4
+      },
+      "efficiency": 94.2,
+      "priceOutCny": 27,
+      "updated": "2026-04-16"
+    },
+    {
+      "rank": 41,
+      "name": "GLM-5",
+      "provider": "glm",
+      "final": 57.1,
+      "overall": 64,
+      "capabilities": {
+        "toolUse": 62.5,
+        "planning": 69.7,
+        "constraints": 59.3,
+        "recovery": 71.9,
+        "synthesis": 53.6,
+        "safety": 65.5
+      },
+      "efficiency": 95.9,
+      "priceOutCny": null,
+      "updated": "2026-03-31"
+    },
+    {
+      "rank": 42,
+      "name": "qwen3.6-35b-a3b",
+      "provider": "qwen",
+      "final": 56.9,
+      "overall": 63.9,
+      "capabilities": {
+        "toolUse": 60.1,
+        "planning": 66.4,
+        "constraints": 62.2,
+        "recovery": 73.9,
+        "synthesis": 57,
+        "safety": 64.3
+      },
+      "efficiency": 96.2,
+      "priceOutCny": 10.8,
+      "updated": "2026-04-26"
+    },
+    {
+      "rank": 43,
+      "name": "qwen3.6-flash",
+      "provider": "qwen",
+      "final": 56.6,
+      "overall": 63.4,
+      "capabilities": {
+        "toolUse": 61.4,
+        "planning": 69.7,
+        "constraints": 61.6,
+        "recovery": 73,
+        "synthesis": 52.6,
+        "safety": 60.5
+      },
+      "efficiency": 94.2,
+      "priceOutCny": 28.8,
+      "updated": "2026-04-26"
+    },
+    {
+      "rank": 44,
+      "name": "GLM-4.6",
+      "provider": "glm",
+      "final": 56.3,
+      "overall": 63.6,
+      "capabilities": {
+        "toolUse": 64.8,
+        "planning": 64.8,
+        "constraints": 59.6,
+        "recovery": 69.7,
+        "synthesis": 57,
+        "safety": 65.2
+      },
+      "efficiency": 93.4,
+      "priceOutCny": null,
+      "updated": "2026-04-05"
+    },
+    {
+      "rank": 45,
+      "name": "qwen3-max-2026-01-23",
+      "provider": "qwen",
+      "final": 55.8,
+      "overall": 59.8,
+      "capabilities": {
+        "toolUse": 62.9,
+        "planning": 72.8,
+        "constraints": 57.6,
+        "recovery": 58.7,
+        "synthesis": 37.2,
+        "safety": 64.1
+      },
+      "efficiency": 95.5,
+      "priceOutCny": 28,
+      "updated": "2026-04-07"
+    },
+    {
+      "rank": 46,
+      "name": "kat-coder-pro-v2",
+      "provider": "kwaipilot",
+      "final": 54.7,
+      "overall": 60.3,
+      "capabilities": {
+        "toolUse": 62.2,
+        "planning": 63.5,
+        "constraints": 60.7,
+        "recovery": 63.3,
+        "synthesis": 47.7,
+        "safety": 63
+      },
+      "efficiency": 88.7,
+      "priceOutCny": null,
+      "updated": "2026-04-01"
+    },
+    {
+      "rank": 47,
+      "name": "GLM-4.7",
+      "provider": "glm",
+      "final": 54.6,
+      "overall": 62.7,
+      "capabilities": {
+        "toolUse": 60.5,
+        "planning": 65.1,
+        "constraints": 63.8,
+        "recovery": 69.2,
+        "synthesis": 53.6,
+        "safety": 63.9
+      },
+      "efficiency": 94.3,
+      "priceOutCny": null,
+      "updated": "2026-04-01"
+    },
+    {
+      "rank": 48,
+      "name": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "final": 54,
+      "overall": 58.1,
+      "capabilities": {
+        "toolUse": 60,
+        "planning": 57.4,
+        "constraints": 54.2,
+        "recovery": 66.2,
+        "synthesis": 49.4,
+        "safety": 61
+      },
+      "efficiency": 95.1,
+      "priceOutCny": null,
+      "updated": "2026-04-02"
+    },
+    {
+      "rank": 49,
+      "name": "hunyuan-2.0-thinking",
+      "provider": "tencent",
+      "final": 52.7,
+      "overall": 60.1,
+      "capabilities": {
+        "toolUse": 57.7,
+        "planning": 57.8,
+        "constraints": 59.8,
+        "recovery": 69.5,
+        "synthesis": 52.1,
+        "safety": 65.4
+      },
+      "efficiency": 91.8,
+      "priceOutCny": 21.2,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 50,
+      "name": "MiniMax-M2.5",
+      "provider": "minimax",
+      "final": 51.8,
+      "overall": 58.8,
+      "capabilities": {
+        "toolUse": 61.1,
+        "planning": 57.6,
+        "constraints": 60.5,
+        "recovery": 60.8,
+        "synthesis": 49,
+        "safety": 63.1
+      },
+      "efficiency": 92.6,
+      "priceOutCny": null,
+      "updated": "2026-04-02"
+    },
+    {
+      "rank": 51,
+      "name": "gemma-4-31b-it",
+      "provider": "google",
+      "final": 51.6,
+      "overall": 56.1,
+      "capabilities": {
+        "toolUse": 59.7,
+        "planning": 50.8,
+        "constraints": 54.5,
+        "recovery": 60.9,
+        "synthesis": 46.8,
+        "safety": 64.5
+      },
+      "efficiency": 95.2,
+      "priceOutCny": null,
+      "updated": "2026-04-11"
+    },
+    {
+      "rank": 52,
+      "name": "Ling-2.5-1T",
+      "provider": "tbox",
+      "final": 51.2,
+      "overall": 54.6,
+      "capabilities": {
+        "toolUse": 60.5,
+        "planning": 56,
+        "constraints": 57.8,
+        "recovery": 52.5,
+        "synthesis": 42.9,
+        "safety": 55.6
+      },
+      "efficiency": 89.3,
+      "priceOutCny": 16,
+      "updated": "2026-04-07"
+    },
+    {
+      "rank": 53,
+      "name": "DeepSeek-R1",
+      "provider": "deepseek",
+      "final": 50.2,
+      "overall": 57.8,
+      "capabilities": {
+        "toolUse": 55.2,
+        "planning": 52,
+        "constraints": 57.3,
+        "recovery": 67.8,
+        "synthesis": 55.2,
+        "safety": 61.9
+      },
+      "efficiency": 99.6,
+      "priceOutCny": 16,
+      "updated": "2026-05-01"
+    },
+    {
+      "rank": 54,
+      "name": "MiniMax-M2.7",
+      "provider": "minimax",
+      "final": 49.5,
+      "overall": 56.8,
+      "capabilities": {
+        "toolUse": 52.3,
+        "planning": 59,
+        "constraints": 55.4,
+        "recovery": 63.6,
+        "synthesis": 51.5,
+        "safety": 60
+      },
+      "efficiency": 94.8,
+      "priceOutCny": null,
+      "updated": "2026-04-02"
+    },
+    {
+      "rank": 55,
+      "name": "kimi-for-coding-k2.6",
+      "provider": "moonshot",
+      "final": 49,
+      "overall": 55.7,
+      "capabilities": {
+        "toolUse": 58.2,
+        "planning": 58.7,
+        "constraints": 53,
+        "recovery": 62.4,
+        "synthesis": 48.9,
+        "safety": 51.4
+      },
+      "efficiency": 46.5,
+      "priceOutCny": null,
+      "updated": "2026-05-01"
+    },
+    {
+      "rank": 56,
+      "name": "gemini-3-flash-preview",
+      "provider": "google",
+      "final": 49,
+      "overall": 53.8,
+      "capabilities": {
+        "toolUse": 37.8,
+        "planning": 54.2,
+        "constraints": 57.1,
+        "recovery": 61.9,
+        "synthesis": 53.7,
+        "safety": 63
+      },
+      "efficiency": 93,
+      "priceOutCny": null,
+      "updated": "2026-04-05"
+    },
+    {
+      "rank": 57,
+      "name": "MiniMax-M2.1",
+      "provider": "minimax",
+      "final": 48.1,
+      "overall": 56.8,
+      "capabilities": {
+        "toolUse": 56,
+        "planning": 58.8,
+        "constraints": 56.4,
+        "recovery": 60.6,
+        "synthesis": 49.3,
+        "safety": 59
+      },
+      "efficiency": 93.1,
+      "priceOutCny": null,
+      "updated": "2026-04-01"
+    },
+    {
+      "rank": 58,
+      "name": "Kimi-K2-Thinking",
+      "provider": "moonshot",
+      "final": 47.8,
+      "overall": 55.2,
+      "capabilities": {
+        "toolUse": 53,
+        "planning": 55.9,
+        "constraints": 54.2,
+        "recovery": 62.3,
+        "synthesis": 51.6,
+        "safety": 54.4
+      },
+      "efficiency": 88.2,
+      "priceOutCny": null,
+      "updated": "2026-04-09"
+    },
+    {
+      "rank": 59,
+      "name": "hunyuan-2.0-instruct",
+      "provider": "tencent",
+      "final": 46.9,
+      "overall": 57.1,
+      "capabilities": {
+        "toolUse": 56.3,
+        "planning": 57.8,
+        "constraints": 55.6,
+        "recovery": 61.9,
+        "synthesis": 48.9,
+        "safety": 62.1
+      },
+      "efficiency": 90.8,
+      "priceOutCny": 11.1,
+      "updated": "2026-04-05"
+    },
+    {
+      "rank": 60,
+      "name": "qwen3-coder-next",
+      "provider": "qwen",
+      "final": 46.8,
+      "overall": 54.6,
+      "capabilities": {
+        "toolUse": 56.5,
+        "planning": 56.4,
+        "constraints": 52.3,
+        "recovery": 57.7,
+        "synthesis": 43.9,
+        "safety": 59.3
+      },
+      "efficiency": 87.7,
+      "priceOutCny": 10,
+      "updated": "2026-04-08"
+    },
+    {
+      "rank": 61,
+      "name": "mistral-small-2603",
+      "provider": "mistralai",
+      "final": 45.3,
+      "overall": 52.4,
+      "capabilities": {
+        "toolUse": 48,
+        "planning": 50.2,
+        "constraints": 51.7,
+        "recovery": 58.6,
+        "synthesis": 50.8,
+        "safety": 57
+      },
+      "efficiency": 90.7,
+      "priceOutCny": null,
+      "updated": "2026-04-06"
+    },
+    {
+      "rank": 62,
+      "name": "grok-4.20",
+      "provider": "x-ai",
+      "final": 43,
+      "overall": 48.8,
+      "capabilities": {
+        "toolUse": 43.4,
+        "planning": 60.2,
+        "constraints": 48.7,
+        "recovery": 50.4,
+        "synthesis": 43.5,
+        "safety": 44.7
+      },
+      "efficiency": 92.3,
+      "priceOutCny": null,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 63,
+      "name": "kimi-for-coding-k2.5",
+      "provider": "moonshot",
+      "final": 42.7,
+      "overall": 52.1,
+      "capabilities": {
+        "toolUse": 47.9,
+        "planning": 57.8,
+        "constraints": 50,
+        "recovery": 55.8,
+        "synthesis": 45.3,
+        "safety": 55.1
+      },
+      "efficiency": 32.3,
+      "priceOutCny": null,
+      "updated": "2026-04-11"
+    },
+    {
+      "rank": 64,
+      "name": "step-3.5-flash-2603",
+      "provider": "stepfun",
+      "final": 42.6,
+      "overall": 52.3,
+      "capabilities": {
+        "toolUse": 55.4,
+        "planning": 50.1,
+        "constraints": 50.9,
+        "recovery": 58.4,
+        "synthesis": 41.9,
+        "safety": 56.9
+      },
+      "efficiency": 86.9,
+      "priceOutCny": 2.1,
+      "updated": "2026-04-02"
+    },
+    {
+      "rank": 65,
+      "name": "step-3.5-flash",
+      "provider": "stepfun",
+      "final": 41.8,
+      "overall": 51.8,
+      "capabilities": {
+        "toolUse": 54.3,
+        "planning": 50.1,
+        "constraints": 49.8,
+        "recovery": 57.3,
+        "synthesis": 40,
+        "safety": 58.8
+      },
+      "efficiency": 86.1,
+      "priceOutCny": null,
+      "updated": "2026-04-04"
+    },
+    {
+      "rank": 66,
+      "name": "Spark X2",
+      "provider": "xunfei",
+      "final": 41.4,
+      "overall": 48.4,
+      "capabilities": {
+        "toolUse": 50.1,
+        "planning": 46.6,
+        "constraints": 45.3,
+        "recovery": 53.6,
+        "synthesis": 39.4,
+        "safety": 55.6
+      },
+      "efficiency": 90.9,
+      "priceOutCny": 3,
+      "updated": "2026-04-07"
+    },
+    {
+      "rank": 67,
+      "name": "step-3.5-flash",
+      "provider": "stepfun",
+      "final": 38.7,
+      "overall": 47.9,
+      "capabilities": {
+        "toolUse": 54.7,
+        "planning": 42.9,
+        "constraints": 39.4,
+        "recovery": 55.6,
+        "synthesis": 40.2,
+        "safety": 53.7
+      },
+      "efficiency": 91.2,
+      "priceOutCny": null,
+      "updated": "2026-04-01"
+    },
+    {
+      "rank": 68,
+      "name": "hunyuan-t1",
+      "provider": "tencent",
+      "final": 34.7,
+      "overall": 41.7,
+      "capabilities": {
+        "toolUse": 35.4,
+        "planning": 40.9,
+        "constraints": 36.2,
+        "recovery": 47.6,
+        "synthesis": 48.9,
+        "safety": 43.2
+      },
+      "efficiency": 94,
+      "priceOutCny": 4,
+      "updated": "2026-04-24"
+    },
+    {
+      "rank": 69,
+      "name": "ERNIE-4.5-Turbo",
+      "provider": "baidu",
+      "final": 33.7,
+      "overall": 42.9,
+      "capabilities": {
+        "toolUse": 44,
+        "planning": 29.1,
+        "constraints": 40.8,
+        "recovery": 54.6,
+        "synthesis": 41,
+        "safety": 52.1
+      },
+      "efficiency": 97.5,
+      "priceOutCny": 3.2,
+      "updated": "2026-04-05"
+    },
+    {
+      "rank": 70,
+      "name": "Ling-2.6-Flash",
+      "provider": "tbox",
+      "final": 27,
+      "overall": 35.8,
+      "capabilities": {
+        "toolUse": 29.2,
+        "planning": 37.4,
+        "constraints": 31,
+        "recovery": 44.7,
+        "synthesis": 30.9,
+        "safety": 43
+      },
+      "efficiency": 99,
+      "priceOutCny": 1.8,
+      "updated": "2026-04-23"
+    }
+  ]
+}
