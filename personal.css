@@ -193,6 +193,51 @@ html[lang="zh-CN"] #end-section-title .char-wrapper {
   filter: grayscale(1) brightness(.22);
 }
 
+.personal-project-media-overlay {
+  position: absolute;
+  left: clamp(1rem, 2.2vw, 2rem);
+  bottom: clamp(1rem, 2.2vw, 2rem);
+  z-index: 2;
+  display: flex;
+  visibility: visible;
+  flex-direction: column;
+  gap: .55rem;
+  max-width: min(78%, 28rem);
+  padding: clamp(.85rem, 1.4vw, 1.25rem) clamp(1rem, 1.8vw, 1.5rem);
+  color: #fff;
+  background: rgba(7, 10, 12, .68);
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: clamp(.75rem, 1vw, 1.1rem);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08),
+    0 12px 32px rgba(0, 0, 0, .24);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.personal-project-media-overlay-eyebrow,
+.personal-project-media-overlay-title {
+  display: block;
+  font-family: "Morgan Display", "PingFang SC", "Microsoft YaHei",
+    "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+}
+
+.personal-project-media-overlay-eyebrow {
+  color: var(--project-details-highlight, #64e1ce);
+  font-size: clamp(.62rem, .75vw, .78rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: .08em;
+}
+
+.personal-project-media-overlay-title {
+  font-size: clamp(1.1rem, 1.65vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
 .project-item[data-personal-status="pending"] .project-item-main {
   position: relative;
 }

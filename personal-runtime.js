@@ -44,6 +44,37 @@ export function createFirstSoundClickGuard(selector = SOUND_BUTTON_SELECTOR) {
   };
 }
 
+export function syncProjectMediaLabel(documentObject = document) {
+  const title = documentObject.querySelector("#project-details-title");
+  const item = documentObject.querySelector(
+    "#project-details-items-move-container .project-details-item",
+  );
+  if (!title || !item) return null;
+
+  let overlay = item.querySelector(".personal-project-media-overlay");
+  if (!overlay) {
+    overlay = documentObject.createElement("div");
+    overlay.className = "personal-project-media-overlay";
+    overlay.setAttribute("aria-hidden", "true");
+
+    const eyebrow = documentObject.createElement("span");
+    eyebrow.className = "personal-project-media-overlay-eyebrow";
+    eyebrow.textContent = "Morgan · 项目实践";
+
+    const overlayTitle = documentObject.createElement("span");
+    overlayTitle.className = "personal-project-media-overlay-title";
+    overlay.append(eyebrow, overlayTitle);
+    item.append(overlay);
+  }
+
+  const overlayTitle = overlay.querySelector(".personal-project-media-overlay-title");
+  const nextTitle = title.textContent.trim();
+  if (overlayTitle && overlayTitle.textContent !== nextTitle) {
+    overlayTitle.textContent = nextTitle;
+  }
+  return overlay;
+}
+
 function installBrandVisibility(documentObject, windowObject) {
   let lastBrand;
   let lastHidden;
@@ -66,10 +97,23 @@ function installBrandVisibility(documentObject, windowObject) {
   windowObject.requestAnimationFrame(update);
 }
 
+function installProjectMediaLabel(documentObject, windowObject) {
+  const sync = () => syncProjectMediaLabel(documentObject);
+  sync();
+  if (!windowObject.MutationObserver || !documentObject.documentElement) return;
+  const observer = new windowObject.MutationObserver(sync);
+  observer.observe(documentObject.documentElement, {
+    childList: true,
+    subtree: true,
+    characterData: true,
+  });
+}
+
 function installBrowserRuntime(documentObject, windowObject) {
   const start = () => {
     prepareInitialMusic(documentObject);
     installBrandVisibility(documentObject, windowObject);
+    installProjectMediaLabel(documentObject, windowObject);
     const guard = createFirstSoundClickGuard();
     documentObject.addEventListener("pointerdown", guard.onPointerDown, true);
     documentObject.addEventListener("click", guard.onClick, true);
