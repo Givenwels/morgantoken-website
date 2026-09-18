@@ -44,8 +44,19 @@ export function createFirstSoundClickGuard(selector = SOUND_BUTTON_SELECTOR) {
   };
 }
 
+export function projectMediaStatement(description) {
+  const text = String(description ?? "").trim();
+  if (!text) return "";
+  return text
+    .split(/[，。！？；\n]/u)
+    .map(part => part.trim())
+    .find(Boolean) ?? "";
+}
+
 export function syncProjectMediaLabel(documentObject = document) {
+  const details = documentObject.querySelector("#project-details");
   const title = documentObject.querySelector("#project-details-title");
+  const description = documentObject.querySelector("#project-details-desc");
   const item = documentObject.querySelector(
     "#project-details-items-move-container .project-details-item",
   );
@@ -59,7 +70,6 @@ export function syncProjectMediaLabel(documentObject = document) {
 
     const eyebrow = documentObject.createElement("span");
     eyebrow.className = "personal-project-media-overlay-eyebrow";
-    eyebrow.textContent = "Morgan · 项目实践";
 
     const overlayTitle = documentObject.createElement("span");
     overlayTitle.className = "personal-project-media-overlay-title";
@@ -67,8 +77,21 @@ export function syncProjectMediaLabel(documentObject = document) {
     item.append(overlay);
   }
 
+  const eyebrow = overlay.querySelector(".personal-project-media-overlay-eyebrow");
   const overlayTitle = overlay.querySelector(".personal-project-media-overlay-title");
-  const nextTitle = title.textContent.trim();
+  const tags = Array.from(
+    documentObject.querySelectorAll?.("#project-details-side-list-services span") ?? [],
+  )
+    .map(tag => tag.textContent.trim())
+    .filter(Boolean)
+    .slice(0, 2);
+  const nextEyebrow = tags.length ? tags.join(" · ") : "Morgan · 项目实践";
+  const nextTitle = details?.dataset?.personalMediaCaption?.trim()
+    || projectMediaStatement(description?.textContent)
+    || title.textContent.trim();
+  if (eyebrow && eyebrow.textContent !== nextEyebrow) {
+    eyebrow.textContent = nextEyebrow;
+  }
   if (overlayTitle && overlayTitle.textContent !== nextTitle) {
     overlayTitle.textContent = nextTitle;
   }
