@@ -53,6 +53,17 @@ export function projectMediaStatement(description) {
     .find(Boolean) ?? "";
 }
 
+function currentProjectMediaCaption(documentObject, title) {
+  const serialized = documentObject.documentElement?.dataset?.personalProjectCaptions;
+  if (!serialized) return "";
+  try {
+    const captions = JSON.parse(serialized);
+    return String(captions?.[title] ?? "").trim();
+  } catch {
+    return "";
+  }
+}
+
 export function syncProjectMediaLabel(documentObject = document) {
   const details = documentObject.querySelector("#project-details");
   const title = documentObject.querySelector("#project-details-title");
@@ -86,9 +97,11 @@ export function syncProjectMediaLabel(documentObject = document) {
     .filter(Boolean)
     .slice(0, 2);
   const nextEyebrow = tags.length ? tags.join(" · ") : "Morgan · 项目实践";
-  const nextTitle = details?.dataset?.personalMediaCaption?.trim()
+  const currentTitle = title.textContent.trim();
+  const nextTitle = currentProjectMediaCaption(documentObject, currentTitle)
+    || details?.dataset?.personalMediaCaption?.trim()
     || projectMediaStatement(description?.textContent)
-    || title.textContent.trim();
+    || currentTitle;
   if (eyebrow && eyebrow.textContent !== nextEyebrow) {
     eyebrow.textContent = nextEyebrow;
   }
