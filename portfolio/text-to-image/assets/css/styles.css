@@ -380,20 +380,20 @@ body.lightbox-open { overflow: hidden; }
   .featured-card:nth-child(even) { width: 88%; margin-left: 12%; }
 }
 
-/* 视频缩略图直接预览首帧（无需封面图） */
-.media-frame video, .featured-image video {
+/* 静态视频封面避免在列表页同时解码几十段视频 */
+.media-frame .video-thumb, .featured-image .video-thumb {
   display: block;
   width: 100%;
   height: auto;
   background: var(--paper-deep);
   transition: transform 0.75s var(--ease), opacity 0.35s ease, filter 0.8s var(--ease);
 }
-.media-button:hover .media-frame video { transform: scale(1.025); }
-.featured-card button:hover .featured-image video { transform: scale(1.018); filter: saturate(1.04); }
+.media-button:hover .media-frame .video-thumb { transform: scale(1.025); }
+.featured-card button:hover .featured-image .video-thumb { transform: scale(1.018); filter: saturate(1.04); }
 
 /* 视频播放指示 */
-.media-frame:has(video), .featured-image:has(video) { position: relative; }
-.media-frame:has(video)::after, .featured-image:has(video)::after {
+.media-frame:has(.video-thumb), .featured-image:has(.video-thumb) { position: relative; }
+.media-frame:has(.video-thumb)::after, .featured-image:has(.video-thumb)::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -410,7 +410,7 @@ body.lightbox-open { overflow: hidden; }
   pointer-events: none;
   transition: transform 0.3s var(--ease), background 0.3s ease;
 }
-.media-frame:has(video)::before, .featured-image:has(video)::before {
+.media-frame:has(.video-thumb)::before, .featured-image:has(.video-thumb)::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -422,7 +422,7 @@ body.lightbox-open { overflow: hidden; }
   border-color: transparent transparent transparent #f7f2ea;
   pointer-events: none;
 }
-.media-button:hover .media-frame:has(video)::after { transform: translate(-50%, -50%) scale(1.1); background: rgba(152, 108, 85, 0.75); }
+.media-button:hover .media-frame:has(.video-thumb)::after { transform: translate(-50%, -50%) scale(1.1); background: rgba(152, 108, 85, 0.75); }
 
 /* 搜索 */
 .search-zone { position: relative; margin: 0 0 16px; }

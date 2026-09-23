@@ -1375,8 +1375,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-5205-(0-2秒) 基础控制：开启高帧率慢动作物理模拟，景深死锁在长裤两侧的工装口袋边....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": true
   },
   {
@@ -1387,8 +1387,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/动物间交互-1.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1399,8 +1399,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-21-7434-三卷3M J20橡胶绝缘自粘带按原图位置静置于浅灰色背景前，前方一段展开的黑色胶....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1411,8 +1411,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-21-2005-三卷3M J20橡胶绝缘自粘带置于浅灰色简洁台面，前方黑色胶带自然展开。主体动作....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1423,8 +1423,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/16 食品广告 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1435,8 +1435,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/食品广告-2.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1447,8 +1447,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-8821-徒步者双脚穿着Salomon越野跑鞋攀踏于粗糙岩石之上，逆光阳光从岩石缝隙透射形....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1459,8 +1459,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-9451-微距环绕运镜，镜头围绕产品瓶身逆时针缓慢旋转，同时由上至下逐步展现整体轮廓，一瓶....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1471,8 +1471,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-21-4717-星巴克白色热饮纸杯矗立于深色木质吧台，右侧麻布咖啡豆袋半开，左侧绿色宣传立牌，背....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1483,8 +1483,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-21-3894-一袋乐事薯片直立摆放在装满新鲜土豆的藤编篮子里，四周被盛开的土豆植株环绕，阳光明... (1).mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1495,8 +1495,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-21-7508-一袋乐事薯片坐落在堆满新鲜土豆的藤编篮子中，背景是繁花盛开的土豆田，天空湛蓝通透....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1507,8 +1507,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-1398-一顶荧光绿色Naturehike挪客双人帐篷搭建于高山草甸，穿橙色冲锋衣的户外人....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1519,8 +1519,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-7956-一名穿着黑色裤子的户外徒步者双脚踩踏岩石，前脚穿着灰白色Salomon越野跑鞋踩....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1531,8 +1531,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-21-2549-一只星巴克白色纸杯立于木质吧台中央，杯盖顶部持续冒出细细白色热气，右侧麻布袋中咖....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1543,8 +1543,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-2254-荧光绿Naturehike挪客帐篷矗立于新疆风格高山草甸，穿橙色连帽冲锋衣的户外....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1555,8 +1555,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/08 直播带货 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1567,8 +1567,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-8652-主体动作：0-1.5秒,男子右手缓慢抬起握住登山包右侧肩带,手指用力收紧调整肩带....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1579,8 +1579,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-4340-主体动作：0-2秒，背橙色登山包的男子头部保持仰望姿态，缓慢眨眼一次，胸腔随呼吸....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1591,8 +1591,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-7681-GAP STUDIO 双模特广告完整画面，左侧深蓝色连衣裙模特、右侧米色风衣模特....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1603,8 +1603,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/kling_20260520_作品_La_Prairie_5381_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1296,
+    "height": 708,
     "featured": false
   },
   {
@@ -1615,8 +1615,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/电商/jimeng-2026-05-20-1087-La Prairie 全套护肤品组合静置于浅蓝色镜面台面上。0–2秒：前景左侧大....mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1627,8 +1627,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/宠物与人交互-2.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": true
   },
   {
@@ -1639,8 +1639,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/22 使用道具 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1651,8 +1651,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/使用道具-2.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1663,8 +1663,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/20 NPC交互 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1675,8 +1675,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/12 新闻播报 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1687,8 +1687,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/10 虚拟偶像 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1699,8 +1699,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_夜晚室内客厅_暖黄色_3417_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1711,8 +1711,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_一位_28_岁的中国_2867_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1723,8 +1723,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_镜头展现燃烧王城_悬_3371_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1735,8 +1735,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/9559e2464a8819456b06c83d62638352.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1280,
+    "height": 720,
     "featured": false
   },
   {
@@ -1747,8 +1747,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/24 宣传cg 高 (1).mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1759,8 +1759,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/宣传cg-2.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1771,8 +1771,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_雨夜城市街巷_霓虹灯_3435_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1783,8 +1783,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_在一款暗黑奇幻风格的_3369_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1795,8 +1795,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_在一款开放世界动作冒_3373_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1807,8 +1807,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/18 吃播 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1819,8 +1819,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/宠物吃播-2.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1831,8 +1831,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/04 动物吃播 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1843,8 +1843,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/动物间交互-2.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1855,8 +1855,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_一只橘猫坐在餐桌前吃_2868_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1867,8 +1867,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/30 篮球 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1879,8 +1879,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/26 田径 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1891,8 +1891,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/28 游泳 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1903,8 +1903,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/32 吉他独奏 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1915,8 +1915,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/34 MV 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1927,8 +1927,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/42 教学 高.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   },
   {
@@ -1939,8 +1939,8 @@ globalThis.PORTFOLIO_MEDIA = [
     "src": "文生视频/kling_20260519_作品_开篇_冲泡时蒸汽升腾_3051_0.mp4",
     "poster": "",
     "duration": 0,
-    "width": 16,
-    "height": 9,
+    "width": 1920,
+    "height": 1080,
     "featured": false
   }
 ];

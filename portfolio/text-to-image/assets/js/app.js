@@ -31,7 +31,11 @@
     return item.type === 'image' ? item.src.replace(/^文生图\//, '') : item.src;
   }
 
-  const api = { filterMedia, nextIndex, formatDuration, resolveMediaPath };
+  function previewMediaPath(item) {
+    return `assets/thumbs/${item.id}.webp`;
+  }
+
+  const api = { filterMedia, nextIndex, formatDuration, resolveMediaPath, previewMediaPath };
   global.Portfolio = api;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 
@@ -51,32 +55,18 @@
   const dom = {};
 
   function makeMedia(item, className) {
-    if (item.type === 'video') {
-      const video = document.createElement('video');
-      video.src = item.src;
-      video.muted = true;
-      video.preload = 'metadata';
-      video.playsInline = true;
-      video.className = className || '';
-      video.setAttribute('aria-label', item.title);
-      video.addEventListener('error', () => {
-        const fallback = document.createElement('div');
-        fallback.className = 'media-error';
-        fallback.textContent = `视频无法载入：${item.title}`;
-        if (video.parentNode) video.replaceWith(fallback);
-      }, { once: true });
-      return video;
-    }
     const image = document.createElement('img');
-    image.src = resolveMediaPath(item);
+    image.src = previewMediaPath(item);
     image.alt = item.title;
+    image.width = item.width;
+    image.height = item.height;
     image.loading = 'lazy';
     image.decoding = 'async';
-    if (className) image.className = className;
+    image.className = [className, item.type === 'video' ? 'video-thumb' : ''].filter(Boolean).join(' ');
     image.addEventListener('error', () => {
       const fallback = document.createElement('div');
       fallback.className = 'media-error';
-      fallback.textContent = `无法载入：${item.title}`;
+      fallback.textContent = `预览无法载入：${item.title}`;
       if (image.parentNode) image.replaceWith(fallback);
     }, { once: true });
     return image;
