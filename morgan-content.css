@@ -137,6 +137,28 @@ h2 {
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
+.bench-workbench-entry {
+  max-width: 62ch;
+  margin-top: 2rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.bench-workbench-entry h2 { margin-bottom: 0.6rem; }
+.bench-workbench-entry p:not(.eyebrow) { color: var(--muted); }
+.bench-workbench-entry a {
+  display: inline-block;
+  margin-top: 0.35rem;
+  padding: 0.8rem 1.1rem;
+  color: #fff;
+  background: var(--accent);
+  font-weight: 700;
+  text-decoration: none;
+}
+.bench-workbench-entry a:hover { background: #254836; }
+.bench-workbench-entry small { display: block; margin-top: 0.8rem; color: var(--muted); }
+
 .status {
   margin-bottom: 2rem;
   padding: 1rem 1.25rem;
