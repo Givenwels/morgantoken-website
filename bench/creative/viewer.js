@@ -1,5 +1,17 @@
 'use strict';
 
+const taskLinks = [...document.querySelectorAll('[data-task-link]')];
+function markTask(href) {
+  for (const link of taskLinks) {
+    if (link.getAttribute('href') === href) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  }
+}
+if (taskLinks.length) {
+  markTask(location.hash || taskLinks[0].getAttribute('href'));
+  window.addEventListener('hashchange', () => markTask(location.hash));
+}
+
 for (const panel of document.querySelectorAll('[data-compare]')) {
   const sides = [...panel.querySelectorAll('[data-compare-side]')].map((element) => ({
     select: element.querySelector('select'),
