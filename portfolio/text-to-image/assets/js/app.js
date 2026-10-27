@@ -2,6 +2,8 @@
   'use strict';
 
   const CATEGORY_ORDER = [
+    '镰仓海街', '首尔时尚', '京都和风', '东京霓虹', '北海道冬日',
+    '光影美术馆', '济州岛春日', '极简黑白', '梦幻花艺', '都市生活',
     '东方人物', '东方场景', '写实人像', '自然与城市', '年代记忆',
     '国漫动画', '日系动画', '宠物写真', '科幻宇宙', '科幻机甲',
     '电商广告', '人物互动', '数字人与播报', '游戏与 CG', '宠物与动物',
@@ -32,7 +34,7 @@
   }
 
   function previewMediaPath(item) {
-    return `assets/thumbs/${item.id}.webp`;
+    return item.previewSrc || `assets/thumbs/${item.id}.webp`;
   }
 
   const api = { filterMedia, nextIndex, formatDuration, resolveMediaPath, previewMediaPath };
@@ -90,17 +92,6 @@
     tag.className = 'media-cat-tag';
     tag.textContent = item.category;
     return tag;
-  }
-
-  function makeCaption(item) {
-    const caption = document.createElement('figcaption');
-    caption.className = 'media-caption';
-    const title = document.createElement('span');
-    title.textContent = item.title;
-    const category = document.createElement('span');
-    category.textContent = item.category;
-    caption.append(title, category);
-    return caption;
   }
 
   function openLightbox(itemId, sourceItems, trigger) {
@@ -177,7 +168,7 @@
   }
 
   function renderHero() {
-    const wanted = ['东方人物', '年代记忆', '科幻宇宙'];
+    const wanted = ['镰仓海街', '东方人物', '科幻宇宙'];
     const chosen = wanted.map((category) => state.items.find((item) => item.type === 'image' && item.category === category)).filter(Boolean);
     if (chosen.length < 3) chosen.push(...state.items.filter((item) => item.type === 'image' && !chosen.includes(item)).slice(0, 3 - chosen.length));
     dom.heroCollage.replaceChildren();
@@ -192,33 +183,6 @@
       button.append(label);
       frame.append(button);
       dom.heroCollage.append(frame);
-    }
-  }
-
-  function curatedSelection() {
-    const sequence = ['东方人物', '年代记忆', '自然与城市', '电商广告', '人物互动', '科幻宇宙', '宠物写真', '国漫动画', '数字人与播报', '游戏与 CG', '运动', '音乐'];
-    return sequence.map((category) => state.items.find((item) => item.category === category)).filter(Boolean);
-  }
-
-  function renderFeatured() {
-    const selected = curatedSelection();
-    dom.featuredGrid.replaceChildren();
-    for (const item of selected) {
-      const figure = document.createElement('figure');
-      figure.className = 'featured-card';
-      const button = mediaButton(item, state.items);
-      const frame = document.createElement('div');
-      frame.className = 'featured-image';
-      frame.append(makeMedia(item));
-      if (item.type === 'video') {
-        const badge = document.createElement('span');
-        badge.className = 'video-badge';
-        badge.textContent = formatDuration(item.duration);
-        frame.append(badge);
-      }
-      button.append(frame, makeCaption(item));
-      figure.append(button);
-      dom.featuredGrid.append(figure);
     }
   }
 
@@ -353,7 +317,6 @@
       imageCount: document.getElementById('imageCount'),
       videoCount: document.getElementById('videoCount'),
       heroCollage: document.getElementById('heroCollage'),
-      featuredGrid: document.getElementById('featuredGrid'),
       gallery: document.getElementById('gallery'),
       resultCount: document.getElementById('resultCount'),
       primaryFilters: document.getElementById('primaryFilters'),
@@ -386,7 +349,6 @@
     dom.videoCount.textContent = videos;
     dom.navCount.textContent = `${state.items.length} ITEMS`;
     renderHero();
-    renderFeatured();
     renderCategoryFilters();
     renderGallery();
     bindEvents();

@@ -188,6 +188,22 @@ html[lang="zh-CN"] #end-section-title .char-wrapper {
   overflow-wrap: anywhere;
 }
 
+/* Static covers keep the project cards visible when the archived WebGL layer is unavailable. */
+.project-item .project-item-image {
+  background-color: #d8d3cb;
+  background-size: cover;
+  background-position: center;
+}
+.project-item[data-id="oryzo_ai"] .project-item-image {
+  background-image: url("/portfolio/text-to-image/assets/portraits/jk_s01_01_kamakura_seaside_breeze_1792933910944.webp");
+  background-position: center 38%;
+}
+.project-item[data-id="of_the_oak"] .project-item-image { background-image: url("/assets/projects/of_the_oak/home.webp"); }
+.project-item[data-id="devin_ai"] .project-item-image { background-image: url("/assets/projects/devin_ai/home.webp"); }
+.project-item[data-id="porsche_dream_machine"] .project-item-image { background-image: url("/assets/projects/porsche_dream_machine/home.webp"); }
+.project-item[data-id="synthetic_human"] .project-item-image { background-image: url("/assets/projects/synthetic_human/home.webp"); }
+.project-item[data-id="ddd_2024"] .project-item-image { background-image: url("/assets/projects/ddd_2024/home.webp"); }
+
 .project-item[data-personal-status="pending"] .project-item-main,
 .project-details-item[data-personal-status="pending"] {
   filter: grayscale(1) brightness(.22);
