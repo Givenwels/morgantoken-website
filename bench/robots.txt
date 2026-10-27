@@ -1,1 +1,2 @@
-Sitemap: https://suyoumo.github.io/bench/sitemap.xml
+User-agent: *
+Allow: /
