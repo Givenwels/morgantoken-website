@@ -75,6 +75,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visib
 .site-note { margin: 18px 0 27px; padding: 13px 16px; border-left: 3px solid var(--accent); background: #eaf3ec; color: #365b49; font-size: 13px; line-height: 1.6; }
 
 .workspace { display: grid; grid-template-columns: 228px minmax(0, 1fr); gap: clamp(24px, 3vw, 44px); align-items: start; }
+.workspace.is-single { grid-template-columns: minmax(0, 1fr); }
 .task-nav { position: sticky; top: 22px; display: grid; gap: 7px; }
 .task-nav-title { margin: 0 0 8px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
 .task-card { display: grid; gap: 5px; padding: 13px 14px; border: 1px solid transparent; border-radius: 10px; text-decoration: none; }
