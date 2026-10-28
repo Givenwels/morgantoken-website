@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Morgan 评测系统的意图识别评测方向：了解题库建设、模型先答、人工独立作答、意图核验、GSB 和报告流程。">
+  <title>意图识别评测 · Morgan 评测系统</title>
+  <link rel="stylesheet" href="/bench/portal.css?v=20261028">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <header class="site-header">
+    <a class="brand" href="/bench/" aria-label="Morgan 评测系统首页"><span class="brand-mark" aria-hidden="true">M</span><span><strong>Morgan 评测系统</strong><small>INTENT EVALUATION</small></span></a>
+    <nav aria-label="主导航"><a href="/bench/">评测主页</a><a href="/bench/creative/">鹈鹕评测</a><a href="/">个人首页</a></nav>
+  </header>
+
+  <main id="main">
+    <section class="inner-hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">EVALUATION TRACK / 02</p>
+        <h1 id="page-title">意图识别<span class="hero-period">.</span></h1>
+        <p class="hero-lead">这条评测线关注通用大模型能否理解多轮问答中的最终要求，并完成用户真正要做的任务。每道题先确认最终意图、保留约束与通过条件，再进入模型答题和人工复核。</p>
+      </div>
+      <aside class="inner-status" aria-label="公开状态">
+        <span class="small-label">PUBLIC STATUS</span>
+        <strong>流程可查看，结果待发布</strong>
+        <p>这里不要求登录或输入 Token。正式题库、原始答卷和评审记录尚未公开，因此暂不展示模型得分。</p>
+      </aside>
+    </section>
+
+    <section class="method" aria-labelledby="method-title">
+      <div><p class="eyebrow">EVALUATION FLOW</p><h2 id="method-title">一次评测怎么走</h2><p class="method-intro">让题目、模型结果和人工判断有可追溯的先后顺序，避免先看到模型答案再写人工基线。</p></div>
+      <ol class="method-list">
+        <li><span>01</span><strong>建设并确认题库</strong><p>从 Word 或主题材料整理题目，逐题确认最终意图、考点、通过条件和失败信号；草稿不进入正式评测。</p></li>
+        <li><span>02</span><strong>模型先答</strong><p>固定题目版本与模型信息，让模型通过 API 或 Agent 平台完成用户要求的实际任务，保留原始回答。</p></li>
+        <li><span>03</span><strong>人工独立作答</strong><p>在看不到模型答案时对同题做一遍，保存初稿；后续修订单独记录。</p></li>
+        <li><span>04</span><strong>核验并做 GSB</strong><p>先看人与模型是否完成最终意图，再并排比较两份模型回答：左边好、右边好、一样好或一样差。</p></li>
+        <li><span>05</span><strong>输出报告</strong><p>分别呈现意图完成率、人机任务结果一致率、GSB 记录与失败案例；样本不足时不生成总体排名。</p></li>
+      </ol>
+    </section>
+
+    <section class="method-note" aria-label="数据与访问说明">
+      <div><span class="small-label">WHY NO TOKEN HERE</span><h2>公开查看不需要凭证</h2><p>之前的入口直接打开私有数据工作台，它为了读写 GitHub 私有仓库才要求 Token。现在访客先进入这个公开页面，私有题库不会暴露在网页里。</p></div>
+      <div><span class="small-label">WHAT IS PUBLIC</span><h2>发布真实结果后再展示</h2><p>评测流程现已公开。题库、模型答案和报告需审核后生成脱敏的公开快照；在那之前，这里不会填入虚构题目或分数。</p></div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>© 2026 Morgan</span><a href="/bench/">返回评测主页 <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>
