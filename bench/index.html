@@ -67,14 +67,14 @@
     <section id="automation" class="automation-overview" aria-labelledby="automation-title">
       <div class="section-heading"><div><p class="eyebrow">AUTOMATION / WHAT RUNS</p><h2 id="automation-title">自动化具体发生在哪里</h2></div><p>执行工作台处理运行；这个网站展示审核后的快照。</p></div>
       <div class="automation-table"><table><thead><tr><th>环节</th><th>系统现在能做什么</th><th>人的参与</th></tr></thead><tbody>
-        <tr><th scope="row">题库建设</th><td><span class="automation-state manual">人工定题</span>五题已恢复；每题冻结提示词与专属规则。AI 自动出题待接入。</td><td>审核题目和通过条件</td></tr>
+        <tr><th scope="row">题库建设</th><td><span class="automation-state">自动整理与检查</span>输入主题或 TXT / MD / DOCX 资料，导出 Agent 出题包，或配置 API 生成候选题；系统检查结构与重复。审核发布后冻结题面、GSB 指南和采证计划。</td><td>编辑候选，核对资料、通过条件与规则，确认后发布</td></tr>
         <tr><th scope="row">模型答题</th><td><span class="automation-state">配置后自动</span>已接 API 批次生成，记录原文、实际模型、耗时和 token；也能上传 Agent 作品。</td><td>填自己的 API，选题与模型后启动</td></tr>
         <tr><th scope="row">运行与采证</th><td><span class="automation-state">自动</span>生成作品入队，隔离运行，截图、录屏并检查证据完整性。</td><td>处理失败或异常运行</td></tr>
         <tr><th scope="row">匿名配对</th><td><span class="automation-state">自动</span>API 批次内按同题、版本、参数与运行条件配对；Agent 作品按已记录的平台和配置配对。</td><td>补齐缺少对照的作品</td></tr>
         <tr><th scope="row">GSB 与人机协同</th><td><span class="automation-state manual">人工判断</span>系统计算已有人工票与独立 AI 票的一致率，只列分歧；AI 票目前需导入。</td><td>同屏观看、四档 GSB、复核分歧</td></tr>
         <tr><th scope="row">报告</th><td><span class="automation-state">自动统计</span>根据真实运行与票更新统计，保存可追溯的导出记录。</td><td>审核结论并发布公开快照</td></tr>
       </tbody></table></div>
-      <p class="scope-note">当前 API 生成已可配置使用，尚未填入你的密钥；自动出题和 API 视觉评审仍未接入。GSB 保留人工判断，机器参考票不会覆盖原始人工票。</p>
+      <p class="scope-note">题库工厂已支持出题包、候选导入、自动检查和人工审核发布；API 出题与模型作答通道均已具备，真实模型 API 尚未配置。API 视觉评审仍未接入。GSB 由人判断，机器参考票独立保存。</p>
     </section>
     <p class="scope-note"><strong>展示口径</strong>　五题题面与规则可查看，目前只有鹈鹕有真实作品和成绩；意图识别展示流程，待题库审核入库后再运行。</p>
   </main>
