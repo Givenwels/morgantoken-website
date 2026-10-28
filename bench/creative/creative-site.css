@@ -84,6 +84,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visib
 .task-card span:last-child { color: var(--muted); font-size: 12px; }
 .task-card.is-ready .task-state { color: var(--accent-dark); }
 .task-content { min-width: 0; }
+.task-section[hidden] { display: none; }
+.copy-status { margin-left: 10px; color: var(--muted); font-size: 12px; }
 .task-section { margin-bottom: 72px; scroll-margin-top: 24px; }
 .task-section + .task-section { padding-top: 40px; border-top: 1px solid var(--line); }
 .task-heading { margin: 0 0 22px; }

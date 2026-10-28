@@ -81,6 +81,16 @@ h1 { margin: 1.2rem 0 1.5rem; font-size: clamp(3.4rem, 8.5vw, 7.6rem); line-heig
 .site-footer a:hover { color: var(--accent); }
 
 /* Intent track details */
+.automation-overview { padding-top: 4rem; scroll-margin-top: 2rem; }
+.automation-table { overflow: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.automation-table table { width: 100%; min-width: 700px; border-collapse: collapse; font-size: .87rem; }
+.automation-table th,.automation-table td { padding: 1rem 1.3rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.automation-table thead th { color: var(--muted); font-size: .76rem; background: var(--accent-soft); }
+.automation-table tbody th { width: 18%; white-space: nowrap; }
+.automation-table td:last-child { width: 25%; color: var(--muted); }
+.automation-table tr:last-child > * { border-bottom: 0; }
+.automation-state { display: block; width: fit-content; margin-bottom: .4rem; padding: .18rem .5rem; border-radius: 5px; background: #e5f0e6; color: #286549; font-size: .7rem; font-weight: 700; }
+.automation-state.manual { background: #f2ebdc; color: #86672a; }
 .inner-hero { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 3rem; align-items: end; padding-block: clamp(4rem, 9vw, 7rem); border-bottom: 1px solid var(--line); }
 .inner-hero h1 { margin-bottom: 1.3rem; }
 .inner-hero .hero-lead { margin-bottom: 0; }

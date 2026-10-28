@@ -12,7 +12,7 @@
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
     <a class="brand" href="/bench/" aria-label="Morgan 评测系统首页"><span class="brand-mark" aria-hidden="true">M</span><span><strong>Morgan 评测系统</strong><small>INTENT EVALUATION</small></span></a>
-    <nav aria-label="主导航"><a href="/bench/">评测主页</a><a href="/bench/creative/">鹈鹕评测</a><a href="/">个人首页</a></nav>
+    <nav aria-label="主导航"><a href="/bench/">评测主页</a><a href="/bench/creative/">创意编程题库</a><a href="/">个人首页</a></nav>
   </header>
 
   <main id="main">
@@ -25,7 +25,7 @@
       <aside class="inner-status" aria-label="公开状态">
         <span class="small-label">PUBLIC STATUS</span>
         <strong>流程可查看，结果待发布</strong>
-        <p>这里不要求登录或输入 Token。正式题库、原始答卷和评审记录尚未公开，因此暂不展示模型得分。</p>
+        <p>已具备 Word 拆题、冻结运行、API 或 Agent 答题、人工核验和报告组件。当前正式库尚无确认题目，模型 API 待配置，暂无可发布成绩。</p>
       </aside>
     </section>
 
@@ -41,8 +41,8 @@
     </section>
 
     <section class="method-note" aria-label="数据与访问说明">
-      <div><span class="small-label">WHY NO TOKEN HERE</span><h2>公开查看不需要凭证</h2><p>之前的入口直接打开私有数据工作台，它为了读写 GitHub 私有仓库才要求 Token。现在访客先进入这个公开页面，私有题库不会暴露在网页里。</p></div>
-      <div><span class="small-label">WHAT IS PUBLIC</span><h2>发布真实结果后再展示</h2><p>评测流程现已公开。题库、模型答案和报告需审核后生成脱敏的公开快照；在那之前，这里不会填入虚构题目或分数。</p></div>
+      <div><span class="small-label">AUTOMATION</span><h2>可自动完成的步骤</h2><p>Word 按题号和轮次拆成待审草稿；确认后冻结题目，通过 API 批量答题或导入 Agent 结果，自动检查缺题与版本，再汇总核验和 GSB 记录。</p></div>
+      <div><span class="small-label">HUMAN REVIEW</span><h2>需要人工把关的步骤</h2><p>审核切题边界、补齐依赖材料、确认最终意图与通过条件；独立作答，核验任务完成情况并打四档 GSB。公开查看无需 Token，管理工作台的私有数据仍须授权。</p></div>
     </section>
   </main>
   <footer class="site-footer"><span>© 2026 Morgan</span><a href="/bench/">返回评测主页 <span aria-hidden="true">↗</span></a></footer>

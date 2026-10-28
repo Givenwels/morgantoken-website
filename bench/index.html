@@ -6,13 +6,13 @@
   <meta name="color-scheme" content="light">
   <meta name="description" content="Morgan 评测系统：公开查看创意编程与意图识别评测的题目、证据、方法和结果。">
   <title>Morgan 评测系统</title>
-  <link rel="stylesheet" href="/bench/portal.css?v=20261028">
+  <link rel="stylesheet" href="/bench/portal.css?v=20261028-automation">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
     <a class="brand" href="/bench/" aria-label="Morgan 评测系统首页"><span class="brand-mark" aria-hidden="true">M</span><span><strong>Morgan 评测系统</strong><small>EVALUATION WORKSPACE</small></span></a>
-    <nav aria-label="主导航"><a href="#tracks">评测方向</a><a href="/bench/creative/">鹈鹕评测</a><a href="/">个人首页</a></nav>
+    <nav aria-label="主导航"><a href="#tracks">评测方向</a><a href="/bench/creative/">创意编程题库</a><a href="#automation">自动化流程</a><a href="/">个人首页</a></nav>
   </header>
 
   <main id="main">
@@ -25,7 +25,7 @@
       </div>
       <aside class="hero-status" aria-label="当前公开状态">
         <span class="status-kicker">CURRENT RELEASE / 01</span>
-        <span class="status-line"><span>创意编程</span><strong>鹈鹕骑自行车已公开</strong></span>
+        <span class="status-line"><span>创意编程</span><strong>5 道题 · 鹈鹕已有结果</strong></span>
         <span class="status-line"><span>意图识别</span><strong>流程公开，结果待发布</strong></span>
         <p>公开页面可直接查看，无需登录或输入 Token。评审数据仍由项目所有者管理。</p>
       </aside>
@@ -39,10 +39,10 @@
         <div class="track-body">
           <div class="track-meta"><span>01 / CREATIVE CODING</span><span class="state state-live">已有公开结果</span></div>
           <h3>创意编程</h3>
-          <p class="track-subtitle">先看一题：鹈鹕骑自行车</p>
-          <p>同一道提示词下的五份真实作品，可以并排播放运行录屏，按“骑行是否成立”等本题规则查看人工 GSB 记录与证据覆盖。</p>
-          <dl class="track-facts"><div><dt>公开题目</dt><dd>1 道</dd></div><div><dt>真实作品</dt><dd>5 份</dd></div><div><dt>首轮人工 GSB</dt><dd>10 组</dd></div></dl>
-          <a class="primary-link" href="/bench/creative/">进入鹈鹕评测 <span aria-hidden="true">↗</span></a>
+          <p class="track-subtitle">五道题各有提示词和 GSB 规则</p>
+          <p>恢复完整创意编程题库。鹈鹕骑车已有五份真实作品、同屏播放和人工 GSB 记录；六边形弹球、三齿轮、章鱼折衣服、CIDER POND 等待作品后独立评测。</p>
+          <dl class="track-facts"><div><dt>公开题目</dt><dd>5 道</dd></div><div><dt>真实作品</dt><dd>5 份</dd></div><div><dt>首轮人工 GSB</dt><dd>10 组</dd></div></dl>
+          <a class="primary-link" href="/bench/creative/">查看题库与作品 <span aria-hidden="true">↗</span></a>
         </div>
       </article>
 
@@ -64,7 +64,19 @@
       </article>
     </section>
 
-    <p class="scope-note"><strong>展示口径</strong>　当前只公开鹈鹕单题的实际作品与记录；意图识别展示评测流程。历史任务快照与排行榜不属于这版评测结果。</p>
+    <section id="automation" class="automation-overview" aria-labelledby="automation-title">
+      <div class="section-heading"><div><p class="eyebrow">AUTOMATION / WHAT RUNS</p><h2 id="automation-title">自动化具体发生在哪里</h2></div><p>执行工作台处理运行；这个网站展示审核后的快照。</p></div>
+      <div class="automation-table"><table><thead><tr><th>环节</th><th>系统现在能做什么</th><th>人的参与</th></tr></thead><tbody>
+        <tr><th scope="row">题库建设</th><td><span class="automation-state manual">人工定题</span>五题已恢复；每题冻结提示词与专属规则。AI 自动出题待接入。</td><td>审核题目和通过条件</td></tr>
+        <tr><th scope="row">模型答题</th><td><span class="automation-state">配置后自动</span>已接 API 批次生成，记录原文、实际模型、耗时和 token；也能上传 Agent 作品。</td><td>填自己的 API，选题与模型后启动</td></tr>
+        <tr><th scope="row">运行与采证</th><td><span class="automation-state">自动</span>生成作品入队，隔离运行，截图、录屏并检查证据完整性。</td><td>处理失败或异常运行</td></tr>
+        <tr><th scope="row">匿名配对</th><td><span class="automation-state">自动</span>API 批次内按同题、版本、参数与运行条件配对；Agent 作品按已记录的平台和配置配对。</td><td>补齐缺少对照的作品</td></tr>
+        <tr><th scope="row">GSB 与人机协同</th><td><span class="automation-state manual">人工判断</span>系统计算已有人工票与独立 AI 票的一致率，只列分歧；AI 票目前需导入。</td><td>同屏观看、四档 GSB、复核分歧</td></tr>
+        <tr><th scope="row">报告</th><td><span class="automation-state">自动统计</span>根据真实运行与票更新统计，保存可追溯的导出记录。</td><td>审核结论并发布公开快照</td></tr>
+      </tbody></table></div>
+      <p class="scope-note">当前 API 生成已可配置使用，尚未填入你的密钥；自动出题和 API 视觉评审仍未接入。GSB 保留人工判断，机器参考票不会覆盖原始人工票。</p>
+    </section>
+    <p class="scope-note"><strong>展示口径</strong>　五题题面与规则可查看，目前只有鹈鹕有真实作品和成绩；意图识别展示流程，待题库审核入库后再运行。</p>
   </main>
   <footer class="site-footer"><span>© 2026 Morgan</span><a href="/">返回个人网站 <span aria-hidden="true">↗</span></a></footer>
 </body>

@@ -2,11 +2,31 @@
 
 const taskLinks = [...document.querySelectorAll('[data-task-link]')];
 function markTask(href) {
+  const selected = taskLinks.find((link) => link.getAttribute('href') === href)?.getAttribute('href') || taskLinks[0]?.getAttribute('href');
   for (const link of taskLinks) {
-    if (link.getAttribute('href') === href) link.setAttribute('aria-current', 'location');
+    if (link.getAttribute('href') === selected) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');
   }
+  for (const section of document.querySelectorAll('.task-section')) {
+    section.hidden = '#' + section.id !== selected;
+    if (section.hidden) for (const video of section.querySelectorAll('video')) video.pause();
+  }
 }
+
+for (const button of document.querySelectorAll('[data-copy-prompt]')) button.addEventListener('click', async () => {
+  const prompt = button.parentElement.querySelector('.prompt');
+  const status = button.parentElement.querySelector('.copy-status');
+  try {
+    if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(prompt.textContent);
+    else {
+      const range = document.createRange(); range.selectNodeContents(prompt);
+      const selection = window.getSelection(); selection.removeAllRanges(); selection.addRange(range);
+      if (!document.execCommand('copy')) throw new Error('clipboard');
+      selection.removeAllRanges();
+    }
+    status.textContent = '已复制';
+  } catch { status.textContent = '可选中上方提示词复制'; }
+});
 if (taskLinks.length) {
   markTask(location.hash || taskLinks[0].getAttribute('href'));
   window.addEventListener('hashchange', () => markTask(location.hash));
