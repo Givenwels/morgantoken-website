@@ -1,5 +1,5 @@
-import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261110-system1';
-import {buildConclusionDraft} from './workflow-data.js?v=20261110-system1';
+import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261110-system2';
+import {buildConclusionDraft} from './workflow-data.js?v=20261110-system2';
 
 export function createReportView({root,onReview,download,notify}){
   const $=id=>root.querySelector('#'+id);

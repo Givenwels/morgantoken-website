@@ -1,7 +1,7 @@
-import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-system1';
-import {createBrowserLabelClient} from './browser-store.js?v=20261110-system1';
-import {createReportView} from './report-view.js?v=20261110-system1';
-import {createWorkspaceView} from './workspace-view.js?v=20261110-system1';
+import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-system2';
+import {createBrowserLabelClient} from './browser-store.js?v=20261110-system2';
+import {createReportView} from './report-view.js?v=20261110-system2';
+import {createWorkspaceView} from './workspace-view.js?v=20261110-system2';
 
 const $=id=>document.getElementById(id);
 const videos=[$('left-video'),$('right-video')];
@@ -184,6 +184,7 @@ function render(){
     row.append(text('strong',`${label}：${name}`),' · ',sourceLink(p[side].url,'打开原视频'));source.append(row);
   }
   source.append(text('p',`${p.source.row_index!=null?'来源 '+(p.source.split||'train')+' 行号 '+p.source.row_index+' · ':''}${p.source.task_id?'任务 '+p.source.task_id+' · ':''}视频按来源固定版本引用。本页不下载或转码视频。`));
+  if(p.prompt_provenance)source.append(text('p',p.prompt_provenance.note_zh));
   if(p.source.prompt_url)source.append(sourceLink(p.source.prompt_url,'来源英文生成提示词文件'),' · ',sourceLink(p.source.project_url,'原作者项目说明'));
   if(p.source.terms_url)source.append(sourceLink(p.source.terms_url,'来源使用范围：非商业学术研究，重新发布需原作者许可'));
   message(draft?'本题有未提交草稿，确认后点“保存并下一组”。':vote?'已恢复本题标注，可回放复核或修改。':'观看左右视频，选择一档 GSB，然后保存并进入下一组。');

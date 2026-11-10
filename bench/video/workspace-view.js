@@ -1,4 +1,4 @@
-import {buildWorkspaceStatus} from './workflow-data.js?v=20261110-system1';
+import {buildWorkspaceStatus} from './workflow-data.js?v=20261110-system2';
 
 export function createWorkspaceView({root}){
   const $=id=>root.querySelector('#'+id);
