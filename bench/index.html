@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="Morgan 评测系统：公开查看创意编程与意图识别评测的题目、证据、方法和结果。">
+  <meta name="description" content="Morgan 评测系统：视频同屏 GSB、模型统计与人工备注报告，兼有创意编程与意图识别评测。">
   <title>Morgan 评测系统</title>
   <link rel="stylesheet" href="/bench/portal.css?v=20261028-automation">
 </head>
@@ -12,7 +12,7 @@
   <a class="skip-link" href="#main">跳到主要内容</a>
   <header class="site-header">
     <a class="brand" href="/bench/" aria-label="Morgan 评测系统首页"><span class="brand-mark" aria-hidden="true">M</span><span><strong>Morgan 评测系统</strong><small>EVALUATION WORKSPACE</small></span></a>
-    <nav aria-label="主导航"><a href="#tracks">评测方向</a><a href="/bench/creative/">创意编程题库</a><a href="#automation">自动化流程</a><a href="/">个人首页</a></nav>
+    <nav aria-label="主导航"><a href="/bench/video/">视频 GSB</a><a href="#tracks">评测方向</a><a href="#automation">自动化流程</a><a href="/">个人首页</a></nav>
   </header>
 
   <main id="main">
@@ -20,19 +20,33 @@
       <div class="hero-copy">
         <p class="eyebrow">MORGAN / EVALUATION</p>
         <h1 id="page-title">Morgan<br>评测系统<span class="hero-period">.</span></h1>
-        <p class="hero-lead">从真实题目和作品出发，固定判读规则、并排查看证据，再记录人工 GSB 判断。不同评测方向各自报告，不把单题结果当成模型总体排名。</p>
-        <a class="text-link" href="#tracks">选择评测方向 <span aria-hidden="true">↗</span></a>
+        <p class="hero-lead">同屏比较模型结果，用 GSB 记录你的判断和备注。系统自动汇总胜负、同好与同差，按任务查看表现，再整理成可追溯的评测报告。</p>
+        <a class="text-link" href="/bench/video/">开始视频评测 <span aria-hidden="true">↗</span></a>
       </div>
       <aside class="hero-status" aria-label="当前公开状态">
         <span class="status-kicker">CURRENT RELEASE / 01</span>
+        <span class="status-line"><span>视频 GSB</span><strong>27 道任务 · 81 组对比 · 6 个模型</strong></span>
         <span class="status-line"><span>创意编程</span><strong>5 道题 · 鹈鹕已有结果</strong></span>
         <span class="status-line"><span>意图识别</span><strong>流程公开，结果待发布</strong></span>
-        <p>公开页面可直接查看，无需登录或输入 Token。评审数据仍由项目所有者管理。</p>
+        <p>可直接观看并进行视频 GSB，无需登录或输入 Token。网页评分保存到当前浏览器，可导出备份，不自动汇总其他访客数据。</p>
       </aside>
     </section>
 
     <section id="tracks" class="tracks" aria-labelledby="tracks-title">
-      <div class="section-heading"><div><p class="eyebrow">TWO EVALUATION TRACKS</p><h2 id="tracks-title">当前评测方向</h2></div><p>每条方向只呈现已经核实的范围与进度。</p></div>
+      <div class="section-heading"><div><p class="eyebrow">EVALUATION WORKSPACE</p><h2 id="tracks-title">当前评测方向</h2></div><p>按自己的评分查看统计，结合备注形成场景结论。</p></div>
+
+      <article class="track track-intent">
+        <div class="track-body">
+          <div class="track-meta"><span>VIDEO / GSB WORKSPACE</span><span class="state state-live">可直接评分</span></div>
+          <h3>视频模型对比</h3>
+          <p class="track-subtitle">同题、同参考图，两个模型同时播放</p>
+          <p>VGI-Bench 的 27 道视觉推理与操作任务，覆盖 Seedance 2.0、可灵 3.0、Gen-4.5、Veo 3.1、万相 2.7、MiniMax H3。中文提示词、来源和模型版本可核对。</p>
+          <dl class="track-facts"><div><dt>任务</dt><dd>27 道</dd></div><div><dt>对比</dt><dd>81 组</dd></div><div><dt>模型</dt><dd>6 个</dd></div></dl>
+          <a class="primary-link" href="/bench/video/">开始视频 GSB <span aria-hidden="true">↗</span></a>
+          <a class="secondary-link" href="/bench/video/#report">查看我的统计与报告 <span aria-hidden="true">↗</span></a>
+        </div>
+        <ol class="intent-flow" aria-label="视频 GSB 到结论的流程"><li><span>01</span>中文提示词与起始参考图</li><li><span>02</span>左右同时播放</li><li><span>03</span>人工 GSB 与现象备注</li><li><span>04</span>自动统计模型和任务表现</li><li><span>05</span>导出报告或 AI 总结资料包</li></ol>
+      </article>
 
       <article class="track track-featured">
         <div class="track-media"><img src="/bench/creative/media/aa152775-d089-40c4-9225-4bf9e33d964f-capture-0.png" alt="鹈鹕骑自行车作品的运行截图" width="1280" height="720" loading="eager"></div>
@@ -65,18 +79,19 @@
     </section>
 
     <section id="automation" class="automation-overview" aria-labelledby="automation-title">
-      <div class="section-heading"><div><p class="eyebrow">AUTOMATION / WHAT RUNS</p><h2 id="automation-title">自动化具体发生在哪里</h2></div><p>执行工作台处理运行；这个网站展示审核后的快照。</p></div>
+      <div class="section-heading"><div><p class="eyebrow">AUTOMATION / WHAT RUNS</p><h2 id="automation-title">自动化具体发生在哪里</h2></div><p>视频 GSB 可直接在网页操作；创意编程运行由本地工作台处理。</p></div>
       <div class="automation-table"><table><thead><tr><th>环节</th><th>系统现在能做什么</th><th>人的参与</th></tr></thead><tbody>
+        <tr><th scope="row">视频素材与配对</th><td><span class="automation-state">元数据自动整理</span>读取公开题目、模型和媒体链接，核对同一实例的提示词与参考图，检查外链后组成对比，不下载视频副本。</td><td>抽查素材是否对题，在线观看并记录 GSB 与现象备注</td></tr>
         <tr><th scope="row">题库建设</th><td><span class="automation-state">自动整理与检查</span>输入主题或 TXT / MD / DOCX 资料，导出 Agent 出题包，或配置 API 生成候选题；系统检查结构与重复。审核发布后冻结题面、GSB 指南和采证计划。</td><td>编辑候选，核对资料、通过条件与规则，确认后发布</td></tr>
         <tr><th scope="row">模型答题</th><td><span class="automation-state">配置后自动</span>已接 API 批次生成，记录原文、实际模型、耗时和 token；也能上传 Agent 作品。</td><td>填自己的 API，选题与模型后启动</td></tr>
         <tr><th scope="row">运行与采证</th><td><span class="automation-state">自动</span>生成作品入队，隔离运行，截图、录屏并检查证据完整性。</td><td>处理失败或异常运行</td></tr>
         <tr><th scope="row">匿名配对</th><td><span class="automation-state">自动</span>API 批次内按同题、版本、参数与运行条件配对；Agent 作品按已记录的平台和配置配对。</td><td>补齐缺少对照的作品</td></tr>
         <tr><th scope="row">GSB 与人机协同</th><td><span class="automation-state manual">人工判断</span>系统计算已有人工票与独立 AI 票的一致率，只列分歧；AI 票目前需导入。</td><td>同屏观看、四档 GSB、复核分歧</td></tr>
-        <tr><th scope="row">报告</th><td><span class="automation-state">自动统计</span>根据真实运行与票更新统计，保存可追溯的导出记录。</td><td>审核结论并发布公开快照</td></tr>
+        <tr><th scope="row">报告</th><td><span class="automation-state">自动统计</span>视频页按已保存人票汇总模型胜负、同好同差与任务表现，汇集备注，导出报告或 AI 总结资料包。结论撰写 API 待接入。</td><td>补充现象和时间点，核对统计与备注，审核结论后再发布</td></tr>
       </tbody></table></div>
       <p class="scope-note">题库工厂已支持出题包、候选导入、自动检查和人工审核发布；API 出题与模型作答通道均已具备，真实模型 API 尚未配置。API 视觉评审仍未接入。GSB 由人判断，机器参考票独立保存。</p>
     </section>
-    <p class="scope-note"><strong>展示口径</strong>　五题题面与规则可查看，目前只有鹈鹕有真实作品和成绩；意图识别展示流程，待题库审核入库后再运行。</p>
+    <p class="scope-note"><strong>展示口径</strong>　视频页统计你当前浏览器保存或导入的评分，不是全站访客榜单。AI 总结先支持资料包导出，模型 API 尚未配置。创意编程目前只有鹈鹕有真实作品与成绩；意图识别展示流程。</p>
   </main>
   <footer class="site-footer"><span>© 2026 Morgan</span><a href="/">返回个人网站 <span aria-hidden="true">↗</span></a></footer>
 </body>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Morgan评测系统 · 视频 GSB</title>
+  <link rel="stylesheet" href="viewer.css?v=20261110-report2"><script type="module" src="viewer.js?v=20261110-report2"></script>
+</head>
+<body data-storage="browser"><main>
+  <header>
+    <a class="brand" href="/bench/">Morgan评测系统 <span>视频 GSB</span></a>
+    <nav aria-label="视频播放与切题">
+      <a class="report-link" href="#report">统计与报告</a>
+      <button id="play">同时播放</button><button id="pause">同时暂停</button><button id="restart">从头重播</button>
+      <button id="previous" disabled>上一组</button><span id="progress">— / —</span><button id="next" disabled>下一组</button>
+      <select id="pair-select" aria-label="选择评测题目" disabled><option>正在读取题目…</option></select>
+    </nav>
+  </header>
+  <section class="batch-bar" aria-label="题库批次">
+    <label for="batch-select">评测集 <select id="batch-select" disabled><option>正在读取题库…</option></select></label>
+    <span id="batch-note"></span>
+  </section>
+  <section class="save-bar" aria-label="保存进度">
+    <strong id="save-progress">正在读取浏览器评分…</strong>
+    <span id="save-confirmation" role="status" aria-live="polite">评分保存在当前浏览器，保存成功后进入下一组。</span>
+    <button id="review-last" disabled>回看最近保存</button>
+    <button id="export">导出标注 JSON</button>
+  </section>
+  <p class="file-location">保存位置：<code id="storage-path">当前浏览器本地存储</code><button id="export-legacy" hidden>导出迁移前的浏览器备份</button></p>
+  <section id="completion" class="completion" hidden>
+    <h2>本轮已全部保存</h2><p id="completion-stats"></p>
+    <button id="export-complete">导出全部标注 JSON</button><button id="continue-review">继续查看题目</button>
+  </section>
+  <section class="task">
+    <div><span class="eyebrow">中文提示词</span><strong id="title">正在读取题目…</strong><span class="mode" id="catalog-stats">在线视频 · 仅存标注</span></div>
+    <p id="prompt"></p>
+    <details id="chinese-panel" class="full-prompt" hidden><summary>完整中文提示词与判定要求</summary><p id="full-chinese-prompt"></p></details>
+    <div class="source-line"><a id="dataset-source" target="_blank" rel="noopener noreferrer">数据来源：正在读取…</a><span id="prompt-provenance"></span></div>
+    <details class="original"><summary>核对来源英文指令与说明</summary><p id="original-prompt" lang="en"></p><small id="translation-note"></small></details>
+    <div id="reference-panel" class="reference" hidden>
+      <a id="reference-link" target="_blank" rel="noopener noreferrer" aria-label="打开起始参考图"><img id="reference-image" alt="这道图生视频题目的起始参考图" hidden></a>
+      <div><strong>起始参考图 · 两个模型共用</strong><span id="reference-status" role="status">正在读取来源…</span><button id="reference-retry" hidden>重试参考图</button></div>
+    </div>
+  </section>
+  <section class="judge-guide" aria-label="人工评分方式">
+    <p><strong>人工 GSB：由你做最终选择。</strong>先核对主体、核心动作和时序是否符合提示词，再比较运动稳定性、一致性与画质。每组只保存一个整体判断。</p>
+    <details class="rules"><summary>五项规则：动作基础质量 · 生动性 · 一致性 · 美感和画质 · 提示词遵循</summary><div id="rules"></div><p>检查项按本题是否适用判断。视频加载失败属于素材问题，不是“两个都差”。</p></details>
+  </section>
+  <section class="comparison" aria-label="左右双视频在线对比">
+    <article><div class="side-heading"><strong>A · 左侧视频 <span id="left-model" class="model-name"></span></strong><span id="left-info">待播放</span></div><video id="left-video" controls muted playsinline preload="none" aria-label="左侧在线视频"></video></article>
+    <article><div class="side-heading"><strong>B · 右侧视频 <span id="right-model" class="model-name"></span></strong><span id="right-info">待播放</span></div><video id="right-video" controls muted playsinline preload="none" aria-label="右侧在线视频"></video></article>
+  </section>
+  <section class="judgment">
+    <div class="vote-actions"><div class="choices" role="group" aria-label="四档 GSB">
+      <button data-choice="left" aria-pressed="false">左边更好<small>A 更符合本题要求</small></button>
+      <button data-choice="right" aria-pressed="false">右边更好<small>B 更符合本题要求</small></button>
+      <button data-choice="both_good" aria-pressed="false">两个都好<small>都达标，无明显优势</small></button>
+      <button data-choice="both_bad" aria-pressed="false">两个都差<small>都没完成核心要求</small></button>
+    </div><button id="save" disabled>保存并下一组</button></div>
+    <div class="note-row"><label for="reason">依据与时间点（可选）<input id="reason" maxlength="2000" placeholder="例如：B 在 2–3 秒动作连续，A 在这里主体变形"></label><button id="undo" disabled>撤销本题标注</button></div>
+    <p id="message" role="status" aria-live="polite">先播放左右视频，再选 GSB。1–4 选择，Enter 保存并继续。</p>
+  </section>
+  <section class="results">
+    <details id="ai-panel"><summary>历史 AI 参考（不替代你的选择）</summary><div id="ai-result"></div></details>
+    <details id="source-panel"><summary>原视频链接与来源明细</summary><div id="source"></div></details>
+    <div class="summary"><span id="summary">正在读取统计…</span></div>
+    <p class="storage-note" id="storage-note">标注保存到本机文件，浏览器旧记录会迁移，刷新后可续评。视频直接从来源网站缓冲，不另存为项目文件。导出的 JSON 可用于后续 GitHub 归档；当前尚未同步 GitHub。</p>
+  </section>
+  <section id="report" class="report-panel" aria-labelledby="report-heading">
+    <div class="report-heading"><div><span class="eyebrow">RESULTS / HUMAN GSB</span><h2 id="report-heading">统计与结论</h2><p id="report-progress"></p></div><a href="#">返回评分 ↑</a></div>
+    <p id="report-scope"></p><p id="report-method" class="report-formula"></p>
+    <div class="report-actions"><button id="download-report" disabled>导出评测报告</button><button id="download-brief" disabled>导出 AI 总结资料包</button><label class="import-button" for="import-labels">导入评分 JSON<input id="import-labels" type="file" accept="application/json,.json" disabled></label></div>
+    <p class="report-hint">AI 结论：尚未配置 API。资料包包含固定统计、你的备注和证据编号，可交给自己的 Agent。后续服务端 API 沿用同一资料结构生成草稿，经你确认后发布。</p>
+    <div class="report-table"><table><thead><tr><th>参考序</th><th>模型</th><th>已评 / 可评</th><th>胜</th><th>负</th><th>同好</th><th>同差</th><th>有效胜率</th></tr></thead><tbody id="model-results"></tbody></table></div>
+    <h3 class="report-section-title">在哪些任务更好</h3><div id="task-results" class="task-results"></div>
+    <details class="note-details"><summary>备注与证据</summary><div id="report-notes"></div></details>
+    <p id="report-snapshot" class="report-hint"></p>
+  </section>
+</main></body></html>
