@@ -47,6 +47,10 @@
   transform: translate3d(0, -.75rem, 0);
 }
 
+#home-featured-disclaimer[data-personal-runtime-preserved="true"] {
+  display: none !important;
+}
+
 #footer-bottom-tagline[data-personal-hidden-section="true"],
 #end-bottom[data-personal-hidden-section="true"],
 #scroll-nav-section[data-personal-hidden-section="true"] {
