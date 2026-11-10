@@ -1,4 +1,4 @@
-import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261110-report2';
+import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261110-report3';
 
 export function createReportView({root,onReview,download,notify}){
   const $=id=>root.querySelector('#'+id);

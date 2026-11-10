@@ -1,6 +1,6 @@
-import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-report2';
-import {createBrowserLabelClient} from './browser-store.js?v=20261110-report2';
-import {createReportView} from './report-view.js?v=20261110-report2';
+import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-report3';
+import {createBrowserLabelClient} from './browser-store.js?v=20261110-report3';
+import {createReportView} from './report-view.js?v=20261110-report3';
 
 const $=id=>document.getElementById(id);
 const videos=[$('left-video'),$('right-video')];
@@ -38,6 +38,7 @@ function hasCurrentVote(){return currentLabels(catalog,saved).some(v=>v.context_
 function canSave(){return storageReady&&!busy&&!failed&&referenceReady&&Boolean(selected)&&(hasCurrentVote()||videos.every(v=>v.readyState>=2));}
 function refreshButtons(){
   if(!catalog)return;
+  for(const id of ['play','pause','restart'])$(id).disabled=busy;
   $('save').disabled=!canSave();
   const allOtherDone=catalog.pairs.every(p=>p.context_id===pair().context_id||currentLabels(catalog,saved).some(v=>v.context_id===p.context_id));
   $('save').textContent=busy?'正在保存…':allOtherDone?'保存并查看统计':'保存并下一组';
@@ -171,6 +172,7 @@ function render(){
 }
 
 async function play(restart=false){
+  if(!catalog||busy)return;
   const token=++playToken;const p=pair();failed=false;pauseMedia();
   for(const [i,side] of ['left','right'].entries())if(!videos[i].getAttribute('src')||videos[i].error){videos[i].preload='auto';videos[i].src=p[side].url;videos[i].load();}
   message('正在从来源网站加载左右视频，双方就绪后一起播放…');
