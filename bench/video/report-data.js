@@ -1,4 +1,5 @@
 import {currentLabels,CHOICES} from './label-data.js';
+import {buildConclusionDraft} from './workflow-data.js';
 
 const empty=id=>({id,available:0,judged:0,wins:0,losses:0,both_good:0,both_bad:0,decisive_win_rate:null,rank:null});
 function update(row,choice,side){
@@ -43,7 +44,8 @@ export function buildSummaryBrief(report){
 
 export function reportMarkdown(report){
   const percent=value=>value===null?'—':value.toFixed(1)+'%';
-  const lines=['# Morgan 视频 GSB 评测报告','',`批次：${report.batch_name} · 快照：${report.snapshot_key}`,`已评 ${report.coverage.judged_pairs}/${report.coverage.available_pairs} 组，覆盖 ${report.coverage.judged_cases}/${report.coverage.available_cases} 道任务。`,'',report.method.metric,report.method.scope,'','| 模型 | 已评 | 胜 | 负 | 同好 | 同差 | 有效胜率 |','| --- | ---: | ---: | ---: | ---: | ---: | ---: |'];
+  const draft=buildConclusionDraft(report);
+  const lines=['# Morgan 视频 GSB 评测报告','',`批次：${report.batch_name} · 快照：${report.snapshot_key}`,`已评 ${report.coverage.judged_pairs}/${report.coverage.available_pairs} 组，覆盖 ${report.coverage.judged_cases}/${report.coverage.available_cases} 道任务。`,'','## 自动结论草稿','',draft.summary,'','由固定统计和备注模板整理，未调用模型 API；请人工核对后使用。','',report.method.metric,report.method.scope,'','| 模型 | 已评 | 胜 | 负 | 同好 | 同差 | 有效胜率 |','| --- | ---: | ---: | ---: | ---: | ---: | ---: |'];
   for(const m of report.models)lines.push(`| ${m.name.replaceAll('|','／')} | ${m.judged} | ${m.wins} | ${m.losses} | ${m.both_good} | ${m.both_bad} | ${percent(m.decisive_win_rate)} |`);
   lines.push('','## 按任务查看','');
   for(const task of report.tasks.filter(t=>t.judged)){lines.push(`### ${task.title}`,`已评 ${task.judged}/${task.available} 组；依据：${task.evidence_ids.join('、')}`);for(const m of task.models.filter(m=>m.judged))lines.push(`- ${m.name}：胜 ${m.wins}、负 ${m.losses}、同好 ${m.both_good}、同差 ${m.both_bad}；有效胜率 ${percent(m.decisive_win_rate)}`);lines.push('');}

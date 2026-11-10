@@ -1,4 +1,5 @@
-import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261110-report3';
+import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261110-system1';
+import {buildConclusionDraft} from './workflow-data.js?v=20261110-system1';
 
 export function createReportView({root,onReview,download,notify}){
   const $=id=>root.querySelector('#'+id);
@@ -10,6 +11,15 @@ export function createReportView({root,onReview,download,notify}){
   return {render(catalog,saved){
     report=buildEvaluationReport(catalog,saved);
     const c=report.coverage;
+    const draft=buildConclusionDraft(report);
+    $('conclusion-summary').textContent=draft.summary;
+    $('conclusion-status').textContent={empty:'等待首票',partial:'阶段草稿',complete:'本批草稿'}[draft.status];
+    const observations=$('conclusion-observations');observations.replaceChildren();
+    for(const e of draft.observations.slice(0,3)){
+      const row=document.createElement('p');row.className='conclusion-observation';
+      row.append(node('strong',`${e.evidence_id} · ${e.choice_zh}：`),document.createTextNode(e.note.length>180?e.note.slice(0,180)+'…':e.note));observations.append(row);
+    }
+    if(draft.observations.length>3)observations.append(node('p',`共 ${draft.observations.length} 条备注，完整原文见下方“备注与证据”或导出报告。`));
     $('report-progress').textContent=`已评 ${c.judged_pairs}/${c.available_pairs} 组 · ${c.judged_cases}/${c.available_cases} 道任务 · ${c.notes} 条备注`;
     $('report-scope').textContent=c.judged_pairs?'这是当前个人样本的参考排序。请同时看已评数量、对手与任务覆盖；备注结论需要原视频支持。':'还没有本批次的评分。打完第一组后，这里会自动更新统计和备注。';
     $('report-method').textContent=report.method.metric;

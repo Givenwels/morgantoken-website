@@ -1,13 +1,14 @@
-import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-report3';
-import {createBrowserLabelClient} from './browser-store.js?v=20261110-report3';
-import {createReportView} from './report-view.js?v=20261110-report3';
+import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-system1';
+import {createBrowserLabelClient} from './browser-store.js?v=20261110-system1';
+import {createReportView} from './report-view.js?v=20261110-system1';
+import {createWorkspaceView} from './workspace-view.js?v=20261110-system1';
 
 const $=id=>document.getElementById(id);
 const videos=[$('left-video'),$('right-video')];
 const browserMode=document.body.dataset.storage==='browser';
 const storageKey=browserMode?'morgan-video-gsb-web-cache-v1':'morgan-video-gsb-link-labels-v2';
 const storageTarget=browserMode?'当前浏览器':'本机文件';
-let browserClient;
+let browserClient,activePage='workspace';
 const exposureKey=storageKey+'-exposure';
 const draftKey=storageKey+'-drafts';
 const backupKey=storageKey+'-before-file-storage';
@@ -15,7 +16,8 @@ const migrationKey=storageKey+'-file-storage-migrated';
 let catalog,allCatalog,rules,index=0,selected=null,changed=false,failed=false,playToken=0,referenceToken=0,referenceReady=true;
 let saved={},browserSaved={},exposure={},drafts={},legacyBackup={},storageReady=false,busy=false,lastSavedContext=null,dismissedComplete=false;
 let rawBrowserCache=null,cacheCanReplace=true;
-const reportView=createReportView({root:$('report'),onReview:context=>{const next=catalog.pairs.findIndex(p=>p.context_id===context);if(next>=0){go(next);document.querySelector('.task').scrollIntoView({block:'start'});}},download:(value,name,type)=>downloadRaw(value,name,type),notify:value=>confirmation(value)});
+const reportView=createReportView({root:$('report'),onReview:context=>{const next=catalog.pairs.findIndex(p=>p.context_id===context);if(next>=0&&go(next))navigate('review');},download:(value,name,type)=>downloadRaw(value,name,type),notify:value=>confirmation(value)});
+const workspaceView=createWorkspaceView({root:$('workspace')});
 $('storage-note').textContent=browserMode?'网页评分保存在当前浏览器，刷新后可续评；不同设备或浏览器不自动同步。请定期导出评分 JSON 备份，也可导入本地工作台的评分查看统计。本页不向 GitHub 自动提交评分，不下载视频。':'评分写入本机文件，刷新后可续评；可导出 JSON 后在个站导入继续查看统计。视频直接从来源网站缓冲，不另存项目文件。';
 function readCache(key){try{return localStorage.getItem(key);}catch{return null;}}
 function writeCache(key,value){try{localStorage.setItem(key,JSON.stringify(value));return true;}catch{return false;}}
@@ -34,6 +36,16 @@ const text=(tag,value,css)=>{const node=document.createElement(tag);node.textCon
 function message(value,error=false){$('message').textContent=value;$('message').classList.toggle('error',error);}
 function confirmation(value,error=false){$('save-confirmation').textContent=value;$('save-confirmation').classList.toggle('error',error);}
 function pauseMedia(){videos.forEach(v=>v.pause());}
+function showPage(){
+  const requested=location.hash.slice(1),next=['workspace','review','report'].includes(requested)?requested:'workspace';
+  if(next!=='review'){playToken++;pauseMedia();}
+  activePage=next;document.body.dataset.page=next;
+  document.querySelectorAll('main > section[data-page]').forEach(el=>el.hidden=el.dataset.page!==next);
+  document.querySelectorAll('[data-route]').forEach(el=>{if(el.dataset.route===next)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function navigate(page){if(location.hash==='#'+page)showPage();else location.hash=page;}
+window.addEventListener('hashchange',showPage);showPage();
 function hasCurrentVote(){return currentLabels(catalog,saved).some(v=>v.context_id===pair().context_id);}
 function canSave(){return storageReady&&!busy&&!failed&&referenceReady&&Boolean(selected)&&(hasCurrentVote()||videos.every(v=>v.readyState>=2));}
 function refreshButtons(){
@@ -48,6 +60,9 @@ function refreshButtons(){
   $('batch-select').disabled=busy;
   $('reason').disabled=busy;
   $('import-labels').disabled=busy||!storageReady;
+  $('backup-all').disabled=busy||changed||!storageReady;
+  $('workspace-resume').disabled=busy||!storageReady;
+  $('export').disabled=busy||changed||!storageReady;
   for(const id of ['download-report','download-brief'])$(id).disabled=busy||changed||!storageReady||!currentLabels(catalog,saved).length;
   $('review-last').disabled=busy||!lastSavedContext;
   document.querySelectorAll('[data-choice]').forEach(b=>b.disabled=busy);
@@ -67,6 +82,10 @@ function summary(){
     if(batch){const view=selectCatalogBatch(allCatalog,batch.id);option.textContent=`${batch.name} · 已评 ${currentLabels(view,saved).length}/${view.pairs.length}`;}
   }
   reportView.render(catalog,saved);
+  workspaceView.render(catalog,saved,{storageReady,browserMode,busy,changed});
+  $('report-draft-warning').hidden=!changed;
+  $('app-storage-status').textContent=storageReady?(browserMode?'浏览器保存 · 已就绪':'文件保存 · 已连接'):'保存尚未就绪';
+  $('app-storage-status').classList.toggle('is-error',!storageReady);
   if(changed||busy||!storageReady)for(const id of ['download-report','download-brief'])$(id).disabled=true;
 }
 function sourceLink(url,label){const link=text('a',label);link.href=url;link.target='_blank';link.rel='noopener noreferrer';return link;}
@@ -208,10 +227,10 @@ async function saveAndContinue(){
     lastSavedContext=savingPair.context_id;dismissedComplete=false;
     if(result.complete){
       summary();refreshButtons();confirmation(`已保存 ${savingPair.id}：${CHOICES[result.record.choice]}。本轮已全部保存。`);
-      message('本轮已完成，可查看统计、导出报告或回看修改。');$('report').scrollIntoView({block:'start',behavior:'smooth'});
+      message('本轮已完成，可查看统计、导出报告或回看修改。');navigate('report');
     }else{
       index=result.nextIndex;render();confirmation(`已保存 ${savingPair.id}：${CHOICES[result.record.choice]} · 已进入下一组 ${pair().id}`);
-      void play();
+      if(activePage==='review')void play();
     }
   }catch(error){
     busy=false;changed=true;refreshButtons();confirmation('本次保存未完成，仍停留在当前组。',true);
@@ -222,10 +241,15 @@ async function saveAndContinue(){
 $('play').addEventListener('click',()=>play());$('restart').addEventListener('click',()=>play(true));
 $('pause').addEventListener('click',()=>{playToken++;pauseMedia();message('已同时暂停。');});
 function go(nextIndex){
-  if(busy||nextIndex<0||nextIndex>=catalog.pairs.length)return;
-  if(changed&&!window.confirm('本题还有未提交草稿，仍要切换吗？')){$('pair-select').value=String(index);return;}
-  index=nextIndex;render();
+  if(!catalog||busy||nextIndex<0||nextIndex>=catalog.pairs.length)return false;
+  if(changed&&nextIndex!==index&&!window.confirm('本题还有未提交草稿，仍要切换吗？')){$('pair-select').value=String(index);return false;}
+  index=nextIndex;render();return true;
 }
+$('workspace-resume').addEventListener('click',()=>{
+  if(!catalog||busy)return;
+  const next=drafts[pair().context_id]?index:resumeIndex(catalog,saved);
+  if(next===index||go(next))navigate('review');
+});
 $('previous').addEventListener('click',()=>go(index-1));$('next').addEventListener('click',()=>go(index+1));
 $('pair-select').addEventListener('change',()=>{const next=Number($('pair-select').value);if(Number.isInteger(next))go(next);});
 document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.choice);rememberDraft();}));
@@ -246,9 +270,18 @@ async function exportCurrent(){
   catch(error){message(error.message,true);}
 }
 $('export').addEventListener('click',exportCurrent);$('export-complete').addEventListener('click',exportCurrent);
+$('backup-all').addEventListener('click',async()=>{
+  if(!catalog||busy||changed||!storageReady)return;
+  try{
+    adopt(await api('/api/labels'));summary();refreshButtons();
+    const backup=exportLabels({...allCatalog,batch_id:'all',batch_name:'全部评测批次'},saved);
+    download(backup,'Morgan-全部批次评分备份.json');
+    confirmation(`已导出全部批次的 ${backup.labels.length} 条已保存评分及备注，未包含视频。`);
+  }catch(error){confirmation('备份未完成：'+error.message,true);}
+});
 $('import-labels').addEventListener('change',async event=>{
   const file=event.target.files?.[0];if(!file)return;
-  if(changed||busy){message('请先保存本题草稿，再导入评分。',true);event.target.value='';return;}
+  if(changed||busy){confirmation('请先保存本题草稿，再导入评分。',true);event.target.value='';return;}
   busy=true;refreshButtons();
   try{
     if(file.size>2*1024*1024)throw Error('评分文件不能超过 2MB。');
@@ -257,7 +290,7 @@ $('import-labels').addEventListener('change',async event=>{
     const labels={};for(const record of data.labels){if(!record?.context_id||labels[record.context_id])throw Error('评分编号缺失或重复，未导入。');labels[record.context_id]=record;}
     const state=await api('/api/labels/import','POST',{labels});adopt(state);busy=false;setBatch(catalog.batch_id);
     confirmation(`已导入 ${state.imported||0} 条；已有不同记录 ${state.conflicts||0} 条、版本不匹配 ${state.invalid_count||0} 条，原记录未覆盖。`);
-  }catch(error){busy=false;refreshButtons();message('未完成导入：'+error.message,true);}
+  }catch(error){busy=false;refreshButtons();confirmation('未完成导入：'+error.message,true);}
   finally{event.target.value='';}
 });
 $('export-legacy').addEventListener('click',()=>download({schema:'morgan-browser-annotation-backup-v1',labels:legacyBackup},'Morgan-浏览器旧标注备份.json'));
@@ -280,7 +313,7 @@ for(const [i,side] of ['left','right'].entries()){
 }
 window.addEventListener('beforeunload',event=>{if(changed||busy){event.preventDefault();event.returnValue='';}});
 document.addEventListener('keydown',event=>{
-  if(!catalog||busy||event.ctrlKey||event.metaKey||event.altKey)return;
+  if(!catalog||activePage!=='review'||busy||event.ctrlKey||event.metaKey||event.altKey)return;
   const editable=event.target.closest('input,textarea,select');
   if(!editable&&['1','2','3','4'].includes(event.key)){event.preventDefault();select(Object.keys(CHOICES)[Number(event.key)-1]);rememberDraft();}
   if(event.key==='Enter'&&(event.target===$('reason')||event.target.closest('.choices')||event.target===document.body)){event.preventDefault();void saveAndContinue();}
@@ -310,4 +343,9 @@ try{
     saved=browserSaved;setBatch(batchId);storageReady=false;summary();refreshButtons();
     $('storage-path').textContent=browserMode?'浏览器存储不可用':'保存服务未连接';confirmation(browserMode?'当前浏览器未能读取评分，请检查存储权限；已有缓存保留。':'需要启动本地文件保存服务，当前记录尚未迁移。',true);message(error.message,true);
   }
-}catch(error){message(error.message,true);['play','pause','restart','save','export'].forEach(id=>$(id).disabled=true);}
+}catch(error){
+  message(error.message,true);confirmation('评测工作台未能初始化：'+error.message,true);
+  $('app-storage-status').textContent='工作台未就绪';$('app-storage-status').classList.add('is-error');
+  $('workspace-batch').textContent='评测数据未能读取';$('workspace-data-status').textContent='请刷新页面后重试';
+  ['play','pause','restart','save','export','backup-all','workspace-resume','import-labels','batch-select','download-report','download-brief'].forEach(id=>$(id).disabled=true);
+}

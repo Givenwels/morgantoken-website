@@ -3,32 +3,44 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Morgan评测系统 · 视频 GSB</title>
-  <link rel="stylesheet" href="viewer.css?v=20261110-report3"><script type="module" src="viewer.js?v=20261110-report3"></script>
+  <link rel="stylesheet" href="viewer.css?v=20261110-system1"><script type="module" src="viewer.js?v=20261110-system1"></script>
 </head>
 <body data-storage="browser"><main>
-  <header>
+  <header class="app-header">
     <a class="brand" href="/bench/">Morgan评测系统 <span>视频 GSB</span></a>
-    <nav aria-label="视频播放与切题">
-      <a class="report-link" href="#report">统计与报告</a>
-      <button id="play" disabled>同时播放</button><button id="pause" disabled>同时暂停</button><button id="restart" disabled>从头重播</button>
-      <button id="previous" disabled>上一组</button><span id="progress">— / —</span><button id="next" disabled>下一组</button>
-      <select id="pair-select" aria-label="选择评测题目" disabled><option>正在读取题目…</option></select>
-    </nav>
+    <nav class="app-nav" aria-label="评测工作台导航"><a href="#workspace" data-route="workspace" aria-current="page">工作台</a><a href="#review" data-route="review">GSB 评审</a><a href="#report" data-route="report">统计报告</a></nav>
+    <span id="app-storage-status" class="app-status">正在读取评分…</span>
   </header>
   <section class="batch-bar" aria-label="题库批次">
-    <label for="batch-select">评测集 <select id="batch-select" disabled><option>正在读取题库…</option></select></label>
+    <label for="batch-select">当前批次 <select id="batch-select" disabled><option>正在读取题库…</option></select></label>
     <span id="batch-note"></span>
   </section>
   <section class="save-bar" aria-label="保存进度">
     <strong id="save-progress">正在读取浏览器评分…</strong>
     <span id="save-confirmation" role="status" aria-live="polite">评分保存在当前浏览器，保存成功后进入下一组。</span>
-    <button id="review-last" disabled>回看最近保存</button>
-    <button id="export">导出标注 JSON</button>
   </section>
-  <p class="file-location">保存位置：<code id="storage-path">当前浏览器本地存储</code><button id="export-legacy" hidden>导出迁移前的浏览器备份</button></p>
+  <section id="workspace" class="workspace" data-page="workspace" aria-labelledby="workspace-heading">
+    <div class="workspace-heading"><div><span class="eyebrow">MORGAN / EVALUATION WORKSPACE</span><h1 id="workspace-heading">评测工作台</h1><p>同屏看作品，人工打 GSB，系统负责保存、续评与汇总。</p></div><span class="workspace-badge">人工 GSB · 自动汇总</span></div>
+    <div class="workspace-stats" aria-label="当前批次统计"><div><span>已保存 / 配对</span><strong id="workspace-progress">— / —</strong></div><div><span>独立题目</span><strong id="workspace-task-count">—</strong></div><div><span>参与模型</span><strong id="workspace-model-count">—</strong></div><div><span>人工备注</span><strong id="workspace-note-count">—</strong></div></div>
+    <div class="workspace-grid">
+      <article class="resume-card"><span class="eyebrow">继续当前批次</span><h2 id="workspace-batch">正在读取评测批次…</h2><p id="workspace-percent">正在恢复已保存进度…</p><progress id="workspace-progress-bar" value="0" max="1" aria-label="本批次已保存进度"></progress><p id="workspace-last"></p><p id="workspace-draft-status" class="draft-notice" hidden>本题有未提交草稿，进入评审后可继续填写。报告只计已保存评分。</p><div class="workspace-actions"><button id="workspace-resume" disabled>开始本批评审</button><a id="workspace-report-link" href="#report">查看当前报告 →</a></div></article>
+      <article class="storage-card"><span class="eyebrow">备份与恢复</span><h2 id="workspace-data-status">正在连接保存服务…</h2><p id="workspace-data-description"></p><div class="workspace-actions"><button id="backup-all" disabled>备份全部批次评分</button><label class="import-button" for="import-labels">从 JSON 恢复<input id="import-labels" type="file" accept="application/json,.json" disabled></label></div><p class="file-location">保存位置：<code id="storage-path">当前浏览器本地存储</code><button id="export-legacy" hidden>导出迁移前的浏览器备份</button></p><p class="report-hint">备份只含评分、备注及来源信息，不含视频。恢复时保留已有不同判断，避免覆盖你的记录。</p></article>
+    </div>
+    <div class="workflow-steps" aria-label="评测流程"><article><span>01 / 素材配对</span><strong id="workspace-material-status">正在读取批次…</strong><p>中文提示词、来源、模型信息随配对保留；视频从来源链接播放。</p></article><article><span>02 / 人工评审</span><strong id="workspace-review-status">等待评分…</strong><p>左右同时播放，四档 GSB；确认保存后进入下一组，备注可选。</p></article><article><span>03 / 汇总报告</span><strong id="workspace-report-status">第一组保存后自动生成</strong><p>自动统计胜负、汇集备注，生成待核对草稿，可导出给自己的 Agent。</p></article></div>
+    <details class="workspace-about"><summary>本批模型、来源与自动化范围</summary><h3>参与模型</h3><div id="workspace-models" class="model-chips"></div><h3>数据来源</h3><div id="workspace-sources" class="workspace-sources"></div><p>当前已自动完成：保存后跳题、刷新续评、统计、报告草稿和资料导出。人工负责 GSB、备注和结论确认。</p><p>模型 API 尚未连接。批量生成、AI 裁判和 AI 场景归纳将在后续接入；目前可把 AI 总结资料包交给自己的 Agent。</p></details>
+  </section>
+  <section id="review" class="review-page" data-page="review" hidden aria-label="GSB 评审">
+  <div class="review-toolbar">
+    <nav aria-label="视频播放与切题">
+      <button id="play" disabled>同时播放</button><button id="pause" disabled>同时暂停</button><button id="restart" disabled>从头重播</button>
+      <button id="previous" disabled>上一组</button><span id="progress">— / —</span><button id="next" disabled>下一组</button>
+      <select id="pair-select" aria-label="选择评测题目" disabled><option>正在读取题目…</option></select>
+    </nav>
+    <div><button id="review-last" disabled>回看最近保存</button><button id="export" disabled>导出本批评分</button></div>
+  </div>
   <section id="completion" class="completion" hidden>
     <h2>本轮已全部保存</h2><p id="completion-stats"></p>
-    <button id="export-complete">导出全部标注 JSON</button><button id="continue-review">继续查看题目</button>
+    <button id="export-complete">导出本批评分 JSON</button><button id="continue-review">继续查看题目</button>
   </section>
   <section class="task">
     <div><span class="eyebrow">中文提示词</span><strong id="title">正在读取题目…</strong><span class="mode" id="catalog-stats">在线视频 · 仅存标注</span></div>
@@ -65,13 +77,16 @@
     <div class="summary"><span id="summary">正在读取统计…</span></div>
     <p class="storage-note" id="storage-note">标注保存到本机文件，浏览器旧记录会迁移，刷新后可续评。视频直接从来源网站缓冲，不另存为项目文件。导出的 JSON 可用于后续 GitHub 归档；当前尚未同步 GitHub。</p>
   </section>
-  <section id="report" class="report-panel" aria-labelledby="report-heading">
-    <div class="report-heading"><div><span class="eyebrow">RESULTS / HUMAN GSB</span><h2 id="report-heading">统计与结论</h2><p id="report-progress"></p></div><a href="#">返回评分 ↑</a></div>
+  </section>
+  <section id="report" class="report-panel" data-page="report" hidden aria-labelledby="report-heading">
+    <div class="report-heading"><div><span class="eyebrow">RESULTS / HUMAN GSB</span><h2 id="report-heading">统计与结论</h2><p id="report-progress"></p></div><a href="#review">继续评审 →</a></div>
     <p id="report-scope"></p><p id="report-method" class="report-formula"></p>
-    <div class="report-actions"><button id="download-report" disabled>导出评测报告</button><button id="download-brief" disabled>导出 AI 总结资料包</button><label class="import-button" for="import-labels">导入评分 JSON<input id="import-labels" type="file" accept="application/json,.json" disabled></label></div>
+    <p id="report-draft-warning" class="draft-notice" hidden>当前有未提交草稿，下面仅统计已保存评分。先保存草稿后再导出报告。</p>
+    <section class="conclusion-card" aria-labelledby="conclusion-heading"><div><span class="eyebrow">自动结论草稿 · 待人工确认</span><span id="conclusion-status" class="conclusion-status"></span></div><h3 id="conclusion-heading">当前样本说明了什么</h3><p id="conclusion-summary"></p><div id="conclusion-observations"></div><p class="report-hint">由固定统计和备注模板整理，未调用模型 API。备注保留为你的观察，不自动推断成已验证的模型能力。</p></section>
+    <div class="report-actions"><button id="download-report" disabled>导出评测报告</button><button id="download-brief" disabled>导出 AI 总结资料包</button><a href="#workspace">备份或恢复评分 →</a></div>
     <p class="report-hint">AI 结论：尚未配置 API。资料包包含固定统计、你的备注和证据编号，可交给自己的 Agent。后续服务端 API 沿用同一资料结构生成草稿，经你确认后发布。</p>
     <div class="report-table"><table><thead><tr><th>参考序</th><th>模型</th><th>已评 / 可评</th><th>胜</th><th>负</th><th>同好</th><th>同差</th><th>有效胜率</th></tr></thead><tbody id="model-results"></tbody></table></div>
-    <h3 class="report-section-title">在哪些任务更好</h3><div id="task-results" class="task-results"></div>
+    <details class="task-details"><summary>按任务展开比较表现</summary><div id="task-results" class="task-results"></div></details>
     <details class="note-details"><summary>备注与证据</summary><div id="report-notes"></div></details>
     <p id="report-snapshot" class="report-hint"></p>
   </section>
