@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Morgan评测系统 · Agent 评分工作台</title>
+<style>
+:root{color-scheme:light;--paper:#f4f5ef;--surface:#fffefa;--ink:#1b2a24;--muted:#617067;--line:#d3ddd3;--accent:#28745c;--accent-soft:#e8f1e8;--bad:#a43927}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;font-size:14px;line-height:1.6}
+main{width:min(1400px,calc(100% - 2.4rem));margin-inline:auto;padding-bottom:4rem}
+header{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line);padding:1rem 0;margin-bottom:1.2rem;flex-wrap:wrap}
+.brand{display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;color:inherit}
+.brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:var(--accent);color:#fff;font:700 1.2rem/1 Georgia,serif}
+.brand strong{font-size:.95rem}.brand small{display:block;color:var(--muted);font:600 .56rem/1.2 ui-monospace,Consolas,monospace;letter-spacing:.12em}
+.toolbar{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+button,.filebtn{font:inherit;border:1px solid var(--line);background:var(--surface);border-radius:9px;padding:.5rem .9rem;cursor:pointer}
+button:hover,.filebtn:hover{border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:default}
+.filebtn input{display:none}
+.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(360px,1fr);gap:1.1rem;align-items:start}
+@media(max-width:980px){.layout{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:1.1rem 1.2rem;margin-bottom:1.1rem}
+.card h2{font-size:1.02rem;margin:.2rem 0 .7rem}
+.card h3{font-size:.92rem;margin:.9rem 0 .4rem;color:var(--accent)}
+.eyebrow{color:var(--accent);font:700 .68rem/1.4 ui-monospace,Consolas,monospace;letter-spacing:.13em;margin:0 0 .3rem}
+.muted{color:var(--muted)}.fine{font-size:.78rem;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:.86rem}
+th,td{border-bottom:1px solid var(--line);padding:.42rem .5rem;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;background:#f1f3ec}
+.steps li{margin:.3rem 0;padding:.42rem .6rem;border-left:3px solid var(--line);background:#f7f9f2;border-radius:0 8px 8px 0}
+.steps li.err{border-left-color:var(--bad);background:#fbf1ec}
+.steps .t{color:var(--accent);font:700 .76rem/1 ui-monospace,Consolas,monospace}
+.steps .d{color:var(--muted);font-size:.8rem}
+.badge{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:.05rem .5rem;font-size:.74rem;font-weight:700}
+.badge.red{background:#f9e3da;color:var(--bad)}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem;font-size:.85rem}
+.meta-grid div span{display:block;color:var(--muted);font-size:.72rem}
+.meta-grid div strong{font-size:.98rem}
+.check-row{display:flex;gap:.6rem;align-items:flex-start;padding:.45rem 0;border-bottom:1px dashed var(--line)}
+.check-row:last-child{border-bottom:0}
+.check-row .cid{font:700 .72rem/1.9 ui-monospace,Consolas,monospace;color:var(--accent);min-width:2.1rem}
+.check-row .txt{flex:1;font-size:.86rem}
+.check-row .txt input{width:100%;margin-top:.25rem;font:inherit;font-size:.78rem;border:1px solid var(--line);border-radius:7px;padding:.3rem .5rem;background:#fff}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{border:0;border-radius:0;padding:.3rem .7rem;font-size:.78rem;background:#fff}
+.seg button.on{background:var(--accent);color:#fff}
+.mod{border:1px solid var(--line);border-radius:10px;margin-bottom:.6rem;overflow:hidden}
+.mod-head{display:flex;align-items:center;gap:.5rem;padding:.5rem .8rem;background:#f1f3ec;cursor:pointer}
+.mod-head strong{font-size:.88rem}
+.mod-head .score{margin-left:auto;font:700 .8rem/1 ui-monospace,Consolas,monospace;color:var(--accent)}
+.mod-body{padding:.5rem .8rem;display:none}
+.mod.open .mod-body{display:block}
+.err-item{display:flex;align-items:center;gap:.5rem;padding:.3rem 0;font-size:.82rem}
+.err-item code{background:#eef1e6;border-radius:5px;padding:.05rem .4rem;font-size:.72rem}
+.err-item input{flex:1;font:inherit;font-size:.78rem;border:1px solid var(--line);border-radius:6px;padding:.25rem .45rem}
+.err-item button{padding:.15rem .5rem;font-size:.75rem}
+.addline{display:flex;gap:.5rem;align-items:center;margin-top:.45rem;flex-wrap:wrap}
+.addline select{font:inherit;font-size:.8rem;border:1px solid var(--line);border-radius:7px;padding:.3rem .5rem;max-width:100%}
+.safety label{display:flex;gap:.5rem;align-items:flex-start;font-size:.84rem;padding:.32rem 0}
+.safety input{margin-top:.28rem}
+.safety-hit{border:1px solid var(--bad);background:#fbf1ec;color:var(--bad);border-radius:10px;padding:.7rem 1rem;font-weight:700;margin-bottom:.7rem}
+.total-row{display:flex;align-items:baseline;gap:1rem;padding:.7rem .2rem 0}
+.total-row strong{font-size:1.5rem;color:var(--accent);font-variant-numeric:tabular-nums}
+.gsb .choices{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem;margin:.5rem 0}
+.gsb .choices button{padding:.55rem .3rem;font-weight:650;font-size:.82rem}
+.gsb .choices button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.export{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;padding:.7rem 1.1rem;width:100%}
+.ab-switch{display:flex;gap:.5rem;margin-bottom:.8rem}
+.ab-switch button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent);font-weight:700}
+.empty{border:1px dashed var(--line);border-radius:13px;padding:2.2rem;text-align:center;color:var(--muted)}
+.toast{position:fixed;bottom:1.2rem;right:1.2rem;background:var(--ink);color:#fff;border-radius:10px;padding:.6rem 1rem;font-size:.82rem;opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:.95}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <a class="brand" href="/bench/"><span class="brand-mark">M</span><span><strong>Morgan评测系统 · Agent 评分工作台</strong><small>AGENT EVALUATION WORKSPACE</small></span></a>
+  <div class="toolbar">
+    <label class="filebtn">导入轨迹 A<input type="file" id="fileA" accept="application/json,.json"></label>
+    <label class="filebtn">导入轨迹 B（对比可选）<input type="file" id="fileB" accept="application/json,.json"></label>
+    <label class="filebtn">导入核验结果<input type="file" id="fileV" accept="application/json,.json"></label>
+    <button id="export">导出评分 JSON</button>
+    <span id="store" class="badge">本地未保存</span>
+  </div>
+</header>
+<div id="abSwitch" class="ab-switch" hidden>
+  <button data-side="A" class="on">A · <span id="abNameA">轨迹 A</span></button>
+  <button data-side="B">B · <span id="abNameB">轨迹 B</span></button>
+</div>
+<div class="layout">
+  <section id="replay"><div class="empty">尚未导入轨迹。点击右上角「导入轨迹」选择 trace.json（格式见 trace-format.md）。导入两份可进入 A/B 对比模式打 GSB。</div></section>
+  <section id="scorePane"></section>
+</div>
+</main>
+<div class="toast" id="toast"></div>
+<script type="module">
+const $=s=>document.querySelector(s);
+const state={traces:{},side:'A',scores:{},rules:null,task:null,taskFetched:''};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)};
+const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e};
+
+fetch('../agent-rules.json').then(r=>r.ok?r.json():Promise.reject()).then(r=>{state.rules=r;if(state.traces[state.side])render();}).catch(()=>toast('agent-rules.json 读取失败（本地双击打开时请经本地服务访问）'));
+function ensureTask(taskId){
+  if(state.taskFetched===taskId)return Promise.resolve(state.task);
+  return fetch(`../tasks/${taskId}/task.json`).then(r=>r.ok?r.json():Promise.reject()).then(t=>{state.task=t;state.taskFetched=taskId;return t;}).catch(()=>null);
+}
+function blankScore(trace){
+  const s={schema:'morgan-agent-score-v1',task_id:trace.task_id,agent:{...trace.agent},
+    checklist:{},rubric:{},safety:{},gsb:{choice:null,note:''},notes:''};
+  return s;
+}
+function scoreOf(key){if(!state.scores[key])state.scores[key]=blankScore(state.traces[key]);return state.scores[key];}
+
+$('#fileA').addEventListener('change',e=>loadTrace(e, 'A'));
+$('#fileB').addEventListener('change',e=>loadTrace(e, 'B'));
+function loadTrace(e,side){
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{const tr=JSON.parse(t);
+    if(tr.schema!=='morgan-agent-trace-v1')throw Error('schema 不是 morgan-agent-trace-v1');
+    state.traces[side]=tr;state.side=side;
+    ensureTask(tr.task_id).then(()=>render());
+    toast(`轨迹 ${side} 已载入：${tr.agent?.name||'?'} · ${tr.task_id}`);
+  }).catch(err=>toast('导入失败：'+err.message));
+  e.target.value='';
+}
+$('#fileV').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  f.text().then(t=>{const v=JSON.parse(t);const key=state.side;
+    if(!state.traces[key])throw Error('先导入轨迹');
+    const s=scoreOf(key);s.verify=v;s.checklist={};
+    for(const[cid,r]of Object.entries(v.results||{}))s.checklist[cid]={pass:!!r.pass,note:r.msg&&!r.pass?r.msg:''};
+    state.traces[key].verify=v;render();toast('核验结果已并入清单');save();
+  }).catch(err=>toast('导入失败：'+err.message));
+  e.target.value='';
+});
+$('#abSwitch').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-side]');if(!b)return;
+  state.side=b.dataset.side;
+  document.querySelectorAll('.ab-switch button').forEach(x=>x.classList.toggle('on',x.dataset.side===state.side));
+  render();
+});
+$('#export').addEventListener('click',()=>{
+  const s=scoreOf(state.side);
+  const blob=new Blob([JSON.stringify(s,null,1)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download=`agent-score-${s.task_id}-${(s.agent.name||'agent').replace(/[^\w.-]+/g,'_')}.json`;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),800);toast('评分 JSON 已导出');
+});
+function save(){try{localStorage.setItem('morgan-agent-score-draft',JSON.stringify({traces:state.traces,scores:state.scores}));
+  $('#store').textContent='已存当前浏览器';}catch{toast('浏览器存储失败，请尽快导出')}}
+function loadSaved(){try{const d=JSON.parse(localStorage.getItem('morgan-agent-score-draft')||'null');
+  if(d&&d.traces){Object.assign(state,d);ensureTask(Object.values(state.traces)[0]?.task_id||'').then(()=>render());}}catch{}}
+addEventListener('beforeunload',e=>{if(Object.keys(state.scores).length){e.preventDefault();e.returnValue=''}});
+
+function render(){
+  const hasB=!!state.traces.B;
+  $('#abSwitch').hidden=!hasB;
+  const tr=state.traces[state.side];
+  // replay
+  const rep=$('#replay');rep.replaceChildren();
+  if(!tr){rep.append(el('div','empty','尚未导入轨迹。'));return}
+  const c=el('div','card');
+  c.append(el('p','eyebrow','TRAJECTORY REPLAY / 轨迹回放'));
+  const mg=el('div','meta-grid');
+  mg.append(metaCell('Agent',tr.agent?.name||'—'),metaCell('框架',tr.agent?.framework||'—'),
+    metaCell('模型版本',tr.agent?.model_version||'—'),metaCell('任务',tr.task_id||'—'),
+    metaCell('用时',tr.run_meta?.duration_sec?tr.run_meta.duration_sec+'s':'—'),
+    metaCell('成本',tr.run_meta?.cost??'—'));
+  c.append(mg);
+  if(tr.routing){c.append(el('h3',null,'中转路由'));c.append(el('p','muted',`${tr.routing.path||''} — ${tr.routing.reason||''}`));}
+  if(tr.instruction_log?.length){c.append(el('h3',null,'用户指令轮次'));
+    const tb=el('table');tb.append(head(['轮','用户指令']));
+    for(const r of tr.instruction_log){const tr2=el('tr');tr2.append(el('td',null,'R'+r.round),el('td',null,r.content));tb.append(tr2);}
+    c.append(tb);}
+  if(tr.plan?.length){c.append(el('h3',null,'规划'));
+    const tb=el('table');tb.append(head(['步','动作']));
+    for(const p of tr.plan){const r=el('tr');r.append(el('td',null,String(p.step)),el('td',null,p.action));tb.append(r);}
+    c.append(tb);}
+  if(tr.steps?.length){c.append(el('h3',null,'执行时间线'));
+    const ol=el('ol','steps');ol.style.paddingLeft='.8rem';ol.style.listStyle='none';
+    for(const s of tr.steps){const li=el('li',s.error?'err':null);
+      li.append(el('span','t',`#${s.i} ${s.tool}`),' ');
+      li.append(el('span','d',`${summarize(s.args)} → ${s.result_summary||''}${s.error?' [错误:'+s.error+']':''} · ${s.ts_sec??'?'}s`));
+      ol.append(li);}
+    c.append(ol);}
+  if(tr.output){c.append(el('h3',null,'最终产出'));
+    const p=el('p');p.append(el('span','badge',(tr.output.artifacts||[]).join('、')||'无产物'));
+    if(tr.output.summary)c.append(el('p','muted',tr.output.summary));}
+  if(tr.messages?.length){const d=el('details');d.append(el('summary',null,'完整对话'));for(const m of tr.messages){const p=el('p','muted',`[${m.role}] ${m.content}`);d.append(p);}c.append(d);}
+  if(tr.verify){const p=el('p');const v=tr.verify;p.append(el('span',v.passed===v.total?'badge':'badge red',`机器核验 ${v.passed}/${v.total}`));p.append(el('span','fine','  来自 verify.py'));c.append(p);}
+  else c.append(el('p','fine','提示：在运行目录执行 tasks/verify.py 后，用「导入核验结果」自动填清单。'));
+  rep.append(c);
+
+  // score pane
+  const s=scoreOf(state.side);
+  if(!state.task){const sp=$('#scorePane');sp.replaceChildren(el('div','empty','task.json 未能加载（'+(tr.task_id||'?')+'），清单不可用；规则扣分与安全项仍可打。'));renderScoreRulesOnly(s);return}
+  const sp=$('#scorePane');sp.replaceChildren();
+  const sc=el('div','card');sc.append(el('p','eyebrow','LAYER 1 / 结果核对清单'));
+  for(const ck of state.task.checklist){
+    const st=s.checklist[ck.id]||{};
+    const row=el('div','check-row');
+    row.append(el('span','cid',ck.id));
+    const box=el('div','txt');box.append(el('span',null,ck.check));
+    const seg=el('div','seg');
+    const bp=el('button',st.pass===true?'on':null,'PASS'),bf=el('button',st.pass===false?'on':null,'FAIL');
+    bp.onclick=()=>{st.pass=true;save();render()};
+    bf.onclick=()=>{st.pass=false;save();render()};
+    seg.append(bp,bf);box.append(seg);
+    const ni=el('input');ni.placeholder='备注（可选）';ni.value=st.note||'';
+    ni.oninput=()=>{st.note=ni.value;save()};
+    box.append(ni);row.append(box);sc.append(row);
+  }
+  sp.append(sc);
+  renderScoreRulesOnly(s,sp);
+}
+function metaCell(k,v){const d=el('div');d.append(el('span',null,k),el('strong',null,String(v)));return d}
+function head(...cols){const t=el('thead');const r=el('tr');for(const c of cols){const th=el('th',null,c);r.append(th)}t.append(r);return t}
+function summarize(args){if(!args)return '';const k=Object.keys(args);if(!k.length)return '';return `${k[0]}=${JSON.stringify(args[k[0]]).slice(0,40)}`}
+function renderScoreRulesOnly(s,sp){
+  sp=sp||$('#scorePane');
+  if(!state.rules)return;
+  s.rubric=s.rubric||{};s.safety=s.safety||{hits:{},note:''};
+  const rc=el('div','card');rc.append(el('p','eyebrow','LAYER 2 / 规则扣分（每模块 10 分制）'));
+  let totalDeduct=0;
+  for(const mod of state.rules.modules){
+    const items=s.rubric[mod.id]||[];
+    const ded=items.reduce((a,i)=>a+(i.deduct||0),0);
+    totalDeduct+=ded;
+    const box=el('div','mod'+(items.length?' open':''));
+    const headEl=el('div','mod-head');
+    headEl.append(el('strong',null,mod.name),el('span','muted fine',mod.lens),
+      el('span','score',`${(10-ded).toFixed(1)} / 10`));
+    box.append(headEl);
+    const body=el('div','mod-body');
+    for(const [i,it] of items.entries()){
+      const row=el('div','err-item');
+      row.append(el('code',null,it.code),el('span',null,it.name),
+        el('span','muted','-'+it.deduct));
+      const ni=el('input');ni.placeholder='依据（可选）';ni.value=it.note||'';
+      ni.oninput=()=>{it.note=ni.value;save()};
+      const rm=el('button',null,'移除');rm.onclick=()=>{items.splice(i,1);save();render()};
+      row.append(ni,rm);body.append(row);
+    }
+    const line=el('div','addline');
+    const sel=el('select');sel.append(el('option',null,'+ 添加错误类型'));
+    for(const e of mod.errors){const op=el('option',null,`${e.code} ${e.name}（-${e.deduct}）`);op.value=e.code;sel.append(op)}
+    sel.onchange=()=>{const e=mod.errors.find(x=>x.code===sel.value);if(e){items.push({...e,note:''});save();render()}};
+    line.append(sel);body.append(line);
+    headEl.onclick=()=>box.classList.toggle('open');
+    box.append(body);rc.append(box);
+  }
+  const tr=el('div','total-row');tr.append(el('span','muted','总扣分'),el('strong',null,String(totalDeduct)),
+    el('span','muted',`单次运行得分 ${state.rules.modules.length*10-totalDeduct}`));
+  rc.append(tr);
+  sp.append(rc);
+  const sf=el('div','card safety');sf.append(el('p','eyebrow','SAFETY / 安全红线（命中即不合格）'));
+  if(Object.values(s.safety.hits||{}).some(x=>x))sf.append(el('div','safety-hit','本次运行安全判定：不合格（命中红线，单独统计）'));
+  for(const r of state.rules.safety_red_lines){
+    const lb=el('label');const cb=el('input');cb.type='checkbox';
+    cb.checked=!!s.safety.hits?.[r.code];
+    cb.onchange=()=>{s.safety.hits=s.safety.hits||{};if(cb.checked)s.safety.hits[r.code]={name:r.name,note:''};else delete s.safety.hits[r.code];save();render()};
+    lb.append(cb);lb.append(el('span',null,`${r.code} ${r.name} — ${r.desc}`));sf.append(lb);
+  }
+  sp.append(sf);
+  const other=state.side==='A'?'B':'A';
+  if(state.traces[other]){
+    const gc=el('div','card gsb');gc.append(el('p','eyebrow','LAYER 3 / 四档 GSB（A/B 对比）'));
+    gc.append(el('p','fine',`A：${state.traces.A?.agent?.name||'?'}　vs　B：${state.traces.B?.agent?.name||'?'}　（左=A 右=B）`));
+    const ch=el('div','choices');
+    for(const [k,lab] of Object.entries(state.rules.choice_labels)){
+      const b=el('button',s.gsb.choice===k?'on':null,lab);
+      b.onclick=()=>{s.gsb.choice=k;save();render()};ch.append(b);
+    }
+    gc.append(ch);
+    const ni=el('input');ni.placeholder='GSB 依据（可选）';ni.style.cssText='width:100%;font:inherit;font-size:.8rem;border:1px solid var(--line);border-radius:8px;padding:.45rem .6rem';
+    ni.value=s.gsb.note||'';ni.oninput=()=>{s.gsb.note=ni.value;save()};
+    gc.append(ni);sp.append(gc);
+  }
+  const ex=el('div','card');
+  const ni=el('input');ni.placeholder='整体备注（可选，进入报告）';ni.style.cssText='width:100%;font:inherit;font-size:.84rem;border:1px solid var(--line);border-radius:8px;padding:.5rem .7rem';
+  ni.value=s.notes||'';ni.oninput=()=>{s.notes=ni.value;save()};
+  ex.append(el('p','eyebrow','NOTES'),ni);sp.append(ex);
+}
+loadSaved();
+</script>
+</body>
+</html>

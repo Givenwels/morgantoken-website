@@ -1,0 +1,159 @@
+{
+ "id": "AG-H1",
+ "title": "三源对账与冲突仲裁",
+ "dimensions": [
+  "信息冲突处理",
+  "长时程一致性"
+ ],
+ "difficulty": "困难",
+ "environment": {
+  "files": [
+   "orders_v1.csv",
+   "orders_v2.csv",
+   "correction_email.md"
+  ],
+  "description": "两版订单快照（v1 旧、v2 新，互有出入）+ 一封供应商更正函。没有任何单一文件是完整真相：v2 是最新基础，但 3 处以邮件为准，1 单被取消，1 单只在邮件里，同一商品在两版中的名称写法不一致。"
+ },
+ "instruction": [
+  "阅读目录下的 orders_v1.csv、orders_v2.csv 和 correction_email.md，生成最终对账单 reconciliation.csv，列：sku,name,qty,unit_price,amount,source。"
+ ],
+ "checklist": [
+  {
+   "id": "C1",
+   "check": "输出文件 reconciliation.csv 存在且列名正确",
+   "verify": "auto"
+  },
+  {
+   "id": "C2",
+   "check": "11 行商品齐全：v2 的 11 个 sku + 邮件新增的 sku-013，共 12 行",
+   "verify": "auto"
+  },
+  {
+   "code": "",
+   "id": "C3",
+   "check": "邮件更正生效：sku-003 qty=45、sku-008 price=82.0",
+   "verify": "auto"
+  },
+  {
+   "id": "C4",
+   "check": "sku-011（整单取消）未出现在对账单中",
+   "verify": "auto"
+  },
+  {
+   "id": "C5",
+   "check": "sku-006 只出现一次（名称写法差异被识别为同一商品）",
+   "verify": "auto"
+  },
+  {
+   "id": "C6",
+   "check": "source 列对每行标注了数据依据（如 v2+邮件更正）",
+   "verify": "auto"
+  },
+  {
+   "id": "C7",
+   "check": "amount = qty × unit_price，计算正确",
+   "verify": "auto"
+  }
+ ],
+ "traps": [
+  "邮件更正 vs 新版快照的优先级",
+  "整单取消的行",
+  "只在邮件中存在的新增行",
+  "名称空格差异导致重复统计"
+ ],
+ "gold": {
+  "rows": [
+   {
+    "sku": "sku-001",
+    "name": "陶瓷马克杯",
+    "qty": 135,
+    "unit_price": 25.0,
+    "amount": 3375.0
+   },
+   {
+    "sku": "sku-002",
+    "name": "帆布托特包",
+    "qty": 80,
+    "unit_price": 42.0,
+    "amount": 3360.0
+   },
+   {
+    "sku": "sku-003",
+    "name": "不锈钢保温杯",
+    "qty": 45,
+    "unit_price": 68.0,
+    "amount": 3060.0
+   },
+   {
+    "sku": "sku-004",
+    "name": "亚麻桌布",
+    "qty": 35,
+    "unit_price": 59.0,
+    "amount": 2065.0
+   },
+   {
+    "sku": "sku-005",
+    "name": "香薰蜡烛",
+    "qty": 200,
+    "unit_price": 18.5,
+    "amount": 3700.0
+   },
+   {
+    "sku": "sku-006",
+    "name": "蓝牙耳机 Pro",
+    "qty": 45,
+    "unit_price": 199.0,
+    "amount": 8955.0
+   },
+   {
+    "sku": "sku-007",
+    "name": "木质相框",
+    "qty": 72,
+    "unit_price": 15.5,
+    "amount": 1116.0
+   },
+   {
+    "sku": "sku-008",
+    "name": "户外露营灯",
+    "qty": 50,
+    "unit_price": 82.0,
+    "amount": 4100.0
+   },
+   {
+    "sku": "sku-009",
+    "name": "硅胶收纳袋",
+    "qty": 300,
+    "unit_price": 6.8,
+    "amount": 2040.0
+   },
+   {
+    "sku": "sku-010",
+    "name": "羊毛围巾",
+    "qty": 60,
+    "unit_price": 79.0,
+    "amount": 4740.0
+   },
+   {
+    "sku": "sku-013",
+    "name": "羊毛抱枕",
+    "qty": 55,
+    "unit_price": 39.0,
+    "amount": 2145.0
+   }
+  ],
+  "skus": [
+   "sku-001",
+   "sku-002",
+   "sku-003",
+   "sku-004",
+   "sku-005",
+   "sku-006",
+   "sku-007",
+   "sku-008",
+   "sku-009",
+   "sku-010",
+   "sku-013"
+  ],
+  "total": 38656.0
+ }
+}

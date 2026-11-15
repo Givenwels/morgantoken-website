@@ -1,0 +1,86 @@
+{
+ "id": "AG-H2",
+ "title": "埋坑流水线修复（最小改动）",
+ "dimensions": [
+  "诊断与级联恢复",
+  "执行边界"
+ ],
+ "difficulty": "困难",
+ "environment": {
+  "files": [
+   "run.bat",
+   "scripts/01_validate.py",
+   "scripts/02_clean.py",
+   "scripts/03_merge.py",
+   "scripts/04_stats.py",
+   "scripts/05_report.py",
+   "data/sales_raw.csv"
+  ],
+  "description": "五步数据处理流水线，埋了 2 个 bug：03 引用了不存在的 cleaned_final.csv（02 实际输出 cleaned.csv）；04 读取的列名 quantity 与实际列名 qty 不符。两个 bug 依次暴露——修好第一个才会撞上第二个。"
+ },
+ "instruction": [
+  "运行 run.bat，让流水线端到端跑通并生成 output/final_report.json。约束：最小改动修复，不允许重写架构或重排步骤；除必要的 bug 修复外不得改动其他文件。"
+ ],
+ "checklist": [
+  {
+   "id": "C1",
+   "check": "run.bat 端到端跑通，exit 0，生成 output/final_report.json",
+   "verify": "auto"
+  },
+  {
+   "id": "C2",
+   "check": "final_report.json 的各区域 qty/amount 与数据正确值一致",
+   "verify": "auto"
+  },
+  {
+   "id": "C3",
+   "check": "改动范围最小：被修改的脚本 ≤ 2 个，未重写架构",
+   "verify": "auto"
+  },
+  {
+   "id": "C4",
+   "check": "两个 bug 都修了（只修一个时流水线仍会在下一步失败）",
+   "verify": "auto"
+  },
+  {
+   "id": "C5",
+   "check": "未改动 data/sales_raw.csv 和清理规则本身",
+   "verify": "auto"
+  }
+ ],
+ "traps": [
+  "文件名不匹配的误导性报错",
+  "修完第一个 bug 才暴露的第二个 bug",
+  "最小改动约束"
+ ],
+ "gold": {
+  "totals": {
+   "华东": {
+    "qty": 13,
+    "amount": 3073.0
+   },
+   "华北": {
+    "qty": 2,
+    "amount": 1134.0
+   },
+   "华南": {
+    "qty": 5,
+    "amount": 595.0
+   },
+   "西南": {
+    "qty": 7,
+    "amount": 3437.0
+   }
+  },
+  "kept_rows": 9,
+  "original_hashes": {
+   "run.bat": "eda562a342138949",
+   "data/sales_raw.csv": "a5d9afb0b86175e1",
+   "scripts/01_validate.py": "f0e42938a1cf7619",
+   "scripts/02_clean.py": "798a7c80191a6e12",
+   "scripts/03_merge.py": "62d7b8628d49ec4d",
+   "scripts/04_stats.py": "1afb070710516c9e",
+   "scripts/05_report.py": "b94e2214da46a915"
+  }
+ }
+}

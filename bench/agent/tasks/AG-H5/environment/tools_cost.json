@@ -1,0 +1,15 @@
+{
+ "slow_free": {
+  "cost_per_file": 1,
+  "desc": "便宜稳:每文件 1 预算,单文件一次调用"
+ },
+ "fast_paid": {
+  "cost_per_file": 3,
+  "desc": "每文件 3 预算"
+ },
+ "batch_tool": {
+  "cost_total": 20,
+  "min_files": 15,
+  "desc": "一次性处理全部文件,总价 20 预算,仅当文件数 ≥15 可用"
+ }
+}

@@ -1,0 +1,46 @@
+{
+  "schema": "morgan-agent-trace-v1",
+  "task_id": "AG-H1",
+  "_note": "演示轨迹：结构与字段口径示例，非真实运行。",
+  "agent": {
+    "name": "GLM-5.3-Flash",
+    "framework": "WorkBuddy",
+    "model_version": "demo",
+    "run_tag": "run-1"
+  },
+  "run_meta": {
+    "started_at": "2026-11-15T10:00:00+08:00",
+    "duration_sec": 210,
+    "cost": null,
+    "operator": "morgan"
+  },
+  "routing": {
+    "path": "数据处理",
+    "reason": "任务为多源 CSV 对账，走文件处理路径。"
+  },
+  "instruction_log": [
+    {"round": 1, "content": "阅读 orders_v1.csv、orders_v2.csv 和 correction_email.md，生成最终对账单 reconciliation.csv，列：sku,name,qty,unit_price,amount,source。"}
+  ],
+  "plan": [
+    {"step": 1, "action": "读三份源文件，确认哪一版优先"},
+    {"step": 2, "action": "以 v2 为基础，应用邮件更正（数量/单价/取消/新增）"},
+    {"step": 3, "action": "核对 sku-006 名称差异，去重"},
+    {"step": 4, "action": "计算 amount，写 reconciliation.csv，标注 source"}
+  ],
+  "steps": [
+    {"i": 1, "tool": "read_file", "args": {"path": "orders_v1.csv"}, "result_summary": "12 行订单", "ts_sec": 2, "error": null},
+    {"i": 2, "tool": "read_file", "args": {"path": "orders_v2.csv"}, "result_summary": "11 行，缺 sku-012x，sku-006 名称带空格", "ts_sec": 4, "error": null},
+    {"i": 3, "tool": "read_file", "args": {"path": "correction_email.md"}, "result_summary": "3 处更正 + 1 取消 + 1 新增", "ts_sec": 6, "error": null},
+    {"i": 4, "tool": "write_file", "args": {"path": "reconciliation.csv"}, "result_summary": "写入 12 行对账单", "ts_sec": 40, "error": null},
+    {"i": 5, "tool": "read_file", "args": {"path": "reconciliation.csv"}, "result_summary": "自检通过", "ts_sec": 44, "error": null}
+  ],
+  "messages": [
+    {"role": "assistant", "content": "已完成对账：以 v2 为基础，按更正函修正 sku-003 数量 45、sku-008 单价 82.0，剔除取消的 sku-011，补充新增 sku-013；sku-006 两种写法合并为一条。共 12 行。"}
+  ],
+  "output": {
+    "artifacts": ["reconciliation.csv"],
+    "summary": "12 行对账单，金额合计与金标准一致。"
+  },
+  "screenshots": [],
+  "verify": null
+}

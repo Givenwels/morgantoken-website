@@ -1,0 +1,115 @@
+{
+ "id": "AG-H4",
+ "title": "七轮需求变更风暴",
+ "dimensions": [
+  "多轮状态维护",
+  "撤回与覆盖",
+  "指令遵循"
+ ],
+ "difficulty": "困难+",
+ "environment": {
+  "files": [
+   "requirements.md",
+   "rounds.txt",
+   "data.csv"
+  ],
+  "description": "初始需求文档 + 连续 7 轮变更对话（加字段、撤回、改排序、改文件名、加过滤、再撤回、调阈值）。最终状态必须逐轮演化得出，只看最后一句话推不出来。"
+ },
+ "instruction": [
+  "阅读 requirements.md（初始配置）和 rounds.txt（7 轮用户变更），按每一轮顺序演化配置，输出：config.json（最终态）、snap_r2.json（第 2 轮结束时的完整配置快照）、snap_r5.json（第 5 轮结束时的完整配置快照）。快照结构须与 config.json 相同。"
+ ],
+ "checklist": [
+  {
+   "id": "C1",
+   "check": "config.json 最终态与 7 轮演化后的正确状态完全一致",
+   "verify": "auto"
+  },
+  {
+   "id": "C2",
+   "check": "sort_by=amount（R3 撤回了 R1 的销量排序）",
+   "verify": "auto"
+  },
+  {
+   "id": "C3",
+   "check": "margin 字段已移除（R6 撤回了 R2 的添加），最终 fields 无 margin",
+   "verify": "auto"
+  },
+  {
+   "id": "C4",
+   "check": "output_file=region_report.json，filters.amount_gt=2000（R4/R5/R7）",
+   "verify": "auto"
+  },
+  {
+   "id": "C5",
+   "check": "snap_r2.json 与第 2 轮结束时的有效状态一致",
+   "verify": "auto"
+  },
+  {
+   "id": "C6",
+   "check": "snap_r5.json 与第 5 轮结束时的有效状态一致（此时 margin 还在、阈值还是 1000）",
+   "verify": "auto"
+  },
+  {
+   "id": "C7",
+   "check": "未把已撤回的约束复活（最终配置里没有 margin、没有 sales 排序）",
+   "verify": "auto"
+  }
+ ],
+ "traps": [
+  "R3 撤回 R1",
+  "R6 撤回 R2（但 R5/R7 不受影响）",
+  "快照必须反映当时态而非最终态",
+  "最终态靠逐轮演化"
+ ],
+ "gold": {
+  "final": {
+   "group_by": "week",
+   "fields": [
+    "channel",
+    "sales",
+    "amount"
+   ],
+   "sort_by": "amount",
+   "sort_order": "desc",
+   "output_file": "region_report.json",
+   "filters": {
+    "amount_gt": 2000
+   },
+   "extras": []
+  },
+  "snap_r2": {
+   "group_by": "week",
+   "fields": [
+    "channel",
+    "sales",
+    "amount",
+    "margin"
+   ],
+   "sort_by": "sales",
+   "sort_order": "desc",
+   "output_file": "weekly_report.json",
+   "filters": {},
+   "extras": [
+    "margin:2位小数"
+   ]
+  },
+  "snap_r5": {
+   "group_by": "week",
+   "fields": [
+    "channel",
+    "sales",
+    "amount",
+    "margin"
+   ],
+   "sort_by": "amount",
+   "sort_order": "desc",
+   "output_file": "region_report.json",
+   "filters": {
+    "amount_gt": 1000
+   },
+   "extras": [
+    "margin:2位小数"
+   ]
+  }
+ }
+}

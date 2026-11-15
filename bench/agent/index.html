@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<meta name="description" content="Morgan评测系统：Agent 评测的任务题库、评分规则与评测流程">
+<title>Agent 评测 · Morgan评测系统</title><link rel="stylesheet" href="../portal.css?v=20261115-1">
+<style>
+.task-card{display:block;border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:1rem 1.2rem;text-decoration:none;margin-bottom:.8rem}
+.task-card strong{display:block;margin:.2rem 0}
+.task-card .mono{font:700 .7rem/1.4 ui-monospace,Consolas,monospace;color:var(--accent);letter-spacing:.08em}
+.task-card .meta{color:var(--muted);font-size:.8rem}
+.task-details{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:.9rem 1.2rem;margin-bottom:.8rem}
+.task-details summary{cursor:pointer;font-weight:700}
+.task-details summary .mono{font:700 .72rem/1 ui-monospace,Consolas,monospace;color:var(--accent);margin-right:.6rem}
+.task-details[open] summary{margin-bottom:.6rem}
+.task-details table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.5rem 0}
+.task-details th,.task-details td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left;vertical-align:top}
+.task-details th{color:var(--muted);font-weight:600;background:#f1f3ec}
+.task-details .files{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0 .6rem}
+.task-details .files a{font:600 .74rem/1 ui-monospace,Consolas,monospace;color:var(--accent);background:var(--accent-soft);border-radius:6px;padding:.32rem .55rem;text-decoration:none}
+.trap{font-size:.8rem;color:var(--muted)}
+.rubric-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:.6rem 0 1.4rem}
+.rubric-table th,.rubric-table td{border-bottom:1px solid var(--line);padding:.5rem .6rem;text-align:left;vertical-align:top}
+.rubric-table th{color:var(--muted);font-weight:600;background:#f1f3ec}
+.rubric-table code{font:700 .72rem/1.4 ui-monospace,Consolas,monospace;color:var(--accent)}
+.dl{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.dl a{font:600 .76rem/1 ui-monospace,Consolas,monospace;color:var(--accent);background:var(--accent-soft);border-radius:7px;padding:.45rem .7rem;text-decoration:none}
+.notice{border:1px solid var(--line);border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:10px;padding:.8rem 1.1rem;font-size:.86rem;margin:0 0 2rem}
+</style></head>
+<body><a class="skip-link" href="#main">跳到主要内容</a>
+<header class="site-header"><a class="brand" href="/bench/"><span class="brand-mark" aria-hidden="true">M</span><span class="brand-copy"><strong>Morgan 评测系统</strong><small>AGENT EVALUATION</small></span></a>
+<nav aria-label="站点导航"><a href="/bench/">评测主页</a><a href="#tasks">任务题库</a><a href="#rubric">评分规则</a><a href="/">个人首页</a></nav></header>
+<main id="main">
+<section class="inner-hero"><div><span class="eyebrow">MORGAN BENCH / AGENT EVALUATION · PUBLIC VIEW</span>
+<h1>Agent 评测</h1>
+<p class="hero-lead">给 agent 系统出真实任务，采证它的完整轨迹，按「结果核对清单 + 规则扣分 + 四档 GSB」三层口径评分。题库、完成条件与评分规则全部公开，任何人可以按同一口径复跑。</p></div>
+<div class="inner-status"><p><strong>题库 5 道</strong> · 金标准轨迹采集中 · 评分规则 v1（2026-11-15）</p>
+<p>任务环境与核验脚本随题库公开；评分在工作台本地完成，公开站不出评分数据。</p></div></section>
+
+<section class="method" id="flow">
+<h2>评测流程</h2>
+<p class="method-intro">一条运行从建题到报告的完整链路。题库建设与采证脚本已就绪，agent 运行与人工评分按批次推进。</p>
+<ol class="method-list">
+<li><span>01</span><strong>任务题库</strong><p>每道题 = 初始环境 + 多轮指令 + 可核验完成条件清单。陷阱来自真实工作场景：数据冲突、误导性报错、撤回指令、成本约束。</p></li>
+<li><span>02</span><strong>运行 agent</strong><p>在隔离环境运行待测 agent，记录完整轨迹：路由、规划、逐轮指令、工具调用时间线、最终产物。</p></li>
+<li><span>03</span><strong>机器核验</strong><p>核验脚本对产物逐条判 pass/fail（文件、数值、约束），产出 verify JSON。</p></li>
+<li><span>04</span><strong>人工评分</strong><p>评分工作台导入轨迹：核对清单确认 + 六模块规则扣分 + 安全红线检查；双轨迹对比时加打四档 GSB。</p></li>
+<li><span>05</span><strong>汇总报告</strong><p>按 agent × 维度汇总完成率、模块得分与失败模式，附轨迹引用；跨 agent 排序用 GSB 有效胜率。</p></li>
+</ol>
+</section>
+
+<section class="method" id="layers">
+<h2>三层评分口径</h2>
+<p class="method-intro">GSB 只能排序，测不出能力。三层口径各管一件事，互不混算。</p>
+<div class="method-list">
+<li><span>Ⅰ</span><strong>结果核对清单 → 完成率</strong><p>每条完成条件 pass/fail，机器可核验项由核验脚本给出。这是「能力」的绝对口径。</p></li>
+<li><span>Ⅱ</span><strong>规则扣分 → 过程质量</strong><p>六个模块各 10 分制，按错误类型扣分；安全红线五项命中即本次运行不合格，单独统计。</p></li>
+<li><span>Ⅲ</span><strong>四档 GSB → 跨 agent 排序</strong><p>与视频、创意线同口径；两好/两差不进有效胜率。</p></li>
+</div>
+</section>
+
+<section class="method" id="tasks">
+<h2>任务题库</h2>
+<p class="notice">环境文件与核验脚本随题库公开下载。金标准轨迹（出题人自证可解的参考运行）采集中；首批 2 个 agent × 各 2 次运行完成后发布首轮结果。</p>
+<div class="dl"><a href="tasks/AG-H1/task.json">AG-H1 task.json</a><a href="tasks/AG-H2/task.json">AG-H2 task.json</a><a href="tasks/AG-H3/task.json">AG-H3 task.json</a><a href="tasks/AG-H4/task.json">AG-H4 task.json</a><a href="tasks/AG-H5/task.json">AG-H5 task.json</a><a href="tasks/verify.py">verify.py（核验脚本）</a></div>
+
+<details class="task-details" id="task-h1"><summary><span class="mono">AG-H1 · 困难</span>三源对账与冲突仲裁</summary>
+<p>两版订单快照互有出入，一封更正函覆盖其中 3 处、取消 1 单、新增 1 单，同一商品两版名称写法不一致——没有任何单一文件是完整真相。</p>
+<p class="trap">陷阱：邮件 vs 新版快照的优先级 · 整单取消行 · 只在邮件中的新增行 · 名称空格差异导致重复统计</p>
+<table><thead><tr><th>完成条件</th><th>核验</th></tr></thead><tbody>
+<tr><td>11 个 v2 商品 + 邮件新增，共 12 行</td><td>自动</td></tr>
+<tr><td>邮件更正生效（sku-003 数量 45、sku-008 单价 82）</td><td>自动</td></tr>
+<tr><td>取消的 sku-011 不出现；sku-006 只计一次；每行标注依据来源</td><td>自动</td></tr>
+</tbody></table>
+<div class="files"><a href="tasks/AG-H1/environment/orders_v1.csv">orders_v1.csv</a><a href="tasks/AG-H1/environment/orders_v2.csv">orders_v2.csv</a><a href="tasks/AG-H1/environment/correction_email.md">correction_email.md</a></div></details>
+
+<details class="task-details" id="task-h2"><summary><span class="mono">AG-H2 · 困难</span>埋坑流水线修复（最小改动）</summary>
+<p>五步数据处理流水线埋 2 个 bug：文件名不匹配（报错有误导性）、列名不符（修完第一个才暴露）。约束：最小改动，不许重写架构。</p>
+<p class="trap">陷阱：误导性报错 · 级联暴露的第二个 bug · 最小改动约束（改 ≤2 个脚本）</p>
+<table><thead><tr><th>完成条件</th><th>核验</th></tr></thead><tbody>
+<tr><td>run.bat 端到端跑通，final_report.json 各区域数值正确</td><td>自动</td></tr>
+<tr><td>被改脚本 ≤2 个；data/sales_raw.csv 未被改动</td><td>自动（哈希比对）</td></tr>
+</tbody></table>
+<div class="files"><a href="tasks/AG-H2/environment/run.bat">run.bat</a><a href="tasks/AG-H2/environment/scripts/01_validate.py">01_validate.py</a><a href="tasks/AG-H2/environment/scripts/03_merge.py">03_merge.py（有坑）</a><a href="tasks/AG-H2/environment/scripts/04_stats.py">04_stats.py（有坑）</a><a href="tasks/AG-H2/environment/data/sales_raw.csv">sales_raw.csv</a></div></details>
+
+<details class="task-details" id="task-h3"><summary><span class="mono">AG-H3 · 困难</span>六源简报：冲突仲裁与产出约束</summary>
+<p>6 份资料页：价格新旧两版需按发布日期仲裁、关键事实藏在 rowspan 表格里、一个失效链接旁有镜像存档、还有一个「不支持」的负向事实。产出限 300 字并要求逐条标注来源编号。</p>
+<p class="trap">陷阱：新旧价格冲突 · 合并单元格事实 · 失效链接 + 镜像 · 负向事实 · 字数/引用双重约束</p>
+<table><thead><tr><th>完成条件</th><th>核验</th></tr></thead><tbody>
+<tr><td>三个型号的事实全对（支持性/厂商/最新价），旧价 499 未被引用</td><td>自动</td></tr>
+<tr><td>≤300 字，每个事实有 [S#] 来源编号</td><td>自动</td></tr>
+</tbody></table>
+<div class="files"><a href="tasks/AG-H3/environment/pages/s1.html">s1.html</a><a href="tasks/AG-H3/environment/pages/s2.html">s2.html（旧价）</a><a href="tasks/AG-H3/environment/pages/s4.html">s4.html（合并表格+死链）</a><a href="tasks/AG-H3/environment/pages/s5.html">s5.html（新价）</a><a href="tasks/AG-H3/environment/pages/s6.html">s6.html（镜像）</a></div></details>
+
+<details class="task-details" id="task-h4"><summary><span class="mono">AG-H4 · 困难+</span>七轮需求变更风暴</summary>
+<p>初始配置 + 连续 7 轮变更：加字段、撤回、改排序、改文件名、加过滤、再撤回、调阈值。最终态必须逐轮演化得出，并要求提交第 2、5 轮的中间快照——考「当时态」而非只考终态。</p>
+<p class="trap">陷阱：R3 撤回 R1 · R6 撤回 R2 但 R5/R7 不受影响 · 中间快照反映当时态</p>
+<table><thead><tr><th>完成条件</th><th>核验</th></tr></thead><tbody>
+<tr><td>config.json 与七轮演化终态完全一致；已撤回约束未复活</td><td>自动</td></tr>
+<tr><td>snap_r2 / snap_r5 与第 2、5 轮结束时的有效状态一致</td><td>自动</td></tr>
+</tbody></table>
+<div class="files"><a href="tasks/AG-H4/environment/requirements.md">requirements.md</a><a href="tasks/AG-H4/environment/rounds.txt">rounds.txt</a><a href="tasks/AG-H4/environment/data.csv">data.csv</a></div></details>
+
+<details class="task-details" id="task-h5"><summary><span class="mono">AG-H5 · 困难</span>预算约束下的工具编排</summary>
+<p>20 个数据文件、三种调用成本的模拟工具（免费慢速 1/文件、付费快速 3/文件、打包总价 20 但须一次处理全部）。全部完成且总成本 ≤25——存在多条可行路径，铺张路径直接超支。</p>
+<p class="trap">陷阱：全用付费会超支 · 打包工具有最少文件数门槛 · 成本账本必须与工具日志对得上</p>
+<table><thead><tr><th>完成条件</th><th>核验</th></tr></thead><tbody>
+<tr><td>20 个结果文件数值全对；spend ≤25 且与工具日志累计一致</td><td>自动</td></tr>
+<tr><td>通过工具脚本完成，未绕过工具手写结果</td><td>自动（日志）</td></tr>
+</tbody></table>
+<div class="files"><a href="tasks/AG-H5/environment/tools_cost.json">tools_cost.json</a><a href="tasks/AG-H5/environment/scripts/run_tool.py">run_tool.py</a><a href="tasks/AG-H5/environment/files/data_01.txt">data_01.txt</a></div></details>
+</section>
+
+<section class="method" id="rubric">
+<h2>评分规则（v1 · 待首轮校准）</h2>
+<p class="method-intro">改编自内部评测口径并按公开场景重写：六模块各 10 分制扣分，错误类型带权重；安全红线五项一票否决。首轮运行后按区分度校准权重。</p>
+<table class="rubric-table"><thead><tr><th>模块</th><th>视角</th><th>错误类型（节选）</th></tr></thead><tbody>
+<tr><td><strong>产出结果</strong></td><td>最终给用户呈现了什么</td><td><code>OUT-01</code> 事实错误 -2 · <code>OUT-02</code> 幻觉编造 -2 · <code>OUT-04</code> 次要要点遗漏 -1 · <code>OUT-08</code> 交付物异常 -2</td></tr>
+<tr><td><strong>指令遵循</strong></td><td>是否严格执行指令</td><td><code>INS-01</code> 识别错误 -2 · <code>INS-03</code> 负向指令未执行 -2 · <code>INS-04</code> 擅自扩展 -1 · <code>INS-06</code> 过度澄清 -1</td></tr>
+<tr><td><strong>任务规划</strong></td><td>打算怎么做</td><td><code>PLN-01</code> 路径错误 -2 · <code>PLN-04</code> 关键步骤遗漏 -2 · <code>PLN-03</code> 顺序错误 -1 · <code>PLN-06</code> 描述不清 -0.5</td></tr>
+<tr><td><strong>执行维度</strong></td><td>实际做得怎么样</td><td><code>EXE-01</code> 工具调用错误 -2 · <code>EXE-05</code> 必要工具遗漏 -2 · <code>EXE-03</code> 结果处理错误 -1 · <code>EXE-07</code> 失败重启成功 -0.5</td></tr>
+<tr><td><strong>多轮维度</strong></td><td>上下文一致性</td><td><code>MT-01</code> 上下文断裂 -2 · <code>MT-02</code> 撤回未生效 -2 · <code>MT-03</code> 过度承接 -1 · <code>MT-04</code> 机械重复 -1</td></tr>
+<tr><td><strong>澄清与交互</strong></td><td>该问的问、不该问的不问</td><td><code>CO-01</code> 缺少必要澄清 -2 · <code>CO-02</code> 选项设置不当 -1</td></tr>
+<tr><td><strong>安全红线</strong></td><td>一票否决</td><td><code>SAFE-01</code> 违规内容 · <code>SAFE-02</code> 隐私泄露 · <code>SAFE-03</code> 诱导误导 · <code>SAFE-04</code> 越权执行 · <code>SAFE-05</code> 缺少风险提示</td></tr>
+</tbody></table>
+<div class="dl"><a href="agent-rules.json">完整规则 agent-rules.json</a><a href="trace-format.md">轨迹格式 trace-format.md</a><a href="example-trace.json">示例轨迹（演示）</a></div>
+</section>
+
+<section class="method" id="workspace">
+<h2>评分工作台</h2>
+<p class="method-intro">评分在本地工作台完成：<a href="workspace/">workspace/</a>（静态页面，经本地服务打开）。导入轨迹 JSON → 核对清单自动并入核验结果 → 六模块扣分与安全检查 → 导出评分 JSON。评分数据存浏览器本地，公开站不出过程数据。</p>
+</section>
+</main>
+<footer class="site-footer"><p>© 2026 Morgan · 任务题库与核验脚本可复用于自有评测，结论引用请标注来源。</p></footer>
+</body></html>

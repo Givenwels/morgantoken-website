@@ -1,0 +1,79 @@
+{
+ "id": "AG-H5",
+ "title": "预算约束下的工具编排",
+ "dimensions": [
+  "任务规划",
+  "成本效率",
+  "约束遵守"
+ ],
+ "difficulty": "困难",
+ "environment": {
+  "files": [
+   "tools_cost.json",
+   "scripts/run_tool.py",
+   "files/（20 个数据文件）"
+  ],
+  "description": "20 个数据文件 + 一个模拟工具（三种调用方式，成本不同：slow_free 1/文件、fast_paid 3/文件、batch_tool 总价 20 但须一次处理全部）。全部完成且总成本 ≤ 25。存在多条可行路径，铺张的路径会超支。"
+ },
+ "instruction": [
+  "用 scripts/run_tool.py 把 files/ 里 20 个数据文件的数字求和处理完（结果写入 results/，工具自动完成），并在 budget.json 里记录你的成本账本 {\"spend\": 数字}。硬约束：总成本 ≤ 25。"
+ ],
+ "checklist": [
+  {
+   "id": "C1",
+   "check": "results/ 下 20 个 .sum 文件齐全且数值正确",
+   "verify": "auto"
+  },
+  {
+   "id": "C2",
+   "check": "budget.json 的 spend ≤ 25",
+   "verify": "auto"
+  },
+  {
+   "id": "C3",
+   "check": "spend 与 tool_log.jsonl 的累计成本一致（没有少报）",
+   "verify": "auto"
+  },
+  {
+   "id": "C4",
+   "check": "20 个文件全部处理，没有遗漏",
+   "verify": "auto"
+  },
+  {
+   "id": "C5",
+   "check": "工具调用方式符合 run_tool.py 的用法（没有绕过工具直接手写结果）",
+   "verify": "auto"
+  }
+ ],
+ "traps": [
+  "全用 fast_paid 会超支（60>25）",
+  "batch_tool 有最少文件数门槛",
+  "账本要与工具日志对得上，不能少报成本"
+ ],
+ "gold": {
+  "sums": {
+   "data_01.txt": 347,
+   "data_02.txt": 403,
+   "data_03.txt": 362,
+   "data_04.txt": 418,
+   "data_05.txt": 377,
+   "data_06.txt": 433,
+   "data_07.txt": 392,
+   "data_08.txt": 448,
+   "data_09.txt": 407,
+   "data_10.txt": 463,
+   "data_11.txt": 422,
+   "data_12.txt": 381,
+   "data_13.txt": 437,
+   "data_14.txt": 396,
+   "data_15.txt": 355,
+   "data_16.txt": 411,
+   "data_17.txt": 370,
+   "data_18.txt": 426,
+   "data_19.txt": 385,
+   "data_20.txt": 441
+  },
+  "budget": 25,
+  "min_cost": 20
+ }
+}
