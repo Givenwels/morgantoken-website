@@ -1,0 +1,113 @@
+{
+ "schema": "morgan-agent-trace-v1",
+ "task_id": "AG-H2",
+ "_note": "金标准参考运行：由出题人完整执行，用于证明题目可解并作为人工评分的对照基线。非候选 agent 的评测数据。",
+ "agent": {
+  "name": "gold-author-run",
+  "framework": "manual + verify.py",
+  "model_version": "n/a",
+  "run_tag": "gold"
+ },
+ "run_meta": {
+  "started_at": "2026-11-15",
+  "duration_sec": null,
+  "cost": null,
+  "operator": "morgan"
+ },
+ "routing": {
+  "path": "工程修复",
+  "reason": "流水线端到端跑通 + 最小改动约束。"
+ },
+ "instruction_log": [
+  {
+   "round": 1,
+   "content": "运行 run.bat，端到端跑通并生成 output/final_report.json；最小改动修复。"
+  }
+ ],
+ "plan": [
+  {
+   "step": 1,
+   "action": "运行 run.bat 定位首个失败点"
+  },
+  {
+   "step": 2,
+   "action": "修 03_merge.py 的输入文件名（cleaned_final.csv → cleaned.csv）"
+  },
+  {
+   "step": 3,
+   "action": "重跑，修 04_stats.py 的列名（quantity → qty）"
+  },
+  {
+   "step": 4,
+   "action": "再跑，全绿，核对 report 数值"
+  }
+ ],
+ "steps": [
+  {
+   "i": 1,
+   "tool": "run",
+   "args": {
+    "script": "run.bat"
+   },
+   "result_summary": "03_merge.py 失败：cleaned_final.csv 缺失",
+   "ts_sec": 3,
+   "error": null
+  },
+  {
+   "i": 2,
+   "tool": "edit",
+   "args": {
+    "path": "scripts/03_merge.py"
+   },
+   "result_summary": "文件名对齐为 cleaned.csv（最小改动 1 行）",
+   "ts_sec": 8,
+   "error": null
+  },
+  {
+   "i": 3,
+   "tool": "run",
+   "args": {
+    "script": "run.bat"
+   },
+   "result_summary": "04_stats.py 失败：KeyError quantity（实际列名 qty）",
+   "ts_sec": 12,
+   "error": null
+  },
+  {
+   "i": 4,
+   "tool": "edit",
+   "args": {
+    "path": "scripts/04_stats.py"
+   },
+   "result_summary": "列名 quantity → qty（最小改动 2 处）",
+   "ts_sec": 16,
+   "error": null
+  },
+  {
+   "i": 5,
+   "tool": "run",
+   "args": {
+    "script": "run.bat"
+   },
+   "result_summary": "PIPELINE OK，final_report.json 生成",
+   "ts_sec": 20,
+   "error": null
+  },
+  {
+   "i": 6,
+   "tool": "verify",
+   "args": {
+    "script": "verify.py"
+   },
+   "result_summary": "5/5 通过",
+   "ts_sec": 24,
+   "error": null
+  }
+ ],
+ "output": {
+  "artifacts": [
+   "output/final_report.json"
+  ],
+  "summary": "两个 bug 均修复；改动仅 03/04 两个脚本；区域合计与金标准一致。"
+ }
+}

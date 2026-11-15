@@ -1,0 +1,83 @@
+{
+ "schema": "morgan-agent-trace-v1",
+ "task_id": "AG-H3",
+ "_note": "金标准参考运行：由出题人完整执行，用于证明题目可解并作为人工评分的对照基线。非候选 agent 的评测数据。",
+ "agent": {
+  "name": "gold-author-run",
+  "framework": "manual + verify.py",
+  "model_version": "n/a",
+  "run_tag": "gold"
+ },
+ "run_meta": {
+  "started_at": "2026-11-15",
+  "duration_sec": null,
+  "cost": null,
+  "operator": "morgan"
+ },
+ "routing": {
+  "path": "多源阅读+写作",
+  "reason": "6 份 HTML 资料 → 300 字简报。"
+ },
+ "instruction_log": [
+  {
+   "round": 1,
+   "content": "写 brief.md：哪些型号支持无线充电/厂商/最新价格；≤300 字；逐条 [S#]；冲突按发布日期取新。"
+  }
+ ],
+ "plan": [
+  {
+   "step": 1,
+   "action": "通读 S1-S6，记录发布日期与关键事实"
+  },
+  {
+   "step": 2,
+   "action": "仲裁：A-1 价格用 S5（459，2026-10）不用 S2（499，2026-03）"
+  },
+  {
+   "step": 3,
+   "action": "C-3 事实在 S4 rowspan 表格 + S6 镜像；B-2 负向事实保留"
+  },
+  {
+   "step": 4,
+   "action": "写 300 字内简报并逐条标注来源编号"
+  }
+ ],
+ "steps": [
+  {
+   "i": 1,
+   "tool": "read_file",
+   "args": {
+    "path": "pages/s1-s6"
+   },
+   "result_summary": "六页事实与日期登记",
+   "ts_sec": 10,
+   "error": null
+  },
+  {
+   "i": 2,
+   "tool": "write_file",
+   "args": {
+    "path": "brief.md"
+   },
+   "result_summary": "三个型号事实 + 来源编号，长度达标",
+   "ts_sec": 40,
+   "error": null
+  },
+  {
+   "i": 3,
+   "tool": "verify",
+   "args": {
+    "script": "verify.py"
+   },
+   "result_summary": "6/6 通过（含 499 禁用检查）",
+   "ts_sec": 44,
+   "error": null
+  }
+ ],
+ "output": {
+  "artifacts": [
+   "brief.md"
+  ],
+  "summary": "A-1 星驰电子 459 [S5]；B-2 蓝湾科技 不支持 [S3]；C-3 云岭智造 1299 [S4][S6]。"
+ }
+}

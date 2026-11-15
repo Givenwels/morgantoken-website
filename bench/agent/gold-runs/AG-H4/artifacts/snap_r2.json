@@ -1,0 +1,1 @@
+{"group_by": "week", "fields": ["channel", "sales", "amount", "margin"], "sort_by": "sales", "sort_order": "desc", "output_file": "weekly_report.json", "filters": {}, "extras": ["margin:2位小数"]}

@@ -1,0 +1,31 @@
+{
+ "task_id": "AG-H3",
+ "results": {
+  "C1": {
+   "pass": true,
+   "msg": "字数 68 超 300"
+  },
+  "C2": {
+   "pass": true,
+   "msg": "缺少事实: []"
+  },
+  "C3": {
+   "pass": true,
+   "msg": "缺少事实: []"
+  },
+  "C4": {
+   "pass": true,
+   "msg": "缺少事实: []"
+  },
+  "C5": {
+   "pass": true,
+   "msg": "引用了被取代的旧价 499"
+  },
+  "C6": {
+   "pass": true,
+   "msg": "来源编号不足 4 处"
+  }
+ },
+ "passed": 6,
+ "total": 6
+}

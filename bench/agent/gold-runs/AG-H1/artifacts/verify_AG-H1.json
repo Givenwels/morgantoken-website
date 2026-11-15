@@ -1,0 +1,35 @@
+{
+ "task_id": "AG-H1",
+ "results": {
+  "C1": {
+   "pass": true,
+   "msg": "列名不完整"
+  },
+  "C2": {
+   "pass": true,
+   "msg": "行数 11，应为 11"
+  },
+  "C3": {
+   "pass": true,
+   "msg": ""
+  },
+  "C4": {
+   "pass": true,
+   "msg": "sku-011 仍存在"
+  },
+  "C5": {
+   "pass": true,
+   "msg": "sku-006 缺失"
+  },
+  "C6": {
+   "pass": true,
+   "msg": "source 列有空白"
+  },
+  "C7": {
+   "pass": true,
+   "msg": "合计 38656.0，应为 38656.0"
+  }
+ },
+ "passed": 7,
+ "total": 7
+}

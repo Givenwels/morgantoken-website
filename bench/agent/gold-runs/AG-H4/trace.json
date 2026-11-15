@@ -1,0 +1,125 @@
+{
+ "schema": "morgan-agent-trace-v1",
+ "task_id": "AG-H4",
+ "_note": "金标准参考运行：由出题人完整执行，用于证明题目可解并作为人工评分的对照基线。非候选 agent 的评测数据。",
+ "agent": {
+  "name": "gold-author-run",
+  "framework": "manual + verify.py",
+  "model_version": "n/a",
+  "run_tag": "gold"
+ },
+ "run_meta": {
+  "started_at": "2026-11-15",
+  "duration_sec": null,
+  "cost": null,
+  "operator": "morgan"
+ },
+ "routing": {
+  "path": "多轮配置演化",
+  "reason": "7 轮指令变更需逐轮维护有效状态。"
+ },
+ "instruction_log": [
+  {
+   "round": 1,
+   "content": "排序改成按销量降序"
+  },
+  {
+   "round": 2,
+   "content": "字段加毛利率，两位小数"
+  },
+  {
+   "round": 3,
+   "content": "撤回 R1，排序回到金额降序"
+  },
+  {
+   "round": 4,
+   "content": "输出文件名改为 region_report.json"
+  },
+  {
+   "round": 5,
+   "content": "加过滤 amount>1000"
+  },
+  {
+   "round": 6,
+   "content": "撤回毛利率字段"
+  },
+  {
+   "round": 7,
+   "content": "过滤阈值 1000→2000"
+  }
+ ],
+ "plan": [
+  {
+   "step": 1,
+   "action": "从 requirements.md 初始态出发，逐轮应用变更"
+  },
+  {
+   "step": 2,
+   "action": "R2/R5 结束时落盘当时态快照"
+  },
+  {
+   "step": 3,
+   "action": "R7 后输出最终 config.json（无 margin、amount 排序、amount_gt=2000）"
+  }
+ ],
+ "steps": [
+  {
+   "i": 1,
+   "tool": "read_file",
+   "args": {
+    "path": "requirements.md + rounds.txt"
+   },
+   "result_summary": "初始态与 7 轮变更登记",
+   "ts_sec": 4,
+   "error": null
+  },
+  {
+   "i": 2,
+   "tool": "evolve+write",
+   "args": {
+    "path": "snap_r2.json"
+   },
+   "result_summary": "R2 态：+margin、sales 排序",
+   "ts_sec": 12,
+   "error": null
+  },
+  {
+   "i": 3,
+   "tool": "evolve+write",
+   "args": {
+    "path": "snap_r5.json"
+   },
+   "result_summary": "R5 态：margin 仍在、amount_gt=1000",
+   "ts_sec": 18,
+   "error": null
+  },
+  {
+   "i": 4,
+   "tool": "evolve+write",
+   "args": {
+    "path": "config.json"
+   },
+   "result_summary": "终态：margin 已撤、amount_gt=2000、region_report.json",
+   "ts_sec": 24,
+   "error": null
+  },
+  {
+   "i": 5,
+   "tool": "verify",
+   "args": {
+    "script": "verify.py"
+   },
+   "result_summary": "7/7 通过",
+   "ts_sec": 28,
+   "error": null
+  }
+ ],
+ "output": {
+  "artifacts": [
+   "config.json",
+   "snap_r2.json",
+   "snap_r5.json"
+  ],
+  "summary": "终态与两份中间快照全部与金标准一致。"
+ }
+}

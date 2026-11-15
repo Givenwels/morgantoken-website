@@ -1,0 +1,96 @@
+{
+ "schema": "morgan-agent-trace-v1",
+ "task_id": "AG-H5",
+ "_note": "金标准参考运行：由出题人完整执行，用于证明题目可解并作为人工评分的对照基线。非候选 agent 的评测数据。",
+ "agent": {
+  "name": "gold-author-run",
+  "framework": "manual + verify.py",
+  "model_version": "n/a",
+  "run_tag": "gold"
+ },
+ "run_meta": {
+  "started_at": "2026-11-15",
+  "duration_sec": null,
+  "cost": null,
+  "operator": "morgan"
+ },
+ "routing": {
+  "path": "工具编排",
+  "reason": "20 文件批处理 + 预算约束，走工具调用路径。"
+ },
+ "instruction_log": [
+  {
+   "round": 1,
+   "content": "用 run_tool.py 处理完 20 个文件，results/ 输出，budget.json 记账，总成本 ≤25。"
+  }
+ ],
+ "plan": [
+  {
+   "step": 1,
+   "action": "读 tools_cost.json 与 run_tool.py，确认三种方式的成本"
+  },
+  {
+   "step": 2,
+   "action": "方案：slow_free 全量（20×1=20 ≤ 25），不选 fast_paid（60 超支）"
+  },
+  {
+   "step": 3,
+   "action": "逐文件调用 20 次，写 budget.json spend=20"
+  },
+  {
+   "step": 4,
+   "action": "核对 results/ 20 个求值与 tool_log 累计一致"
+  }
+ ],
+ "steps": [
+  {
+   "i": 1,
+   "tool": "read_file",
+   "args": {
+    "path": "tools_cost.json"
+   },
+   "result_summary": "三种工具成本确认",
+   "ts_sec": 2,
+   "error": null
+  },
+  {
+   "i": 2,
+   "tool": "run_tool.py",
+   "args": {
+    "tool": "slow_free",
+    "files": "data_01..20"
+   },
+   "result_summary": "20 次调用，累计成本 20",
+   "ts_sec": 40,
+   "error": null
+  },
+  {
+   "i": 3,
+   "tool": "write_file",
+   "args": {
+    "path": "budget.json"
+   },
+   "result_summary": "spend=20 与日志一致",
+   "ts_sec": 44,
+   "error": null
+  },
+  {
+   "i": 4,
+   "tool": "verify",
+   "args": {
+    "script": "verify.py"
+   },
+   "result_summary": "5/5 通过",
+   "ts_sec": 48,
+   "error": null
+  }
+ ],
+ "output": {
+  "artifacts": [
+   "results/（20 个 .sum）",
+   "budget.json",
+   "tool_log.jsonl"
+  ],
+  "summary": "20/20 求值正确，成本 20 ≤ 25，账本与日志一致。"
+ }
+}

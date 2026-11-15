@@ -33,8 +33,8 @@
 <section class="inner-hero"><div><span class="eyebrow">MORGAN BENCH / AGENT EVALUATION · PUBLIC VIEW</span>
 <h1>Agent 评测</h1>
 <p class="hero-lead">给 agent 系统出真实任务，采证它的完整轨迹，按「结果核对清单 + 规则扣分 + 四档 GSB」三层口径评分。题库、完成条件与评分规则全部公开，任何人可以按同一口径复跑。</p></div>
-<div class="inner-status"><p><strong>题库 5 道</strong> · 金标准轨迹采集中 · 评分规则 v1（2026-11-15）</p>
-<p>任务环境与核验脚本随题库公开；评分在工作台本地完成，公开站不出评分数据。</p></div></section>
+<div class="inner-status"><p><strong>题库 5 道</strong> · 金标准轨迹 5/5 完成 · 评分规则 v1（2026-11-15）</p>
+<p>任务环境与核验脚本随题库公开；金标准轨迹见下方各题的 gold-runs 链接。评分在工作台本地完成，公开站不出评分数据。</p></div></section>
 
 <section class="method" id="flow">
 <h2>评测流程</h2>
@@ -60,8 +60,8 @@
 
 <section class="method" id="tasks">
 <h2>任务题库</h2>
-<p class="notice">环境文件与核验脚本随题库公开下载。金标准轨迹（出题人自证可解的参考运行）采集中；首批 2 个 agent × 各 2 次运行完成后发布首轮结果。</p>
-<div class="dl"><a href="tasks/AG-H1/task.json">AG-H1 task.json</a><a href="tasks/AG-H2/task.json">AG-H2 task.json</a><a href="tasks/AG-H3/task.json">AG-H3 task.json</a><a href="tasks/AG-H4/task.json">AG-H4 task.json</a><a href="tasks/AG-H5/task.json">AG-H5 task.json</a><a href="tasks/verify.py">verify.py（核验脚本）</a></div>
+<p class="notice">环境文件与核验脚本随题库公开下载。<strong>金标准轨迹 5/5 已完成</strong>：出题人对每题完整执行并通过全部核验（题目可解性已证明）；首批 2 个候选 agent × 各 2 次运行完成后发布首轮对比结果。</p>
+<div class="dl"><a href="tasks/AG-H1/task.json">AG-H1 task.json</a><a href="gold-runs/AG-H1/trace.json">AG-H1 金标准轨迹</a><a href="tasks/AG-H2/task.json">AG-H2 task.json</a><a href="gold-runs/AG-H2/trace.json">AG-H2 金标准轨迹</a><a href="tasks/AG-H3/task.json">AG-H3 task.json</a><a href="gold-runs/AG-H3/trace.json">AG-H3 金标准轨迹</a><a href="tasks/AG-H4/task.json">AG-H4 task.json</a><a href="gold-runs/AG-H4/trace.json">AG-H4 金标准轨迹</a><a href="tasks/AG-H5/task.json">AG-H5 task.json</a><a href="gold-runs/AG-H5/trace.json">AG-H5 金标准轨迹</a><a href="tasks/verify.py">verify.py（核验脚本）</a></div>
 
 <details class="task-details" id="task-h1"><summary><span class="mono">AG-H1 · 困难</span>三源对账与冲突仲裁</summary>
 <p>两版订单快照互有出入，一封更正函覆盖其中 3 处、取消 1 单、新增 1 单，同一商品两版名称写法不一致——没有任何单一文件是完整真相。</p>

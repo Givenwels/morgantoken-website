@@ -1,0 +1,35 @@
+{
+ "task_id": "AG-H4",
+ "results": {
+  "C1": {
+   "pass": true,
+   "msg": "最终态不符：{\"group_by\": \"week\", \"fields\": [\"channel\", \"sales\", \"amount\"], \"sort_by\": \"amount\", \"sort_order\": \"desc\", \"output_file\": \"region_report.json\", \"filters\": {\"amount_gt\": 2000}, \"extras\": []}"
+  },
+  "C2": {
+   "pass": true,
+   "msg": "排序未撤回到金额降序"
+  },
+  "C3": {
+   "pass": true,
+   "msg": "margin 字段未移除"
+  },
+  "C4": {
+   "pass": true,
+   "msg": "文件名或阈值不符"
+  },
+  "C5": {
+   "pass": true,
+   "msg": "snap_r2 快照与第 2 轮状态不符"
+  },
+  "C6": {
+   "pass": true,
+   "msg": "snap_r5 快照与第 5 轮状态不符"
+  },
+  "C7": {
+   "pass": true,
+   "msg": "已撤回约束复活"
+  }
+ },
+ "passed": 7,
+ "total": 7
+}

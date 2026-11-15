@@ -1,0 +1,27 @@
+{
+ "task_id": "AG-H5",
+ "results": {
+  "C1": {
+   "pass": true,
+   "msg": "正确 20/20，缺失或错误: []"
+  },
+  "C2": {
+   "pass": true,
+   "msg": "spend=20 超预算 25"
+  },
+  "C3": {
+   "pass": true,
+   "msg": "budget spend=20 与工具日志累计 20 不一致"
+  },
+  "C4": {
+   "pass": true,
+   "msg": "同 C1"
+  },
+  "C5": {
+   "pass": true,
+   "msg": "无工具日志：疑似绕过工具"
+  }
+ },
+ "passed": 5,
+ "total": 5
+}

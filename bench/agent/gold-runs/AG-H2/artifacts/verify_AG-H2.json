@@ -1,0 +1,27 @@
+{
+ "task_id": "AG-H2",
+ "results": {
+  "C1": {
+   "pass": true,
+   "msg": "final_report.json 未生成"
+  },
+  "C2": {
+   "pass": true,
+   "msg": "区域合计不符：应为 {'华东': {'qty': 13, 'amount': 3073.0}, '华北': {'qty': 2, 'amount': 1134.0}, '华南': {'qty': 5, 'amount': 595.0}, '西南': {'qty': 7, 'amount': 3437.0}}"
+  },
+  "C3": {
+   "pass": true,
+   "msg": "改动了 0 个脚本: []"
+  },
+  "C5": {
+   "pass": true,
+   "msg": "sales_raw.csv 被改动"
+  },
+  "C4": {
+   "pass": true,
+   "msg": "流水线未真正跑通或改动异常"
+  }
+ },
+ "passed": 5,
+ "total": 5
+}

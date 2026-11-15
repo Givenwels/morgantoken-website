@@ -1,0 +1,1 @@
+{"group_by": "week", "fields": ["channel", "sales", "amount"], "sort_by": "amount", "sort_order": "desc", "output_file": "region_report.json", "filters": {"amount_gt": 2000}, "extras": []}

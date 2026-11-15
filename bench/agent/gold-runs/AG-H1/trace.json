@@ -1,0 +1,93 @@
+{
+ "schema": "morgan-agent-trace-v1",
+ "task_id": "AG-H1",
+ "_note": "金标准参考运行：由出题人完整执行，用于证明题目可解并作为人工评分的对照基线。非候选 agent 的评测数据。",
+ "agent": {
+  "name": "gold-author-run",
+  "framework": "manual + verify.py",
+  "model_version": "n/a",
+  "run_tag": "gold"
+ },
+ "run_meta": {
+  "started_at": "2026-11-15",
+  "duration_sec": null,
+  "cost": null,
+  "operator": "morgan"
+ },
+ "routing": {
+  "path": "数据处理",
+  "reason": "三源 CSV/MD 对账，走文件处理路径。"
+ },
+ "instruction_log": [
+  {
+   "round": 1,
+   "content": "生成最终对账单 reconciliation.csv，列：sku,name,qty,unit_price,amount,source。"
+  }
+ ],
+ "plan": [
+  {
+   "step": 1,
+   "action": "读 orders_v1/orders_v2/correction_email，确认优先级：邮件更正 > v2 > v1"
+  },
+  {
+   "step": 2,
+   "action": "以 v2 为基础应用邮件更正（sku-003 数量 45、sku-008 单价 82、剔除 sku-011、新增 sku-013）"
+  },
+  {
+   "step": 3,
+   "action": "识别 sku-006 两种写法为同一商品，避免重复"
+  },
+  {
+   "step": 4,
+   "action": "计算 amount 并标注 source，写出 reconciliation.csv"
+  }
+ ],
+ "steps": [
+  {
+   "i": 1,
+   "tool": "read_file",
+   "args": {
+    "path": "orders_v1.csv"
+   },
+   "result_summary": "12 行旧快照",
+   "ts_sec": 2,
+   "error": null
+  },
+  {
+   "i": 2,
+   "tool": "read_file",
+   "args": {
+    "path": "orders_v2.csv"
+   },
+   "result_summary": "11 行，sku-012x 已删，sku-006 名称带空格",
+   "ts_sec": 4,
+   "error": null
+  },
+  {
+   "i": 3,
+   "tool": "read_file",
+   "args": {
+    "path": "correction_email.md"
+   },
+   "result_summary": "3 更正 + 1 取消 + 1 新增",
+   "ts_sec": 6,
+   "error": null
+  },
+  {
+   "i": 4,
+   "tool": "compute+write",
+   "args": {
+    "path": "reconciliation.csv"
+   },
+   "result_summary": "12 行，金额合计与金标准一致",
+   "ts_sec": 30,
+   "error": null
+  }
+ ],
+ "output": {
+  "artifacts": [
+   "reconciliation.csv"
+  ],
+  "summary": "12 行对账单；邮件更正生效、取消行剔除、新增行补入、sku-006 去重。"
+ }
+}
