@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Morgan评测系统 · 视频 GSB</title>
-  <link rel="stylesheet" href="viewer.css?v=20261110-system2"><script type="module" src="viewer.js?v=20261110-system2"></script>
+  <link rel="stylesheet" href="viewer.css?v=20261115-review1"><script type="module" src="viewer.js?v=20261115-review1"></script>
 </head>
 <body data-storage="browser"><main>
   <header class="app-header">
@@ -58,16 +58,16 @@
     <details class="rules"><summary>五项规则：动作基础质量 · 生动性 · 一致性 · 美感和画质 · 提示词遵循</summary><div id="rules"></div><p>检查项按本题是否适用判断。视频加载失败属于素材问题，不是“两个都差”。</p></details>
   </section>
   <section class="comparison" aria-label="左右双视频在线对比">
-    <article><div class="side-heading"><strong>A · 左侧视频 <span id="left-model" class="model-name"></span></strong><span id="left-info">待播放</span></div><video id="left-video" controls muted playsinline preload="none" aria-label="左侧在线视频"></video></article>
-    <article><div class="side-heading"><strong>B · 右侧视频 <span id="right-model" class="model-name"></span></strong><span id="right-info">待播放</span></div><video id="right-video" controls muted playsinline preload="none" aria-label="右侧在线视频"></video></article>
+    <article><div class="side-heading"><strong>A · 左侧视频 <span id="left-model" class="model-name"></span></strong><span id="left-info">待播放</span></div><div class="video-stage"><div class="stage-hint" aria-hidden="true"><span class="stage-play">▶</span><strong>待播放</strong><span>点击上方「同时播放」，两侧就绪后同步开播</span></div><video id="left-video" controls muted playsinline preload="none" aria-label="左侧在线视频"></video></div></article>
+    <article><div class="side-heading"><strong>B · 右侧视频 <span id="right-model" class="model-name"></span></strong><span id="right-info">待播放</span></div><div class="video-stage"><div class="stage-hint" aria-hidden="true"><span class="stage-play">▶</span><strong>待播放</strong><span>点击上方「同时播放」，两侧就绪后同步开播</span></div><video id="right-video" controls muted playsinline preload="none" aria-label="右侧在线视频"></video></div></article>
   </section>
+  <div class="vote-actions"><div class="choices" role="group" aria-label="四档 GSB">
+      <button data-choice="left" aria-pressed="false">左边更好<kbd>1</kbd><small>A 更符合本题要求</small></button>
+      <button data-choice="right" aria-pressed="false">右边更好<kbd>2</kbd><small>B 更符合本题要求</small></button>
+      <button data-choice="both_good" aria-pressed="false">两个都好<kbd>3</kbd><small>都达标，无明显优势</small></button>
+      <button data-choice="both_bad" aria-pressed="false">两个都差<kbd>4</kbd><small>都没完成核心要求</small></button>
+    </div><button id="save" disabled><span id="save-label">保存并下一组</span><kbd>Enter</kbd></button></div>
   <section class="judgment">
-    <div class="vote-actions"><div class="choices" role="group" aria-label="四档 GSB">
-      <button data-choice="left" aria-pressed="false">左边更好<small>A 更符合本题要求</small></button>
-      <button data-choice="right" aria-pressed="false">右边更好<small>B 更符合本题要求</small></button>
-      <button data-choice="both_good" aria-pressed="false">两个都好<small>都达标，无明显优势</small></button>
-      <button data-choice="both_bad" aria-pressed="false">两个都差<small>都没完成核心要求</small></button>
-    </div><button id="save" disabled>保存并下一组</button></div>
     <div class="note-row"><label for="reason">依据与时间点（可选）<input id="reason" maxlength="2000" placeholder="例如：B 在 2–3 秒动作连续，A 在这里主体变形"></label><button id="undo" disabled>撤销本题标注</button></div>
     <p id="message" role="status" aria-live="polite">先播放左右视频，再选 GSB。1–4 选择，Enter 保存并继续。</p>
   </section>

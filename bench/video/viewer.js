@@ -53,7 +53,7 @@ function refreshButtons(){
   for(const id of ['play','pause','restart'])$(id).disabled=busy;
   $('save').disabled=!canSave();
   const allOtherDone=catalog.pairs.every(p=>p.context_id===pair().context_id||currentLabels(catalog,saved).some(v=>v.context_id===p.context_id));
-  $('save').textContent=busy?'正在保存…':allOtherDone?'保存并查看统计':'保存并下一组';
+  $('save-label').textContent=busy?'正在保存…':allOtherDone?'保存并查看统计':'保存并下一组';
   $('undo').disabled=busy||!storageReady||!hasCurrentVote();
   $('previous').disabled=busy||index===0;$('next').disabled=busy||index===catalog.pairs.length-1;
   $('pair-select').disabled=busy;
