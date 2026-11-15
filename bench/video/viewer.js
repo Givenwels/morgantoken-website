@@ -1,7 +1,7 @@
-import {CHOICES,validateCatalog,parseSaved,currentLabels,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261110-system2';
-import {createBrowserLabelClient} from './browser-store.js?v=20261110-system2';
-import {createReportView} from './report-view.js?v=20261110-system2';
-import {createWorkspaceView} from './workspace-view.js?v=20261110-system2';
+import {CHOICES,DIMENSIONS,validateCatalog,parseSaved,currentLabels,completeDims,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261115-dims2';
+import {createBrowserLabelClient} from './browser-store.js?v=20261115-dims2';
+import {createReportView} from './report-view.js?v=20261115-dims2';
+import {createWorkspaceView} from './workspace-view.js?v=20261115-dims2';
 
 const $=id=>document.getElementById(id);
 const videos=[$('left-video'),$('right-video')];
@@ -13,7 +13,7 @@ const exposureKey=storageKey+'-exposure';
 const draftKey=storageKey+'-drafts';
 const backupKey=storageKey+'-before-file-storage';
 const migrationKey=storageKey+'-file-storage-migrated';
-let catalog,allCatalog,rules,index=0,selected=null,changed=false,failed=false,playToken=0,referenceToken=0,referenceReady=true;
+let catalog,allCatalog,rules,index=0,selected={},notes={},activeDim=null,changed=false,failed=false,playToken=0,referenceToken=0,referenceReady=true;
 let saved={},browserSaved={},exposure={},drafts={},legacyBackup={},storageReady=false,busy=false,lastSavedContext=null,dismissedComplete=false;
 let rawBrowserCache=null,cacheCanReplace=true;
 const reportView=createReportView({root:$('report'),onReview:context=>{const next=catalog.pairs.findIndex(p=>p.context_id===context);if(next>=0&&go(next))navigate('review');},download:(value,name,type)=>downloadRaw(value,name,type),notify:value=>confirmation(value)});
@@ -47,7 +47,8 @@ function showPage(){
 function navigate(page){if(location.hash==='#'+page)showPage();else location.hash=page;}
 window.addEventListener('hashchange',showPage);showPage();
 function hasCurrentVote(){return currentLabels(catalog,saved).some(v=>v.context_id===pair().context_id);}
-function canSave(){return storageReady&&!busy&&!failed&&referenceReady&&Boolean(selected)&&(hasCurrentVote()||videos.every(v=>v.readyState>=2));}
+function dimsComplete(){return completeDims(selected).length===Object.keys(DIMENSIONS).length;}
+function canSave(){return storageReady&&!busy&&!failed&&referenceReady&&dimsComplete()&&(hasCurrentVote()||videos.every(v=>v.readyState>=2));}
 function refreshButtons(){
   if(!catalog)return;
   for(const id of ['play','pause','restart'])$(id).disabled=busy;
@@ -58,25 +59,51 @@ function refreshButtons(){
   $('previous').disabled=busy||index===0;$('next').disabled=busy||index===catalog.pairs.length-1;
   $('pair-select').disabled=busy;
   $('batch-select').disabled=busy;
-  $('reason').disabled=busy;
   $('import-labels').disabled=busy||!storageReady;
   $('backup-all').disabled=busy||changed||!storageReady;
   $('workspace-resume').disabled=busy||!storageReady;
   $('export').disabled=busy||changed||!storageReady;
   for(const id of ['download-report','download-brief'])$(id).disabled=busy||changed||!storageReady||!currentLabels(catalog,saved).length;
   $('review-last').disabled=busy||!lastSavedContext;
-  document.querySelectorAll('[data-choice]').forEach(b=>b.disabled=busy);
 }
-function select(choice){selected=choice;document.querySelectorAll('[data-choice]').forEach(b=>{const active=b.dataset.choice===choice;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));});refreshButtons();}
+function updateDimProgress(){
+  const done=completeDims(selected).length,total=Object.keys(DIMENSIONS).length;
+  $('dim-progress-text').textContent=`已选 ${done} / ${total} 维度`+(dimsComplete()?' · 可保存':'');
+}
+function setDimRowsDisabled(disabled){
+  document.querySelectorAll('.dim-row').forEach(row=>{
+    row.classList.toggle('active',!disabled&&row.dataset.dim===activeDim);
+    row.querySelectorAll('[data-choice]').forEach(b=>{b.disabled=disabled;b.setAttribute('aria-pressed',String(selected[row.dataset.dim]===b.dataset.choice));b.classList.toggle('selected',selected[row.dataset.dim]===b.dataset.choice);});
+    const input=row.querySelector('input');if(input)input.disabled=disabled;
+  });
+}
+function setActiveDim(dim){
+  activeDim=dim;
+  document.querySelectorAll('.dim-row').forEach(row=>row.classList.toggle('active',row.dataset.dim===activeDim));
+}
+function select(dim,choice,advance=true){
+  selected[dim]=choice;
+  const row=document.querySelector(`.dim-row[data-dim="${dim}"]`);
+  if(row)for(const b of row.querySelectorAll('[data-choice]')){const active=b.dataset.choice===choice;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));}
+  if(advance){
+    const remaining=Object.keys(DIMENSIONS).filter(key=>!Object.hasOwn(CHOICES,selected[key])&&key!==dim);
+    setActiveDim(remaining.length?remaining[0]:dim);
+  }
+  updateDimProgress();rememberDraft();refreshButtons();
+}
+function collectNotes(){
+  const value={};
+  for(const row of document.querySelectorAll('.dim-row')){const input=row.querySelector('input');if(input?.value.trim())value[row.dataset.dim]=input.value;}
+  return value;
+}
 function summary(){
   const votes=currentLabels(catalog,saved);
-  const counts=Object.entries(CHOICES).map(([value,label])=>`${label} ${votes.filter(v=>v.choice===value).length}`);
   const models=new Set(catalog.pairs.flatMap(p=>[p.left.model,p.right.model]));
   $('catalog-stats').textContent=`${catalog.pairs.length} 组 · ${catalog.pairs.length*2} 段视频 · ${models.size} 种模型`;
-  $('summary').textContent=`人工已保存 ${votes.length} / ${catalog.pairs.length} 组`+(votes.length?' · '+counts.join(' · '):'');
+  $('summary').textContent=`人工已保存 ${votes.length} / ${catalog.pairs.length} 组 · 共 ${votes.length*Object.keys(DIMENSIONS).length} 条维度判断`;
   $('save-progress').textContent=storageReady?`已保存至${storageTarget} ${votes.length} / ${catalog.pairs.length} 组`:'保存服务未连接';
   $('completion').hidden=changed||dismissedComplete||votes.length!==catalog.pairs.length;
-  $('completion-stats').textContent=`${votes.length} 组标注均已保存至${storageTarget}。${counts.join(' · ')}。`;
+  $('completion-stats').textContent=`${votes.length} 组标注均已保存至${storageTarget}，每组含 ${Object.keys(DIMENSIONS).length} 条维度判断。`;
   for(const option of $('batch-select').options){
     const batch=allCatalog.batches?.find(b=>b.id===option.value);
     if(batch){const view=selectCatalogBatch(allCatalog,batch.id);option.textContent=`${batch.name} · 已评 ${currentLabels(view,saved).length}/${view.pairs.length}`;}
@@ -98,8 +125,8 @@ function adopt(state){
 }
 function rememberDraft(){
   if(!catalog||busy)return;
-  changed=true;drafts[pair().context_id]={choice:selected,note:$('reason').value,updated_at:new Date().toISOString()};writeCache(draftKey,drafts);
-  summary();message('当前选择或备注尚未提交，点击保存按钮确认并继续。');
+  changed=true;drafts[pair().context_id]={dims:{...selected},notes:collectNotes(),updated_at:new Date().toISOString()};writeCache(draftKey,drafts);
+  summary();message('当前判断尚未提交，六个维度全部选完后点击保存按钮确认。');
 }
 function dropDraft(context){delete drafts[context];writeCache(draftKey,drafts);}
 
@@ -157,6 +184,34 @@ async function api(route,method='GET',value){
   finally{clearTimeout(timer);}
 }
 
+function buildDimRows(){
+  const container=$('dim-rows');container.replaceChildren();
+  const checksByName=new Map((rules?.dimensions||[]).map(d=>[d.name,d]));
+  for(const [key,label] of Object.entries(DIMENSIONS)){
+    const guide=checksByName.get(label);
+    const row=document.createElement('div');row.className='dim-row';row.dataset.dim=key;
+    const head=document.createElement('button');head.type='button';head.className='dim-head';
+    head.append(text('strong',label));
+    if(guide?.checks)head.append(text('span',guide.checks,'dim-checks'));
+    head.addEventListener('click',()=>{setActiveDim(key);});
+    const group=document.createElement('div');group.className='dim-choices';group.setAttribute('role','group');group.setAttribute('aria-label',`${label} 四档 GSB`);
+    for(const [choice,choiceLabel] of Object.entries(CHOICES)){
+      const button=document.createElement('button');button.type='button';button.dataset.choice=choice;button.dataset.dim=key;button.setAttribute('aria-pressed','false');
+      button.append(text('span',choiceLabel),Object.assign(document.createElement('kbd'),{textContent:String(Object.keys(CHOICES).indexOf(choice)+1)}));
+      button.addEventListener('click',()=>select(key,choice));
+      group.append(button);
+    }
+    const noteWrap=document.createElement('label');noteWrap.className='dim-note';
+    noteWrap.append(text('span','备注（可选）'));
+    const input=document.createElement('input');input.type='text';input.maxLength=2000;input.placeholder=`${label}维度的依据与时间点，例如：2–3 秒脚部穿模`;
+    input.addEventListener('input',rememberDraft);input.addEventListener('focus',()=>setActiveDim(key));
+    noteWrap.append(input);
+    row.append(head,group,noteWrap);
+    container.append(row);
+  }
+  container.querySelector('.dim-loading')?.remove();
+}
+
 function render(){
   playToken++;pauseMedia();failed=false;changed=false;
   const p=pair();
@@ -173,7 +228,16 @@ function render(){
   exposure[p.context_id]={...exposure[p.context_id],models:true};writeCache(exposureKey,exposure);
   const vote=currentLabels(catalog,saved).find(v=>v.context_id===p.context_id);
   const draft=drafts[p.context_id];
-  select(draft?.choice||vote?.choice||null);$('reason').value=draft?.note??vote?.note??'';changed=Boolean(draft);
+  selected={...(draft?.dims||vote?.dims||{})};notes=draft?.notes||vote?.notes||{};
+  for(const row of document.querySelectorAll('.dim-row')){
+    const key=row.dataset.dim;
+    for(const b of row.querySelectorAll('[data-choice]')){const active=selected[key]===b.dataset.choice;b.classList.toggle('selected',active);b.setAttribute('aria-pressed',String(active));}
+    const input=row.querySelector('input');input.value=notes[key]||'';
+  }
+  const remaining=Object.keys(DIMENSIONS).filter(key=>!Object.hasOwn(CHOICES,selected[key]));
+  setActiveDim(remaining[0]||Object.keys(DIMENSIONS)[0]);
+  updateDimProgress();
+  changed=Boolean(draft);
   $('ai-panel').open=false;$('ai-panel').hidden=!p.ai_reference;$('source-panel').open=false;document.querySelector('.original').open=false;
   const ai=$('ai-result');ai.replaceChildren();
   if(p.ai_reference)ai.append(text('p',CHOICES[p.ai_reference.choice],'result-choice'),text('p',p.ai_reference.summary),text('p',p.ai_reference.origin,'result-note'));
@@ -187,7 +251,7 @@ function render(){
   if(p.prompt_provenance)source.append(text('p',p.prompt_provenance.note_zh));
   if(p.source.prompt_url)source.append(sourceLink(p.source.prompt_url,'来源英文生成提示词文件'),' · ',sourceLink(p.source.project_url,'原作者项目说明'));
   if(p.source.terms_url)source.append(sourceLink(p.source.terms_url,'来源使用范围：非商业学术研究，重新发布需原作者许可'));
-  message(draft?'本题有未提交草稿，确认后点“保存并下一组”。':vote?'已恢复本题标注，可回放复核或修改。':'观看左右视频，选择一档 GSB，然后保存并进入下一组。');
+  message(draft?'本题有未提交草稿，全部维度选完后点“保存并下一组”。':vote?'已恢复本题标注，可回放复核或修改。':'观看左右视频，六个维度各选一档 GSB，然后保存并进入下一组。');
   void loadReference();summary();refreshButtons();
 }
 
@@ -211,7 +275,7 @@ async function play(restart=false){
     };
     await Promise.race([prepare(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('加载超时')),30000);})]);
     if(token!==playToken)return;await Promise.all(videos.map(v=>v.play()));if(token!==playToken)return;
-    message('左右已开始播放。选择 GSB 后点击“保存并下一组”。');
+    message('左右已开始播放。六个维度各选一档 GSB，然后保存。');
   }catch{
     if(token!==playToken)return;pauseMedia();failed=true;
     message('视频未能同时播放，请重试或核对原视频链接。加载失败不记为“两个都差”。',true);
@@ -223,14 +287,14 @@ async function saveAndContinue(){
   const savingPair=pair(),savingIndex=index;rememberDraft();busy=true;pauseMedia();refreshButtons();
   confirmation(`正在保存 ${savingPair.id}…`);
   try{
-    const result=await persistLabelAndPlanNext({catalog,index:savingIndex,choice:selected,note:$('reason').value,exposure:exposure[savingPair.context_id],persist:record=>api('/api/labels','POST',{record})});
+    const result=await persistLabelAndPlanNext({catalog,index:savingIndex,dims:{...selected},notes:collectNotes(),exposure:exposure[savingPair.context_id],persist:record=>api('/api/labels','POST',{record})});
     adopt(result.state);dropDraft(savingPair.context_id);changed=false;busy=false;
     lastSavedContext=savingPair.context_id;dismissedComplete=false;
     if(result.complete){
-      summary();refreshButtons();confirmation(`已保存 ${savingPair.id}：${CHOICES[result.record.choice]}。本轮已全部保存。`);
+      summary();refreshButtons();confirmation(`已保存 ${savingPair.id}：六个维度判断完成。本轮已全部保存。`);
       message('本轮已完成，可查看统计、导出报告或回看修改。');navigate('report');
     }else{
-      index=result.nextIndex;render();confirmation(`已保存 ${savingPair.id}：${CHOICES[result.record.choice]} · 已进入下一组 ${pair().id}`);
+      index=result.nextIndex;render();confirmation(`已保存 ${savingPair.id}：六个维度判断完成 · 已进入下一组 ${pair().id}`);
       if(activePage==='review')void play();
     }
   }catch(error){
@@ -253,8 +317,7 @@ $('workspace-resume').addEventListener('click',()=>{
 });
 $('previous').addEventListener('click',()=>go(index-1));$('next').addEventListener('click',()=>go(index+1));
 $('pair-select').addEventListener('change',()=>{const next=Number($('pair-select').value);if(Number.isInteger(next))go(next);});
-document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{select(b.dataset.choice);rememberDraft();}));
-$('reason').addEventListener('input',rememberDraft);$('save').addEventListener('click',saveAndContinue);
+$('save').addEventListener('click',saveAndContinue);
 $('review-last').addEventListener('click',()=>{const next=catalog.pairs.findIndex(p=>p.context_id===lastSavedContext);if(next>=0)go(next);});
 $('undo').addEventListener('click',async()=>{
   if(busy||!hasCurrentVote())return;busy=true;refreshButtons();
@@ -287,7 +350,7 @@ $('import-labels').addEventListener('change',async event=>{
   try{
     if(file.size>2*1024*1024)throw Error('评分文件不能超过 2MB。');
     const data=JSON.parse(await file.text());
-    if(data.schema!=='morgan-video-gsb-labels-v2'||!Array.isArray(data.labels))throw Error('请选择本系统导出的评分 JSON，不能导入题库或 AI 参考票。');
+    if(data.schema!=='morgan-video-gsb-labels-v3'||!Array.isArray(data.labels))throw Error('请选择本系统导出的评分 JSON（v3 分维度格式），不能导入题库或 AI 参考票。');
     const labels={};for(const record of data.labels){if(!record?.context_id||labels[record.context_id])throw Error('评分编号缺失或重复，未导入。');labels[record.context_id]=record;}
     const state=await api('/api/labels/import','POST',{labels});adopt(state);busy=false;setBatch(catalog.batch_id);
     confirmation(`已导入 ${state.imported||0} 条；已有不同记录 ${state.conflicts||0} 条、版本不匹配 ${state.invalid_count||0} 条，原记录未覆盖。`);
@@ -316,8 +379,8 @@ window.addEventListener('beforeunload',event=>{if(changed||busy){event.preventDe
 document.addEventListener('keydown',event=>{
   if(!catalog||activePage!=='review'||busy||event.ctrlKey||event.metaKey||event.altKey)return;
   const editable=event.target.closest('input,textarea,select');
-  if(!editable&&['1','2','3','4'].includes(event.key)){event.preventDefault();select(Object.keys(CHOICES)[Number(event.key)-1]);rememberDraft();}
-  if(event.key==='Enter'&&(event.target===$('reason')||event.target.closest('.choices')||event.target===document.body)){event.preventDefault();void saveAndContinue();}
+  if(!editable&&['1','2','3','4'].includes(event.key)){event.preventDefault();if(activeDim)select(activeDim,Object.keys(CHOICES)[Number(event.key)-1]);}
+  if(event.key==='Enter'&&(event.target===$('dim-progress-text')||event.target.closest('.dim-choices')||event.target===document.body)){event.preventDefault();void saveAndContinue();}
 });
 
 try{
@@ -328,15 +391,16 @@ try{
   let preferred;try{preferred=JSON.parse(readCache(storageKey+'-active-batch'));}catch{}
   const batchId=allCatalog.batches?.some(b=>b.id===preferred)?preferred:allCatalog.default_batch;
   catalog=selectCatalogBatch(allCatalog,batchId);
+  buildDimRows();
   $('batch-select').replaceChildren(...(allCatalog.batches||[{id:'',name:'当前题库'}]).map(b=>{const option=text('option',b.name);option.value=b.id;return option;}));
-  for(const d of rules.dimensions){const row=document.createElement('div');row.append(text('h3',d.name==='Prompt 遵循'?'提示词遵循':d.name),text('p',d.checks),text('p','常见问题：'+d.common_issues));$('rules').append(row);}
+  for(const d of rules.dimensions){const row=document.createElement('div');row.append(text('h3',d.name),text('p',d.checks),text('p','常见问题：'+d.common_issues));$('rules').append(row);}
   let migration;
   try{
     let state=await api('/api/labels');
     if(!readCache(migrationKey)&&Object.keys(browserSaved).length){state=await api('/api/labels/import','POST',{labels:browserSaved});migration=state;}
     adopt(state);
     writeCache(migrationKey,true);
-    for(const [context,draft] of Object.entries(drafts)){const vote=saved[context];if(vote&&vote.choice===draft.choice&&vote.note===(draft.note||'').trim())dropDraft(context);}
+    for(const [context,draft] of Object.entries(drafts)){const vote=saved[context];if(vote&&JSON.stringify(vote.dims)===JSON.stringify(draft.dims)&&JSON.stringify(vote.notes||{})===JSON.stringify(draft.notes||{}))dropDraft(context);}
     setBatch(batchId);
     if(migration?.conflicts||migration?.invalid_count){$('export-legacy').hidden=false;confirmation(`已连接本机文件；旧缓存有 ${migration.conflicts||0} 条不同记录、${migration.invalid_count||0} 条旧版本记录，原缓存已保留备份，可导出核对。`,true);}
     else confirmation(migration?.imported?`已迁移 ${migration.imported} 条标注，可继续评测。`:`已从${storageTarget}恢复 ${currentLabels(catalog,saved).length} 条标注。`);

@@ -1,4 +1,6 @@
 export const CHOICES=Object.freeze({left:'左边更好',right:'右边更好',both_good:'两个都好',both_bad:'两个都差'});
+export const DIMENSIONS=Object.freeze({motion:'运动质量',vividness:'生动性',consistency:'一致性',aesthetics:'美感',quality:'画质',adherence:'遵循'});
+const DIMENSION_KEYS=Object.keys(DIMENSIONS);
 
 export function validateCatalog(catalog){
   if(catalog?.media_mode!=='remote-link'||!Array.isArray(catalog.pairs)||!catalog.pairs.length)throw Error('在线视频题库格式不正确。');
@@ -40,23 +42,37 @@ export function parseSaved(raw){
   return value;
 }
 
+function validDims(dims){
+  return Boolean(dims)&&!Array.isArray(dims)&&DIMENSION_KEYS.every(key=>Object.hasOwn(CHOICES,dims[key]));
+}
+function cleanNotes(notes){
+  const clean={};
+  if(!notes||Array.isArray(notes))return clean;
+  for(const key of DIMENSION_KEYS)if(typeof notes[key]==='string'&&notes[key].trim())clean[key]=notes[key].trim().slice(0,2000);
+  return clean;
+}
+
 export function currentLabels(catalog,saved){
   return catalog.pairs.flatMap(pair=>{
     const vote=saved[pair.context_id];
-    return vote?.context_id===pair.context_id&&vote.pair_id===pair.id&&Object.hasOwn(CHOICES,vote.choice)?[vote]:[];
+    return vote?.context_id===pair.context_id&&vote.pair_id===pair.id&&validDims(vote.dims)?[vote]:[];
   });
 }
 
-export function makeLabel(pair,choice,note,exposure={},now=new Date().toISOString()){
-  if(!Object.hasOwn(CHOICES,choice))throw Error('请选择四档 GSB 中的一档。');
-  return {pair_id:pair.id,context_id:pair.context_id,choice,note:String(note||'').trim().slice(0,2000),annotated_at:now,ai_reference_seen:Boolean(exposure.ai),model_identity_seen:Boolean(exposure.models)};
+export function completeDims(dims){
+  return DIMENSION_KEYS.filter(key=>Object.hasOwn(CHOICES,dims?.[key]));
+}
+
+export function makeLabel(pair,dims,notes={},exposure={},now=new Date().toISOString()){
+  if(!validDims(dims))throw Error('六个维度需要各选一档 GSB 才能保存。');
+  return {pair_id:pair.id,context_id:pair.context_id,dims:Object.fromEntries(DIMENSION_KEYS.map(key=>[key,dims[key]])),notes:cleanNotes(notes),annotated_at:now,ai_reference_seen:Boolean(exposure.ai),model_identity_seen:Boolean(exposure.models)};
 }
 
 export function exportLabels(catalog,saved,now=new Date().toISOString()){
-  return {schema:'morgan-video-gsb-labels-v2',catalog_id:catalog.catalog_id,batch_id:catalog.batch_id,batch_name:catalog.batch_name,rule_hash:catalog.rule_hash,exported_at:now,media_included:false,
+  return {schema:'morgan-video-gsb-labels-v3',catalog_id:catalog.catalog_id,batch_id:catalog.batch_id,batch_name:catalog.batch_name,rule_hash:catalog.rule_hash,exported_at:now,media_included:false,
     labels:currentLabels(catalog,saved).map(vote=>{
       const pair=catalog.pairs.find(p=>p.context_id===vote.context_id);
-      return {...vote,choice_zh:CHOICES[vote.choice],batch_id:pair.batch_id,prompt_zh:pair.prompt_zh,prompt_original:pair.prompt_original,prompt_provenance:pair.prompt_provenance,reference:pair.reference,task_category:pair.task_category,display_language:pair.display_language,
+      return {...vote,dims_zh:Object.fromEntries(DIMENSION_KEYS.map(key=>[key,`${DIMENSIONS[key]}：${CHOICES[vote.dims[key]]}`])),batch_id:pair.batch_id,prompt_zh:pair.prompt_zh,prompt_original:pair.prompt_original,prompt_provenance:pair.prompt_provenance,reference:pair.reference,task_category:pair.task_category,display_language:pair.display_language,
         translation:pair.translation,source:pair.source,left:{id:pair.left.id,url:pair.left.url,model:pair.left.model,model_version:pair.left.model_version,model_name:catalog.model_names?.[pair.left.model]||pair.left.model},right:{id:pair.right.id,url:pair.right.url,model:pair.right.model,model_version:pair.right.model_version,model_name:catalog.model_names?.[pair.right.model]||pair.right.model}};
     })};
 }
@@ -77,12 +93,12 @@ export function resumeIndex(catalog,saved){
   return nextUnratedIndex(catalog,saved,last)??last;
 }
 
-export async function persistLabelAndPlanNext({catalog,index,choice,note,exposure={},persist,now}){
+export async function persistLabelAndPlanNext({catalog,index,dims,notes,exposure={},persist,now}){
   const pair=catalog.pairs[index];
-  const record=makeLabel(pair,choice,note,exposure,now);
+  const record=makeLabel(pair,dims,notes,exposure,now);
   const state=await persist(record);
   const confirmed=state?.labels?.[pair.context_id];
-  if(confirmed?.pair_id!==pair.id||confirmed?.choice!==choice||confirmed?.context_id!==pair.context_id)throw Error('保存服务没有确认本次标注，请重试。');
+  if(confirmed?.pair_id!==pair.id||confirmed?.context_id!==pair.context_id||!validDims(confirmed.dims))throw Error('保存服务没有确认本次标注，请重试。');
   const nextIndex=nextUnratedIndex(catalog,state.labels,index);
   return {state,record:confirmed,nextIndex,complete:nextIndex===null};
 }

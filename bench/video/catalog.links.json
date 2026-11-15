@@ -3,7 +3,7 @@
   "catalog_id": "rapidata-video-pilot-20261108",
   "display_language": "zh-CN",
   "media_mode": "remote-link",
-  "rule_hash": "282207a0bd8dcda5642b85ab705eaec0edbcdb4a17b508a1e4827d5b13be2ce9",
+  "rule_hash": "3e83e028a6e050305a4738e1680369d6039411d64c56c14d3f1f8bbef917d55e",
   "created_at": "2026-11-08T15:11:15.883111+00:00",
   "human_ai_agreement_eligible": false,
   "agreement_note": "新批次没有导入来源成绩、人工票或 AI 结论。81 组来自 27 道题，不是 81 道独立试题。旧批次的 AI 参考与人工记录继续单独保留。",

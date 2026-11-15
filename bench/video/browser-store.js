@@ -1,4 +1,4 @@
-import {CHOICES} from './label-data.js';
+import {CHOICES,DIMENSIONS,makeLabel} from './label-data.js';
 
 export function createBrowserLabelClient({catalog,storage=globalThis.localStorage,key='morgan-video-gsb-web-store-v1'}){
   const read=()=>{
@@ -8,8 +8,10 @@ export function createBrowserLabelClient({catalog,storage=globalThis.localStorag
   };
   const canonical=record=>{
     const pair=catalog.pairs.find(p=>p.context_id===record?.context_id&&p.id===record.pair_id);
-    if(!pair||!Object.hasOwn(CHOICES,record.choice)||typeof(record.note??'')!=='string'||String(record.note||'').length>2000)throw Error('评分版本或内容不正确，未保存。');
-    return {pair_id:pair.id,context_id:pair.context_id,choice:record.choice,note:(record.note||'').trim(),annotated_at:Number.isFinite(Date.parse(record.annotated_at))?record.annotated_at:new Date().toISOString(),stored_at:new Date().toISOString(),ai_reference_seen:record.ai_reference_seen===true,model_identity_seen:record.model_identity_seen===true,reviewer:'browser-human'};
+    if(!pair)throw Error('评分版本或内容不正确，未保存。');
+    let clean;
+    try{clean=makeLabel(pair,record?.dims,record?.notes,{});}catch{throw Error('评分需要六个维度各选一档 GSB，未保存。');}
+    return {...clean,annotated_at:Number.isFinite(Date.parse(record.annotated_at))?record.annotated_at:new Date().toISOString(),stored_at:new Date().toISOString(),ai_reference_seen:record.ai_reference_seen===true,model_identity_seen:record.model_identity_seen===true,reviewer:'browser-human'};
   };
   const write=state=>{
     const serialized=JSON.stringify({...state,revision:(state.revision||0)+1});
@@ -27,7 +29,7 @@ export function createBrowserLabelClient({catalog,storage=globalThis.localStorag
       for(const input of Object.values(body.labels)){
         let record;try{record=canonical(input);}catch{invalid_count++;continue;}
         const existing=state.labels[record.context_id];
-        if(existing){if(existing.choice!==record.choice||existing.note!==record.note)conflicts++;continue;}
+        if(existing){if(JSON.stringify(existing.dims)!==JSON.stringify(record.dims)||JSON.stringify(existing.notes||{})!==JSON.stringify(record.notes||{}))conflicts++;continue;}
         if(state.deleted_contexts[record.context_id]){conflicts++;continue;}
         state.labels[record.context_id]=record;imported++;
       }

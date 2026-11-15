@@ -20,7 +20,7 @@ export function createWorkspaceView({root}){
     $('workspace-data-status').textContent=storageReady?(browserMode?'当前浏览器保存已就绪':'本机文件保存已就绪'):'保存服务未就绪';
     $('workspace-data-description').textContent=browserMode?'评分留在当前浏览器，可刷新续评。导出 JSON 后可在其他设备导入恢复；当前未启用跨设备同步或公共票池。':'评分写入本机 data/video-gsb-labels.json。导出 JSON 后可到个站导入查看，网站不会自动读取本机数据。';
     $('workspace-material-status').textContent=`已建批次 · ${status.total_cases} 道题 / ${status.total_pairs} 组配对`;
-    $('workspace-review-status').textContent=status.complete?'已完成本批人工 GSB':status.saved_pairs?`进行中 · ${status.saved_pairs} 组已保存`:'待开始 · 选择四档 GSB 并记录备注';
+    $('workspace-review-status').textContent=status.complete?'已完成本批人工 GSB':status.saved_pairs?`进行中 · ${status.saved_pairs} 组已保存`:'待开始 · 六个维度各选四档 GSB';
     $('workspace-report-status').textContent=status.report_ready?'阶段统计与结论草稿已生成':'第一组保存后自动生成';
     $('workspace-draft-status').hidden=!changed;
     const models=$('workspace-models');models.replaceChildren();

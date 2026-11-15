@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Morgan评测系统 · 视频 GSB</title>
-  <link rel="stylesheet" href="viewer.css?v=20261115-review1"><script type="module" src="viewer.js?v=20261115-review1"></script>
+  <link rel="stylesheet" href="viewer.css?v=20261115-dims2"><script type="module" src="viewer.js?v=20261115-dims2"></script>
 </head>
 <body data-storage="browser"><main>
   <header class="app-header">
@@ -54,22 +54,20 @@
     </div>
   </section>
   <section class="judge-guide" aria-label="人工评分方式">
-    <p><strong>人工 GSB：由你做最终选择。</strong>先核对主体、核心动作和时序是否符合提示词，再比较运动稳定性、一致性与画质。每组只保存一个整体判断。</p>
-    <details class="rules"><summary>五项规则：动作基础质量 · 生动性 · 一致性 · 美感和画质 · 提示词遵循</summary><div id="rules"></div><p>检查项按本题是否适用判断。视频加载失败属于素材问题，不是“两个都差”。</p></details>
+    <p><strong>人工 GSB：由你做最终选择。</strong>六个维度各自独立判断：运动质量、生动性、一致性、美感、画质、遵循，每维四档，全部选完才能保存。</p>
+    <details class="rules"><summary>六项规则：运动质量 · 生动性 · 一致性 · 美感 · 画质 · 遵循</summary><div id="rules"></div><p>检查项按本题是否适用判断。视频加载失败属于素材问题，不是“两个都差”。</p></details>
   </section>
   <section class="comparison" aria-label="左右双视频在线对比">
     <article><div class="side-heading"><strong>A · 左侧视频 <span id="left-model" class="model-name"></span></strong><span id="left-info">待播放</span></div><div class="video-stage"><div class="stage-hint" aria-hidden="true"><span class="stage-play">▶</span><strong>待播放</strong><span>点击上方「同时播放」，两侧就绪后同步开播</span></div><video id="left-video" controls muted playsinline preload="none" aria-label="左侧在线视频"></video></div></article>
     <article><div class="side-heading"><strong>B · 右侧视频 <span id="right-model" class="model-name"></span></strong><span id="right-info">待播放</span></div><div class="video-stage"><div class="stage-hint" aria-hidden="true"><span class="stage-play">▶</span><strong>待播放</strong><span>点击上方「同时播放」，两侧就绪后同步开播</span></div><video id="right-video" controls muted playsinline preload="none" aria-label="右侧在线视频"></video></div></article>
   </section>
-  <div class="vote-actions"><div class="choices" role="group" aria-label="四档 GSB">
-      <button data-choice="left" aria-pressed="false">左边更好<kbd>1</kbd><small>A 更符合本题要求</small></button>
-      <button data-choice="right" aria-pressed="false">右边更好<kbd>2</kbd><small>B 更符合本题要求</small></button>
-      <button data-choice="both_good" aria-pressed="false">两个都好<kbd>3</kbd><small>都达标，无明显优势</small></button>
-      <button data-choice="both_bad" aria-pressed="false">两个都差<kbd>4</kbd><small>都没完成核心要求</small></button>
-    </div><button id="save" disabled><span id="save-label">保存并下一组</span><kbd>Enter</kbd></button></div>
-  <section class="judgment">
-    <div class="note-row"><label for="reason">依据与时间点（可选）<input id="reason" maxlength="2000" placeholder="例如：B 在 2–3 秒动作连续，A 在这里主体变形"></label><button id="undo" disabled>撤销本题标注</button></div>
-    <p id="message" role="status" aria-live="polite">先播放左右视频，再选 GSB。1–4 选择，Enter 保存并继续。</p>
+  <section class="judgment" aria-label="分维度 GSB 判断">
+    <div id="dim-rows" class="dim-rows"><p class="dim-loading">正在读取评分维度…</p></div>
+    <div class="vote-actions">
+      <div class="dim-progress"><strong id="dim-progress-text">已选 0 / 6 维度</strong><span>键盘 1–4 判断当前维度，选完自动跳下一维；Enter 保存</span></div>
+      <div class="save-cluster"><button id="undo" disabled>撤销本题标注</button><button id="save" disabled><span id="save-label">保存并下一组</span><kbd>Enter</kbd></button></div>
+    </div>
+    <p id="message" role="status" aria-live="polite">先播放左右视频，每个维度各选一档 GSB；全部选完后保存进入下一组。</p>
   </section>
   <section class="results">
     <details id="ai-panel"><summary>历史 AI 参考（不替代你的选择）</summary><div id="ai-result"></div></details>
@@ -85,7 +83,8 @@
     <section class="conclusion-card" aria-labelledby="conclusion-heading"><div><span class="eyebrow">自动结论草稿 · 待人工确认</span><span id="conclusion-status" class="conclusion-status"></span></div><h3 id="conclusion-heading">当前样本说明了什么</h3><p id="conclusion-summary"></p><div id="conclusion-observations"></div><p class="report-hint">由固定统计和备注模板整理，未调用模型 API。备注保留为你的观察，不自动推断成已验证的模型能力。</p></section>
     <div class="report-actions"><button id="download-report" disabled>导出评测报告</button><button id="download-brief" disabled>导出 AI 总结资料包</button><a href="#workspace">备份或恢复评分 →</a></div>
     <p class="report-hint">AI 结论：尚未配置 API。资料包包含固定统计、你的备注和证据编号，可交给自己的 Agent。后续服务端 API 沿用同一资料结构生成草稿，经你确认后发布。</p>
-    <div class="report-table"><table><thead><tr><th>参考序</th><th>模型</th><th>已评 / 可评</th><th>胜</th><th>负</th><th>同好</th><th>同差</th><th>有效胜率</th></tr></thead><tbody id="model-results"></tbody></table></div>
+    <div id="dimension-tabs" class="dim-tabs" role="tablist" aria-label="按维度查看统计"></div>
+    <div class="report-table"><table><thead><tr><th>参考序</th><th>模型</th><th>已评维度</th><th>胜</th><th>负</th><th>同好</th><th>同差</th><th>有效胜率</th></tr></thead><tbody id="model-results"></tbody></table></div>
     <details class="task-details"><summary>按任务展开比较表现</summary><div id="task-results" class="task-results"></div></details>
     <details class="note-details"><summary>备注与证据</summary><div id="report-notes"></div></details>
     <p id="report-snapshot" class="report-hint"></p>
