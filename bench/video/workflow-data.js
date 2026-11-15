@@ -1,4 +1,4 @@
-import {currentLabels,resumeIndex,DIMENSIONS} from './label-data.js?v=20261115-dims2';
+import {currentLabels,resumeIndex,DIMENSIONS} from './label-data.js?v=20261115-dims3';
 
 export function buildWorkspaceStatus(catalog,saved){
   const votes=currentLabels(catalog,saved);

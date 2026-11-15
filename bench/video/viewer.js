@@ -1,7 +1,7 @@
-import {CHOICES,DIMENSIONS,validateCatalog,parseSaved,currentLabels,completeDims,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261115-dims2';
-import {createBrowserLabelClient} from './browser-store.js?v=20261115-dims2';
-import {createReportView} from './report-view.js?v=20261115-dims2';
-import {createWorkspaceView} from './workspace-view.js?v=20261115-dims2';
+import {CHOICES,DIMENSIONS,validateCatalog,parseSaved,currentLabels,completeDims,exportLabels,resumeIndex,persistLabelAndPlanNext,selectCatalogBatch,referenceImageURL} from './label-data.js?v=20261115-dims3';
+import {createBrowserLabelClient} from './browser-store.js?v=20261115-dims3';
+import {createReportView} from './report-view.js?v=20261115-dims3';
+import {createWorkspaceView} from './workspace-view.js?v=20261115-dims3';
 
 const $=id=>document.getElementById(id);
 const videos=[$('left-video'),$('right-video')];
@@ -65,10 +65,20 @@ function refreshButtons(){
   $('export').disabled=busy||changed||!storageReady;
   for(const id of ['download-report','download-brief'])$(id).disabled=busy||changed||!storageReady||!currentLabels(catalog,saved).length;
   $('review-last').disabled=busy||!lastSavedContext;
+  updateDimProgress();
+}
+function saveBlockReason(){
+  if(!storageReady)return '保存服务未就绪';
+  if(failed)return '视频加载失败，请重新播放';
+  if(!referenceReady)return '参考图未就绪';
+  if(!hasCurrentVote()&&!videos.every(v=>v.readyState>=2))return '先播放左右视频';
+  return null;
 }
 function updateDimProgress(){
   const done=completeDims(selected).length,total=Object.keys(DIMENSIONS).length;
-  $('dim-progress-text').textContent=`已选 ${done} / ${total} 维度`+(dimsComplete()?' · 可保存':'');
+  const reason=dimsComplete()?saveBlockReason():null;
+  $('dim-progress-text').textContent=`已选 ${done} / ${total} 维度`+(dimsComplete()?(reason?` · ${reason}`:' · 可保存'):'');
+  $('save').title=reason||'';
 }
 function setDimRowsDisabled(disabled){
   document.querySelectorAll('.dim-row').forEach(row=>{
@@ -313,7 +323,7 @@ function go(nextIndex){
 $('workspace-resume').addEventListener('click',()=>{
   if(!catalog||busy)return;
   const next=drafts[pair().context_id]?index:resumeIndex(catalog,saved);
-  if(next===index||go(next))navigate('review');
+  if(next===index||go(next)){navigate('review');if(!hasCurrentVote())void play();}
 });
 $('previous').addEventListener('click',()=>go(index-1));$('next').addEventListener('click',()=>go(index+1));
 $('pair-select').addEventListener('change',()=>{const next=Number($('pair-select').value);if(Number.isInteger(next))go(next);});

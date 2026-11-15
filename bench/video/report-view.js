@@ -1,6 +1,6 @@
-import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261115-dims2';
-import {buildConclusionDraft} from './workflow-data.js?v=20261115-dims2';
-import {DIMENSIONS} from './label-data.js?v=20261115-dims2';
+import {buildEvaluationReport,buildSummaryBrief,reportMarkdown} from './report-data.js?v=20261115-dims3';
+import {buildConclusionDraft} from './workflow-data.js?v=20261115-dims3';
+import {DIMENSIONS} from './label-data.js?v=20261115-dims3';
 
 export function createReportView({root,onReview,download,notify}){
   const $=id=>root.querySelector('#'+id);
