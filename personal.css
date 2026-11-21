@@ -291,7 +291,7 @@ html[lang="zh-CN"] #end-section-title .char-wrapper {
   place-items: center;
   z-index: 3;
   color: #fff;
-  font: 500 clamp(.8rem, 1.4vw, 1.1rem)/1.2 "Aeonik", "PingFang SC", sans-serif;
+  font: 500 clamp(.8rem, 1.4vw, 1.1rem)/1.2 "Hanken Grotesk", "PingFang SC", sans-serif;
   letter-spacing: .06em;
   text-align: center;
   text-shadow: 0 1px 12px rgba(0, 0, 0, .65);
@@ -329,7 +329,7 @@ html[lang="zh-CN"] #end-section-title .char-wrapper {
   min-height: 12rem;
   color: var(--project-details-color-text, #fff);
   background: var(--morgan-neutral-detail-cover);
-  font: 500 clamp(.8rem, 1.4vw, 1.1rem)/1.2 "Aeonik", "PingFang SC", sans-serif;
+  font: 500 clamp(.8rem, 1.4vw, 1.1rem)/1.2 "Hanken Grotesk", "PingFang SC", sans-serif;
   letter-spacing: .06em;
   text-align: center;
   pointer-events: none;
