@@ -145,12 +145,14 @@ html[lang="zh-CN"] #end-section-title .char-wrapper {
 }
 
 #footer-section {
-  min-height: clamp(42rem, 78vh, 52rem);
+  min-height: clamp(26rem, 46vh, 32rem);
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 #footer-top {
   flex-grow: 0;
-  margin-top: clamp(2.5rem, 5vh, 4rem);
+  margin-top: clamp(1rem, 2vh, 1.5rem);
 }
 
 #footer-middle {
@@ -159,14 +161,14 @@ html[lang="zh-CN"] #end-section-title .char-wrapper {
   row-gap: 0;
   max-width: 70rem;
   margin-inline: auto;
-  align-items: center;
+  align-items: start;
 }
 
 #footer-middle-contact {
   display: block;
   grid-column: 1;
   grid-row: 1;
-  align-self: center;
+  align-self: start;
 }
 
 #footer-contact-enquires {
